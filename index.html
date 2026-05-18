@@ -25,12 +25,27 @@
 
     /* === Variables de couleurs === */
     :root {
+      /* Palette unifiée — une seule source de vérité */
       --terracotta: #C0552A;
+      --terracotta-dark: #9C4520;
       --sable: #F5E6C8;
+      --sable-fonce: #E9D6AE;
       --vert: #2D5016;
+      --vert-fonce: #1F2A1A;
       --or: #D4AF37;
+      --or-fonce: #B8961F;
       --jaune-btn: #FFD700;
-      --texte: #2a2a2a;
+      --texte: #2A2A2A;
+      --texte-doux: #6B5640;
+      --encre: #1A1A1A;
+
+      /* Police unifiée */
+      --font-titre: 'Playfair Display', serif;
+      --font-corps: 'Lato', sans-serif;
+
+      /* Mouvement unifié — transitions d'images plus douces et lentes */
+      --ease-doux: cubic-bezier(0.22, 1, 0.36, 1);
+      --duree-image: 1.1s;
     }
 
     /* === Base typographique === */
@@ -43,15 +58,20 @@
       scroll-margin-top: 84px;
     }
     body {
-      font-family: 'Lato', sans-serif;
+      font-family: var(--font-corps);
       color: var(--texte);
       background-color: #fff;
       margin: 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
     h1, h2, h3, h4, h5, .titre {
-      font-family: 'Playfair Display', serif;
+      font-family: var(--font-titre);
       font-weight: 700;
+      letter-spacing: -0.01em;
     }
+    p { line-height: 1.7; }
+    a { transition: color 0.25s var(--ease-doux); }
 
     /* === Image placeholder partagé === */
     .img-placeholder {
@@ -76,8 +96,10 @@
       z-index: 1045;
       width: 46px;
       height: 46px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      flex-wrap: nowrap;          /* l'icône ne passe jamais à la ligne */
       align-items: center;
       justify-content: center;
       gap: 6px;
@@ -86,10 +108,18 @@
       border-radius: 50%;
       cursor: pointer;
       padding: 0;
+      overflow: hidden;
+      line-height: 1;
       text-decoration: none;
+      white-space: nowrap;
       box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
       transition: background 0.2s ease, transform 0.2s ease;
     }
+    .nav-fab i {
+      display: block;
+      line-height: 1;
+    }
+    .nav-fab-burger span { flex: 0 0 auto; }
     .nav-fab:hover {
       background: #fff;
       transform: scale(1.06);
@@ -233,7 +263,7 @@
       align-items: center;
       gap: 0.6rem;
       padding: 0.55rem 0.6rem;
-      color: #6b5640;
+      color: var(--texte-doux);
       text-decoration: none;
       font-family: 'Lato', sans-serif;
       font-weight: 700;
@@ -267,7 +297,7 @@
       margin-top: 2rem;
       padding: 0.95rem 2rem;
       background: var(--jaune-btn);
-      color: #1a1a1a;
+      color: var(--encre);
       font-weight: 900;
       font-size: 1.05rem;
       letter-spacing: 0.04em;
@@ -372,8 +402,9 @@
         padding: 0.6rem 1.4rem;
         font-size: 0.92rem;
         letter-spacing: 0.08em;
+        white-space: nowrap;        /* l'intitulé ne se coupe jamais */
         background: transparent;
-        transition: background 0.25s ease, color 0.25s ease;
+        transition: background 0.25s var(--ease-doux), color 0.25s var(--ease-doux);
       }
       .menu-head:hover,
       .menu-head:focus-visible {
@@ -640,7 +671,7 @@
       right: 0;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.9s var(--ease-doux), transform 0.9s var(--ease-doux);
       padding: 2.2rem 2.4rem;
       background: #fff;
       border-radius: 4px;
@@ -671,7 +702,7 @@
     }
     .city-info-item h3 {
       margin: 0 0 0.8rem 0;
-      color: #1a1a1a;
+      color: var(--encre);
       font-size: 2.4rem;
       letter-spacing: -0.02em;
     }
@@ -772,7 +803,7 @@
       background:
         radial-gradient(ellipse at top left, rgba(212,175,55,0.08), transparent 60%),
         radial-gradient(ellipse at bottom right, rgba(192,85,42,0.1), transparent 55%),
-        #1f2a1a;
+        var(--vert-fonce);
       color: #f5e6c8;
       height: 240vh;
     }
@@ -856,11 +887,11 @@
     }
     .dish-side .btn-maroc {
       background-color: #D4AF37;
-      color: #1f2a1a;
+      color: var(--vert-fonce);
     }
     .dish-side .btn-maroc:hover {
-      background-color: #b8961f;
-      color: #1f2a1a;
+      background-color: var(--or-fonce);
+      color: var(--vert-fonce);
     }
 
     /* === PLATS : effet shuffle / paquet de cartes === */
@@ -874,11 +905,11 @@
       border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
-      background: #1f2a1a;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  z-index 0s linear 0.35s,
-                  box-shadow 0.4s ease,
-                  border-color 0.3s ease;
+      background: var(--vert-fonce);
+      transition: transform var(--duree-image) var(--ease-doux),
+                  z-index 0s linear 0.55s,
+                  box-shadow 0.8s var(--ease-doux),
+                  border-color 0.6s var(--ease-doux);
       will-change: transform;
       --tx: -50%;
       --ty: -50%;
@@ -894,8 +925,8 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                  filter 0.4s ease;
+      transition: transform 0.8s var(--ease-doux),
+                  filter 0.8s var(--ease-doux);
       transform: scale(1.06);
     }
     .dish-thumb-name {
@@ -972,7 +1003,7 @@
        === SECTION : Experiences Teaser ===
        ============================================================ */
     .exp-teaser {
-      background: linear-gradient(135deg, var(--terracotta), #8B3A1A);
+      background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
       color: #fff;
       padding: 5rem 1.25rem;
       text-align: center;
@@ -1026,7 +1057,7 @@
        === SECTION : Flights Teaser ===
        ============================================================ */
     .flights-teaser {
-      background: linear-gradient(135deg, var(--vert), #1a3a0a);
+      background: linear-gradient(135deg, var(--vert), var(--vert-fonce));
       color: #fff;
       padding: 5rem 1rem;
       text-align: center;
@@ -1052,7 +1083,7 @@
       transition: background-color 0.2s;
     }
     .btn-maroc:hover {
-      background-color: #9c4520;
+      background-color: var(--terracotta-dark);
       color: #fff;
     }
     .btn-or {
@@ -1060,7 +1091,7 @@
       color: #000;
     }
     .btn-or:hover {
-      background-color: #b8961f;
+      background-color: var(--or-fonce);
       color: #000;
     }
     .btn-outline-white {
@@ -1094,7 +1125,7 @@
        === Footer ===
        ============================================================ */
     .footer-maroc {
-      background-color: #1a1a1a;
+      background-color: var(--encre);
       color: #aaa;
       text-align: center;
       padding: 2rem 1rem;
@@ -1260,7 +1291,7 @@
       </div>
       <div class="menu-group">
         <a class="menu-head" href="guide.html">
-          Guide Pratique
+          Guide
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
