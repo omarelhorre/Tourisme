@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenue au Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       index.html — Feuille de styles
+       Palette : terracotta #C0552A, sable #F5E6C8, vert #2D5016,
+                 or #D4AF37, blanc #FFFFFF
+       ============================================================ */
+
+    /* === Variables de couleurs === */
+    :root {
+      --terracotta: #C0552A;
+      --sable: #F5E6C8;
+      --vert: #2D5016;
+      --or: #D4AF37;
+      --jaune-btn: #FFD700;
+      --texte: #2a2a2a;
+    }
+
+    /* === Base typographique === */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Décalage d'ancrage pour ne pas passer sous la navbar fixe */
+    #mapSection, #dishesSection, #experiencesSection,
+    #guideSection, #flightsSection {
+      scroll-margin-top: 84px;
+    }
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--texte);
+      background-color: #fff;
+      margin: 0;
+    }
+    h1, h2, h3, h4, h5, .titre {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* === Image placeholder partagé === */
+    .img-placeholder {
+      background: #e0d5c5;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      border-radius: 8px;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+       === Icônes flottantes (palmier + burger) — pas de header ===
+       ============================================================ */
+    .nav-fab {
+      position: fixed;
+      top: 1.75rem;
+      z-index: 1045;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: none;
+      box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .nav-fab:hover {
+      background: #fff;
+      transform: scale(1.06);
+    }
+    .nav-fab-logo { left: 2.5rem; }
+    .nav-fab-burger { right: 2.5rem; }
+    .nav-fab-logo i {
+      color: var(--terracotta);
+      font-size: 1.5rem;
+    }
+    /* Les 2 barres du burger */
+    .nav-fab-burger span {
+      display: block;
+      width: 22px;
+      height: 2.5px;
+      background: var(--terracotta);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    /* Burger → croix quand le menu est ouvert */
+    body.menu-open .nav-fab-burger span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    body.menu-open .nav-fab-burger span:nth-child(2) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
+
+    /* ============================================================
+       === Menu plein écran (palette Maroc, esprit GTA VI) ===
+       ============================================================ */
+    .site-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 1044;
+      /* Fond = couleur primaire du site (sable) */
+      background: var(--sable);
+      display: flex;
+      flex-direction: column;
+      padding: 6.5rem 2.5rem 3rem;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.02);
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  visibility 0s linear 0.35s;
+    }
+    body.menu-open .site-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    /* Motif zellige discret en fond du menu */
+    .site-menu::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .site-menu-inner {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Élément de menu : lien direct OU section dépliable */
+    .menu-group {
+      border-bottom: 1px solid rgba(192, 85, 42, 0.22);
+    }
+    .menu-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1.15rem 0.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      color: var(--texte);
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .menu-head:hover,
+    .menu-head:focus-visible {
+      color: var(--terracotta);
+      padding-left: 0.9rem;
+      outline: none;
+    }
+    .menu-head .chev {
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      transition: transform 0.35s ease;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .menu-group.open .menu-head .chev {
+      transform: rotate(180deg);
+    }
+    .menu-group.open .menu-head {
+      color: var(--terracotta);
+    }
+
+    /* Sous-section dépliable (Accueil → sections, Villes → villes) */
+    .menu-sub {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .menu-group.open .menu-sub {
+      max-height: 640px;
+      opacity: 1;
+    }
+    .menu-sub-list {
+      list-style: none;
+      margin: 0;
+      padding: 0.3rem 0 1.2rem 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .menu-sub-list.cities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.1rem 1.5rem;
+    }
+    .menu-sub-list a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 0.6rem;
+      color: #6b5640;
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    .menu-sub-list a::before {
+      content: "→";
+      color: var(--terracotta);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .menu-sub-list a:hover {
+      color: var(--terracotta);
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .menu-sub-list a:hover::before {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Lien CTA "Réserver un Vol" en bas */
+    .menu-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      padding: 0.95rem 2rem;
+      background: var(--jaune-btn);
+      color: #1a1a1a;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .menu-cta:hover {
+      background: #f5cd00;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-fab { top: 1.1rem; }
+      .nav-fab-logo { left: 1.1rem; }
+      .nav-fab-burger { right: 1.1rem; }
+      .site-menu { padding: 5.5rem 1.25rem 2.5rem; }
+      .menu-sub-list.cities { grid-template-columns: 1fr; }
+    }
+
+    /* === Desktop : panneau coulissant à droite (esprit GTA VI) ===
+       Sur ≥992px le menu n'est plus plein écran : il glisse depuis
+       la droite sur ~la moitié de l'écran, la page reste visible à
+       gauche. La version mobile (plein écran) reste inchangée. */
+    @media (min-width: 992px) {
+      .site-menu {
+        /* La couche devient un calque transparent qui découpe le
+           panneau coulissant (évite toute barre de défilement). */
+        background: transparent;
+        padding: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: none;
+        transition: none;
+      }
+      body.menu-open .site-menu {
+        pointer-events: auto;
+      }
+      .site-menu::before { display: none; }
+
+      .site-menu-inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: min(50vw, 760px);
+        max-width: none;
+        margin: 0;
+        padding: 7rem 4.5rem 3rem;
+        overflow-y: auto;
+        background: var(--sable);
+        border-left: 1px solid rgba(192, 85, 42, 0.18);
+        box-shadow: -30px 0 70px -25px rgba(60, 30, 10, 0.45);
+        transform: translateX(100%);
+        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      body.menu-open .site-menu-inner {
+        transform: translateX(0);
+      }
+      /* Motif zellige reporté sur le panneau lui-même */
+      .site-menu-inner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* ---- Disposition en onglets (rangée en haut + contenu en bas) ----
+         Rangée compacte d'onglets en haut ; le contenu de l'onglet
+         sélectionné occupe la zone du bas du panneau. */
+      .site-menu-inner {
+        padding: 5rem 4rem 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 0.5rem;
+      }
+      /* Chaque groupe = un onglet compact (son contenu est en absolu,
+         donc le groupe se réduit à la taille de son intitulé). */
+      .menu-group {
+        display: block;
+        flex: 0 0 auto;
+        border-bottom: none;
+        margin: 0;
+      }
+
+      /* Intitulé = onglet pastille dans la rangée */
+      .menu-head {
+        position: relative;
+        z-index: 1;
+        width: auto;
+        justify-content: center;
+        gap: 0;
+        border-bottom: none;
+        border-radius: 999px;
+        padding: 0.6rem 1.4rem;
+        font-size: 0.92rem;
+        letter-spacing: 0.08em;
+        background: transparent;
+        transition: background 0.25s ease, color 0.25s ease;
+      }
+      .menu-head:hover,
+      .menu-head:focus-visible {
+        padding-left: 1.4rem;
+        background: rgba(192, 85, 42, 0.12);
+        color: var(--terracotta);
+      }
+      .menu-head .chev { display: none; }
+      /* Onglet actif = pastille pleine (esprit GTA VI) */
+      .menu-group.open .menu-head {
+        background: var(--terracotta);
+        color: #fff;
+      }
+
+      /* Zone du bas : contenu de l'onglet sélectionné */
+      .menu-sub {
+        position: absolute;
+        left: 4rem;
+        right: 4rem;
+        top: 9.5rem;
+        bottom: 6.5rem;
+        z-index: 1;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(192, 85, 42, 0.18);
+        max-height: none;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(14px);
+        transition: opacity 0.35s ease, transform 0.35s ease,
+                    visibility 0s linear 0.35s;
+      }
+      .menu-group.open .menu-sub {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      .menu-sub-list {
+        padding: 0;
+        gap: 0.1rem;
+      }
+      .menu-sub-list a {
+        font-size: clamp(1.3rem, 2.1vw, 2rem);
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        padding: 0.45rem 0.7rem;
+      }
+      .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
+
+      /* CTA ancré en bas du panneau */
+      .menu-cta {
+        position: absolute;
+        z-index: 2;
+        left: 4rem;
+        bottom: 2.5rem;
+        margin-top: 0;
+      }
+    }
+
+    /* ============================================================
+       === SECTION : Hero ===
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(10, 15, 40, 0.15) 0%, rgba(10, 15, 40, 0.35) 35%, rgba(5, 10, 30, 0.78) 100%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%),
+        url("assets/casablanca-hassan2.webp") center/cover no-repeat;
+    }
+    .hero::after {
+      /* Pattern marocain très discret */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.25'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 2rem 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.35);
+    }
+    .hero .sous-titre {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #F5C76E;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .hero p.desc {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* ============================================================
+       === SECTION : Stats Counter ===
+       ============================================================ */
+    .stats-section {
+      background-color: var(--sable);
+      padding: 4rem 0;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+    .stat-card i {
+      font-size: 2.5rem;
+      color: var(--terracotta);
+      margin-bottom: 0.8rem;
+    }
+    .stat-card .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--vert);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      color: var(--texte);
+    }
+
+    /* ============================================================
+       === SECTION : Carte interactive (scroll + tracé) ===
+       ============================================================ */
+    .map-section {
+      background-color: #fff;
+      position: relative;
+      /* 100vh d'entrée + 60vh par ville = 580vh pour 8 villes */
+      height: 580vh;
+    }
+    .map-intro {
+      padding: 4rem 0 1rem;
+      text-align: center;
+    }
+    .map-intro h2 {
+      color: var(--terracotta);
+    }
+    .map-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      aspect-ratio: 1 / 1.1;
+    }
+    .map-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+    .map-outline {
+      fill: var(--sable);
+      stroke: var(--terracotta);
+      stroke-width: 2;
+    }
+    /* Chemin tracé entre les villes */
+    .map-trace {
+      fill: none;
+      stroke: var(--terracotta);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 4 6;
+      stroke-dashoffset: var(--dashoffset, 9999);
+      filter: drop-shadow(0 0 4px rgba(192,85,42,0.4));
+    }
+    /* Point doré qui se déplace le long du tracé */
+    .map-traveler {
+      fill: var(--or);
+      stroke: #fff;
+      stroke-width: 3;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.8));
+      transition: opacity 0.3s;
+    }
+    .city-dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--terracotta);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), background-color 0.2s;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .city-dot.visible {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .city-dot.current {
+      background: var(--or);
+      transform: translate(-50%, -50%) scale(1.5);
+      animation: pulse 1.5s infinite;
+    }
+    .city-dot-label {
+      position: absolute;
+      transform: translate(-50%, -180%);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--vert);
+      background: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .city-dot-label.visible {
+      opacity: 1;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(212,175,55,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+    }
+
+    /* === Fiche ville — design épuré === */
+    .city-info-stage {
+      position: relative;
+      min-height: 320px;
+    }
+    .city-info-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      padding: 2.2rem 2.4rem;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 18px 40px -20px rgba(0,0,0,0.18);
+      pointer-events: none;
+    }
+    .city-info-item.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .city-info-item .city-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .city-info-item .city-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--terracotta);
+    }
+    .city-info-item h3 {
+      margin: 0 0 0.8rem 0;
+      color: #1a1a1a;
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+    }
+    .city-info-item p {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #555;
+    }
+    .city-info-item a {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .city-info-item a:hover {
+      gap: 0.8rem;
+    }
+
+    /* Barre de progression verticale à GAUCHE de la carte */
+    .map-progress {
+      position: absolute;
+      top: 5%;
+      left: -50px;
+      bottom: 5%;
+      width: 32px;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+    .map-progress-bar {
+      position: relative;
+      width: 3px;
+      height: 100%;
+      background: rgba(192,85,42,0.15);
+      border-radius: 2px;
+    }
+    .map-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--terracotta), var(--or));
+      border-radius: 2px;
+      transition: height 0.1s linear;
+    }
+    /* Marqueurs d'étapes (un par ville, verticaux) */
+    .map-progress-steps {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .step-tick {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border: 2px solid rgba(192,85,42,0.4);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .step-tick.reached {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+    .step-tick.current {
+      background: var(--or);
+      border-color: var(--or);
+      transform: translateX(-50%) scale(1.4);
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25);
+    }
+    @media (max-width: 991px) {
+      .map-progress { display: none; }
+      .map-section { height: auto; }
+      .map-sticky { position: static; height: auto; padding: 2rem 0; }
+      .city-info-stage { min-height: auto; margin-top: 2rem; }
+      .city-info-item { position: relative; opacity: 1; transform: none; margin-bottom: 1rem; }
+    }
+
+    /* ============================================================
+       === SECTION : Plats — Stack 3D piloté par le scroll ===
+       ============================================================ */
+    .dishes-teaser {
+      position: relative;
+      background:
+        radial-gradient(ellipse at top left, rgba(212,175,55,0.08), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(192,85,42,0.1), transparent 55%),
+        #1f2a1a;
+      color: #f5e6c8;
+      height: 240vh;
+    }
+    .dishes-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    /* Décor pattern subtil */
+    .dishes-sticky::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.10'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      pointer-events: none;
+    }
+    .dish-layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 3rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* Scène 3D */
+    .dish-stage {
+      position: relative;
+      height: 360px;
+      perspective: 1400px;
+    }
+    .dish-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    /* Bloc texte à droite — centré */
+    .dish-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      color: #f5e6c8;
+    }
+    .dish-side .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #D4AF37;
+      font-weight: 700;
+    }
+    .dish-side .eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: #D4AF37;
+    }
+    .dish-side h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .dish-side p {
+      margin: 0;
+      color: rgba(245, 230, 200, 0.75);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .dish-side .btn-maroc {
+      background-color: #D4AF37;
+      color: #1f2a1a;
+    }
+    .dish-side .btn-maroc:hover {
+      background-color: #b8961f;
+      color: #1f2a1a;
+    }
+
+    /* === PLATS : effet shuffle / paquet de cartes === */
+    .dish-thumb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      border: 2px solid rgba(245, 230, 200, 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #1f2a1a;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  z-index 0s linear 0.35s,
+                  box-shadow 0.4s ease,
+                  border-color 0.3s ease;
+      will-change: transform;
+      --tx: -50%;
+      --ty: -50%;
+      --tz: 0px;
+      --rz: 0deg;
+      transform: translate(var(--tx), var(--ty))
+                 translateZ(var(--tz))
+                 rotate(var(--rz));
+    }
+    /* Image intérieure — c'est elle qui se redimensionne au hover */
+    .dish-thumb-inner {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  filter 0.4s ease;
+      transform: scale(1.06);
+    }
+    .dish-thumb-name {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      transition: padding 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Position centrale */
+    .dish-thumb.pos-center {
+      --tx: -50%; --ty: -50%; --tz: 0px; --rz: 0deg;
+      z-index: 5;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.55);
+    }
+    /* Gauche : décalée + rotation -3°, partiellement derrière la centrale */
+    .dish-thumb.pos-left {
+      --tx: -82%; --ty: -52%; --tz: -30px; --rz: -3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .dish-thumb.pos-left .dish-thumb-inner { filter: brightness(0.85); }
+    /* Droite : symétrique */
+    .dish-thumb.pos-right {
+      --tx: -18%; --ty: -48%; --tz: -30px; --rz: 3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .dish-thumb.pos-right .dish-thumb-inner { filter: brightness(0.85); }
+    /* "Back" : restée dans le paquet, derrière */
+    .dish-thumb.pos-back {
+      --tx: -50%; --ty: -48%; --tz: -90px; --rz: 1deg;
+      z-index: 1;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+    .dish-thumb.pos-back .dish-thumb-inner { filter: brightness(0.7); }
+
+    /* === Hover : seule l'image intérieure se rétracte === */
+    .dish-thumb:hover {
+      border-color: var(--or);
+      box-shadow: 0 24px 50px rgba(212, 175, 55, 0.4);
+    }
+    .dish-thumb:hover .dish-thumb-inner {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    @media (max-width: 991px) {
+      .dishes-teaser { height: auto; }
+      .dishes-sticky { position: static; height: auto; padding: 4rem 1rem; }
+      .dish-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1rem; text-align: center; }
+      .dish-side { align-items: center; }
+      .dish-thumb { width: 240px; height: 240px; }
+      .dish-stage { height: 280px; }
+    }
+
+    /* ============================================================
+       === SECTION : Experiences Teaser ===
+       ============================================================ */
+    .exp-teaser {
+      background: linear-gradient(135deg, var(--terracotta), #8B3A1A);
+      color: #fff;
+      padding: 5rem 1.25rem;
+      text-align: center;
+      /* Contenu centré (horizontal + vertical) dans la section */
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .exp-teaser h2 {
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .exp-teaser p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       === SECTION : Guide Pratique Teaser ===
+       ============================================================ */
+    .guide-teaser {
+      padding: 5rem 0;
+      background-color: var(--sable);
+    }
+    .guide-teaser h2 {
+      color: var(--vert);
+    }
+    .guide-icon-card {
+      text-align: center;
+      padding: 1.5rem 0.8rem;
+      background: #fff;
+      border-radius: 10px;
+      height: 100%;
+    }
+    .guide-icon-card i {
+      font-size: 2.2rem;
+      color: var(--terracotta);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .guide-icon-card span {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* ============================================================
+       === SECTION : Flights Teaser ===
+       ============================================================ */
+    .flights-teaser {
+      background: linear-gradient(135deg, var(--vert), #1a3a0a);
+      color: #fff;
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+    .flights-teaser h2 { color: #fff; }
+    .flights-teaser p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* === Boutons généraux === */
+    .btn-maroc {
+      background-color: var(--terracotta);
+      color: #fff;
+      padding: 0.7rem 1.6rem;
+      border-radius: 4px;
+      border: none;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.2s;
+    }
+    .btn-maroc:hover {
+      background-color: #9c4520;
+      color: #fff;
+    }
+    .btn-or {
+      background-color: var(--or);
+      color: #000;
+    }
+    .btn-or:hover {
+      background-color: #b8961f;
+      color: #000;
+    }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 0.65rem 1.6rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .btn-outline-white:hover {
+      background: #fff;
+      color: var(--terracotta);
+    }
+
+    /* === Titres de section === */
+    .section-title {
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       === Footer ===
+       ============================================================ */
+    .footer-maroc {
+      background-color: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================================
+       === Bords inclinés (haut uniquement) — pas de gap ===
+       ============================================================ */
+    .stats-section {
+      clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -4vw;
+      padding-top: 7rem !important;
+    }
+    .map-section {
+      clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%);
+      margin-top: -4vw;
+    }
+    .dishes-teaser {
+      clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -4vw;
+    }
+    .exp-teaser {
+      clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%);
+      margin-top: -4vw;
+      padding-top: 8rem !important;
+    }
+    .guide-teaser {
+      clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -4vw;
+      padding-top: 7rem !important;
+    }
+    .flights-teaser {
+      clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%);
+      margin-top: -4vw;
+      padding-top: 8rem !important;
+    }
+    .footer-maroc {
+      clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+      margin-top: -4vw;
+      padding-top: 5rem !important;
+    }
+    @media (max-width: 768px) {
+      .stats-section, .map-section, .dishes-teaser,
+      .exp-teaser, .guide-teaser, .flights-teaser, .footer-maroc {
+        clip-path: none;
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- === SECTION : Icônes flottantes (palmier + burger) === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- === SECTION : Menu plein écran (sections dépliables) === -->
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+
+      <!-- ACCUEIL — section dépliable vers les sections de la page -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="#mapSection">Explorez le Maroc</a></li>
+            <li><a href="#dishesSection">Gastronomie</a></li>
+            <li><a href="#experiencesSection">Expériences</a></li>
+            <li><a href="#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VILLES — section dépliable vers les pages des villes -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Liens directs -->
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION : Hero === -->
+  <section class="hero" data-parallax="0.3" data-parallax-bg>
+    <div class="hero-content">
+      <h1>Bienvenue au Royaume du Maroc</h1>
+      <div class="sous-titre">Là où l'orient rencontre l'occident</div>
+      <p class="desc">
+        Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques —
+        découvrez un pays aux mille visages.
+      </p>
+    </div>
+  </section>
+
+  <!-- === SECTION : Stats / Compteurs === -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-buildings-fill"></i>
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Villes à Découvrir</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-bank2"></i>
+            <div class="stat-number" data-target="9">0</div>
+            <div class="stat-label">Sites UNESCO</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-egg-fried"></i>
+            <div class="stat-number" data-target="50" data-suffix="+">0</div>
+            <div class="stat-label">Plats Traditionnels</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-stars"></i>
+            <div class="stat-number" data-target="4" data-suffix="+">0</div>
+            <div class="stat-label">Expériences Uniques</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Carte interactive (sticky + tracé au scroll) === -->
+  <section class="map-section" id="mapSection">
+    <!-- Conteneur sticky qui reste collé pendant le scroll de la section -->
+    <div class="map-sticky">
+      <div class="container">
+        <div class="map-intro">
+          <h2 class="section-title">Explorez le Maroc</h2>
+          <p class="section-subtitle">Faites défiler pour tracer votre voyage</p>
+        </div>
+
+        <div class="row align-items-center g-4">
+          <!-- Carte SVG + tracé -->
+          <div class="col-lg-5">
+            <div class="map-wrapper" id="mapWrapper">
+              <svg class="map-svg" viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg">
+                <!-- Contour du Maroc -->
+                <path class="map-outline" d="M 80 60 L 140 50 L 200 55 L 260 70 L 310 90 L 340 130 L 350 180 L 340 230 L 320 270 L 290 310 L 250 340 L 210 360 L 170 380 L 130 390 L 90 380 L 60 350 L 50 300 L 60 250 L 70 200 L 75 150 L 80 100 Z" />
+                <!-- Chemin reliant les villes dans l'ordre du voyage -->
+                <path class="map-trace" id="mapTrace"
+                      d="M 152 66 L 192 75 L 180 97 L 220 141 L 120 167 L 152 242 L 80 242 L 100 308" />
+                <!-- Point voyageur qui se déplace le long du tracé -->
+                <circle id="mapTraveler" class="map-traveler" r="8" cx="152" cy="66" />
+              </svg>
+
+              <!-- Points des villes (positions en % du wrapper) -->
+              <div class="city-dot" data-city="Tanger" data-step="0" style="top: 15%; left: 38%;"></div>
+              <div class="city-dot" data-city="Tétouan" data-step="1" style="top: 17%; left: 48%;"></div>
+              <div class="city-dot" data-city="Chefchaouen" data-step="2" style="top: 22%; left: 45%;"></div>
+              <div class="city-dot" data-city="Fès" data-step="3" style="top: 32%; left: 55%;"></div>
+              <div class="city-dot" data-city="Casablanca" data-step="4" style="top: 38%; left: 30%;"></div>
+              <div class="city-dot" data-city="Marrakech" data-step="5" style="top: 55%; left: 38%;"></div>
+              <div class="city-dot" data-city="Essaouira" data-step="6" style="top: 55%; left: 20%;"></div>
+              <div class="city-dot" data-city="Agadir" data-step="7" style="top: 70%; left: 25%;"></div>
+
+              <!-- Labels qui apparaissent au-dessus du point courant -->
+              <div class="city-dot-label" data-city="Tanger" style="top: 15%; left: 38%;">Tanger</div>
+              <div class="city-dot-label" data-city="Tétouan" style="top: 17%; left: 48%;">Tétouan</div>
+              <div class="city-dot-label" data-city="Chefchaouen" style="top: 22%; left: 45%;">Chefchaouen</div>
+              <div class="city-dot-label" data-city="Fès" style="top: 32%; left: 55%;">Fès</div>
+              <div class="city-dot-label" data-city="Casablanca" style="top: 38%; left: 30%;">Casablanca</div>
+              <div class="city-dot-label" data-city="Marrakech" style="top: 55%; left: 38%;">Marrakech</div>
+              <div class="city-dot-label" data-city="Essaouira" style="top: 55%; left: 20%;">Essaouira</div>
+              <div class="city-dot-label" data-city="Agadir" style="top: 70%; left: 25%;">Agadir</div>
+
+              <!-- Barre de progression verticale à gauche de la carte -->
+              <div class="map-progress">
+                <div class="map-progress-bar">
+                  <div class="map-progress-fill" id="mapProgressFill"></div>
+                  <div class="map-progress-steps" id="mapProgressSteps">
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fiches villes (une seule visible à la fois) -->
+          <div class="col-lg-7">
+            <div class="city-info-stage" id="cityInfoStage">
+              <div class="city-info-item active" data-city="Tanger">
+                <div class="city-eyebrow">Nord — Côte méditerranéenne</div>
+                <h3>Tanger</h3>
+                <p>Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.</p>
+                <a href="tanger.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Tétouan">
+                <div class="city-eyebrow">Nord — Rif</div>
+                <h3>Tétouan</h3>
+                <p>La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.</p>
+                <a href="tetouan.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Chefchaouen">
+                <div class="city-eyebrow">Nord — Montagnes du Rif</div>
+                <h3>Chefchaouen</h3>
+                <p>La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.</p>
+                <a href="chefchaouen.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Fès">
+                <div class="city-eyebrow">Centre — Capitale spirituelle</div>
+                <h3>Fès</h3>
+                <p>Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.</p>
+                <a href="fes.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Casablanca">
+                <div class="city-eyebrow">Centre — Façade atlantique</div>
+                <h3>Casablanca</h3>
+                <p>Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.</p>
+                <a href="casablanca.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Marrakech">
+                <div class="city-eyebrow">Centre-Sud — Cité ocre</div>
+                <h3>Marrakech</h3>
+                <p>La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.</p>
+                <a href="marrakech.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Essaouira">
+                <div class="city-eyebrow">Côte atlantique</div>
+                <h3>Essaouira</h3>
+                <p>Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.</p>
+                <a href="essaouira.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Agadir">
+                <div class="city-eyebrow">Sud — Souss</div>
+                <h3>Agadir</h3>
+                <p>Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.</p>
+                <a href="agadir.html">Voir la ville →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Plats — Stack 3D piloté par le scroll === -->
+  <section class="dishes-teaser" id="dishesSection">
+    <div class="dishes-sticky">
+      <div class="dish-layout">
+        <div class="dish-stage">
+          <div class="dish-track">
+            <div class="dish-thumb" data-index="0">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-couscous.jpg');"></div>
+              <div class="dish-thumb-name">Couscous</div>
+            </div>
+            <div class="dish-thumb" data-index="1">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-harira.jpg');"></div>
+              <div class="dish-thumb-name">Harira</div>
+            </div>
+            <div class="dish-thumb" data-index="2">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-pastilla.jpg');"></div>
+              <div class="dish-thumb-name">Pastilla</div>
+            </div>
+            <div class="dish-thumb" data-index="3">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-tanjia.webp'); background-position: center;"></div>
+              <div class="dish-thumb-name">Tanjia</div>
+            </div>
+          </div>
+        </div>
+        <div class="dish-side">
+          <div class="eyebrow">Gastronomie</div>
+          <h2>Explorez la Gastronomie Marocaine</h2>
+          <p>Des saveurs uniques qui racontent l'histoire d'un peuple.</p>
+          <a href="dishes.html" class="btn-maroc">
+            En savoir plus sur les plats marocains →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Teaser Expériences === -->
+  <section class="exp-teaser" id="experiencesSection">
+    <h2>Prêt pour les Meilleures Expériences ?</h2>
+    <p>
+      Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et
+      les cours de cuisine — le Maroc vous attend.
+    </p>
+    <a href="experiences.html" class="btn-outline-white">Découvrir les Expériences →</a>
+  </section>
+
+  <!-- === SECTION : Teaser Guide Pratique === -->
+  <section class="guide-teaser" id="guideSection">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2>Votre Guide de Voyage Complet</h2>
+          <p style="font-size: 1.05rem; line-height: 1.7;">
+            Quand partir, quels documents préparer, comment vous déplacer, combien prévoir —
+            toutes les informations essentielles pour un voyage serein au Maroc.
+          </p>
+          <a href="guide.html" class="btn-maroc">Consulter le Guide →</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-calendar3"></i>
+                <span>Quand partir</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Visas &amp; Formalités</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-bus-front"></i>
+                <span>Transport</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-currency-dollar"></i>
+                <span>Budget</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Teaser Vols === -->
+  <section class="flights-teaser" id="flightsSection">
+    <h2>Trouvez le Vol Parfait</h2>
+    <p>
+      Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc.
+      Comparez les compagnies et choisissez ce qui vous convient.
+    </p>
+    <a href="flights.html" class="btn-maroc btn-or">Voir les Vols →</a>
+  </section>
+
+  <!-- === SECTION : Footer === -->
+  <footer class="footer-maroc">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === JavaScript — index.html ===
+       ============================================================ */
+
+    /* === 1. Menu plein écran : ouverture/fermeture + sections dépliables === */
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      // Active une section (et désactive les autres)
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head')
+           .setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      // Ouvre / ferme le menu plein écran
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        // Sur desktop : un onglet est toujours sélectionné (zone du bas
+        // jamais vide). Sur mobile : on garde l'accordéon repliable.
+        if (open && isDesktop() &&
+            !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      // Clic dans la zone vide (gauche du panneau sur desktop) → ferme
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      // Clic sur un intitulé : desktop = onglet (toujours afficher),
+      // mobile = accordéon repliable (clic = ouvrir/fermer).
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+
+      // Liens d'ancre → défilement fluide vers la section + fermeture du menu
+      menu.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            setMenu(false);
+            // Laisse le menu se fermer avant de défiler
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120);
+          } else {
+            setMenu(false);
+          }
+        });
+      });
+    })();
+
+    /* === 2. Compteurs animés (IntersectionObserver) === */
+    const counters = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          const duration = 1500;
+          const startTime = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const value = Math.floor(progress * target);
+            el.textContent = value + (progress === 1 ? suffix : '');
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* === 3. Carte interactive : animation au scroll ===
+       Au fur et à mesure que l'utilisateur scrolle la section,
+       on calcule un progress 0→1 qui :
+         - trace progressivement le path SVG (stroke-dashoffset)
+         - déplace le "voyageur" (cercle doré) le long du path
+         - révèle les points des villes un par un
+         - affiche la fiche ville correspondante
+         - met à jour la barre de progression
+    */
+    const mapSection = document.getElementById('mapSection');
+    const mapTrace = document.getElementById('mapTrace');
+    const mapTraveler = document.getElementById('mapTraveler');
+    const cityDots = document.querySelectorAll('.city-dot');
+    const cityLabels = document.querySelectorAll('.city-dot-label');
+    const infoCards = document.querySelectorAll('.city-info-item');
+    const progressFill = document.getElementById('mapProgressFill');
+    const stepTicks = document.querySelectorAll('#mapProgressSteps .step-tick');
+
+    // Longueur totale du chemin SVG
+    const traceLength = mapTrace.getTotalLength();
+    mapTrace.style.strokeDasharray = traceLength;
+    mapTrace.style.strokeDashoffset = traceLength;
+
+    const totalSteps = cityDots.length; // 8 villes
+
+    function updateMapAnimation() {
+      const rect = mapSection.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const total = rect.height - winH;
+      const scrolled = -rect.top;
+      let progress = total > 0 ? scrolled / total : 0;
+      progress = Math.max(0, Math.min(1, progress));
+
+      // 1. Tracé du chemin
+      mapTrace.style.strokeDashoffset = traceLength * (1 - progress);
+
+      // 2. Position du voyageur le long du chemin
+      const point = mapTrace.getPointAtLength(traceLength * progress);
+      mapTraveler.setAttribute('cx', point.x);
+      mapTraveler.setAttribute('cy', point.y);
+
+      // 3. Étape courante (0..totalSteps-1)
+      const stepFloat = progress * (totalSteps - 1);
+      const currentStep = Math.round(stepFloat);
+
+      // 4. Révéler les points + activer le courant
+      cityDots.forEach((dot, i) => {
+        dot.classList.toggle('visible', i <= currentStep);
+        dot.classList.toggle('current', i === currentStep);
+      });
+      cityLabels.forEach((lbl, i) => {
+        lbl.classList.toggle('visible', i === currentStep);
+      });
+
+      // 5. Afficher la fiche correspondante
+      infoCards.forEach((card, i) => {
+        card.classList.toggle('active', i === currentStep);
+      });
+
+      // 6. Barre de progression verticale + marqueurs d'étapes
+      progressFill.style.height = (progress * 100) + '%';
+      stepTicks.forEach((tick, i) => {
+        tick.classList.toggle('reached', i <= currentStep);
+        tick.classList.toggle('current', i === currentStep);
+      });
+    }
+
+    // rAF throttle pour fluidité
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateMapAnimation();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateMapAnimation);
+    updateMapAnimation();
+
+    /* === 4. Parallaxe globale === */
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+    function updateParallax() {
+      const scrollY = window.pageYOffset;
+      parallaxEls.forEach(el => {
+        const speed = parseFloat(el.dataset.parallax) || 0.3;
+        const rect = el.getBoundingClientRect();
+        const elTop = rect.top + scrollY;
+        const offset = (scrollY - elTop) * speed;
+        if (el.hasAttribute('data-parallax-bg')) {
+          el.style.backgroundPositionY = `calc(50% + ${offset}px)`;
+        } else {
+          el.style.transform = `translate3d(0, ${offset}px, 0)`;
+        }
+      });
+    }
+    let pTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!pTicking) {
+        requestAnimationFrame(() => { updateParallax(); pTicking = false; });
+        pTicking = true;
+      }
+    }, { passive: true });
+    updateParallax();
+
+    /* === 5. Plats : stack 3D piloté par le scroll de la section === */
+    (function() {
+      const section = document.getElementById('dishesSection');
+      const thumbs = document.querySelectorAll('.dish-thumb');
+      if (!section || !thumbs.length) return;
+      const total = thumbs.length; // 4
+
+      function render(currentIndex) {
+        thumbs.forEach((t, i) => {
+          t.classList.remove('pos-center', 'pos-left', 'pos-right', 'pos-back');
+          const diff = (i - currentIndex + total) % total;
+          // diff=0 → center, diff=1 → right, diff=total-1 → left, sinon → back
+          if (diff === 0) t.classList.add('pos-center');
+          else if (diff === 1) t.classList.add('pos-right');
+          else if (diff === total - 1) t.classList.add('pos-left');
+          else t.classList.add('pos-back');
+        });
+      }
+
+      function update() {
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight;
+        const totalScroll = rect.height - winH;
+        const scrolled = -rect.top;
+        let progress = totalScroll > 0 ? scrolled / totalScroll : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        const idx = Math.min(total - 1, Math.round(progress * (total - 1)));
+        render(idx);
+      }
+
+      // Clic sur une vignette latérale → l'amener au centre
+      thumbs.forEach((t, i) => {
+        t.addEventListener('click', () => render(i));
+      });
+
+      let dTicking = false;
+      window.addEventListener('scroll', () => {
+        if (!dTicking) {
+          requestAnimationFrame(() => { update(); dTicking = false; });
+          dTicking = true;
+        }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      render(0);
+      update();
+    })();
+  </script>
+
+</body>
+</html>
