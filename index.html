@@ -951,12 +951,21 @@
     }
 
     @media (max-width: 991px) {
-      .dishes-teaser { height: auto; }
-      .dishes-sticky { position: static; height: auto; padding: 4rem 1rem; }
-      .dish-layout { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1rem; text-align: center; }
-      .dish-side { align-items: center; }
-      .dish-thumb { width: 240px; height: 240px; }
-      .dish-stage { height: 280px; }
+      /* On CONSERVE l'effet de défilement des plats sur mobile :
+         section haute + sticky + pile pilotée au scroll. Seule la
+         disposition passe en une colonne (pile au-dessus, texte
+         en dessous). */
+      .dishes-teaser { height: 220vh; }
+      .dishes-sticky { padding: 2rem 1rem; }
+      .dish-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+      .dish-stage { order: 1; height: 300px; }
+      .dish-side { order: 2; align-items: center; }
+      .dish-thumb { width: 230px; height: 230px; }
     }
 
     /* ============================================================
@@ -1134,6 +1143,57 @@
         clip-path: none;
         margin-top: 0;
       }
+    }
+
+    /* ============================================================
+       === Passe responsive mobile ===
+       ============================================================ */
+    @media (max-width: 991px) {
+      /* Pas de défilement horizontal — `clip` (et pas `hidden`) pour
+         ne PAS casser le position:sticky de la section Plats. */
+      html { overflow-x: clip; }
+      .stats-section { padding: 3rem 0 !important; }
+      .guide-teaser { padding: 3.5rem 0; }
+      .flights-teaser { padding: 3.5rem 1.25rem; }
+    }
+
+    @media (max-width: 768px) {
+      /* Sections : marges resserrées + titres adaptés */
+      .map-intro { padding: 2.5rem 0 0.5rem; }
+      .city-info-item { padding: 1.5rem 1.4rem; }
+      .city-info-item h3 { font-size: 1.9rem; }
+      .map-wrapper { max-width: 360px; }
+      /* Tracé complet visible + nom au-dessus de chaque site */
+      .map-trace { stroke-dashoffset: 0 !important; }
+      .city-dot-label {
+        font-size: 0.62rem;
+        padding: 1px 4px;
+        opacity: 1 !important;
+      }
+      .city-dot { transform: translate(-50%, -50%) scale(1) !important; }
+
+      .exp-teaser { min-height: auto; padding: 4rem 1.25rem; }
+      .exp-teaser p, .flights-teaser p { font-size: 1rem; }
+
+      /* Pile de plats : on réduit pour rester dans l'écran */
+      .dish-stage { height: 260px; }
+      .dish-thumb { width: 210px; height: 210px; }
+      .dish-thumb-name { font-size: 1.05rem; padding: 1rem 0.6rem 0.8rem; }
+      .dish-layout { padding: 0 1.25rem; }
+
+      /* Cartes & grilles : espacement plus compact */
+      .stat-card { padding: 1.5rem 0.75rem; }
+      .stat-card i { font-size: 2rem; }
+      .stat-card .stat-number { font-size: 2.2rem; }
+      .guide-teaser .row { --bs-gutter-x: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .dish-stage { height: 230px; }
+      .dish-thumb { width: 175px; height: 175px; }
+      .section-subtitle { margin-bottom: 2rem; }
+      .btn-maroc, .btn-outline-white { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+      .exp-teaser, .guide-teaser, .flights-teaser { padding-left: 1rem; padding-right: 1rem; }
     }
   </style>
 </head>
@@ -1613,6 +1673,22 @@
     const totalSteps = cityDots.length; // 8 villes
 
     function updateMapAnimation() {
+      // --- Mobile : pas d'effet de scroll → on dessine TOUT le tracé
+      //     dès le départ, tous les points visibles avec leur nom
+      //     affiché au-dessus de chaque site. ---
+      if (window.matchMedia('(max-width: 991px)').matches) {
+        mapTrace.style.strokeDashoffset = 0;
+        mapTraveler.style.display = 'none';
+        cityDots.forEach(d => {
+          d.classList.add('visible');
+          d.classList.remove('current');
+        });
+        cityLabels.forEach(l => l.classList.add('visible'));
+        infoCards.forEach(c => c.classList.add('active'));
+        return;
+      }
+      mapTraveler.style.display = '';
+
       const rect = mapSection.getBoundingClientRect();
       const winH = window.innerHeight;
       const total = rect.height - winH;
