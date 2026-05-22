@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marrakech — La Ville Rouge | Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- === Shared Destination Styling === -->
+  <link href="city-page.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- === Floating navigation menu system === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION 1: HERO === -->
+  <section class="city-hero">
+    <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=1920&q=80" alt="Marrakech" class="city-hero-img">
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <span class="city-eyebrow hero-animate-1">La Ville Rouge</span>
+      <h1 class="hero-animate-2">Marrakech</h1>
+      <p class="city-tagline hero-animate-3">Où l'histoire almohade rencontre la magie des mille et une nuits</p>
+      <div class="city-breadcrumb hero-animate-3">
+        <a href="index.html">Accueil</a> → <a href="destinations.html">Destinations</a> → <span>Marrakech</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Plaine d'Haouz — Région Marrakech-Safi</span>
+          <h2>La perle ocre du sud marocain</h2>
+          <p>Fondée en 1070 par les Almoravides, Marrakech est l'une des quatre villes impériales du Maroc. Surnommée « la ville rouge » pour la teinte ocre caractéristique de ses remparts et de ses bâtiments historiques, elle a été le cœur battant et la capitale de prestigieuses dynasties comme les Almoravides, les Almohades et les Saadiens.</p>
+          <p>La médina, classée au patrimoine mondial de l'UNESCO depuis 1985, est un labyrinthe envoûtant de ruelles où se mêlent palais somptueux, mosquées monumentales et souks bourdonnants. La place Jemaa el-Fna, centre névralgique de la ville, offre chaque soir un spectacle unique de musiciens, conteurs, acrobates et échoppes culinaires odorantes.</p>
+          <p>À quelques encablures du tumulte de la vieille ville, le Jardin Majorelle — créé par le peintre français Jacques Majorelle en 1923 puis magnifiquement restauré par Yves Saint Laurent — offre une halte apaisante aux tons bleu cobalt et jaune vif. L'imposante chaîne de l'Atlas, visible par temps clair depuis les toits-terrasses de la ville, invite également à de magnifiques excursions.</p>
+        </div>
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>3 à 4 jours</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Mars-Mai et Octobre-Novembre</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Marrakech-Safi</p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1545042679-2a60ea930902?w=800&q=80" alt="Architecture traditionnelle Marrakech">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <section class="city-highlights">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DÉCOUVERTES</span>
+        <h2>À ne pas manquer à Marrakech</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Activité 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-palette"></i></div>
+              <img src="https://images.unsplash.com/photo-1565060169194-19fabf63012c?w=600&q=80" alt="Jardin Majorelle">
+            </div>
+            <h3 class="city-card-title">Jardin Majorelle</h3>
+            <p class="city-card-desc">Jardin botanique mythique restauré par Yves Saint Laurent, réputé pour ses teintes bleu cobalt et sa végétation luxuriante. Il abrite également un superbe musée berbère.</p>
+          </div>
+        </div>
+        <!-- Activité 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-sun"></i></div>
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Place Jemaa el-Fna">
+            </div>
+            <h3 class="city-card-title">Place Jemaa el-Fna</h3>
+            <p class="city-card-desc">Le cœur vibrant de Marrakech, classé à l'UNESCO. Animée de jour comme de nuit, la place accueille conteurs, musiciens traditionnels et stands de cuisine locale savoureuse.</p>
+          </div>
+        </div>
+        <!-- Activité 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-bank"></i></div>
+              <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=600&q=80" alt="Mosquée Koutoubia">
+            </div>
+            <h3 class="city-card-title">Mosquée Koutoubia</h3>
+            <p class="city-card-desc">Chef-d'œuvre de l'art almohade dominant la ville de son minaret de 77 m. L'intérieur est réservé aux musulmans, mais ses jardins fleuris extérieurs sont ouverts à tous.</p>
+          </div>
+        </div>
+        <!-- Activité 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-building"></i></div>
+              <img src="https://images.unsplash.com/photo-1545042679-2a60ea930902?w=600&q=80" alt="Palais de la Bahia">
+            </div>
+            <h3 class="city-card-title">Palais de la Bahia</h3>
+            <p class="city-card-desc">Splendide palais du XIXe siècle, chef-d'œuvre de l'art mauresque orné de zelliges colorés, de plafonds en cèdre sculpté et de grands patios verdoyants.</p>
+          </div>
+        </div>
+        <!-- Activité 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-sunrise"></i></div>
+              <img src="https://images.unsplash.com/photo-1549488344-cbb6c34cf1ac?w=600&q=80" alt="Tombeaux Saadiens">
+            </div>
+            <h3 class="city-card-title">Tombeaux Saadiens</h3>
+            <p class="city-card-desc">Nécropole royale du XVIe siècle, célèbre pour la finesse de sa salle des Douze Colonnes sculptée dans le marbre de Carrare et le bois de thuya.</p>
+          </div>
+        </div>
+        <!-- Activité 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-mortarboard"></i></div>
+              <img src="https://images.unsplash.com/photo-1549488344-cbb6c34cf1ac?w=600&q=80" alt="Médersa Ben Youssef">
+            </div>
+            <h3 class="city-card-title">Médersa Ben Youssef</h3>
+            <p class="city-card-desc">Joyau de l'architecture arabo-andalouse, cette ancienne école coranique éblouit par son grand patio orné de zelliges et de stucs finement ciselés.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 4: GASTRONOMIE === -->
+  <section class="city-food">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SAVEURS</span>
+        <h2>Gastronomie Marrakchia</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Plat 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge">Incontournable</span>
+              <img src="https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=600&q=80" alt="Tanjia Marrakchia">
+            </div>
+            <h3 class="city-card-title">Tanjia Marrakchia</h3>
+            <p class="city-card-desc">Spécialité culinaire unique de Marrakech : de la viande d'agneau ou de veau mijotée de longues heures dans une jarre en argile avec du safran et du citron confit.</p>
+          </div>
+        </div>
+        <!-- Plat 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge">Incontournable</span>
+              <img src="https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=600&q=80" alt="Couscous Royal">
+            </div>
+            <h3 class="city-card-title">Couscous Royal</h3>
+            <p class="city-card-desc">Une semoule fine travaillée à la main, surmontée de légumes fondants de saison, de viandes tendres et de pois chiches parfumés. Un plat familial traditionnel.</p>
+          </div>
+        </div>
+        <!-- Plat 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge badge-sec">Spécialité locale</span>
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Méchoui traditionnel">
+            </div>
+            <h3 class="city-card-title">Le Méchoui</h3>
+            <p class="city-card-desc">Agneau rôti entier à l'étouffée dans un four souterrain en argile traditionnelle. Une viande incroyablement fondante rehaussée de sel et de cumin.</p>
+          </div>
+        </div>
+        <!-- Plat 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge badge-sec">Spécialité locale</span>
+              <img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&q=80" alt="Pâtisseries orientales">
+            </div>
+            <h3 class="city-card-title">Pâtisseries Orientales</h3>
+            <p class="city-card-desc">Délicates cornes de gazelle, chebakias croustillantes et briouats aux amandes parfumés au miel et à la fleur d'oranger. L'accompagnement idéal du thé.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 5: ACTIVITÉS POPULAIRES === -->
+  <section class="city-popular-activities">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">POPULAIRE</span>
+        <h2>Activités populaires à Marrakech</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Activité populaire 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-wind"></i></div>
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Vol en montgolfière">
+            </div>
+            <h3 class="city-card-title">Vol en montgolfière</h3>
+            <p class="city-card-desc">Survolez la plaine d'Haouz au lever du soleil pour admirer le réveil de la ville ocre et les sommets enneigés de l'Atlas.</p>
+          </div>
+        </div>
+        <!-- Activité populaire 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-compass"></i></div>
+              <img src="https://images.unsplash.com/photo-1542362567-b07eac79094d?w=600&q=80" alt="Désert d'Agafay">
+            </div>
+            <h3 class="city-card-title">Tenter l’aventure dans le désert d’Agafay</h3>
+            <p class="city-card-desc">Découvrez ce désert de pierre exceptionnel aux portes de la ville : excursions en quad, couchers de soleil flamboyants et dîners magiques sous les étoiles.</p>
+          </div>
+        </div>
+        <!-- Activité populaire 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-tree"></i></div>
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Vallée de l'Ourika">
+            </div>
+            <h3 class="city-card-title">Se rendre dans la vallée de l’Ourika</h3>
+            <p class="city-card-desc">Échappez-vous dans cette oasis verdoyante nichée au pied du Haut Atlas, réputée pour ses cascades fraîches et ses charmants villages berbères traditionnels.</p>
+          </div>
+        </div>
+        <!-- Activité populaire 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-shop-window"></i></div>
+              <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Les Souks de la Médina">
+            </div>
+            <h3 class="city-card-title">Flâner dans les souks de la Médina</h3>
+            <p class="city-card-desc">Perdez-vous avec délectation dans ce dédale d'artisanat foisonnant et coloré, riche en lanternes en cuivre, épices parfumées et tapis tissés à la main.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <section class="city-hotels">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SÉJOURS</span>
+        <h2>Hébergements d'exception</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Hôtel 1 -->
+        <div class="col-md-4 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="La Mamounia Palace">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€€</span>
+            </div>
+            <h3 class="city-card-title">La Mamounia</h3>
+            <p class="city-card-desc">Palace légendaire mariant avec brio l'art déco et l'architecture arabo-andalouse. Ses jardins centenaires offrent un havre de paix mythique.</p>
+          </div>
+        </div>
+        <!-- Hôtel 2 -->
+        <div class="col-md-4 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Royal Mansour">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€€</span>
+            </div>
+            <h3 class="city-card-title">Royal Mansour</h3>
+            <p class="city-card-desc">Une véritable vitrine de l'artisanat marocain, composée de somptueux riads privés d'exception et d'un spa remarquable plébiscité mondialement.</p>
+          </div>
+        </div>
+        <!-- Hôtel 3 -->
+        <div class="col-md-4 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Riad de la médina">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+            </div>
+            <h3 class="city-card-title">Riad de la médina</h3>
+            <p class="city-card-desc">Demeure traditionnelle intimiste dotée d'un patio central verdoyant et d'un toit-terrasse panoramique idéal au coucher du soleil.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <section class="city-culture">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">CONSEILS</span>
+        <h2>Culture & Conseils de Voyage</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Conseil 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-cash-coin"></i></div>
+            <h3 class="culture-card-title">L'art du marchandage</h3>
+            <p class="culture-card-desc">Dans les souks, la négociation fait partie intégrante du commerce local. Échangez toujours avec le sourire et beaucoup de courtoisie.</p>
+          </div>
+        </div>
+        <!-- Conseil 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-shield-x"></i></div>
+            <h3 class="culture-card-title">Accès aux mosquées</h3>
+            <p class="culture-card-desc">La majorité des mosquées en activité sont réservées aux fidèles musulmans. La Koutoubia s'admire ainsi principalement depuis ses superbes extérieurs.</p>
+          </div>
+        </div>
+        <!-- Conseil 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-compass"></i></div>
+            <h3 class="culture-card-title">Navigation dans la médina</h3>
+            <p class="culture-card-desc">Le cœur historique est un vaste dédale où les applications GPS perdent parfois le signal. Sollicitez poliment les commerçants établis.</p>
+          </div>
+        </div>
+        <!-- Conseil 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-thermometer-half"></i></div>
+            <h3 class="culture-card-title">Climat chaud et sec</h3>
+            <p class="culture-card-desc">Les étés sont très secs et torrides. Les nuits d'hiver (décembre à février) se révèlent fraîches, nécessitant d'emporter des lainages légers.</p>
+          </div>
+        </div>
+        <!-- Conseil 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-shoe-heel"></i></div>
+            <h3 class="culture-card-title">Rues pavées</h3>
+            <p class="culture-card-desc">Les ruelles pavées de la médina exigent le port de chaussures de marche confortables à semelles plates pour parer aux dénivelés et passages étroits.</p>
+          </div>
+        </div>
+        <!-- Conseil 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-camera"></i></div>
+            <h3 class="culture-card-title">Respect des habitants</h3>
+            <p class="culture-card-desc">Demandez poliment l'autorisation avant de photographier les habitants, artisans et commerçants dans l'exercice de leur art quotidien.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 8: CTA FINAL === -->
+  <section class="city-cta">
+    <div class="city-cta-content container">
+      <h2>Prêt à plonger dans l'ocre et l'or ?</h2>
+      <p>Marrakech vous attend avec ses palais millénaires, ses souks envoûants et ses nuits étoilées sur les toits de riads. Planifiez dès maintenant votre séjour.</p>
+      <div class="city-cta-buttons">
+        <a href="flights.html" class="btn-maroc-primary"><i class="bi bi-airplane"></i>Planifier mon voyage</a>
+        <a href="destinations.html" class="btn-maroc-outline"><i class="bi bi-map"></i>Toutes les destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 9: FOOTER === -->
+  <footer class="footer-simple">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === Navigation Drawer & Scroll Reveal Logic ===
+       ============================================================ */
+
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+    })();
+
+    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
