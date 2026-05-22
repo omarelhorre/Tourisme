@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Plats Marocains — Saveurs et Traditions | Royaume du Maroc</title>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --terracotta: #C0552A;
@@ -25,7 +21,6 @@
       --texte: #444;
       --ease-doux: cubic-bezier(.2,.8,.2,1);
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -35,1082 +30,638 @@
       margin: 0;
       -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--encre); }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; color: var(--encre); }
     a { color: var(--terracotta); }
 
-    /* ============================================================
-       === Petite barre de navigation flottante ===
-       ============================================================ */
     .top-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(251, 248, 241, 0.85);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251,248,241,0.88);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
       padding: 0.9rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .top-bar a.brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--encre);
-      text-decoration: none;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.15rem;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      color: var(--encre); text-decoration: none;
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem;
     }
     .top-bar a.brand i { color: var(--terracotta); font-size: 1.3rem; }
     .top-bar .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--texte);
-      text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 700;
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: #fff;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--texte); text-decoration: none; font-size: 0.92rem; font-weight: 700;
+      padding: 0.45rem 0.9rem; border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12); background: #fff;
+      transition: background .2s, border-color .2s, color .2s;
     }
-    .top-bar .back-link:hover {
-      background: var(--terracotta);
-      color: #fff;
-      border-color: var(--terracotta);
-    }
+    .top-bar .back-link:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
 
-    /* ============================================================
-       === HERO ===
-       ============================================================ */
     .dishes-hero {
-      padding: 5rem 1.5rem 3rem;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at top, rgba(212,175,55,0.15), transparent 60%),
-        var(--sable);
+      padding: 5rem 1.5rem 3rem; text-align: center;
+      background: radial-gradient(ellipse at top, rgba(212,175,55,0.15), transparent 60%), var(--sable);
     }
     .dishes-hero .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--terracotta);
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
-      margin-bottom: 1rem;
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      color: var(--terracotta); font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; font-size: 0.78rem; margin-bottom: 1rem;
     }
-    .dishes-hero .eyebrow::before,
-    .dishes-hero .eyebrow::after {
-      content: ""; width: 32px; height: 1px; background: var(--terracotta);
+    .dishes-hero .eyebrow::before,.dishes-hero .eyebrow::after {
+      content:""; width:32px; height:1px; background:var(--terracotta);
     }
-    .dishes-hero h1 {
-      margin: 0 0 0.6rem;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      letter-spacing: -0.01em;
-    }
-    .dishes-hero p.lead {
-      max-width: 640px;
-      margin: 0 auto 2.4rem;
-      font-size: 1.05rem;
-      color: var(--texte);
-      font-style: italic;
-    }
+    .dishes-hero h1 { margin: 0 0 0.6rem; font-size: clamp(2.2rem,5vw,3.6rem); letter-spacing: -0.01em; }
+    .dishes-hero p.lead { max-width:640px; margin:0 auto 2.4rem; font-size:1.05rem; color:var(--texte); font-style:italic; }
 
-    /* === Search bar === */
-    .search-wrap {
-      max-width: 560px;
-      margin: 0 auto;
-      position: relative;
-    }
+    .search-wrap { max-width:560px; margin:0 auto; position:relative; }
     .search-wrap i.bi-search {
-      position: absolute;
-      left: 1.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(0,0,0,0.4);
-      font-size: 1.05rem;
-      pointer-events: none;
-      transition: color 0.2s;
+      position:absolute; left:1.2rem; top:50%; transform:translateY(-50%);
+      color:rgba(0,0,0,0.4); font-size:1.05rem; pointer-events:none; transition:color .2s;
     }
     .search-wrap input {
-      width: 100%;
-      padding: 1.05rem 3rem 1.05rem 3rem;
-      border: 1.5px solid rgba(0,0,0,0.08);
-      border-radius: 999px;
-      background: #fff;
-      font-family: 'Lato', sans-serif;
-      font-size: 1rem;
-      color: var(--encre);
-      outline: none;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      width:100%; padding:1.05rem 3rem 1.05rem 3rem;
+      border:1.5px solid rgba(0,0,0,0.08); border-radius:999px; background:#fff;
+      font-family:'Lato',sans-serif; font-size:1rem; color:var(--encre);
+      outline:none; box-shadow:0 4px 18px rgba(0,0,0,0.06);
+      transition:border-color .25s,box-shadow .25s;
     }
-    .search-wrap input::placeholder { color: rgba(0,0,0,0.35); }
-    .search-wrap input:focus {
-      border-color: var(--terracotta);
-      box-shadow: 0 6px 28px rgba(192,85,42,0.18);
-    }
-    .search-wrap input:focus + .search-count,
-    .search-wrap input:not(:placeholder-shown) + .search-count {
-      opacity: 1;
-    }
-    .search-wrap:focus-within i.bi-search { color: var(--terracotta); }
+    .search-wrap input::placeholder { color:rgba(0,0,0,0.35); }
+    .search-wrap input:focus { border-color:var(--terracotta); box-shadow:0 6px 28px rgba(192,85,42,0.18); }
+    .search-wrap:focus-within i.bi-search { color:var(--terracotta); }
     .search-clear {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: transparent;
-      color: rgba(0,0,0,0.4);
-      font-size: 1.2rem;
-      cursor: pointer;
-      padding: 0.2rem 0.5rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s, color 0.2s;
+      position:absolute; right:1rem; top:50%; transform:translateY(-50%);
+      border:none; background:transparent; color:rgba(0,0,0,0.4); font-size:1.2rem;
+      cursor:pointer; padding:0.2rem 0.5rem; opacity:0; pointer-events:none;
+      transition:opacity .2s,color .2s;
     }
-    .search-clear.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .search-clear:hover { color: var(--terracotta); }
-    .search-count {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: rgba(0,0,0,0.55);
-      opacity: 0.6;
-      transition: opacity 0.3s;
-    }
+    .search-clear.visible { opacity:1; pointer-events:auto; }
+    .search-clear:hover { color:var(--terracotta); }
+    .search-count { text-align:center; margin-top:1rem; font-size:0.85rem; color:rgba(0,0,0,0.55); }
 
-    /* ============================================================
-       === Grille des plats ===
-       ============================================================ */
-    .dishes-section {
-      padding: 4rem 1.5rem 6rem;
-    }
+    .dishes-section { padding: 4rem 1.5rem 6rem; }
     .dishes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.6rem;
-      max-width: 1280px;
-      margin: 0 auto;
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:1.8rem; max-width:1280px; margin:0 auto;
     }
 
-    /* === Carte plat === */
+    /* === Dish Card === */
     .dish-card {
-      position: relative;
-      background: #fff;
-      border-radius: 22px;
-      overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 6px 22px rgba(0,0,0,0.07);
-      transition: transform 0.45s var(--ease-doux),
-                  box-shadow 0.45s var(--ease-doux),
-                  opacity 0.35s ease;
-      display: flex;
-      flex-direction: column;
+      position:relative; background:#fff; border-radius:22px; overflow:hidden;
+      cursor:pointer; box-shadow:0 6px 22px rgba(0,0,0,0.07);
+      transition:transform .45s var(--ease-doux), box-shadow .45s var(--ease-doux), opacity .35s ease;
+      display:flex; flex-direction:column;
     }
-    .dish-card.hidden {
-      opacity: 0;
-      transform: scale(0.96);
-      pointer-events: none;
-      position: absolute;
-      width: 0; height: 0; padding: 0; margin: 0;
-      overflow: hidden;
-    }
-    .dish-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 38px rgba(0,0,0,0.13);
-    }
-    .dish-card:hover .dish-card-img {
-      transform: scale(1.08);
-    }
-    .dish-card-img-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      background: var(--sable-fonce);
-    }
+    .dish-card.hidden { opacity:0; transform:scale(0.96); pointer-events:none; position:absolute; width:0;height:0;padding:0;margin:0;overflow:hidden; }
+    .dish-card:hover { transform:translateY(-7px); box-shadow:0 20px 40px rgba(0,0,0,0.14); }
+    .dish-card:hover .dish-card-img { transform:scale(1.07); }
+    .dish-card-img-wrap { position:relative; width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--sable-fonce); }
     .dish-card-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s var(--ease-doux);
-    }
-    .dish-card-img.gradient {
-      background-size: cover;
-      background-position: center;
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      transition:transform .7s var(--ease-doux);
     }
     .dish-card-badge {
-      position: absolute;
-      top: 0.9rem;
-      left: 0.9rem;
-      background: rgba(0,0,0,0.65);
-      color: #fff;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      backdrop-filter: blur(6px);
+      position:absolute; top:0.9rem; left:0.9rem;
+      background:rgba(0,0,0,0.62); color:#fff;
+      font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700;
+      padding:0.3rem 0.7rem; border-radius:999px; backdrop-filter:blur(6px);
     }
     .dish-card-price {
-      position: absolute;
-      top: 0.9rem;
-      right: 0.9rem;
-      background: var(--or);
-      color: var(--encre);
-      font-weight: 800;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      position:absolute; top:0.9rem; right:0.9rem;
+      background:var(--or); color:var(--encre);
+      font-weight:800; font-size:0.85rem; padding:0.3rem 0.75rem;
+      border-radius:999px; box-shadow:0 4px 10px rgba(0,0,0,0.18);
     }
-    .dish-card-body {
-      padding: 1.2rem 1.3rem 1.4rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .dish-card-body h3 {
-      margin: 0 0 0.35rem;
-      font-size: 1.25rem;
-      letter-spacing: -0.01em;
-    }
+    .dish-card-body { padding:1.2rem 1.3rem 1.4rem; flex:1; display:flex; flex-direction:column; }
+    .dish-card-body h3 { margin:0 0 0.35rem; font-size:1.22rem; letter-spacing:-0.01em; }
     .dish-card-body .desc {
-      margin: 0;
-      color: rgba(0,0,0,0.6);
-      font-size: 0.92rem;
-      line-height: 1.55;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      margin:0; color:rgba(0,0,0,0.6); font-size:0.91rem; line-height:1.55;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
     }
     .dish-card-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      margin-top: 1rem;
-      color: rgba(0,0,0,0.55);
-      font-size: 0.82rem;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:0.6rem; margin-top:1rem; color:rgba(0,0,0,0.55); font-size:0.82rem;
     }
-    .dish-card-foot .cal {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
+    .dish-card-foot .cal { display:inline-flex; align-items:center; gap:0.3rem; }
     .dish-card-foot .more {
-      color: var(--terracotta);
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      transition: gap 0.3s ease;
+      color:var(--terracotta); font-weight:700;
+      display:inline-flex; align-items:center; gap:0.25rem; transition:gap .3s;
     }
-    .dish-card:hover .dish-card-foot .more { gap: 0.5rem; }
+    .dish-card:hover .dish-card-foot .more { gap:0.5rem; }
 
-    /* ============================================================
-       === Panneau détail (expandable inline) ===
-       ============================================================ */
+    /* Allergen mini-badges on card */
+    .dish-card-allergens {
+      display:flex; flex-wrap:wrap; gap:0.3rem; margin-top:0.7rem;
+    }
+    .mini-badge {
+      font-size:0.62rem; font-weight:700; letter-spacing:0.05em;
+      padding:0.2rem 0.5rem; border-radius:999px;
+      display:inline-flex; align-items:center; gap:0.2rem;
+    }
+    .mini-badge.high { background:rgba(192,85,42,0.12); color:var(--terracotta-dark); border:1px solid rgba(192,85,42,0.25); }
+    .mini-badge.medium { background:rgba(212,175,55,0.15); color:#876606; border:1px solid rgba(212,175,55,0.32); }
+
+    /* === Detail Panel === */
     .dish-detail {
-      grid-column: 1 / -1;
-      background: #fff;
-      border-radius: 26px;
-      box-shadow: 0 18px 60px rgba(0,0,0,0.16);
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: max-height 0.55s var(--ease-doux),
-                  opacity 0.45s ease,
-                  transform 0.55s var(--ease-doux),
-                  margin 0.55s var(--ease-doux);
-      margin: 0;
-      pointer-events: none;
+      grid-column:1/-1; background:#fff; border-radius:26px;
+      box-shadow:0 18px 60px rgba(0,0,0,0.16); overflow:hidden;
+      max-height:0; opacity:0; transform:translateY(-10px);
+      transition:max-height .55s var(--ease-doux), opacity .45s ease, transform .55s var(--ease-doux), margin .55s var(--ease-doux);
+      margin:0; pointer-events:none;
     }
-    .dish-detail.open {
-      max-height: 1200px;
-      opacity: 1;
-      transform: translateY(0);
-      margin: 0.4rem 0 1rem;
-      pointer-events: auto;
-    }
-    .dish-detail-inner {
-      display: flex;
-      flex-direction: row;
-      gap: 0;
-    }
+    .dish-detail.open { max-height:1400px; opacity:1; transform:translateY(0); margin:0.4rem 0 1rem; pointer-events:auto; }
+    .dish-detail-inner { display:flex; flex-direction:row; gap:0; }
     .dish-detail-img {
-      flex: 0 0 48%;
-      min-height: 380px;
-      background-size: cover;
-      background-position: center;
-      background-color: var(--sable-fonce);
-      position: relative;
+      flex:0 0 46%; min-height:400px;
+      background-size:cover; background-position:center;
+      background-color:var(--sable-fonce); position:relative;
     }
     .dish-detail-img::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 30%;
-      background: linear-gradient(to top, rgba(0,0,0,0.35), transparent);
-      pointer-events: none;
+      content:""; position:absolute; inset:auto 0 0 0; height:35%;
+      background:linear-gradient(to top,rgba(0,0,0,0.38),transparent); pointer-events:none;
     }
     .dish-detail-body {
-      flex: 1;
-      padding: 2.4rem 2.4rem 2.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      position: relative;
+      flex:1; padding:2.4rem 2.4rem 2.2rem;
+      display:flex; flex-direction:column; gap:0.9rem; position:relative;
     }
     .dish-detail-close {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.2rem;
-      width: 36px;
-      height: 36px;
-      border: none;
-      background: rgba(0,0,0,0.06);
-      color: var(--encre);
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
+      position:absolute; top:1.2rem; right:1.2rem;
+      width:36px; height:36px; border:none; background:rgba(0,0,0,0.06);
+      color:var(--encre); border-radius:50%; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+      transition:background .2s,color .2s,transform .2s;
     }
-    .dish-detail-close:hover {
-      background: var(--terracotta);
-      color: #fff;
-      transform: rotate(90deg);
-    }
+    .dish-detail-close:hover { background:var(--terracotta); color:#fff; transform:rotate(90deg); }
     .dish-detail-body .category-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      font-weight: 700;
-      align-self: flex-start;
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase;
+      color:var(--terracotta); font-weight:700; align-self:flex-start;
     }
-    .dish-detail-body .category-chip::before {
-      content: ""; width: 24px; height: 1px; background: var(--terracotta);
-    }
-    .dish-detail-body h2 {
-      margin: 0;
-      font-size: clamp(1.8rem, 3vw, 2.3rem);
-      letter-spacing: -0.01em;
-    }
-    .dish-detail-body p.desc {
-      margin: 0;
-      color: var(--texte);
-      line-height: 1.7;
-      font-size: 1.02rem;
-    }
+    .dish-detail-body .category-chip::before { content:""; width:24px; height:1px; background:var(--terracotta); }
+    .dish-detail-body h2 { margin:0; font-size:clamp(1.7rem,3vw,2.2rem); letter-spacing:-0.01em; }
+    .dish-detail-body p.desc { margin:0; color:var(--texte); line-height:1.7; font-size:1rem; }
     .dish-detail-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem 2rem;
-      margin-top: 0.4rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(0,0,0,0.07);
+      display:flex; flex-wrap:wrap; gap:1.2rem 2rem; margin-top:0.4rem;
+      padding-top:1.2rem; border-top:1px solid rgba(0,0,0,0.07);
     }
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
+    .meta-item { display:flex; flex-direction:column; gap:0.15rem; }
+    .meta-item .label { font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(0,0,0,0.5); font-weight:700; }
+    .meta-item .value { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--encre); font-weight:700; }
+    .meta-item .value.price { color:var(--terracotta); }
+
+    /* Allergen section in detail */
+    .allergen-section { margin-top:0.2rem; }
+    .allergen-section .alg-title {
+      font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+      color:rgba(0,0,0,0.5); font-weight:700; margin-bottom:0.5rem;
     }
-    .meta-item .label {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.5);
-      font-weight: 700;
+    .allergen-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .allergen-tag {
+      font-size:0.74rem; font-weight:700; padding:0.28rem 0.65rem;
+      border-radius:999px; display:inline-flex; align-items:center; gap:0.3rem;
     }
-    .meta-item .value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--encre);
-      font-weight: 700;
-    }
-    .meta-item .value.price { color: var(--terracotta); }
+    .allergen-tag.high { background:rgba(192,85,42,0.12); color:var(--terracotta-dark); border:1px solid rgba(192,85,42,0.3); }
+    .allergen-tag.medium { background:rgba(212,175,55,0.15); color:#876606; border:1px solid rgba(212,175,55,0.35); }
 
     .btn-ingredients {
-      align-self: flex-start;
-      margin-top: 0.6rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      background: var(--encre);
-      color: #fff;
-      padding: 0.85rem 1.5rem;
-      border: none;
-      border-radius: 999px;
-      font-family: 'Lato', sans-serif;
-      font-weight: 700;
-      font-size: 0.93rem;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      align-self:flex-start; margin-top:0.4rem;
+      display:inline-flex; align-items:center; gap:0.55rem;
+      background:var(--encre); color:#fff; padding:0.82rem 1.4rem;
+      border:none; border-radius:999px; font-family:'Lato',sans-serif; font-weight:700;
+      font-size:0.92rem; letter-spacing:0.03em; cursor:pointer;
+      transition:background .3s,transform .3s,box-shadow .3s;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
     }
-    .btn-ingredients i { font-size: 1rem; transition: transform 0.3s ease; }
-    .btn-ingredients:hover {
-      background: var(--terracotta);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(192,85,42,0.32);
-    }
-    .btn-ingredients:hover i { transform: rotate(15deg) scale(1.1); }
+    .btn-ingredients i { font-size:1rem; transition:transform .3s; }
+    .btn-ingredients:hover { background:var(--terracotta); transform:translateY(-2px); box-shadow:0 10px 24px rgba(192,85,42,0.32); }
+    .btn-ingredients:hover i { transform:rotate(15deg) scale(1.1); }
 
-    /* === Empty state === */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 1rem;
-      color: rgba(0,0,0,0.5);
-      grid-column: 1 / -1;
-    }
-    .empty-state i { font-size: 3rem; color: var(--terracotta); opacity: 0.5; }
-    .empty-state h3 { margin: 1rem 0 0.4rem; color: var(--encre); }
+    .empty-state { text-align:center; padding:4rem 1rem; color:rgba(0,0,0,0.5); grid-column:1/-1; }
+    .empty-state i { font-size:3rem; color:var(--terracotta); opacity:0.5; }
+    .empty-state h3 { margin:1rem 0 0.4rem; color:var(--encre); }
 
-    /* ============================================================
-       === Modal des ingrédients ===
-       ============================================================ */
-    .ingredients-modal .modal-dialog {
-      max-width: 580px;
-    }
-    .ingredients-modal .modal-content {
-      border: none;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
-    }
-    .ingredients-modal .modal-header {
-      background: var(--encre);
-      color: #fff;
-      border-bottom: none;
-      padding: 1.6rem 1.8rem 1.4rem;
-      position: relative;
-    }
-    .ingredients-modal .modal-header h5 {
-      margin: 0;
-      color: #fff;
-      font-size: 1.35rem;
-      font-family: 'Playfair Display', serif;
-    }
-    .ingredients-modal .modal-header .modal-eyebrow {
-      display: block;
-      color: var(--or);
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-    .ingredients-modal .btn-close {
-      filter: invert(1) brightness(2);
-      opacity: 0.7;
-    }
-    .ingredients-modal .modal-body {
-      padding: 1.4rem 1.8rem 1.8rem;
-      max-height: 60vh;
-      overflow-y: auto;
-    }
-    .ingredients-modal .modal-footer {
-      border-top: 1px solid rgba(0,0,0,0.06);
-      padding: 1rem 1.8rem;
-      font-size: 0.82rem;
-      color: rgba(0,0,0,0.55);
-    }
-    .ing-list { list-style: none; padding: 0; margin: 0; }
+    /* === Ingredients Modal === */
+    .ingredients-modal .modal-dialog { max-width:600px; }
+    .ingredients-modal .modal-content { border:none; border-radius:22px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.28); }
+    .ingredients-modal .modal-header { background:var(--encre); color:#fff; border-bottom:none; padding:1.6rem 1.8rem 1.4rem; }
+    .ingredients-modal .modal-header h5 { margin:0; color:#fff; font-size:1.35rem; font-family:'Playfair Display',serif; }
+    .ingredients-modal .modal-header .modal-eyebrow { display:block; color:var(--or); font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; font-weight:700; margin-bottom:0.3rem; }
+    .ingredients-modal .btn-close { filter:invert(1) brightness(2); opacity:0.7; }
+    .ingredients-modal .modal-body { padding:1.4rem 1.8rem 1.8rem; max-height:60vh; overflow-y:auto; }
+    .ingredients-modal .modal-footer { border-top:1px solid rgba(0,0,0,0.06); padding:1rem 1.8rem; font-size:0.82rem; color:rgba(0,0,0,0.55); }
+    .ing-list { list-style:none; padding:0; margin:0; }
     .ing-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      animation: fadeInRow 0.4s ease both;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem; padding:0.85rem 0; border-bottom:1px solid rgba(0,0,0,0.05);
+      animation:fadeInRow .4s ease both;
     }
-    .ing-item:last-child { border-bottom: none; }
-    .ing-item-name {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .ing-item-name strong {
-      color: var(--encre);
-      font-weight: 700;
-      font-size: 0.98rem;
-    }
-    .ing-item-qty {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--terracotta);
-      font-weight: 700;
-      min-width: 60px;
-      text-align: right;
-    }
+    .ing-item:last-child { border-bottom:none; }
+    .ing-item-name { display:flex; flex-direction:column; gap:0.25rem; }
+    .ing-item-name strong { color:var(--encre); font-weight:700; font-size:0.98rem; }
+    .ing-item-qty { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--terracotta); font-weight:700; min-width:60px; text-align:right; }
     .allergen-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      width: fit-content;
+      display:inline-flex; align-items:center; gap:0.3rem;
+      font-size:0.72rem; font-weight:700; letter-spacing:0.02em;
+      padding:0.25rem 0.55rem; border-radius:999px; width:fit-content;
     }
-    .allergen-badge.high {
-      background: rgba(192, 85, 42, 0.12);
-      color: var(--terracotta-dark);
-      border: 1px solid rgba(192, 85, 42, 0.25);
-    }
-    .allergen-badge.medium {
-      background: rgba(212, 175, 55, 0.15);
-      color: #876606;
-      border: 1px solid rgba(212, 175, 55, 0.32);
-    }
-    .allergen-legend {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .allergen-badge.high { background:rgba(192,85,42,0.12); color:var(--terracotta-dark); border:1px solid rgba(192,85,42,0.25); }
+    .allergen-badge.medium { background:rgba(212,175,55,0.15); color:#876606; border:1px solid rgba(212,175,55,0.32); }
+    .allergen-legend { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+    @keyframes fadeInRow { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-    @keyframes fadeInRow {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @media (max-width:768px) {
+      .dishes-hero { padding:3.5rem 1.25rem 2.4rem; }
+      .dishes-section { padding:3rem 1.25rem 4.5rem; }
+      .dish-detail-inner { flex-direction:column; }
+      .dish-detail-img { flex:1; min-height:240px; aspect-ratio:16/9; }
+      .dish-detail-body { padding:1.6rem 1.5rem 1.5rem; }
+      .dish-detail-meta { gap:1rem 1.6rem; }
     }
-
-    /* ============================================================
-       === Responsive ===
-       ============================================================ */
-    @media (max-width: 768px) {
-      .dishes-hero { padding: 3.5rem 1.25rem 2.4rem; }
-      .dishes-section { padding: 3rem 1.25rem 4.5rem; }
-      .dish-detail-inner { flex-direction: column; }
-      .dish-detail-img { flex: 1; min-height: 240px; aspect-ratio: 4 / 3; }
-      .dish-detail-body { padding: 1.6rem 1.5rem 1.5rem; }
-      .dish-detail-meta { gap: 1rem 1.6rem; }
+    @media (max-width:480px) {
+      .dishes-grid { gap:1.1rem; }
+      .dish-card-body { padding:1rem 1.1rem 1.2rem; }
+      .ingredients-modal .modal-body { padding:1rem 1.2rem 1.4rem; }
+      .ingredients-modal .modal-header { padding:1.3rem 1.4rem 1.1rem; }
     }
-    @media (max-width: 480px) {
-      .dishes-grid { gap: 1.1rem; }
-      .dish-card-body { padding: 1rem 1.1rem 1.2rem; }
-      .ingredients-modal .modal-body { padding: 1rem 1.2rem 1.4rem; }
-      .ingredients-modal .modal-header { padding: 1.3rem 1.4rem 1.1rem; }
-    }
-
-    /* Réduit le mouvement si l'utilisateur le préfère */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- === Top bar === -->
-  <nav class="top-bar">
-    <a href="index.html" class="brand">
-      <i class="bi bi-tree-fill"></i> Royaume du Maroc
-    </a>
-    <a href="index.html" class="back-link">
-      <i class="bi bi-arrow-left"></i> Retour
-    </a>
-  </nav>
+<nav class="top-bar">
+  <a href="index.html" class="brand"><i class="bi bi-tree-fill"></i> Royaume du Maroc</a>
+  <a href="index.html" class="back-link"><i class="bi bi-arrow-left"></i> Retour</a>
+</nav>
 
-  <!-- === Hero + Search === -->
-  <section class="dishes-hero">
-    <div class="container">
-      <span class="eyebrow">Gastronomie</span>
-      <h1>Plats Marocains</h1>
-      <p class="lead">
-        Une cuisine millénaire au carrefour des saveurs berbères, arabes, andalouses et méditerranéennes.
-        Explorez les plats emblématiques du royaume.
-      </p>
-      <div class="search-wrap">
-        <i class="bi bi-search"></i>
-        <input type="text" id="searchInput" placeholder="Rechercher un plat, un ingrédient..." autocomplete="off" />
-        <button type="button" class="search-clear" id="searchClear" aria-label="Effacer">
-          <i class="bi bi-x-circle-fill"></i>
-        </button>
-        <div class="search-count" id="searchCount" aria-live="polite"></div>
+<section class="dishes-hero">
+  <div class="container">
+    <span class="eyebrow">Gastronomie</span>
+    <h1>Plats Marocains</h1>
+    <p class="lead">Une cuisine millénaire au carrefour des saveurs berbères, arabes, andalouses et méditerranéennes. Explorez les plats emblématiques du royaume.</p>
+    <div class="search-wrap">
+      <i class="bi bi-search"></i>
+      <input type="text" id="searchInput" placeholder="Rechercher un plat, un ingrédient..." autocomplete="off" />
+      <button type="button" class="search-clear" id="searchClear" aria-label="Effacer"><i class="bi bi-x-circle-fill"></i></button>
+      <div class="search-count" id="searchCount" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dishes-section">
+  <div class="dishes-grid" id="dishesGrid"></div>
+</section>
+
+<div class="modal fade ingredients-modal" id="ingredientsModal" tabindex="-1" aria-labelledby="ingredientsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <span class="modal-eyebrow">Ingrédients & Allergènes</span>
+          <h5 id="ingredientsModalLabel">—</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
-    </div>
-  </section>
-
-  <!-- === Grille === -->
-  <section class="dishes-section">
-    <div class="dishes-grid" id="dishesGrid">
-      <!-- Cards injectées par JS -->
-    </div>
-  </section>
-
-  <!-- === Modal des ingrédients === -->
-  <div class="modal fade ingredients-modal" id="ingredientsModal" tabindex="-1" aria-labelledby="ingredientsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>
-            <span class="modal-eyebrow">Ingrédients</span>
-            <h5 id="ingredientsModalLabel">—</h5>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body">
-          <ul class="ing-list" id="ingredientsList"></ul>
-        </div>
-        <div class="modal-footer">
-          <div class="allergen-legend">
-            <span class="allergen-badge high">⚠ Allergène fréquent</span>
-            <span class="allergen-badge medium">⚠ Sensibilité possible</span>
-          </div>
+      <div class="modal-body"><ul class="ing-list" id="ingredientsList"></ul></div>
+      <div class="modal-footer">
+        <div class="allergen-legend">
+          <span class="allergen-badge high">⚠ Allergène prioritaire</span>
+          <span class="allergen-badge medium">⚠ Sensibilité possible</span>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- === Bootstrap JS === -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
 
-  <script>
-    /* ============================================================
-       === Données : plats + ingrédients + allergènes ===
-       Chaque ingrédient porte éventuellement un champ `allergen`
-       qui pointe sur une clé de RISK_LEVELS. Le niveau (high/medium)
-       et l'étiquette sont calculés au rendu.
-       ============================================================ */
+const RISK_LEVELS = {
+  'gluten':         { level: 'high',   label: '⚠ Gluten' },
+  'lait':           { level: 'high',   label: '⚠ Lactose' },
+  'arachides':      { level: 'high',   label: '⚠ Arachides' },
+  'fruits de mer':  { level: 'high',   label: '⚠ Fruits de mer' },
+  'œufs':           { level: 'high',   label: '⚠ Œufs' },
+  'fruits à coque': { level: 'high',   label: '⚠ Fruits à coque' },
+  'soja':           { level: 'medium', label: '⚠ Soja' },
+  'sésame':         { level: 'medium', label: '⚠ Sésame' },
+  'moutarde':       { level: 'medium', label: '⚠ Moutarde' },
+  'céleri':         { level: 'medium', label: '⚠ Céleri' },
+};
 
-    const RISK_LEVELS = {
-      'gluten':         { level: 'high',   label: '⚠ Sensibilité possible' },
-      'lait':           { level: 'high',   label: '⚠ Très courant' },
-      'arachides':      { level: 'high',   label: '⚠ Allergène fréquent' },
-      'fruits de mer':  { level: 'high',   label: '⚠ Allergène fréquent' },
-      'œufs':           { level: 'high',   label: '⚠ Allergène fréquent' },
-      'fruits à coque': { level: 'high',   label: '⚠ Allergène fréquent' },
-      'soja':           { level: 'medium', label: '⚠ Sensibilité possible' },
-      'sésame':         { level: 'medium', label: '⚠ Sensibilité possible' },
-      'moutarde':       { level: 'medium', label: '⚠ Sensibilité possible' }
-    };
+// Real open-license dish photos (Wikimedia Commons / open sources)
+const DISHES = [
+  {
+    id: 'couscous',
+    name: 'Couscous Royal',
+    category: 'Plat principal',
+    price: '85 MAD',
+    calories: '480 kcal',
+    image: 'assets/dish-couscous.jpg',
+    imagePosition: '50% 40%',
+    description: "Semoule de blé dur cuite à la vapeur, garnie de légumes mijotés (carotte, courgette, navet, citrouille) et de trois viandes — agneau, poulet et merguez. Le plat du vendredi par excellence, partagé en famille autour d'un grand plat unique.",
+    allergens: ['gluten','lait'],
+    ingredients: [
+      { name: 'Semoule de blé dur',        qty: '200g', allergen: 'gluten' },
+      { name: 'Épaule d\'agneau',           qty: '150g' },
+      { name: 'Poulet fermier',             qty: '120g' },
+      { name: 'Merguez',                    qty: '80g'  },
+      { name: 'Carotte',                    qty: '100g' },
+      { name: 'Courgette',                  qty: '100g' },
+      { name: 'Navet',                      qty: '80g'  },
+      { name: 'Citrouille',                 qty: '100g' },
+      { name: 'Pois chiches',               qty: '50g'  },
+      { name: 'Oignon',                     qty: '50g'  },
+      { name: 'Coriandre fraîche',          qty: '10g'  },
+      { name: 'Smen (beurre rance)',         qty: '15g', allergen: 'lait' },
+      { name: 'Ras el hanout, cumin, curcuma', qty: '5g' },
+      { name: 'Safran',                     qty: '0.5g' },
+      { name: 'Huile d\'olive',             qty: '20g'  },
+    ]
+  },
+  {
+    id: 'harira',
+    name: 'Harira',
+    category: 'Soupe / Entrée',
+    price: '30 MAD',
+    calories: '220 kcal',
+    image: 'assets/dish-harira.jpg',
+    imagePosition: '50% 50%',
+    description: "Soupe traditionnelle aux lentilles, pois chiches, tomates et viande, parfumée au céleri et à la coriandre. Star du Ramadan, servie pour rompre le jeûne accompagnée de dattes et de chebakia. Sources d'allergènes : gluten (vermicelles, farine), lait (smen), céleri.",
+    allergens: ['gluten','lait','céleri'],
+    ingredients: [
+      { name: 'Lentilles brunes',           qty: '60g'  },
+      { name: 'Pois chiches',               qty: '50g'  },
+      { name: 'Tomates fraîches',           qty: '200g' },
+      { name: 'Concentré de tomate',        qty: '15g'  },
+      { name: 'Bœuf ou agneau',             qty: '80g'  },
+      { name: 'Vermicelles',                qty: '30g', allergen: 'gluten' },
+      { name: 'Farine (tedouira)',           qty: '15g', allergen: 'gluten' },
+      { name: 'Céleri branche',             qty: '40g', allergen: 'céleri' },
+      { name: 'Coriandre fraîche',          qty: '20g'  },
+      { name: 'Persil plat',                qty: '15g'  },
+      { name: 'Oignon',                     qty: '50g'  },
+      { name: 'Ail',                        qty: '10g'  },
+      { name: 'Smen',                       qty: '10g', allergen: 'lait' },
+      { name: 'Cumin, curcuma, gingembre',  qty: '4g'   },
+      { name: 'Cannelle',                   qty: '2g'   },
+    ]
+  },
+  {
+    id: 'pastilla',
+    name: 'Pastilla au Poulet',
+    category: 'Plat raffiné',
+    price: '95 MAD',
+    calories: '560 kcal',
+    image: 'assets/dish-pastilla.jpg',
+    imagePosition: '50% 50%',
+    description: "Délicate pâte feuilletée warka garnie de poulet effiloché aux amandes, parfumée à la cannelle et saupoudrée de sucre glace. Le contraste sucré-salé emblématique de la cuisine andalouse-marocaine. Allergènes confirmés : gluten, amandes (fruits à coque), œufs, lait, céleri, soja.",
+    allergens: ['gluten','fruits à coque','œufs','lait','céleri'],
+    ingredients: [
+      { name: 'Feuilles de brick (warka)',  qty: '100g', allergen: 'gluten' },
+      { name: 'Poulet fermier',             qty: '180g' },
+      { name: 'Amandes effilées grillées',  qty: '75g',  allergen: 'fruits à coque' },
+      { name: 'Œufs',                       qty: '60g',  allergen: 'œufs' },
+      { name: 'Oignon doux',                qty: '80g'  },
+      { name: 'Persil, coriandre',          qty: '25g', allergen: 'céleri' },
+      { name: 'Beurre fondu clarifié',      qty: '75g',  allergen: 'lait' },
+      { name: 'Cannelle moulue',            qty: '5g'   },
+      { name: 'Sucre glace',                qty: '15g'  },
+      { name: 'Safran',                     qty: '0.5g' },
+      { name: 'Ras el hanout, gingembre',   qty: '5g'   },
+    ]
+  },
+  {
+    id: 'tanjia',
+    name: 'Tanjia Marrakchia',
+    category: 'Plat principal',
+    price: '110 MAD',
+    calories: '620 kcal',
+    image: 'assets/dish-tanjia.webp',
+    imagePosition: '50% 45%',
+    description: "Jarret de bœuf ou d'agneau confit pendant 6 à 8 heures dans une jarre en terre, parfumé au cumin, citron confit, ail et safran. La spécialité culte de Marrakech, mijotée traditionnellement dans les cendres du hammam. Sans légumes, concentrée sur la viande fondante.",
+    allergens: ['lait'],
+    ingredients: [
+      { name: 'Jarret de veau ou agneau',        qty: '300g' },
+      { name: 'Citrons confits au sel',           qty: '40g'  },
+      { name: 'Ail (tête entière)',               qty: '20g'  },
+      { name: 'Cumin moulu',                      qty: '8g'   },
+      { name: 'Ras el hanout',                    qty: '5g'   },
+      { name: 'Safran',                           qty: '0.3g' },
+      { name: 'Smen (beurre rance)',              qty: '20g', allergen: 'lait' },
+      { name: 'Huile d\'olive',                   qty: '15g'  },
+      { name: 'Eau de fleur d\'oranger',          qty: '5g'   },
+      { name: 'Curcuma',                          qty: '2g'   },
+    ]
+  },
+  {
+    id: 'tagine-poulet',
+    name: 'Tagine Poulet & Citrons Confits',
+    category: 'Tagine',
+    price: '75 MAD',
+    calories: '410 kcal',
+    image: 'assets/tajine.jpeg',
+    imagePosition: '50% 50%',
+    description: "Poulet fermier mijoté lentement dans un tagine en terre cuite avec olives violettes, citrons confits et coriandre fraîche. Un classique du repas familial marocain, servi avec du khobz tiède.",
+    allergens: [],
+    ingredients: [
+      { name: 'Poulet fermier (cuisses)',    qty: '200g' },
+      { name: 'Citrons confits',             qty: '50g'  },
+      { name: 'Olives violettes',            qty: '80g'  },
+      { name: 'Oignon',                      qty: '60g'  },
+      { name: 'Ail',                         qty: '10g'  },
+      { name: 'Coriandre, persil',           qty: '25g'  },
+      { name: 'Gingembre frais',             qty: '3g'   },
+      { name: 'Safran',                      qty: '0.3g' },
+      { name: 'Curcuma, cumin',              qty: '3g'   },
+      { name: 'Huile d\'olive',              qty: '20g'  },
+    ]
+  },
+];
 
-    const DISHES = [
-      {
-        id: 'couscous',
-        name: 'Couscous Royal',
-        category: 'Plat principal',
-        price: '85 MAD',
-        calories: '480 kcal',
-        image: 'assets/dish-couscous.jpg',
-        description: "Semoule de blé dur cuite à la vapeur, garnie de légumes mijotés (carotte, courgette, navet, citrouille) et de trois viandes. Le plat du vendredi par excellence, partagé en famille autour d'un grand plat unique.",
-        ingredients: [
-          { name: 'Semoule de blé dur', qty: '200g', allergen: 'gluten' },
-          { name: 'Agneau',              qty: '150g' },
-          { name: 'Poulet fermier',      qty: '120g' },
-          { name: 'Merguez',             qty: '80g'  },
-          { name: 'Carotte',             qty: '100g' },
-          { name: 'Courgette',           qty: '100g' },
-          { name: 'Navet',               qty: '80g'  },
-          { name: 'Citrouille',          qty: '100g' },
-          { name: 'Pois chiches',        qty: '50g'  },
-          { name: 'Oignon',              qty: '50g'  },
-          { name: 'Coriandre fraîche',   qty: '10g'  },
-          { name: 'Smen (beurre rance)', qty: '15g', allergen: 'lait' },
-          { name: 'Cumin, curcuma',      qty: '5g'   }
-        ]
-      },
-      {
-        id: 'harira',
-        name: 'Harira',
-        category: 'Soupe / Entrée',
-        price: '30 MAD',
-        calories: '220 kcal',
-        image: 'assets/dish-harira.jpg',
-        imagePosition: '28% 55%',
-        description: "Soupe traditionnelle aux lentilles, pois chiches, tomates et viande, parfumée au céleri et à la coriandre. Star du Ramadan, servie pour rompre le jeûne, accompagnée de dattes et de chebakia.",
-        ingredients: [
-          { name: 'Lentilles brunes', qty: '60g'  },
-          { name: 'Pois chiches',     qty: '50g'  },
-          { name: 'Tomates fraîches', qty: '200g' },
-          { name: 'Bœuf',             qty: '80g'  },
-          { name: 'Vermicelles',      qty: '30g', allergen: 'gluten' },
-          { name: 'Céleri',           qty: '40g'  },
-          { name: 'Coriandre',        qty: '20g'  },
-          { name: 'Persil plat',      qty: '15g'  },
-          { name: 'Oignon',           qty: '50g'  },
-          { name: 'Smen',             qty: '10g', allergen: 'lait' },
-          { name: 'Farine',           qty: '15g', allergen: 'gluten' },
-          { name: 'Cumin, curcuma',   qty: '4g'   }
-        ]
-      },
-      {
-        id: 'pastilla',
-        name: 'Pastilla au poulet',
-        category: 'Plat raffiné',
-        price: '95 MAD',
-        calories: '560 kcal',
-        image: 'assets/dish-pastilla.jpg',
-        description: "Délicate pâte feuilletée warka garnie de poulet effiloché aux amandes, parfumée à la cannelle et saupoudrée de sucre glace. Le contraste sucré-salé emblématique de la cuisine andalouse-marocaine.",
-        ingredients: [
-          { name: 'Pâte warka',          qty: '100g', allergen: 'gluten' },
-          { name: 'Poulet fermier',      qty: '150g' },
-          { name: 'Amandes effilées',    qty: '50g',  allergen: 'fruits à coque' },
-          { name: 'Œufs',                qty: '60g',  allergen: 'œufs' },
-          { name: 'Oignon doux',         qty: '50g'  },
-          { name: 'Persil, coriandre',   qty: '25g'  },
-          { name: 'Cannelle',            qty: '5g'   },
-          { name: 'Sucre glace',         qty: '15g'  },
-          { name: 'Beurre',              qty: '40g',  allergen: 'lait' },
-          { name: 'Safran',              qty: '0.5g' }
-        ]
-      },
-      {
-        id: 'tanjia',
-        name: 'Tanjia Marrakchia',
-        category: 'Plat principal',
-        price: '110 MAD',
-        calories: '620 kcal',
-        image: 'assets/dish-tanjia.webp',
-        description: "Viande de bœuf ou d'agneau confite des heures durant dans une jarre en terre, parfumée au cumin, citron confit, ail et safran. La spécialité culte de Marrakech, mijotée dans les cendres du hammam.",
-        ingredients: [
-          { name: 'Bœuf à mijoter',           qty: '250g' },
-          { name: 'Citron confit',            qty: '40g'  },
-          { name: 'Ail',                      qty: '15g'  },
-          { name: 'Cumin moulu',              qty: '5g'   },
-          { name: 'Smen',                     qty: '20g', allergen: 'lait' },
-          { name: 'Safran',                   qty: '0.3g' },
-          { name: 'Eau de fleur d\'oranger',  qty: '5g'   },
-          { name: 'Huile d\'olive',           qty: '15g'  }
-        ]
-      },
-      {
-        id: 'tagine-poulet',
-        name: 'Tagine au poulet & citrons confits',
-        category: 'Tagine',
-        price: '75 MAD',
-        calories: '410 kcal',
-        gradient: 'linear-gradient(135deg, #D4AF37 0%, #B8961F 100%)',
-        description: "Poulet fermier mijoté lentement dans un tagine en terre cuite avec olives violettes, citrons confits et coriandre fraîche. Un classique du repas familial, servi avec du khobz tiède.",
-        ingredients: [
-          { name: 'Poulet fermier',    qty: '200g' },
-          { name: 'Citrons confits',   qty: '50g'  },
-          { name: 'Olives violettes',  qty: '80g'  },
-          { name: 'Oignon',            qty: '60g'  },
-          { name: 'Ail',               qty: '10g'  },
-          { name: 'Coriandre, persil', qty: '25g'  },
-          { name: 'Gingembre frais',   qty: '3g'   },
-          { name: 'Safran',            qty: '0.3g' },
-          { name: 'Huile d\'olive',    qty: '20g'  }
-        ]
-      },
-      {
-        id: 'tagine-boeuf',
-        name: 'Tagine au bœuf & pruneaux',
-        category: 'Tagine',
-        price: '90 MAD',
-        calories: '520 kcal',
-        gradient: 'linear-gradient(135deg, #C0552A 0%, #9C4520 100%)',
-        description: "Bœuf fondant mijoté avec pruneaux moelleux, amandes grillées et graines de sésame dorées. L'équilibre sucré-salé typique de la cuisine des grands jours, parfumé à la cannelle.",
-        ingredients: [
-          { name: 'Bœuf à mijoter', qty: '220g' },
-          { name: 'Pruneaux',       qty: '60g'  },
-          { name: 'Amandes',        qty: '40g',  allergen: 'fruits à coque' },
-          { name: 'Sésame',         qty: '15g',  allergen: 'sésame' },
-          { name: 'Oignon',         qty: '50g'  },
-          { name: 'Cannelle',       qty: '3g'   },
-          { name: 'Gingembre',      qty: '3g'   },
-          { name: 'Beurre',         qty: '20g',  allergen: 'lait' }
-        ]
-      },
-      {
-        id: 'mechoui',
-        name: 'Méchoui',
-        category: 'Plat de fête',
-        price: '120 MAD',
-        calories: '580 kcal',
-        gradient: 'linear-gradient(135deg, #1F2A1A 0%, #2D5016 100%)',
-        description: "Agneau rôti entier à la broche pendant cinq heures, frotté au cumin, à l'ail et au beurre rance. Plat des grandes occasions servi avec une pincée de sel et de cumin pour exalter la viande.",
-        ingredients: [
-          { name: 'Agneau',         qty: '300g' },
-          { name: 'Smen',           qty: '25g',  allergen: 'lait' },
-          { name: 'Ail',            qty: '15g'  },
-          { name: 'Cumin moulu',    qty: '8g'   },
-          { name: 'Coriandre',      qty: '10g'  },
-          { name: 'Huile d\'olive', qty: '15g'  }
-        ]
-      },
-      {
-        id: 'chebakia',
-        name: 'Chebakia',
-        category: 'Dessert',
-        price: '12 MAD / pièce',
-        calories: '180 kcal',
-        gradient: 'linear-gradient(135deg, #B8961F 0%, #9C4520 100%)',
-        description: "Pâtisserie en forme de rose, frite puis enrobée de miel chaud et de graines de sésame dorées. Incontournable du Ramadan, parfumée à l'eau de fleur d'oranger, au safran et à l'anis.",
-        ingredients: [
-          { name: 'Farine',                  qty: '80g',  allergen: 'gluten' },
-          { name: 'Œuf',                     qty: '30g',  allergen: 'œufs'   },
-          { name: 'Beurre',                  qty: '15g',  allergen: 'lait'   },
-          { name: 'Sésame grillé',           qty: '20g',  allergen: 'sésame' },
-          { name: 'Miel d\'oranger',         qty: '40g'  },
-          { name: 'Eau de fleur d\'oranger', qty: '5g'   },
-          { name: 'Cannelle, anis',          qty: '3g'   },
-          { name: 'Safran',                  qty: '0.2g' }
-        ]
-      }
-    ];
+/* ── Helpers ── */
+const RISK_UNIQUE = (allergens) => [...new Set(allergens)];
 
-    /* ============================================================
-       === Rendu de la grille ===
-       ============================================================ */
-    const grid = document.getElementById('dishesGrid');
-    const ingredientsModalEl = document.getElementById('ingredientsModal');
-    const bsModal = new bootstrap.Modal(ingredientsModalEl);
-    let openCard = null; // référence vers la carte actuellement développée
-
-    function dishImageHtml(dish) {
-      if (dish.image) {
-        return `<img class="dish-card-img" src="${dish.image}" alt="${dish.name}"
-                  style="${dish.imagePosition ? `object-position: ${dish.imagePosition};` : ''}" />`;
-      }
-      return `<div class="dish-card-img gradient" style="background-image: ${dish.gradient};"></div>`;
+function getCardAllergens(dish) {
+  const seen = new Set();
+  const out = [];
+  dish.ingredients.forEach(ing => {
+    if (ing.allergen && !seen.has(ing.allergen)) {
+      seen.add(ing.allergen);
+      out.push(ing.allergen);
     }
+  });
+  return out;
+}
 
-    function dishDetailBgStyle(dish) {
-      if (dish.image) {
-        return `background-image: url('${dish.image}'); ${dish.imagePosition ? `background-position: ${dish.imagePosition};` : ''}`;
-      }
-      return `background-image: ${dish.gradient};`;
-    }
+function allergenTagsHtml(allergens, cls='allergen-tag') {
+  if (!allergens.length) return '<span style="color:rgba(0,0,0,0.4);font-size:0.8rem;">Aucun allergène majeur déclaré</span>';
+  return allergens.map(a => {
+    const r = RISK_LEVELS[a];
+    return r ? `<span class="${cls} ${r.level}">${r.label}</span>` : '';
+  }).join('');
+}
 
-    function renderGrid() {
-      grid.innerHTML = DISHES.map(dish => `
-        <article class="dish-card" data-id="${dish.id}" tabindex="0" role="button"
-                 aria-expanded="false" aria-label="Voir le détail de ${dish.name}">
-          <div class="dish-card-img-wrap">
-            ${dishImageHtml(dish)}
-            <span class="dish-card-badge">${dish.category}</span>
-            <span class="dish-card-price">${dish.price}</span>
-          </div>
-          <div class="dish-card-body">
-            <h3>${dish.name}</h3>
-            <p class="desc">${dish.description}</p>
-            <div class="dish-card-foot">
-              <span class="cal"><i class="bi bi-fire"></i> ${dish.calories}</span>
-              <span class="more">Voir le détail <i class="bi bi-arrow-right"></i></span>
-            </div>
-          </div>
-        </article>
-      `).join('');
-    }
+/* ── Grid render ── */
+const grid = document.getElementById('dishesGrid');
+const ingredientsModalEl = document.getElementById('ingredientsModal');
+const bsModal = new bootstrap.Modal(ingredientsModalEl);
+let openCard = null;
 
-    /* === Ouvre/ferme le panneau détail sous la carte === */
-    function closeOpenDetail() {
-      if (!openCard) return;
-      const detail = openCard.nextElementSibling;
-      if (detail && detail.classList.contains('dish-detail')) {
-        detail.classList.remove('open');
-        // attend la fin de la transition pour supprimer le panneau
-        setTimeout(() => detail.remove(), 600);
-      }
-      openCard.setAttribute('aria-expanded', 'false');
-      openCard = null;
-    }
-
-    function openDetail(card) {
-      const id = card.dataset.id;
-      const dish = DISHES.find(d => d.id === id);
-      if (!dish) return;
-
-      // Si une autre carte est déjà ouverte → on ferme avant
-      if (openCard && openCard !== card) closeOpenDetail();
-      // Toggle sur la même carte → on ferme
-      if (openCard === card) { closeOpenDetail(); return; }
-
-      const detail = document.createElement('div');
-      detail.className = 'dish-detail';
-      detail.innerHTML = `
-        <div class="dish-detail-inner">
-          <div class="dish-detail-img" style="${dishDetailBgStyle(dish)}"></div>
-          <div class="dish-detail-body">
-            <button class="dish-detail-close" aria-label="Fermer"><i class="bi bi-x-lg"></i></button>
-            <span class="category-chip">${dish.category}</span>
-            <h2>${dish.name}</h2>
-            <p class="desc">${dish.description}</p>
-            <div class="dish-detail-meta">
-              <div class="meta-item">
-                <span class="label">Prix</span>
-                <span class="value price">${dish.price}</span>
-              </div>
-              <div class="meta-item">
-                <span class="label">Catégorie</span>
-                <span class="value">${dish.category}</span>
-              </div>
-              <div class="meta-item">
-                <span class="label">Calories</span>
-                <span class="value">${dish.calories}</span>
-              </div>
-              <div class="meta-item">
-                <span class="label">Ingrédients</span>
-                <span class="value">${dish.ingredients.length}</span>
-              </div>
-            </div>
-            <button class="btn-ingredients" data-action="open-ingredients" data-id="${dish.id}">
-              <i class="bi bi-flower2"></i> Découvrir les ingrédients
-            </button>
-          </div>
+function renderGrid() {
+  grid.innerHTML = DISHES.map(dish => {
+    const cardAllergens = getCardAllergens(dish);
+    const miniTagsHtml = cardAllergens.length
+      ? cardAllergens.map(a => {
+          const r = RISK_LEVELS[a];
+          return r ? `<span class="mini-badge ${r.level}">${r.label}</span>` : '';
+        }).join('')
+      : '';
+    return `
+    <article class="dish-card" data-id="${dish.id}" tabindex="0" role="button"
+             aria-expanded="false" aria-label="Voir le détail de ${dish.name}">
+      <div class="dish-card-img-wrap">
+        <img class="dish-card-img"
+             src="${dish.image}"
+             alt="${dish.name}"
+             style="${dish.imagePosition ? `object-position:${dish.imagePosition};` : ''}"
+             loading="lazy" />
+        <span class="dish-card-badge">${dish.category}</span>
+        <span class="dish-card-price">${dish.price}</span>
+      </div>
+      <div class="dish-card-body">
+        <h3>${dish.name}</h3>
+        <p class="desc">${dish.description}</p>
+        ${miniTagsHtml ? `<div class="dish-card-allergens">${miniTagsHtml}</div>` : ''}
+        <div class="dish-card-foot">
+          <span class="cal"><i class="bi bi-fire"></i> ${dish.calories}</span>
+          <span class="more">Voir le détail <i class="bi bi-arrow-right"></i></span>
         </div>
-      `;
-      card.insertAdjacentElement('afterend', detail);
-      // 2 frames pour laisser le DOM peindre avant d'animer
-      requestAnimationFrame(() => requestAnimationFrame(() => detail.classList.add('open')));
-      card.setAttribute('aria-expanded', 'true');
-      openCard = card;
-      // scroll doux pour que le détail soit visible
-      setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ── Detail panel ── */
+function closeOpenDetail() {
+  if (!openCard) return;
+  const detail = openCard.nextElementSibling;
+  if (detail && detail.classList.contains('dish-detail')) {
+    detail.classList.remove('open');
+    setTimeout(() => detail.remove(), 600);
+  }
+  openCard.setAttribute('aria-expanded','false');
+  openCard = null;
+}
+
+function openDetail(card) {
+  const dish = DISHES.find(d => d.id === card.dataset.id);
+  if (!dish) return;
+  if (openCard && openCard !== card) closeOpenDetail();
+  if (openCard === card) { closeOpenDetail(); return; }
+
+  const cardAllergens = getCardAllergens(dish);
+
+  const detail = document.createElement('div');
+  detail.className = 'dish-detail';
+  detail.innerHTML = `
+    <div class="dish-detail-inner">
+      <div class="dish-detail-img" style="background-image:url('${dish.image}');${dish.imagePosition?`background-position:${dish.imagePosition};`:''}"></div>
+      <div class="dish-detail-body">
+        <button class="dish-detail-close" aria-label="Fermer"><i class="bi bi-x-lg"></i></button>
+        <span class="category-chip">${dish.category}</span>
+        <h2>${dish.name}</h2>
+        <p class="desc">${dish.description}</p>
+        <div class="dish-detail-meta">
+          <div class="meta-item"><span class="label">Prix</span><span class="value price">${dish.price}</span></div>
+          <div class="meta-item"><span class="label">Calories</span><span class="value">${dish.calories}</span></div>
+          <div class="meta-item"><span class="label">Ingrédients</span><span class="value">${dish.ingredients.length}</span></div>
+        </div>
+        <div class="allergen-section">
+          <div class="alg-title">Allergènes détectés</div>
+          <div class="allergen-tags">${allergenTagsHtml(cardAllergens,'allergen-tag')}</div>
+        </div>
+        <button class="btn-ingredients" data-action="open-ingredients" data-id="${dish.id}">
+          <i class="bi bi-flower2"></i> Voir tous les ingrédients
+        </button>
+      </div>
+    </div>`;
+  card.insertAdjacentElement('afterend', detail);
+  requestAnimationFrame(() => requestAnimationFrame(() => detail.classList.add('open')));
+  card.setAttribute('aria-expanded','true');
+  openCard = card;
+  setTimeout(() => detail.scrollIntoView({ behavior:'smooth', block:'center' }), 80);
+}
+
+/* ── Ingredients Modal ── */
+function openIngredientsModal(dish) {
+  ingredientsModalEl.querySelector('#ingredientsModalLabel').textContent = dish.name;
+  const list = ingredientsModalEl.querySelector('#ingredientsList');
+  list.innerHTML = dish.ingredients.map((ing, idx) => {
+    const risk = ing.allergen ? RISK_LEVELS[ing.allergen] : null;
+    const badge = risk ? `<span class="allergen-badge ${risk.level}">${risk.label}</span>` : '';
+    return `<li class="ing-item" style="animation-delay:${idx*35}ms">
+      <div class="ing-item-name"><strong>${ing.name}</strong>${badge}</div>
+      <span class="ing-item-qty">${ing.qty}</span>
+    </li>`;
+  }).join('');
+  bsModal.show();
+}
+
+/* ── Event delegation ── */
+grid.addEventListener('click', (e) => {
+  const ingBtn = e.target.closest('[data-action="open-ingredients"]');
+  if (ingBtn) { const dish = DISHES.find(d=>d.id===ingBtn.dataset.id); if(dish) openIngredientsModal(dish); return; }
+  const closeBtn = e.target.closest('.dish-detail-close');
+  if (closeBtn) { closeOpenDetail(); return; }
+  const card = e.target.closest('.dish-card');
+  if (card && !card.classList.contains('hidden')) openDetail(card);
+});
+grid.addEventListener('keydown', (e) => {
+  const card = e.target.closest('.dish-card');
+  if (card && (e.key==='Enter'||e.key===' ')) { e.preventDefault(); openDetail(card); }
+  if (e.key==='Escape' && openCard) closeOpenDetail();
+});
+
+/* ── Search ── */
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+const searchCount = document.getElementById('searchCount');
+const cards = () => Array.from(document.querySelectorAll('.dish-card'));
+
+function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function dishMatches(dish, q) {
+  if (!q) return true;
+  const hay = [dish.name, dish.category, dish.description, ...dish.ingredients.map(i=>i.name)].map(normalize).join(' | ');
+  return hay.includes(q);
+}
+
+function applyFilter() {
+  const q = normalize(searchInput.value.trim());
+  let visible = 0;
+  cards().forEach(card => {
+    const dish = DISHES.find(d=>d.id===card.dataset.id);
+    const match = dishMatches(dish, q);
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  const existing = grid.querySelector('.empty-state');
+  if (visible===0) {
+    if (!existing) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.innerHTML = '<i class="bi bi-search"></i><h3>Aucun plat ne correspond</h3><p>Essayez un autre mot-clé ou un ingrédient (ex. amandes, citron).</p>';
+      grid.appendChild(empty);
     }
+  } else if (existing) { existing.remove(); }
+  searchClear.classList.toggle('visible', !!q);
+  searchCount.textContent = q ? `${visible} plat${visible>1?'s':''} trouvé${visible>1?'s':''}` : '';
+  if (openCard && openCard.classList.contains('hidden')) closeOpenDetail();
+}
 
-    /* === Modal des ingrédients === */
-    function openIngredientsModal(dish) {
-      ingredientsModalEl.querySelector('#ingredientsModalLabel').textContent = dish.name;
-      const list = ingredientsModalEl.querySelector('#ingredientsList');
-      list.innerHTML = dish.ingredients.map((ing, idx) => {
-        const risk = ing.allergen ? RISK_LEVELS[ing.allergen] : null;
-        const badge = risk
-          ? `<span class="allergen-badge ${risk.level}">${risk.label}</span>`
-          : '';
-        return `
-          <li class="ing-item" style="animation-delay: ${idx * 35}ms">
-            <div class="ing-item-name">
-              <strong>${ing.name}</strong>
-              ${badge}
-            </div>
-            <span class="ing-item-qty">${ing.qty}</span>
-          </li>
-        `;
-      }).join('');
-      bsModal.show();
-    }
+searchInput.addEventListener('input', applyFilter);
+searchClear.addEventListener('click', () => { searchInput.value=''; applyFilter(); searchInput.focus(); });
 
-    /* === Délégation d'événements === */
-    grid.addEventListener('click', (e) => {
-      const ingBtn = e.target.closest('[data-action="open-ingredients"]');
-      if (ingBtn) {
-        const dish = DISHES.find(d => d.id === ingBtn.dataset.id);
-        if (dish) openIngredientsModal(dish);
-        return;
-      }
-      const closeBtn = e.target.closest('.dish-detail-close');
-      if (closeBtn) { closeOpenDetail(); return; }
-      const card = e.target.closest('.dish-card');
-      if (card && !card.classList.contains('hidden')) openDetail(card);
-    });
-
-    // Accessibilité clavier : Enter / Space sur une carte
-    grid.addEventListener('keydown', (e) => {
-      const card = e.target.closest('.dish-card');
-      if (card && (e.key === 'Enter' || e.key === ' ')) {
-        e.preventDefault();
-        openDetail(card);
-      }
-      if (e.key === 'Escape' && openCard) closeOpenDetail();
-    });
-
-    /* ============================================================
-       === Recherche en temps réel ===
-       Match sur nom, catégorie, description et ingrédients. Filtrage
-       instantané avec fondu doux (la classe .hidden retire la carte
-       du flux sans déclencher de reflow brutal).
-       ============================================================ */
-    const searchInput = document.getElementById('searchInput');
-    const searchClear = document.getElementById('searchClear');
-    const searchCount = document.getElementById('searchCount');
-    const cards = () => Array.from(document.querySelectorAll('.dish-card'));
-
-    function normalize(s) {
-      return (s || '').toLowerCase()
-        .normalize('NFD').replace(/[̀-ͯ]/g, '');
-    }
-
-    function dishMatches(dish, q) {
-      if (!q) return true;
-      const hay = [
-        dish.name,
-        dish.category,
-        dish.description,
-        ...dish.ingredients.map(i => i.name)
-      ].map(normalize).join(' | ');
-      return hay.includes(q);
-    }
-
-    function applyFilter() {
-      const q = normalize(searchInput.value.trim());
-      let visible = 0;
-      cards().forEach(card => {
-        const dish = DISHES.find(d => d.id === card.dataset.id);
-        const match = dishMatches(dish, q);
-        card.classList.toggle('hidden', !match);
-        if (match) visible++;
-      });
-
-      // Empty state
-      const existing = grid.querySelector('.empty-state');
-      if (visible === 0) {
-        if (!existing) {
-          const empty = document.createElement('div');
-          empty.className = 'empty-state';
-          empty.innerHTML = `
-            <i class="bi bi-search"></i>
-            <h3>Aucun plat ne correspond</h3>
-            <p>Essayez un autre mot-clé ou un ingrédient (ex. amandes, citron).</p>
-          `;
-          grid.appendChild(empty);
-        }
-      } else if (existing) {
-        existing.remove();
-      }
-
-      // Compteur + bouton effacer
-      searchClear.classList.toggle('visible', !!q);
-      searchCount.textContent = q
-        ? `${visible} plat${visible > 1 ? 's' : ''} trouvé${visible > 1 ? 's' : ''}`
-        : '';
-
-      // Si la carte ouverte n'est plus visible, on referme le détail
-      if (openCard && openCard.classList.contains('hidden')) closeOpenDetail();
-    }
-
-    searchInput.addEventListener('input', applyFilter);
-    searchClear.addEventListener('click', () => {
-      searchInput.value = '';
-      applyFilter();
-      searchInput.focus();
-    });
-
-    /* === Démarrage === */
-    renderGrid();
-    applyFilter();
-  </script>
+renderGrid();
+applyFilter();
+</script>
 </body>
 </html>
