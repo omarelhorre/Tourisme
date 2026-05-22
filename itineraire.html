@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#C0552A" />
+  <title>Itinéraire Maroc — Voyage sur mesure</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --terracotta: #C0552A;
+      --terracotta-dark: #9C4520;
+      --sable: #F5E6C8;
+      --sable-fonce: #E9D6AE;
+      --vert: #2D5016;
+      --vert-fonce: #1F2A1A;
+      --or: #D4AF37;
+      --or-dark: #B8961F;
+      --ivoire: #F7F0E7;
+      --nuit: #22190F;
+      --ombre: rgba(0,0,0,0.28);
+      --shadow-soft: 0 30px 60px rgba(0,0,0,0.16);
+      --shadow-gold: 0 0 22px rgba(212,175,55,0.22);
+      --radius: 28px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      color: var(--ivoire);
+      background: radial-gradient(circle at top, rgba(255,241,214,0.16), transparent 28%),
+                  linear-gradient(180deg, #1f1208 0%, #291c0f 28%, #3f2b19 68%, #1c1208 100%);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cpath d='M45 0 L90 45 L45 90 L0 45Z' fill='none' stroke='%23D4AF37' stroke-width='0.5'/%3E%3Cpath d='M45 11 L79 45 L45 79 L11 45Z' fill='none' stroke='%23D4AF37' stroke-width='0.5'/%3E%3Cpath d='M45 22 L67 45 L45 67 L23 45Z' fill='%23D4AF37' opacity='0.22'/%3E%3Ccircle cx='45' cy='45' r='4' fill='%23D4AF37'/%3E%3C/svg%3E");
+      opacity: 0.06;
+      mix-blend-mode: soft-light;
+    }
+
+    .cursor,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .cursor {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--or);
+      mix-blend-mode: difference;
+      will-change: transform;
+    }
+    .cursor-ring {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid rgba(212,175,55,0.88);
+      border-radius: 50%;
+      opacity: 0.6;
+      will-change: transform, opacity, scale;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      background: radial-gradient(circle at center, rgba(255,243,204,0.25), rgba(28,18,7,0.98) 55%);
+      color: var(--ivoire);
+    }
+    .loading-star {
+      animation: loadingStar 2s ease-in-out infinite;
+    }
+    @keyframes loadingStar {
+      0%,100% { opacity: 0.25; transform: scale(0.92) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.1) rotate(26deg); }
+    }
+    .loading-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      color: var(--sable);
+    }
+    .loading-sub {
+      font-size: 0.82rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(245,230,200,0.8);
+    }
+    .loading-bar {
+      width: 220px;
+      height: 2px;
+      background: rgba(212,175,55,0.18);
+      overflow: hidden;
+      position: relative;
+    }
+    .loading-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, var(--or), transparent);
+      animation: loadBar 1.5s ease-in-out infinite;
+    }
+    @keyframes loadBar { to { transform: translateX(100%); } }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--terracotta), var(--or), var(--vert));
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 1200;
+    }
+
+    .nav-fab {
+      position: fixed;
+      top: 1.8rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(247,238,210,0.92);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+      border: 1px solid rgba(212,175,55,0.26);
+      z-index: 1100;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .nav-fab:hover {
+      transform: scale(1.05);
+      background: #fff;
+    }
+    .nav-fab-logo { left: 1.8rem; }
+    .nav-fab-burger { right: 1.8rem; }
+    .nav-fab i,
+    .nav-fab span {
+      color: var(--terracotta);
+      font-size: 1.45rem;
+      display: inline-block;
+      line-height: 1;
+    }
+    .nav-fab-burger span {
+      width: 22px;
+      height: 2.5px;
+      background: var(--terracotta);
+      border-radius: 999px;
+      position: relative;
+    }
+    .nav-fab-burger span::before,
+    .nav-fab-burger span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: inherit;
+      transition: transform 0.3s ease;
+    }
+    .nav-fab-burger span::before { top: -7px; }
+    .nav-fab-burger span::after { top: 7px; }
+    body.menu-open .nav-fab-burger span { background: transparent; }
+    body.menu-open .nav-fab-burger span::before { transform: translateY(7px) rotate(45deg); }
+    body.menu-open .nav-fab-burger span::after { transform: translateY(-7px) rotate(-45deg); }
+
+    .site-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 1080;
+      background: rgba(245,230,200,0.96);
+      padding: 5rem 2rem 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.02);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+      overflow-y: auto;
+    }
+    body.menu-open .site-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition-delay: 0s;
+    }
+    .site-menu::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cg fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.16'%3E%3Cpolygon points='45,13 56,34 78,34 61,47 68,68 45,57 22,68 29,47 12,34 34,34'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.32;
+      pointer-events: none;
+    }
+    .site-menu-inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+    }
+    .menu-group {
+      border-bottom: 1px solid rgba(192,85,42,0.22);
+    }
+    .menu-head {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      padding: 1rem 0.25rem;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      color: var(--vert-fonce);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .menu-head:hover,
+    .menu-head:focus-visible {
+      color: var(--terracotta);
+      padding-left: 1rem;
+      outline: none;
+    }
+    .menu-head .chev {
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      transition: transform 0.35s ease;
+    }
+    .menu-group.open .menu-head .chev {
+      transform: rotate(180deg);
+    }
+    .menu-sub {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+    }
+    .menu-group.open .menu-sub {
+      max-height: 600px;
+      opacity: 1;
+    }
+    .menu-sub-list {
+      list-style: none;
+      padding-left: 0.8rem;
+      margin: 0.8rem 0 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .menu-sub-list a,
+    .menu-sub-list button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(192,85,42,0.18);
+      background: rgba(255,255,255,0.72);
+      color: var(--vert-fonce);
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.96rem;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .menu-sub-list a:hover,
+    .menu-sub-list button:hover {
+      background: rgba(255,255,255,0.95);
+      border-color: rgba(192,85,42,0.28);
+    }
+
+    .hero {
+      min-height: 92vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 28px 30px;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 160%;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.25;
+    }
+    .hero::before {
+      top: -18%;
+      left: -8%;
+      background: radial-gradient(circle at top left, rgba(192,85,42,0.22), transparent 40%);
+    }
+    .hero::after {
+      bottom: -22%;
+      right: -12%;
+      background: radial-gradient(circle at bottom right, rgba(212,175,55,0.18), transparent 38%);
+    }
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 25%, rgba(212,175,55,0.16), transparent 16%),
+                  radial-gradient(circle at 80% 20%, rgba(192,85,42,0.15), transparent 18%),
+                  linear-gradient(160deg, rgba(38,21,10,0.12), rgba(30,18,10,0.78));
+      pointer-events: none;
+    }
+    .star-ornament {
+      position: absolute;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content-card {
+      width: min(1060px, 100%);
+      padding: 40px 42px 36px;
+      background: rgba(255,246,231,0.12);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft), var(--shadow-gold);
+      border-radius: 36px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    .hero-content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120%;
+      height: 90%;
+      background: linear-gradient(135deg, transparent 42%, rgba(255,255,255,0.08) 68%, transparent 92%);
+      transform: skewY(-6deg);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--or);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 26px;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    .hero-badge-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--or), transparent);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 6vw, 6.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--ivoire);
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 0;
+    }
+    .hero-title span {
+      display: block;
+    }
+    .hero-title-emphase {
+      font-style: italic;
+      color: var(--or);
+      font-size: 1.1em;
+      letter-spacing: 0.08em;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.9vw, 1.22rem);
+      color: rgba(245,230,200,0.92);
+      max-width: 840px;
+      text-align: center;
+      margin: 0 auto;
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 36px;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .hero-divider-ornament {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--or), transparent);
+    }
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: rgba(245,230,200,0.88);
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .scroll-dot {
+      width: 6px;
+      height: 32px;
+      border: 1px solid rgba(212,175,55,0.82);
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-dot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 8px;
+      background: var(--or);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      animation: scrollDot 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollDot {
+      0% { transform: translate(-50%, -140%); opacity: 0; }
+      30% { opacity: 1; }
+      100% { transform: translate(-50%, 220%); opacity: 0; }
+    }
+
+    .filter-bar {
+      position: sticky;
+      top: 88px;
+      z-index: 150;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 24px;
+      margin: 0 24px 24px;
+      background: rgba(12,9,6,0.58);
+      border: 1px solid rgba(212,175,55,0.14);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.22);
+      background: rgba(255,255,255,0.06);
+      color: rgba(245,230,200,0.94);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.77rem;
+      font-weight: 700;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(192,85,42,0.18), rgba(212,175,55,0.12));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: #fff;
+      border-color: rgba(212,175,55,0.5);
+      background: rgba(212,175,55,0.08);
+    }
+    .filter-btn:hover::before,
+    .filter-btn.active::before {
+      opacity: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      padding: 90px 24px 42px;
+      position: relative;
+      z-index: 2;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      color: var(--or);
+      letter-spacing: 0.38em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: var(--ivoire);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--or);
+      font-weight: 400;
+    }
+
+    .itineraries-section {
+      position: relative;
+      z-index: 2;
+      padding: 0 24px 100px;
+    }
+    .circuits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      max-width: 1460px;
+      margin: 0 auto;
+    }
+
+    .circuit-card {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      backdrop-filter: blur(16px);
+      transform-style: preserve-3d;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+      transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+      cursor: none;
+    }
+    .circuit-card::before,
+    .circuit-card::after {
+      content: '';
+      position: absolute;
+      width: 42px;
+      height: 42px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+    .circuit-card::before {
+      top: 18px;
+      left: 18px;
+      border-top: 2px solid var(--or);
+      border-left: 2px solid var(--or);
+    }
+    .circuit-card::after {
+      right: 18px;
+      bottom: 18px;
+      border-bottom: 2px solid var(--or);
+      border-right: 2px solid var(--or);
+    }
+    .circuit-card:hover {
+      border-color: rgba(212,175,55,0.35);
+      box-shadow: 0 36px 75px rgba(0,0,0,0.32);
+    }
+    .circuit-card:hover::before,
+    .circuit-card:hover::after {
+      opacity: 1;
+    }
+
+    .card-image {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease, filter 0.8s ease;
+      filter: saturate(0.88) contrast(1.02);
+    }
+    .circuit-card:hover .card-image img {
+      transform: scale(1.12);
+      filter: saturate(1.08) contrast(1.05);
+    }
+    .card-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(14,9,6,0) 28%, rgba(12,8,5,0.32) 58%, rgba(12,8,5,0.76) 100%);
+    }
+    .card-badge-duration {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212,175,55,0.5);
+      color: var(--sable);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+      backdrop-filter: blur(10px);
+    }
+    .card-theme-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      z-index: 2;
+    }
+    .theme-pill {
+      background: rgba(212,175,55,0.16);
+      color: var(--or);
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.32);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .circuit-card:hover .theme-pill {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .theme-pill:nth-child(2) { transition-delay: 0.05s; }
+    .theme-pill:nth-child(3) { transition-delay: 0.1s; }
+
+    .card-body {
+      padding: 26px;
+      position: relative;
+    }
+    .card-divider {
+      height: 4px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--terracotta), var(--or), var(--vert));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.55s ease;
+    }
+    .circuit-card:hover .card-divider {
+      transform: scaleX(1);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.22rem;
+      margin-bottom: 8px;
+      color: var(--ivoire);
+    }
+    .card-public {
+      font-size: 0.84rem;
+      color: rgba(245,230,200,0.82);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.18);
+      background: rgba(255,255,255,0.04);
+      font-size: 0.78rem;
+      color: rgba(245,230,200,0.9);
+    }
+    .meta-icon svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--or);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .meta-budget { color: var(--or); font-weight: 700; }
+
+    .card-route {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      font-size: 0.84rem;
+      color: rgba(245,230,200,0.88);
+    }
+    .route-city {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .route-arrow {
+      color: var(--or);
+      opacity: 0.8;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.33s ease, transform 0.33s ease;
+    }
+    .circuit-card:hover .card-actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-explorer,
+    .btn-rate {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.18);
+      padding: 11px 16px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      background: rgba(255,255,255,0.05);
+      color: var(--ivoire);
+      overflow: hidden;
+      position: relative;
+    }
+    .btn-explorer:hover {
+      box-shadow: 0 12px 26px rgba(0,0,0,0.2);
+      transform: translateY(-1px);
+    }
+    .btn-explorer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(212,175,55,0.12);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .btn-explorer:hover::before {
+      opacity: 1;
+    }
+    .btn-explorer svg,
+    .btn-rate svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .btn-rate { gap: 6px; }
+    .star-rating {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .star {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: none;
+      transition: transform 0.18s ease;
+    }
+    .star svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--or);
+      fill: none;
+      stroke-width: 1.4;
+      transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+    .star.filled svg,
+    .star.hover svg {
+      fill: var(--or);
+      stroke: var(--or);
+    }
+    .star:hover { transform: scale(1.3); }
+
+    .rating-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: rgba(28,18,10,0.94);
+      color: var(--or);
+      border: 1px solid rgba(212,175,55,0.3);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1050;
+    }
+    .rating-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .circuit-card.featured { grid-column: span 2; }
+    .circuit-card.featured .card-image { height: 320px; }
+
+    .city-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1005;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .city-modal.open { display: flex; }
+    .city-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,6,3,0.9);
+      backdrop-filter: blur(10px);
+    }
+    .city-modal-box {
+      position: relative;
+      z-index: 1;
+      width: min(920px, 100%);
+      max-height: 86vh;
+      background: rgba(250,243,227,0.98);
+      border-radius: 32px;
+      border: 1px solid rgba(212,175,55,0.22);
+      overflow: hidden;
+      padding: 38px 36px 28px;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.32);
+    }
+    .city-modal-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--terracotta), var(--or), var(--vert));
+    }
+    .city-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .city-modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.82rem;
+      color: var(--nuit);
+      line-height: 1.05;
+    }
+    .city-modal-sub {
+      margin-top: 8px;
+      color: var(--terracotta-dark);
+      font-size: 0.92rem;
+      font-style: italic;
+    }
+    .city-modal-close {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      border: 1px solid rgba(192,85,42,0.2);
+      background: rgba(255,255,255,0.8);
+      cursor: none;
+      transition: border-color 0.2s ease, color 0.2s ease;
+      color: var(--vert-fonce);
+    }
+    .city-modal-close:hover {
+      border-color: rgba(212,175,55,0.38);
+      color: var(--terracotta);
+    }
+    .city-modal-close svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+    .city-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 16px;
+    }
+    .city-card-item {
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(212,175,55,0.18);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: none;
+    }
+    .city-card-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212,175,55,0.34);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.12);
+    }
+    .city-img-wrap {
+      height: 138px;
+      overflow: hidden;
+    }
+    .city-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .city-card-item:hover .city-img-wrap img {
+      transform: scale(1.07);
+    }
+    .city-card-name {
+      padding: 16px 14px 18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.92rem;
+      color: var(--nuit);
+      line-height: 1.2;
+    }
+    .city-card-name span {
+      display: block;
+      margin-top: 6px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.8rem;
+      color: var(--terracotta-dark);
+      font-style: italic;
+    }
+    .modal-footer-cta {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(212,175,55,0.14);
+      text-align: center;
+    }
+    .modal-footer-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--vert-fonce);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: color 0.2s ease;
+    }
+    .modal-footer-cta a:hover { color: var(--terracotta); }
+    .modal-footer-cta svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .separator {
+      display: flex;
+      overflow: hidden;
+      margin: 0 24px;
+    }
+    .separator-line {
+      flex: 1;
+      height: 4px;
+      background: linear-gradient(90deg, var(--terracotta), var(--or), var(--vert), var(--terracotta-dark));
+      border-radius: 999px;
+    }
+
+    .generator-section {
+      position: relative;
+      z-index: 2;
+      padding: 90px 24px 100px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    }
+    .generator-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background-image: radial-gradient(circle at 20% 30%, rgba(212,175,55,0.12), transparent 18%),
+                        radial-gradient(circle at 85% 20%, rgba(192,85,42,0.12), transparent 20%);
+      pointer-events: none;
+    }
+    .generator-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .generator-left {
+      position: relative;
+      z-index: 1;
+    }
+    .generator-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.02;
+      color: var(--ivoire);
+      margin-bottom: 20px;
+    }
+    .generator-title em {
+      font-style: italic;
+      color: var(--or);
+      font-weight: 400;
+    }
+    .generator-desc {
+      color: rgba(245,230,200,0.92);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+    .btn-generator {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--terracotta), var(--or));
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      border: none;
+      cursor: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 15px 35px rgba(192,85,42,0.18);
+    }
+    .btn-generator:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(192,85,42,0.28);
+    }
+    .btn-generator svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .generator-right {
+      position: relative;
+    }
+    .wizard-preview {
+      position: relative;
+      padding: 32px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(212,175,55,0.22);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.16);
+    }
+    .wizard-preview::before,
+    .wizard-preview::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--or);
+    }
+    .wizard-preview::before {
+      top: 0;
+      left: 0;
+      border-right: none;
+      border-bottom: none;
+    }
+    .wizard-preview::after {
+      right: 0;
+      bottom: 0;
+      border-left: none;
+      border-top: none;
+    }
+    .wizard-step-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-family: 'Playfair Display', serif;
+      color: var(--terracotta-dark);
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .wizard-step-title svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--or);
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .profile-options {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .profile-opt {
+      border-radius: 22px;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1px solid rgba(212,175,55,0.18);
+      background: rgba(255,255,255,0.86);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: none;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    .profile-opt.active,
+    .profile-opt:hover {
+      border-color: rgba(212,175,55,0.32);
+      background: rgba(255,247,226,0.98);
+      transform: translateY(-2px);
+    }
+    .profile-opt-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.12);
+    }
+    .profile-opt-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--terracotta-dark);
+      fill: none;
+      stroke-width: 1.7;
+    }
+    .profile-opt.active .profile-opt-icon svg {
+      stroke: var(--terracotta);
+    }
+    .profile-opt span {
+      font-size: 0.75rem;
+      color: var(--vert-fonce);
+      letter-spacing: 0.04em;
+    }
+
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .interest-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(212,175,55,0.18);
+      background: rgba(255,255,255,0.08);
+      color: rgba(245,230,200,0.96);
+      font-size: 0.82rem;
+      cursor: none;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      border: none;
+    }
+    .interest-tag svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+    }
+    .interest-tag:hover,
+    .interest-tag.selected {
+      background: rgba(212,175,55,0.16);
+      color: var(--or);
+      transform: translateY(-1px);
+    }
+
+    .footer-ornament {
+      position: relative;
+      z-index: 2;
+      padding: 54px 24px 42px;
+      text-align: center;
+      border-top: 1px solid rgba(212,175,55,0.16);
+      color: rgba(245,230,200,0.82);
+    }
+    .footer-star {
+      margin: 0 auto 18px;
+      width: 58px;
+      animation: rotateStar 18s linear infinite;
+    }
+    @keyframes rotateStar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .footer-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,230,200,0.75);
+    }
+    .footer-sub {
+      margin-top: 8px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.97rem;
+      color: rgba(212,175,55,0.7);
+      letter-spacing: 0.12em;
+    }
+
+    .particles-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--or);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.24);
+      pointer-events: none;
+      transform: scale(0);
+      animation: rippleAnim 0.65s ease-out forwards;
+    }
+    @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+
+    .back-to-top {
+      position: fixed;
+      right: 32px;
+      bottom: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      border: 1px solid rgba(212,175,55,0.28);
+      background: rgba(255,255,255,0.12);
+      color: var(--or);
+      display: grid;
+      place-items: center;
+      transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      z-index: 1050;
+      cursor: none;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      background: rgba(212,175,55,0.14);
+      transform: translateY(-2px);
+    }
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    @media (max-width: 1140px) {
+      .circuits-grid { grid-template-columns: repeat(2, 1fr); }
+      .circuit-card.featured { grid-column: span 1; }
+      .generator-inner { grid-template-columns: 1fr; }
+      .filter-bar { top: 86px; margin: 0 18px 22px; }
+      .itineraries-section { padding: 0 18px 86px; }
+    }
+    @media (max-width: 820px) {
+      .hero { min-height: auto; padding-top: 110px; }
+      .generator-inner { gap: 32px; }
+      .nav-fab { width: 44px; height: 44px; }
+      .hero-content-card { padding: 32px 28px 28px; }
+      .filter-bar { padding: 14px 16px; gap: 8px; }
+      .filter-btn { padding: 8px 14px; font-size: 0.72rem; }
+      .section-header { padding: 72px 18px 34px; }
+      .generator-section { padding: 72px 18px 90px; }
+      .profile-options { grid-template-columns: repeat(2, 1fr); }
+      .city-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .generator-title { font-size: 2.35rem; }
+      .hero-title { font-size: clamp(2.4rem, 9vw, 4.4rem); }
+    }
+    @media (max-width: 620px) {
+      .nav-fab { top: 1rem; }
+      .nav-fab-logo { left: 1rem; }
+      .nav-fab-burger { right: 1rem; }
+      .filter-bar { top: 72px; margin: 0 14px 18px; }
+      .itineraries-section { padding: 0 14px 70px; }
+      .circuits-grid { grid-template-columns: 1fr; }
+      .hero-content-card { padding: 26px 20px 22px; }
+      .card-body { padding: 20px; }
+      .card-title { font-size: 1.08rem; }
+      .card-meta { gap: 8px; }
+      .btn-explorer, .btn-rate { width: 100%; justify-content: center; }
+      .hero-scroll-indicator { bottom: 20px; }
+      .hero-divider { gap: 12px; }
+      .generator-inner { padding-bottom: 24px; }
+      .profile-options { grid-template-columns: 1fr; }
+      .interest-tags { gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="loading-star">
+      <svg width="72" height="72" viewBox="0 0 100 100">
+        <polygon points="50,6 60,38 94,38 66,58 76,94 50,74 24,94 34,58 6,38 40,38" fill="none" stroke="#D4AF37" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="7" fill="#D4AF37" opacity="0.7" />
+      </svg>
+    </div>
+    <div class="loading-text">Composez votre voyage</div>
+    <div class="loading-sub">Itinéraires &amp; inspirations</div>
+    <div class="loading-bar"></div>
+  </div>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="particles-container" id="particles"></div>
+  <div class="rating-toast" id="ratingToast"></div>
+
+  <button class="nav-fab nav-fab-logo" aria-label="Ouvrir le menu" onclick="toggleMenu()">
+    <i>✦</i>
+  </button>
+  <button class="nav-fab nav-fab-burger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" aria-hidden="true">
+    <div class="site-menu-inner">
+      <div class="menu-group open">
+        <button class="menu-head" type="button" onclick="toggleGroup(this)">
+          Accueil
+          <span class="chev">⌄</span>
+        </button>
+        <div class="menu-sub">
+          <div class="menu-sub-list">
+            <a href="#top">Haut de page</a>
+            <a href="#generator-section">Générateur</a>
+            <a href="#footer">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-group">
+        <button class="menu-head" type="button" onclick="toggleGroup(this)">
+          Itinéraires
+          <span class="chev">⌄</span>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="#circuitsGrid">Tous les circuits</a></li>
+            <li><a href="#generator-section">Générateur de voyage</a></li>
+            <li><button type="button" onclick="closeMenu(); scrollToSection('generator-section')">Créer mon voyage</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-group">
+        <button class="menu-head" type="button" onclick="toggleGroup(this)">
+          Villes
+          <span class="chev">⌄</span>
+        </button>
+        <div class="menu-sub">
+          <div class="menu-sub-list">
+            <button type="button" onclick="closeMenu(); openSampleModal('Marrakech', 'Palais, Médina, Atlas')">Marrakech</button>
+            <button type="button" onclick="closeMenu(); openSampleModal('Fès', 'Médina, Tanneurs, Artisanat')">Fès</button>
+            <button type="button" onclick="closeMenu(); openSampleModal('Merzouga', 'Dunes, Nomades, Ciel étoilé')">Merzouga</button>
+            <button type="button" onclick="closeMenu(); openSampleModal('Essaouira', 'Plages, Port, Kite')">Essaouira</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero" id="top">
+    <div class="hero-canvas"></div>
+    <svg class="star-ornament" style="top:14%;left:7%;width:62px;height:62px" viewBox="0 0 60 60">
+      <polygon points="30,3 36,20 55,20 40,32 46,50 30,38 14,50 20,32 5,20 24,20" fill="none" stroke="rgba(212,175,55,0.87)" stroke-width="1.6"/>
+    </svg>
+    <svg class="star-ornament" style="top:18%;right:9%;width:46px;height:46px" viewBox="0 0 60 60">
+      <polygon points="30,3 36,20 55,20 40,32 46,50 30,38 14,50 20,32 5,20 24,20" fill="rgba(192,85,42,0.26)" stroke="rgba(192,85,42,0.82)" stroke-width="1.4"/>
+    </svg>
+    <svg class="star-ornament" style="bottom:25%;left:5%;width:34px;height:34px" viewBox="0 0 60 60">
+      <polygon points="30,3 36,20 55,20 40,32 46,50 30,38 14,50 20,32 5,20 24,20" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.8"/>
+    </svg>
+    <svg class="star-ornament" style="bottom:30%;right:7%;width:56px;height:56px" viewBox="0 0 60 60">
+      <polygon points="30,3 36,20 55,20 40,32 46,50 30,38 14,50 20,32 5,20 24,20" fill="none" stroke="rgba(212,175,55,0.78)" stroke-width="1.4"/>
+    </svg>
+
+    <div class="hero-content-card" id="heroCard">
+      <div class="hero-badge" id="heroBadge">
+        <span class="hero-badge-line"></span>
+        <span>Itinéraires Sélectionnés</span>
+        <span class="hero-badge-line right"></span>
+      </div>
+      <h1 class="hero-title" id="heroTitle">
+        <span>Composez votre</span>
+        <span>voyage</span>
+        <span class="hero-title-emphase">Maroc luxe &amp; aventure</span>
+      </h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        Mélangez ambiance terracotta, lumière sable et accents or pour découvrir des circuits sur mesure, animés par des effets de scroll, cartes 3D et modals d'étapes.
+      </p>
+      <div class="hero-divider" id="heroDivider">
+        <div class="hero-divider-ornament"></div>
+        <svg width="28" height="28" viewBox="0 0 30 30">
+          <polygon points="15,1 18,10 28,10 20,16 23,26 15,19 7,26 10,16 2,10 12,10" fill="none" stroke="#D4AF37" stroke-width="1.2"/>
+          <circle cx="15" cy="15" r="3" fill="#D4AF37" opacity="0.7"/>
+        </svg>
+        <div class="hero-divider-ornament right"></div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator" id="heroScroll">
+      <div class="scroll-dot"></div>
+      <span>Découvrir</span>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+      <span>Tous</span>
+    </button>
+    <button class="filter-btn" data-filter="culture">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V12l9-9 9 9v10"/><path d="M9 22V16h6v6"/><rect x="10" y="7" width="4" height="4"/></svg>
+      <span>Culture</span>
+    </button>
+    <button class="filter-btn" data-filter="aventure">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg>
+      <span>Aventure</span>
+    </button>
+    <button class="filter-btn" data-filter="nature">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M5 12C5 7 9 3 12 3s7 4 7 9H5z"/><path d="M5 12c0 5 3.5 8 7 8s7-3 7-8"/></svg>
+      <span>Nature</span>
+    </button>
+    <button class="filter-btn" data-filter="luxe">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+      <span>Luxe</span>
+    </button>
+    <button class="filter-btn" data-filter="famille">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="2"/><circle cx="17" cy="6" r="2"/><path d="M5 22v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3"/><circle cx="13" cy="13" r="2"/></svg>
+      <span>Famille</span>
+    </button>
+    <button class="filter-btn" data-filter="sport">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2c0 0-3 4-3 10s3 10 3 10"/><path d="M2 12h20"/><path d="M4.9 6.9C7 8 9.5 8.5 12 8.5s5-.5 7.1-1.6"/><path d="M19.1 17.1C17 16 14.5 15.5 12 15.5s-5 .5-7.1 1.6"/></svg>
+      <span>Sport</span>
+    </button>
+  </div>
+
+  <section class="itineraries-section">
+    <div class="section-header">
+      <div class="section-eyebrow"><span>——</span><span>Cartes en main</span><span>——</span></div>
+      <h2 class="section-title">Les <em>9 circuits</em> qui réveillent l'âme</h2>
+    </div>
+
+    <div class="circuits-grid" id="circuitsGrid">
+      <!-- Cards section content copied from itineraire .html -->
+      <div class="circuit-card featured" data-tags="culture nature" data-title="Marrakech Express" data-duration="3 – 4 jours" data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=420&q=80"},{"name":"Essaouira","tag":"Cité des Alizés","img":"https://images.unsplash.com/photo-1569596082827-c10e91f3ed28?w=420&q=80"},{"name":"Cascades d\u0027Ouzoud","tag":"Les Grandes Cascades","img":"https://images.unsplash.com/photo-1548032885-b5e38734688a?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=820&q=80" alt="Marrakech, médina impériale" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">3 – 4 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Culture</span><span class="theme-pill">Nature</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Marrakech Express</div>
+          <div class="card-public">Idéal pour un 1er voyage, court séjour</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg><span>Facile</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>3 étapes</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Marrakech</span><span class="route-arrow">→</span><span class="route-city">Essaouira</span><span class="route-arrow">ou</span><span class="route-city">Cascades d'Ouzoud</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="aventure culture nature" data-title="Découverte Classique" data-duration="7 – 8 jours" data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=420&q=80"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"https://images.unsplash.com/photo-1509233725247-49e657c54213?w=420&q=80"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"https://images.unsplash.com/photo-1547234935-80c7145ec969?w=420&q=80"},{"name":"Fès","tag":"Cité Millénaire","img":"https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?w=620&q=80" alt="Dunes de Merzouga, Sahara marocain" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">7 – 8 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Aventure</span><span class="theme-pill">Culture</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Découverte Classique</div>
+          <div class="card-public">Découverte complète du Maroc</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span>Modéré</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>4 étapes</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Marrakech</span><span class="route-arrow">→</span><span class="route-city">Atlas</span><span class="route-arrow">→</span><span class="route-city">Merzouga</span><span class="route-arrow">→</span><span class="route-city">Fès</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="culture nature" data-title="Grand Tour Nord-Sud" data-duration="10 – 12 jours" data-cities='[{"name":"Tanger","tag":"Porte de l\u0027Afrique","img":"https://images.unsplash.com/photo-1553697388-94e804e2f0f6?w=420&q=80"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"https://images.unsplash.com/photo-1548011241-415c1f67c9b9?w=420&q=80"},{"name":"Fès","tag":"Cité Millénaire","img":"https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=420&q=80"},{"name":"Essaouira","tag":"Cité des Alizés","img":"https://images.unsplash.com/photo-1569596082827-c10e91f3ed28?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1548011241-415c1f67c9b9?w=620&q=80" alt="Chefchaouen, la ville bleue" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">10 – 12 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Culture</span><span class="theme-pill">Détente</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Grand Tour Nord-Sud</div>
+          <div class="card-public">Exploration approfondie du pays</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span>Modéré</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>6 étapes</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Tanger</span><span class="route-arrow">→</span><span class="route-city">Chefchaouen</span><span class="route-arrow">→</span><span class="route-city">Fès</span><span class="route-arrow">→</span><span class="route-city">Essaouira</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="culture aventure nature" data-title="Circuit Complet" data-duration="14 jours" data-cities='[{"name":"Côte Atlantique","tag":"Littoral & Plages","img":"https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=420&q=80"},{"name":"Haut Atlas","tag":"Montagnes Majestueuses","img":"https://images.unsplash.com/photo-1509233725247-49e657c54213?w=420&q=80"},{"name":"Désert du Sahara","tag":"Dunes & Silence","img":"https://images.unsplash.com/photo-1547234935-80c7145ec969?w=420&q=80"},{"name":"Villes Impériales","tag":"Marrakech · Fès · Meknès · Rabat","img":"https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=620&q=80" alt="Fès, cité millénaire" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">14 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Complet</span><span class="theme-pill">Intense</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Circuit Complet</div>
+          <div class="card-public">Exploration exhaustive du Maroc</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg><span>Intense</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>8 étapes</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Côtes</span><span class="route-arrow">→</span><span class="route-city">Montagnes</span><span class="route-arrow">→</span><span class="route-city">Désert</span><span class="route-arrow">→</span><span class="route-city">5 Impériales</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="sport nature" data-title="Surf Atlantique" data-duration="5 jours" data-cities='[{"name":"Agadir","tag":"Cité du Soleil","img":"https://images.unsplash.com/photo-1516370337-bc75bc4bae00?w=420&q=80"},{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=420&q=80"},{"name":"Imsouane","tag":"La Plus Longue Vague","img":"https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=420&q=80"},{"name":"Essaouira","tag":"Vent & Kitesurf","img":"https://images.unsplash.com/photo-1569596082827-c10e91f3ed28?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=620&q=80" alt="Surf à Taghazout, côte Atlantique" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">5 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Sport</span><span class="theme-pill">Nature</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Surf Atlantique</div>
+          <div class="card-public">Pour surfeurs et sportifs</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2c0 0-3 4-3 10s3 10 3 10"/><path d="M2 12h20"/></svg><span>Sportif</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>4 spots</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Agadir</span><span class="route-arrow">→</span><span class="route-city">Taghazout</span><span class="route-arrow">→</span><span class="route-city">Imsouane</span><span class="route-arrow">→</span><span class="route-city">Essaouira</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="luxe" data-title="Bien-être &amp; Détente" data-duration="5 jours" data-cities='[{"name":"Marrakech","tag":"Palaces & Hammams","img":"https://images.unsplash.com/photo-1540541338287-41700207dee6?w=420&q=80"},{"name":"Essaouira","tag":"Douceur Atlantique","img":"https://images.unsplash.com/photo-1569596082827-c10e91f3ed28?w=420&q=80"},{"name":"Agadir","tag":"Plage de Luxe","img":"https://images.unsplash.com/photo-1516370337-bc75bc4bae00?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=620&q=80" alt="Spa et hammam de luxe au Maroc" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">5 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Bien-être</span><span class="theme-pill">Luxe</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Bien-être &amp; Détente</div>
+          <div class="card-public">Idéal pour couples, détente absolue</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Facile</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>3 villes</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Marrakech</span><span class="route-arrow">→</span><span class="route-city">Essaouira</span><span class="route-arrow">→</span><span class="route-city">Agadir</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="aventure nature" data-title="Aventure Pure" data-duration="7 jours" data-cities='[{"name":"Imlil","tag":"Village Berbère","img":"https://images.unsplash.com/photo-1509233725247-49e657c54213?w=420&q=80"},{"name":"Merzouga","tag":"Erg Chebbi","img":"https://images.unsplash.com/photo-1547234935-80c7145ec969?w=420&q=80"},{"name":"Gorges du Dadès","tag":"Canyon Spectaculaire","img":"https://images.unsplash.com/photo-1574117025-b9b1d8a1c5c5?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1509233725247-49e657c54213?w=620&q=80" alt="Trekking dans le Haut Atlas" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">7 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Aventure</span><span class="theme-pill">Nature</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Aventure Pure</div>
+          <div class="card-public">Pour aventuriers et randonneurs</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg><span>Intense</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></svg><span>4167 m</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Imlil</span><span class="route-arrow">→</span><span class="route-city">Merzouga</span><span class="route-arrow">→</span><span class="route-city">Gorges Dadès</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="famille culture nature" data-title="Famille Maroc" data-duration="5 jours" data-cities='[{"name":"Agadir","tag":"Plages Familiales","img":"https://images.unsplash.com/photo-1516370337-bc75bc4bae00?w=420&q=80"},{"name":"Taroudant","tag":"Petite Marrakech","img":"https://images.unsplash.com/photo-1553603226-f86a03e17a5e?w=420&q=80"},{"name":"Ouarzazate","tag":"Hollywood d\u0027Afrique","img":"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1553603226-f86a03e17a5e?w=620&q=80" alt="Kasbah du Maroc du Sud" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">5 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Famille</span><span class="theme-pill">Culture</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Famille Maroc</div>
+          <div class="card-public">Familles avec enfants, accessible</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg><span>Facile</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="2"/><circle cx="16" cy="7" r="2"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg><span>Tout âge</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Agadir</span><span class="route-arrow">→</span><span class="route-city">Taroudant</span><span class="route-arrow">→</span><span class="route-city">Ouarzazate</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="circuit-card" data-tags="luxe culture" data-title="Luxe Exclusif" data-duration="10 jours" data-cities='[{"name":"Marrakech","tag":"Palaces 5 Étoiles","img":"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=420&q=80"},{"name":"Ouarzazate","tag":"Kasbahs & Cinéma","img":"https://images.unsplash.com/photo-1553603226-f86a03e17a5e?w=420&q=80"},{"name":"Merzouga","tag":"Camp Luxe Sahara","img":"https://images.unsplash.com/photo-1547234935-80c7145ec969?w=420&q=80"}]'>
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=620&q=80" alt="Palace de luxe au Maroc" loading="lazy">
+          <div class="card-image-overlay"></div>
+          <div class="card-badge-duration">10 jours</div>
+          <div class="card-theme-tag"><span class="theme-pill">Luxe</span><span class="theme-pill">Exclusif</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-divider"></div>
+          <div class="card-title">Luxe Exclusif</div>
+          <div class="card-public">Tourisme haut de gamme, palaces 5★</div>
+          <div class="card-meta">
+            <div class="meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span class="meta-budget">€€€€€</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><span>VIP</span></div>
+            <div class="meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>3 joyaux</span></div>
+          </div>
+          <div class="card-route"><span class="route-city">Marrakech</span><span class="route-arrow">→</span><span class="route-city">Ouarzazate</span><span class="route-arrow">→</span><span class="route-city">Merzouga</span></div>
+          <div class="card-actions">
+            <button class="btn-explorer" onclick="openCityModal(this)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer les villes</button>
+            <div class="btn-rate" title="Notez cet itinéraire"><div class="star-rating"><button class="star" data-v="1"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="2"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="3"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="4"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button><button class="star" data-v="5"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></button></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="city-modal" id="cityModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="city-modal-backdrop" onclick="closeCityModal()"></div>
+    <div class="city-modal-box">
+      <div class="city-modal-header">
+        <div>
+          <div class="city-modal-title" id="modalTitle">Villes de l'itinéraire</div>
+          <div class="city-modal-sub" id="modalSub">Découvrez chaque étape</div>
+        </div>
+        <button class="city-modal-close" onclick="closeCityModal()" aria-label="Fermer">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="city-cards-grid" id="modalCities"></div>
+      <div class="modal-footer-cta">
+        <a href="villes.html">Explorer toutes les villes du Maroc<svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="separator"><div class="separator-line"></div></div>
+
+  <section id="generator-section" class="generator-section">
+    <svg style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:0.06;pointer-events:none" width="340" height="340" viewBox="0 0 350 350"><polygon points="175,10 210,115 315,115 230,180 262,285 175,220 88,285 120,180 35,115 140,115" fill="none" stroke="#C0552A" stroke-width="2.5"/><polygon points="175,40 203,125 295,125 223,178 252,270 175,212 98,270 127,178 55,125 147,125" fill="none" stroke="#C0552A" stroke-width="1.5"/><circle cx="175" cy="175" r="20" fill="none" stroke="#9C4520" stroke-width="1"/></svg>
+    <div class="generator-inner">
+      <div class="generator-left">
+        <div class="section-eyebrow" style="justify-content:flex-start;margin-bottom:18px"><span>——</span><span>Sur Mesure</span><span>——</span></div>
+        <h2 class="generator-title">Votre voyage<br><em>unique</em>, créé<br>par notre IA</h2>
+        <p class="generator-desc">Notre générateur intelligent analyse vos préférences, votre budget et vos envies pour composer l'itinéraire marocain qui vous ressemble parfaitement.</p>
+        <a href="villes.html" class="btn-generator"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Explorer toutes les villes</a>
+      </div>
+      <div class="generator-right">
+        <div class="wizard-preview">
+          <div class="wizard-step-title"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Étape 1 — Votre profil</div>
+          <div class="profile-options">
+            <div class="profile-opt active"><div class="profile-opt-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div><span>Solo</span></div>
+            <div class="profile-opt"><div class="profile-opt-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="15" cy="8" r="3"/><path d="M3 21a6 6 0 0 1 12 0"/><path d="M15 21a6 6 0 0 0-3-5.2"/></svg></div><span>Couple</span></div>
+            <div class="profile-opt"><div class="profile-opt-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="2"/><circle cx="15" cy="7" r="2"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="12" cy="14" r="2"/></svg></div><span>Famille</span></div>
+            <div class="profile-opt"><div class="profile-opt-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span>Groupe</span></div>
+          </div>
+
+          <div class="wizard-step-title"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>Centres d'intérêt</div>
+          <div class="interest-tags">
+            <button class="interest-tag selected"><svg viewBox="0 0 24 24"><path d="M3 22V12l9-9 9 9v10"/><path d="M9 22V16h6v6"/></svg>Culture</button>
+            <button class="interest-tag"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/></svg>Aventure</button>
+            <button class="interest-tag selected"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Bien-être</button>
+            <button class="interest-tag"><svg viewBox="0 0 24 24"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></svg>Montagne</button>
+            <button class="interest-tag"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Surf</button>
+            <button class="interest-tag"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Photo</button>
+          </div>
+          <button class="btn-explorer" style="width:100%;justify-content:center;margin-top:8px;" onclick="window.location.href='villes.html'"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Générer mon voyage</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-ornament" id="footer">
+    <div class="footer-star">
+      <svg width="48" height="48" viewBox="0 0 50 50"><polygon points="25,2 30,18 47,18 34,27 39,44 25,35 11,44 16,27 3,18 20,18" fill="none" stroke="#D4AF37" stroke-width="1.2"/><circle cx="25" cy="25" r="4" fill="#D4AF37" opacity="0.5"/></svg>
+    </div>
+    <div class="footer-text">© 2025 Portail Touristique du Maroc — Tous droits réservés</div>
+    <div class="footer-sub">أرض الألوان والأحلام</div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursorRing');
+    gsap.set([cursor, cursorRing], { xPercent: -50, yPercent: -50 });
+
+    document.addEventListener('mousemove', e => {
+      gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.08, ease: 'none' });
+      gsap.to(cursorRing, { x: e.clientX, y: e.clientY, duration: 0.18, ease: 'power1.out' });
+    });
+
+    document.querySelectorAll('button, a, .circuit-card, .filter-btn, .profile-opt, .interest-tag, .city-card-item').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        gsap.to(cursorRing, { scale: 1.7, opacity: 1, duration: 0.2 });
+        gsap.to(cursor, { scale: 0.5, duration: 0.2 });
+      });
+      el.addEventListener('mouseleave', () => {
+        gsap.to(cursorRing, { scale: 1, opacity: 0.6, duration: 0.2 });
+        gsap.to(cursor, { scale: 1, duration: 0.2 });
+      });
+    });
+
+    window.addEventListener('load', () => {
+      gsap.to('#loading', { opacity: 0, duration: 0.8, delay: 1.1, onComplete: () => { document.getElementById('loading').style.display = 'none'; initAnimations(); } });
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const scrolled = maxScroll > 0 ? scrollY / maxScroll : 0;
+      gsap.to('#progressBar', { scaleX: scrolled, duration: 0.1, ease: 'none' });
+      document.getElementById('backToTop').classList.toggle('visible', scrollY > 500);
+      const heroY = Math.min(scrollY, window.innerHeight);
+      gsap.set('.hero-canvas', { y: heroY * 0.28 });
+      gsap.set('#heroTitle', { y: heroY * 0.12 });
+      gsap.set('#heroSubtitle', { y: heroY * 0.08 });
+    }, { passive: true });
+
+    function initAnimations() {
+      gsap.timeline()
+        .to('#heroCard', { opacity: 1, y: 0, duration: 0.85, ease: 'power3.out' })
+        .to('#heroBadge', { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' }, '-=0.4')
+        .to('#heroTitle', { opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.5')
+        .to('#heroSubtitle', { opacity: 1, duration: 0.75, ease: 'power2.out' }, '-=0.5')
+        .to('#heroDivider', { opacity: 1, duration: 0.55 }, '-=0.3')
+        .to('#heroScroll', { opacity: 1, duration: 0.45 }, '-=0.35');
+
+      ['#star1','#star2','#star3','#star4'].forEach((id, i) => {
+        gsap.to(id, { opacity: 0.8, duration: 0.9, delay: 0.5 + i * 0.2, ease: 'power2.out' });
+        gsap.to(id, { y: '+=14', duration: 3.3 + i * 0.5, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * 0.7 });
+        gsap.to(id, { rotation: 360, duration: 18 + i * 5, repeat: -1, ease: 'none', transformOrigin: '50% 50%' });
+      });
+
+      gsap.utils.toArray('.circuit-card').forEach((card, i) => {
+        gsap.fromTo(card, { opacity: 0, y: 50, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 86%', toggleActions: 'play none none none' }, delay: (i % 3) * 0.08 });
+      });
+
+      gsap.utils.toArray('.section-header').forEach(h => {
+        gsap.fromTo(h, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.75, scrollTrigger: { trigger: h, start: 'top 80%' } });
+      });
+
+      gsap.fromTo('.generator-inner', { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.95, scrollTrigger: { trigger: '.generator-section', start: 'top 72%' } });
+    }
+
+    document.querySelectorAll('.circuit-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, { rotateY: x * 7, rotateX: -y * 7, duration: 0.35, ease: 'power2.out', transformPerspective: 1000 });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' });
+      });
+    });
+
+    document.querySelectorAll('.btn-explorer').forEach(btn => {
+      btn.addEventListener('click', e => {
+        if (e.target.closest('.btn-explorer') !== btn) return;
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        ripple.style.cssText = `left:${e.clientX - rect.left}px;top:${e.clientY - rect.top}px;width:28px;height:28px;margin:-14px;`;
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 700);
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.circuit-card').forEach(card => {
+          const match = filter === 'all' || (card.dataset.tags || '').includes(filter);
+          gsap.to(card, { opacity: match ? 1 : 0.22, scale: match ? 1 : 0.97, duration: 0.38, ease: 'power2.out' });
+        });
+      });
+    });
+
+    document.querySelectorAll('.profile-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.profile-opt').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        gsap.fromTo(opt, { scale: 0.94 }, { scale: 1, duration: 0.3, ease: 'back.out(2.5)' });
+      });
+    });
+    document.querySelectorAll('.interest-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        tag.classList.toggle('selected');
+        gsap.fromTo(tag, { scale: 0.88 }, { scale: 1, duration: 0.25, ease: 'back.out(3)' });
+      });
+    });
+
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('ratingToast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    document.querySelectorAll('.star-rating').forEach(widget => {
+      const stars = widget.querySelectorAll('.star');
+      let saved = 0;
+      stars.forEach(star => {
+        const value = +star.dataset.v;
+        star.addEventListener('mouseenter', () => {
+          stars.forEach(s => s.classList.toggle('hover', +s.dataset.v <= value));
+        });
+        star.addEventListener('mouseleave', () => {
+          stars.forEach(s => s.classList.remove('hover'));
+        });
+        star.addEventListener('click', e => {
+          e.stopPropagation();
+          saved = value;
+          stars.forEach(s => s.classList.toggle('filled', +s.dataset.v <= value));
+          gsap.fromTo(star, { scale: 0.7 }, { scale: 1, duration: 0.32, ease: 'back.out(4)' });
+          const labels = ['', 'Passable', 'Bien', 'Très bien', 'Excellent', 'Parfait!'];
+          showToast(`${labels[value]} — ${value} étoile${value > 1 ? 's' : ''} enregistrée${value > 1 ? 's' : ''}`);
+        });
+      });
+    });
+
+    function openCityModal(button) {
+      const card = button.closest('.circuit-card');
+      const title = card.dataset.title || card.querySelector('.card-title').textContent;
+      const duration = card.dataset.duration || '';
+      let cities = [];
+      try { cities = JSON.parse(card.dataset.cities || '[]'); } catch (err) { cities = []; }
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalSub').textContent = duration + (cities.length ? ' · ' + cities.length + ' destination' + (cities.length > 1 ? 's' : '') : '');
+      const grid = document.getElementById('modalCities');
+      grid.innerHTML = '';
+      cities.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'city-card-item';
+        item.innerHTML = `<div class="city-img-wrap"><img src="${city.img}" alt="${city.name}" loading="lazy"></div><div class="city-card-name">${city.name}<span>${city.tag}</span></div>`;
+        grid.appendChild(item);
+      });
+      document.getElementById('cityModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo('.city-modal-box', { opacity: 0, y: 28, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, ease: 'power3.out' });
+      gsap.fromTo('.city-card-item', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.38, stagger: 0.07, delay: 0.18, ease: 'power2.out' });
+    }
+
+    function closeCityModal() {
+      gsap.to('.city-modal-box', { opacity: 0, y: 18, scale: 0.97, duration: 0.22, ease: 'power2.in', onComplete: () => {
+        document.getElementById('cityModal').classList.remove('open');
+        document.body.style.overflow = '';
+      } });
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCityModal(); closeMenu(); } });
+
+    const particles = document.getElementById('particles');
+    for (let i = 0; i < 24; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'particle';
+      dot.style.left = `${Math.random() * 100}%`;
+      dot.style.top = `${Math.random() * 100}%`;
+      particles.appendChild(dot);
+      gsap.to(dot, {
+        opacity: Math.random() * 0.45 + 0.08,
+        y: -(Math.random() * 180 + 80),
+        x: (Math.random() - 0.5) * 90,
+        duration: Math.random() * 8 + 6,
+        repeat: -1,
+        delay: Math.random() * 5,
+        ease: 'none'
+      });
+    }
+
+    function toggleMenu() {
+      const open = document.body.classList.toggle('menu-open');
+      document.getElementById('siteMenu').setAttribute('aria-hidden', !open);
+      if (open) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+    function closeMenu() {
+      document.body.classList.remove('menu-open');
+      document.getElementById('siteMenu').setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function toggleGroup(button) {
+      const group = button.closest('.menu-group');
+      group.classList.toggle('open');
+    }
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function openSampleModal(name, subtitle) {
+      const grid = document.getElementById('modalCities');
+      grid.innerHTML = '';
+      const sample = [{ name, tag: subtitle, img: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=420&q=80' }];
+      sample.forEach(city => {
+        const item = document.createElement('div');
+        item.className = 'city-card-item';
+        item.innerHTML = `<div class="city-img-wrap"><img src="${city.img}" alt="${city.name}" loading="lazy"></div><div class="city-card-name">${city.name}<span>${city.tag}</span></div>`;
+        grid.appendChild(item);
+      });
+      document.getElementById('modalTitle').textContent = name;
+      document.getElementById('modalSub').textContent = subtitle;
+      document.getElementById('cityModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  </script>
+</body>
+</html>
