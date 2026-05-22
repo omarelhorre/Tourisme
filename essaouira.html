@@ -5,28 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Essaouira — Vents & Remparts | Royaume du Maroc</title>
 
-  <!-- === Bootstrap 5 CSS === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- === Bootstrap Icons === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
-
-  <!-- === Google Fonts : Playfair Display + Lato === -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-
-  <!-- === Shared Destination Styling === -->
   <link href="city-page.css" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- === Floating navigation menu system === -->
+  <!-- === Navigation flottante === -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
-           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+          aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
@@ -89,7 +82,8 @@
 
   <!-- === SECTION 1: HERO === -->
   <section class="city-hero">
-    <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1920&q=80" alt="Remparts de la Skala d'Essaouira" class="city-hero-img">
+    <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1920&q=80"
+         alt="Remparts de la Skala d'Essaouira" class="city-hero-img">
     <div class="city-hero-overlay"></div>
     <div class="city-hero-content">
       <span class="city-eyebrow hero-animate-1">Côte Atlantique</span>
@@ -101,7 +95,77 @@
     </div>
   </section>
 
-  <!-- === SECTION 2: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <!-- === SECTION 2: INTRO 2 COLONNES (AJOUTÉE) === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+
+        <!-- Colonne gauche : texte de présentation -->
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Côte Atlantique — Région Marrakech-Safi</span>
+          <h2>La cité des vents, des remparts et de l'art</h2>
+          <p>
+            Essaouira est une ville portuaire fondée au XVIIIe siècle sur la côte atlantique du Maroc.
+            Sa médina, classée au patrimoine mondial de l'UNESCO, séduit par son architecture
+            unique mêlant influences portugaises et marocaines, ses ruelles blanches et bleues
+            balayées par les alizés, et ses remparts imposants surplombant l'océan.
+          </p>
+          <p>
+            La Skala de la Ville, avec ses canons pointés vers l'horizon, offre l'un des panoramas
+            les plus saisissants de la côte marocaine. Le port de pêche, animé dès l'aube par le
+            retour des barques bleues, témoigne d'une vie maritime authentique préservée depuis
+            des siècles.
+          </p>
+          <p>
+            Depuis les années 1960, Essaouira attire artistes, musiciens et voyageurs en quête
+            de sérénité. La ville est réputée pour son artisanat du bois de thuya — marqueterie
+            et objets sculptés — ainsi que pour ses galeries d'art qui jalonnent la médina.
+            La longue plage de sable, idéale pour le kitesurf et le windsurf grâce aux vents
+            constants, complète cette destination unique au Maroc.
+          </p>
+        </div>
+
+        <!-- Colonne droite : En un clin d'œil + image -->
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>2 à 3 jours</p>
+              </div>
+            </div>
+
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Printemps et Automne</p>
+              </div>
+            </div>
+
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Marrakech-Safi / Côte Atlantique</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="intro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=800&q=80"
+                 alt="Remparts blancs d'Essaouira face à l'Atlantique">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER === -->
   <section class="city-highlights">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -109,77 +173,84 @@
         <h2>À ne pas manquer à Essaouira</h2>
       </div>
       <div class="row g-4">
-        <!-- Activité 1 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-image"></i></div>
-              <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=600&q=80" alt="Ruelles blanches et bleues de la Médina d'Essaouira">
+              <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=600&q=80"
+                   alt="Ruelles blanches et bleues de la Médina d'Essaouira">
             </div>
             <h3 class="city-card-title">Médina d'Essaouira (UNESCO)</h3>
             <p class="city-card-desc">Médina classée au patrimoine mondial de l'UNESCO. Architecture portugaise et marocaine mêlées, ruelles calmes.</p>
           </div>
         </div>
-        <!-- Activité 2 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-compass"></i></div>
-              <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80" alt="Remparts et canons d'Essaouira">
+              <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&q=80"
+                   alt="Remparts et canons d'Essaouira">
             </div>
             <h3 class="city-card-title">Remparts & Skala de la Ville</h3>
             <p class="city-card-desc">Canons pointés vers l'Atlantique sur des remparts du XVIIIe siècle. Vue imprenable sur l'océan et les îles.</p>
           </div>
         </div>
-        <!-- Activité 3 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-anchor"></i></div>
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Barques bleues de pêcheurs à Essaouira">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+                   alt="Barques bleues de pêcheurs à Essaouira">
             </div>
             <h3 class="city-card-title">Port de pêche</h3>
             <p class="city-card-desc">Retour des barques bleues en fin de matinée. Ambiance authentique, mouettes et odeur d'iode.</p>
           </div>
         </div>
-        <!-- Activité 4 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-wind"></i></div>
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Plage et amateurs de planche à voile à Essaouira">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80"
+                   alt="Plage et kitesurf à Essaouira">
             </div>
             <h3 class="city-card-title">Plage d'Essaouira</h3>
             <p class="city-card-desc">Longue plage de sable balayée par les vents alizés. Très appréciée pour la marche, le kitesurf et le windsurf.</p>
           </div>
         </div>
-        <!-- Activité 5 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-shop-window"></i></div>
-              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80" alt="Artisanat de thuya à Essaouira">
+              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80"
+                   alt="Artisanat de thuya à Essaouira">
             </div>
             <h3 class="city-card-title">Souks & artisanat du thuya</h3>
             <p class="city-card-desc">Essaouira est réputée pour sa marqueterie en bois de thuya. Ateliers et boutiques visibles dans toute la médina.</p>
           </div>
         </div>
-        <!-- Activité 6 -->
+
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
               <div class="city-card-icon-badge"><i class="bi bi-palette"></i></div>
-              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=600&q=80" alt="Galeries d'art et d'exposition à Essaouira">
+              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=600&q=80"
+                   alt="Galeries d'art à Essaouira">
             </div>
             <h3 class="city-card-title">Galeries d'art & ateliers</h3>
             <p class="city-card-desc">La ville attire artistes et musiciens depuis les années 1960. Nombreuses galeries à découvrir au fil des ruelles.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 3: RESTAURANTS === -->
+  <!-- === SECTION 4: RESTAURANTS === -->
   <section class="city-restaurants" style="background: var(--bg-cream); border-top: 1px solid #f0ebe3; border-bottom: 1px solid #f0ebe3;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -187,51 +258,56 @@
         <h2>Où manger à Essaouira</h2>
       </div>
       <div class="row g-4">
-        <!-- Restaurant 1 -->
+
         <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&q=80" alt="Poisson grillé sur le port d'Essaouira">
+              <img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&q=80"
+                   alt="Poisson grillé sur le port d'Essaouira">
             </div>
             <h3 class="city-card-title">Poisson du port</h3>
             <p class="city-card-desc">Acheter son poisson directement aux pêcheurs et le faire griller sur place. Expérience locale incontournable.</p>
           </div>
         </div>
-        <!-- Restaurant 2 -->
+
         <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1585934812687-2dc724f72993?w=600&q=80" alt="Tajine de poisson traditionnel marocain">
+              <img src="https://images.unsplash.com/photo-1585934812687-2dc724f72993?w=600&q=80"
+                   alt="Tajine de poisson traditionnel marocain">
             </div>
             <h3 class="city-card-title">Cuisine marocaine (tajines de poisson)</h3>
             <p class="city-card-desc">Les restaurants de la médina proposent des tajines de poisson frais aux épices locales, spécialité de la côte.</p>
           </div>
         </div>
-        <!-- Restaurant 3 -->
+
         <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80" alt="Terrasse de café avec vue sur l'océan à Essaouira">
+              <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80"
+                   alt="Terrasse de café avec vue sur l'océan à Essaouira">
             </div>
             <h3 class="city-card-title">Cafés face à l'océan</h3>
             <p class="city-card-desc">Thé à la menthe, pâtisseries marocaines et vue sur l'Atlantique depuis les terrasses des remparts.</p>
           </div>
         </div>
-        <!-- Restaurant 4 -->
+
         <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Cuisine inventive et fusion à Essaouira">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80"
+                   alt="Table créative et fusion à Essaouira">
             </div>
             <h3 class="city-card-title">Tables créatives & fusion</h3>
             <p class="city-card-desc">Quelques adresses proposent une cuisine inventive mêlant produits locaux et influences méditerranéennes.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 4: HÉBERGEMENTS === -->
+  <!-- === SECTION 5: HÉBERGEMENTS === -->
   <section class="city-hotels" style="background: #ffffff;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -239,65 +315,70 @@
         <h2>Hébergements d'exception</h2>
       </div>
       <div class="row g-4">
-        <!-- Hôtel 1 -->
+
         <div class="col-md-4 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Riad charmant dans la médina d'Essaouira">
+              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80"
+                   alt="Riad charmant dans la médina d'Essaouira">
             </div>
             <div class="hotel-rating">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span>
+              <span class="hotel-price">€€</span>
             </div>
             <h3 class="city-card-title">Riad en médina</h3>
             <p class="city-card-desc">Demeures traditionnelles restaurées dans la médina classée UNESCO. Patio, terrasse et ambiance intime.</p>
           </div>
         </div>
-        <!-- Hôtel 2 -->
+
         <div class="col-md-4 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Maison d'hôtes en bord de mer à Essaouira">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80"
+                   alt="Maison d'hôtes en bord de mer à Essaouira">
             </div>
             <div class="hotel-rating">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span>
+              <span class="hotel-price">€€</span>
             </div>
             <h3 class="city-card-title">Maison d'hôtes proche de la plage</h3>
             <p class="city-card-desc">Petites structures à quelques minutes de la plage, idéales pour les amateurs de sports nautiques et de vent.</p>
           </div>
         </div>
-        <!-- Hôtel 3 -->
+
         <div class="col-md-4 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Hôtel moderne à Essaouira">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80"
+                   alt="Hôtel moderne à Essaouira">
             </div>
             <div class="hotel-rating">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-              <span class="mx-2">•</span> <span class="hotel-price">€</span>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span>
+              <span class="hotel-price">€</span>
             </div>
             <h3 class="city-card-title">Hôtel hors médina (plus calme)</h3>
             <p class="city-card-desc">Établissements modernes à l'écart de l'animation de la médina, avec parking et accès facile en voiture.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 9: FOOTER === -->
+  <!-- === FOOTER === -->
   <footer class="footer-simple">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
-  <!-- === Bootstrap Bundle JS === -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /* ============================================================
-       === Navigation Drawer & Scroll Reveal Logic ===
-       ============================================================ */
-
     (function() {
       const toggle = document.getElementById('menuToggle');
       const menu   = document.getElementById('siteMenu');
@@ -322,43 +403,31 @@
         }
       }
 
-      toggle.addEventListener('click', () => {
-        setMenu(!document.body.classList.contains('menu-open'));
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setMenu(false);
-      });
-      menu.addEventListener('click', (e) => {
-        if (e.target === menu) setMenu(false);
-      });
+      toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+      menu.addEventListener('click', (e) => { if (e.target === menu) setMenu(false); });
 
       groups.forEach(group => {
-        const head = group.querySelector('.menu-head');
-        head.addEventListener('click', () => {
+        group.querySelector('.menu-head').addEventListener('click', () => {
           if (isDesktop()) {
             activate(group);
           } else {
-            const willOpen = !group.classList.contains('open');
-            willOpen ? activate(group) : activate(null);
+            !group.classList.contains('open') ? activate(group) : activate(null);
           }
         });
       });
     })();
 
-    // Premium Scroll Reveal trigger (using IntersectionObserver)
     (function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const delay = entry.target.dataset.delay || 0;
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, parseInt(delay));
+            setTimeout(() => entry.target.classList.add('visible'), parseInt(delay));
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.12 });
-
       document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     })();
   </script>

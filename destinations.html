@@ -5,25 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nos Destinations — Royaume du Maroc</title>
 
-  <!-- === Bootstrap 5 CSS === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- === Bootstrap Icons === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
-
-  <!-- === Google Fonts : Playfair Display + Lato === -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       destinations.html — Feuille de styles
-       Palette : terracotta #C0552A, sable #F5E6C8, vert #2D5016,
-                 or #D4AF37, blanc #FFFFFF
-       ============================================================ */
-
-    /* === Variables de couleurs === */
     :root {
       --terracotta: #C0552A;
       --sable: #F5E6C8;
@@ -33,10 +21,7 @@
       --texte: #2a2a2a;
     }
 
-    /* === Base typographique === */
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Lato', sans-serif;
       color: #1C1C1C;
@@ -44,9 +29,7 @@
       margin: 0;
     }
 
-    /* ============================================================
-       === Icônes flottantes (palmier + burger) — menu de l'accueil ===
-       ============================================================ */
+    /* === Navigation flottante === */
     .nav-fab {
       position: fixed;
       top: 1.75rem;
@@ -67,16 +50,10 @@
       box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    .nav-fab:hover {
-      background: #fff;
-      transform: scale(1.06);
-    }
+    .nav-fab:hover { background: #fff; transform: scale(1.06); }
     .nav-fab-logo { left: 2.5rem; }
     .nav-fab-burger { right: 2.5rem; }
-    .nav-fab-logo i {
-      color: var(--terracotta);
-      font-size: 1.5rem;
-    }
+    .nav-fab-logo i { color: var(--terracotta); font-size: 1.5rem; }
     .nav-fab-burger span {
       display: block;
       width: 22px;
@@ -85,17 +62,11 @@
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    body.menu-open .nav-fab-burger span:nth-child(1) {
-      transform: translateY(8.5px) rotate(45deg);
-    }
-    body.menu-open .nav-fab-burger span:nth-child(2) {
-      transform: translateY(-8.5px) rotate(-45deg);
-    }
+    body.menu-open .nav-fab-burger span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+    body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-8.5px) rotate(-45deg); }
     body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
-    /* ============================================================
-       === Menu plein écran / Panel de navigation ===
-       ============================================================ */
+    /* === Menu === */
     .site-menu {
       position: fixed;
       inset: 0;
@@ -108,8 +79,7 @@
       opacity: 0;
       visibility: hidden;
       transform: scale(1.02);
-      transition: opacity 0.35s ease, transform 0.35s ease,
-                  visibility 0s linear 0.35s;
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
     }
     body.menu-open .site-menu {
       opacity: 1;
@@ -125,17 +95,8 @@
       opacity: 0.5;
       pointer-events: none;
     }
-
-    .site-menu-inner {
-      position: relative;
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .menu-group {
-      border-bottom: 1px solid rgba(192, 85, 42, 0.22);
-    }
+    .site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
+    .menu-group { border-bottom: 1px solid rgba(192, 85, 42, 0.22); }
     .menu-head {
       display: flex;
       align-items: center;
@@ -156,49 +117,14 @@
       text-transform: uppercase;
       transition: color 0.2s ease, padding-left 0.2s ease;
     }
-    .menu-head:hover,
-    .menu-head:focus-visible {
-      color: var(--terracotta);
-      padding-left: 0.9rem;
-      outline: none;
-    }
-    .menu-head .chev {
-      font-size: 1.1rem;
-      color: var(--terracotta);
-      transition: transform 0.35s ease;
-      flex-shrink: 0;
-      margin-left: 1rem;
-    }
-    .menu-group.open .menu-head .chev {
-      transform: rotate(180deg);
-    }
-    .menu-group.open .menu-head {
-      color: var(--terracotta);
-    }
-
-    .menu-sub {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-    .menu-group.open .menu-sub {
-      max-height: 640px;
-      opacity: 1;
-    }
-    .menu-sub-list {
-      list-style: none;
-      margin: 0;
-      padding: 0.3rem 0 1.2rem 0.4rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
-    .menu-sub-list.cities {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.1rem 1.5rem;
-    }
+    .menu-head:hover, .menu-head:focus-visible { color: var(--terracotta); padding-left: 0.9rem; outline: none; }
+    .menu-head .chev { font-size: 1.1rem; color: var(--terracotta); transition: transform 0.35s ease; flex-shrink: 0; margin-left: 1rem; }
+    .menu-group.open .menu-head .chev { transform: rotate(180deg); }
+    .menu-group.open .menu-head { color: var(--terracotta); }
+    .menu-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
+    .menu-group.open .menu-sub { max-height: 640px; opacity: 1; }
+    .menu-sub-list { list-style: none; margin: 0; padding: 0.3rem 0 1.2rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; }
+    .menu-sub-list.cities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 1.5rem; }
     .menu-sub-list a {
       display: flex;
       align-items: center;
@@ -212,24 +138,11 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
       border-radius: 8px;
-      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      transition: color 0.2s ease, background 0.2s ease;
     }
-    .menu-sub-list a::before {
-      content: "→";
-      color: var(--terracotta);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .menu-sub-list a:hover {
-      color: var(--terracotta);
-      background: rgba(255, 255, 255, 0.6);
-    }
-    .menu-sub-list a:hover::before {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
+    .menu-sub-list a::before { content: "→"; color: var(--terracotta); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    .menu-sub-list a:hover { color: var(--terracotta); background: rgba(255,255,255,0.6); }
+    .menu-sub-list a:hover::before { opacity: 1; transform: translateX(0); }
     .menu-cta {
       display: inline-flex;
       align-items: center;
@@ -246,11 +159,7 @@
       border-radius: 999px;
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    .menu-cta:hover {
-      background: #f5cd00;
-      color: #000;
-      transform: translateY(-2px);
-    }
+    .menu-cta:hover { background: #f5cd00; color: #000; transform: translateY(-2px); }
 
     @media (max-width: 768px) {
       .nav-fab { top: 1.1rem; }
@@ -261,39 +170,27 @@
     }
 
     @media (min-width: 992px) {
-      .site-menu {
-        background: transparent;
-        padding: 0;
-        overflow: hidden;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        pointer-events: none;
-        transition: none;
-      }
-      body.menu-open .site-menu {
-        pointer-events: auto;
-      }
+      .site-menu { background: transparent; padding: 0; overflow: hidden; opacity: 1; visibility: visible; transform: none; pointer-events: none; transition: none; }
+      body.menu-open .site-menu { pointer-events: auto; }
       .site-menu::before { display: none; }
-
       .site-menu-inner {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 0; right: 0;
         height: 100%;
         width: min(50vw, 760px);
         max-width: none;
         margin: 0;
-        padding: 7rem 4.5rem 3rem;
+        padding: 5rem 4rem 3rem;
         overflow-y: auto;
         background: var(--sable);
         border-left: 1px solid rgba(192, 85, 42, 0.18);
         box-shadow: -30px 0 70px -25px rgba(60, 30, 10, 0.45);
         transform: translateX(100%);
         transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      body.menu-open .site-menu-inner {
-        transform: translateX(0);
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 0.5rem;
       }
       .site-menu-inner::before {
         content: "";
@@ -304,90 +201,21 @@
         pointer-events: none;
         z-index: 0;
       }
-      .site-menu-inner {
-        padding: 5rem 4rem 3rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        gap: 0.5rem;
-      }
-      .menu-group {
-        display: block;
-        flex: 0 0 auto;
-        border-bottom: none;
-        margin: 0;
-      }
-      .menu-head {
-        position: relative;
-        z-index: 1;
-        width: auto;
-        justify-content: center;
-        gap: 0;
-        border-bottom: none;
-        border-radius: 999px;
-        padding: 0.6rem 1.4rem;
-        font-size: 0.92rem;
-        letter-spacing: 0.08em;
-        background: transparent;
-        transition: background 0.25s ease, color 0.25s ease;
-      }
-      .menu-head:hover,
-      .menu-head:focus-visible {
-        padding-left: 1.4rem;
-        background: rgba(192, 85, 42, 0.12);
-        color: var(--terracotta);
-      }
+      body.menu-open .site-menu-inner { transform: translateX(0); }
+      .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
+      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; gap: 0; border-bottom: none; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: 0.08em; background: transparent; transition: background 0.25s ease, color 0.25s ease; }
+      .menu-head:hover, .menu-head:focus-visible { padding-left: 1.4rem; background: rgba(192, 85, 42, 0.12); color: var(--terracotta); }
       .menu-head .chev { display: none; }
-      .menu-group.open .menu-head {
-        background: var(--terracotta);
-        color: #fff;
-      }
-      .menu-sub {
-        position: absolute;
-        left: 4rem;
-        right: 4rem;
-        top: 9.5rem;
-        bottom: 6.5rem;
-        z-index: 1;
-        padding-top: 1.5rem;
-        border-top: 1px solid rgba(192, 85, 42, 0.18);
-        max-height: none;
-        overflow-y: auto;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(14px);
-        transition: opacity 0.35s ease, transform 0.35s ease,
-                    visibility 0s linear 0.35s;
-      }
-      .menu-group.open .menu-sub {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        transition: opacity 0.35s ease, transform 0.35s ease;
-      }
-      .menu-sub-list {
-        padding: 0;
-        gap: 0.1rem;
-      }
-      .menu-sub-list a {
-        font-size: clamp(1.3rem, 2.1vw, 2rem);
-        font-weight: 900;
-        letter-spacing: -0.01em;
-        padding: 0.45rem 0.7rem;
-      }
+      .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
+      .menu-sub { position: absolute; left: 4rem; right: 4rem; top: 9.5rem; bottom: 6.5rem; z-index: 1; padding-top: 1.5rem; border-top: 1px solid rgba(192, 85, 42, 0.18); max-height: none; overflow-y: auto; opacity: 0; visibility: hidden; transform: translateY(14px); transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s; }
+      .menu-group.open .menu-sub { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.35s ease, transform 0.35s ease; }
+      .menu-sub-list { padding: 0; gap: 0.1rem; }
+      .menu-sub-list a { font-size: clamp(1.3rem, 2.1vw, 2rem); font-weight: 900; letter-spacing: -0.01em; padding: 0.45rem 0.7rem; }
       .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
-      .menu-cta {
-        position: absolute;
-        z-index: 2;
-        left: 4rem;
-        bottom: 2.5rem;
-        margin-top: 0;
-      }
+      .menu-cta { position: absolute; z-index: 2; left: 4rem; bottom: 2.5rem; margin-top: 0; }
     }
 
-    /* ============================================================
-       === CSS Spécifique Lovable ===
-       ============================================================ */
+    /* === HERO === */
     .dest-hero {
       position: relative;
       height: 75vh;
@@ -403,12 +231,7 @@
     .dest-hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top right,
-        rgba(10,5,0,0.75) 0%,
-        rgba(10,5,0,0.38) 45%,
-        transparent 72%
-      );
+      background: linear-gradient(to top right, rgba(10,5,0,0.75) 0%, rgba(10,5,0,0.38) 45%, transparent 72%);
     }
     .dest-hero-content {
       position: absolute;
@@ -441,23 +264,41 @@
       color: rgba(255,255,255,0.88);
       line-height: 1.6;
     }
+
+    /* === GRILLE === */
     .dest-grid-section {
       background: #FAF8F4;
       padding: 80px 0 100px;
     }
+
+    /* Titre de section */
+    .dest-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: #1C1C1C;
+      margin-bottom: 0.5rem;
+    }
+    .dest-section-sub {
+      font-size: 1rem;
+      color: #888;
+      font-style: italic;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Cartes */
     .dest-card-link {
       text-decoration: none;
       color: inherit;
       display: block;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .dest-card-link:hover {
-      transform: translateY(-8px);
-    }
+    .dest-card-link:hover { transform: translateY(-8px); }
     .dest-card-img-wrap {
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 1.1rem;
+      position: relative;
     }
     .dest-card-img-wrap img {
       width: 100%;
@@ -466,9 +307,25 @@
       display: block;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .dest-card-link:hover .dest-card-img-wrap img {
-      transform: scale(1.06);
+    .dest-card-link:hover .dest-card-img-wrap img { transform: scale(1.06); }
+
+    /* Badge de région sur l'image */
+    .dest-card-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
     }
+
     .dest-card-eyebrow {
       font-family: 'Lato', sans-serif;
       font-size: 0.70rem;
@@ -487,9 +344,7 @@
       margin-bottom: 0.45rem;
       transition: color 0.3s ease;
     }
-    .dest-card-link:hover .dest-card-name {
-      color: var(--terracotta);
-    }
+    .dest-card-link:hover .dest-card-name { color: var(--terracotta); }
     .dest-card-desc {
       font-family: 'Lato', sans-serif;
       font-size: 0.93rem;
@@ -498,10 +353,8 @@
       font-weight: 400;
     }
 
-    /* === Hero content entrance animations on load === */
-    .hero-animate-1,
-    .hero-animate-2,
-    .hero-animate-3 {
+    /* === Animations === */
+    .hero-animate-1, .hero-animate-2, .hero-animate-3 {
       opacity: 0;
       transform: translateY(35px);
       filter: blur(6px);
@@ -513,14 +366,9 @@
     .hero-animate-3 { animation-delay: 0.55s; }
 
     @keyframes heroFadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
 
-    /* === Premium Scroll Reveal Animation (Apple-like scale & cinematic blur) === */
     .fade-up {
       opacity: 0;
       transform: translateY(45px) scale(0.97);
@@ -530,51 +378,39 @@
                   filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity, filter;
     }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
+    .fade-up.visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 
-    /* Footer simple */
+    /* === Footer === */
     .footer-simple {
       background-color: #1a1a1a;
       color: #aaa;
       text-align: center;
       font-size: 0.85rem;
       padding: 2.5rem 1rem;
-      border: none;
     }
 
     @media (max-width: 768px) {
-      .dest-hero-content {
-        bottom: 2rem;
-        left: 1.5rem;
-        right: 1.5rem;
-      }
-      .dest-hero h1 {
-        font-size: 2.4rem;
-      }
-      .dest-card-img-wrap img {
-        height: 220px;
-      }
+      .dest-hero-content { bottom: 2rem; left: 1.5rem; right: 1.5rem; }
+      .dest-hero h1 { font-size: 2.4rem; }
+      .dest-card-img-wrap img { height: 220px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- === Floating navigation menu system from index.html === -->
+  <!-- === Navigation flottante === -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
-           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+          aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
 
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
+
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           Accueil
@@ -599,12 +435,11 @@
         <div class="menu-sub">
           <ul class="menu-sub-list cities">
             <li><a href="marrakech.html">Marrakech</a></li>
-            <li><a href="fes.html">Fès</a></li>
+            <li><a href="rabat.html">Rabat</a></li>
             <li><a href="chefchaouen.html">Chefchaouen</a></li>
-            <li><a href="tetouan.html">Tétouan</a></li>
-            <li><a href="casablanca.html">Casablanca</a></li>
             <li><a href="agadir.html">Agadir</a></li>
-            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="merzouga.html">Merzouga</a></li>
+            <li><a href="ifrane.html">Ifrane</a></li>
             <li><a href="essaouira.html">Essaouira</a></li>
           </ul>
         </div>
@@ -631,108 +466,157 @@
 
   <!-- === SECTION 1: HERO === -->
   <section class="dest-hero">
-    <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=1920&q=80" alt="Du Rif au Sahara">
+    <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=1920&q=80"
+         alt="Chefchaouen — Du Rif au Sahara">
     <div class="dest-hero-overlay"></div>
     <div class="dest-hero-content">
       <span class="dest-eyebrow hero-animate-1">DESTINATIONS</span>
       <h1 class="hero-animate-2">Du Rif au Sahara.</h1>
-      <p class="hero-animate-3">Six régions, mille nuances. Composez votre carte du Maroc.</p>
+      <p class="hero-animate-3">
+        Sept destinations, mille nuances. Composez votre carte du Maroc.
+      </p>
     </div>
   </section>
 
-  <!-- === SECTION 2: GRILLE DESTINATIONS === -->
+  <!-- === SECTION 2: GRILLE DES 7 DESTINATIONS === -->
   <section class="dest-grid-section">
     <div class="container">
+
+      <!-- Titre de section -->
+      <div class="fade-up" data-delay="0">
+        <h2 class="dest-section-title">Nos Destinations</h2>
+        <p class="dest-section-sub">
+          Sept villes et paysages à explorer, du Nord atlantique aux dunes du Sahara
+        </p>
+      </div>
+
       <div class="row g-lg-5 g-4" style="row-gap: 3.5rem !important;">
-        <!-- Card 1 — Marrakech -->
+
+        <!-- ① Marrakech -->
         <div class="col-lg-4 col-md-6 fade-up" data-delay="0">
           <a href="marrakech.html" class="dest-card-link">
             <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80" alt="Marrakech">
+              <span class="dest-card-badge">Ville Impériale</span>
+              <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&q=80"
+                   alt="Place Jemaa el-Fna à Marrakech de nuit">
             </div>
             <div class="dest-card-eyebrow">VILLE IMPÉRIALE</div>
             <h2 class="dest-card-name">Marrakech</h2>
-            <p class="dest-card-desc">La ville rouge, ses jardins Majorelle et la place Jemaa el-Fna.</p>
+            <p class="dest-card-desc">
+              La ville rouge, ses jardins Majorelle et la place Jemaa el-Fna.
+            </p>
           </a>
         </div>
 
-        <!-- Card 2 — Fès -->
+        <!-- ② Rabat -->
         <div class="col-lg-4 col-md-6 fade-up" data-delay="100">
-          <a href="fes.html" class="dest-card-link">
+          <a href="rabat.html" class="dest-card-link">
             <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800&q=80" alt="Fès">
+              <span class="dest-card-badge">Capitale</span>
+              <img src="https://images.unsplash.com/photo-1559589689-577aabd1db4f?w=800&q=80"
+                   alt="Tour Hassan et mausolée Mohammed V à Rabat">
             </div>
-            <div class="dest-card-eyebrow">CAPITALE SPIRITUELLE</div>
-            <h2 class="dest-card-name">Fès</h2>
-            <p class="dest-card-desc">Médina millénaire, tanneries, université Al Quaraouiyine.</p>
+            <div class="dest-card-eyebrow">CAPITALE</div>
+            <h2 class="dest-card-name">Rabat</h2>
+            <p class="dest-card-desc">
+              Kasbah des Oudayas, Tour Hassan et patrimoine UNESCO au bord de l'Atlantique.
+            </p>
           </a>
         </div>
 
-        <!-- Card 3 — Chefchaouen -->
+        <!-- ③ Chefchaouen -->
         <div class="col-lg-4 col-md-6 fade-up" data-delay="200">
           <a href="chefchaouen.html" class="dest-card-link">
             <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=800&q=80" alt="Chefchaouen">
+              <span class="dest-card-badge">Rif</span>
+              <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=800&q=80"
+                   alt="Ruelles bleues et escaliers de Chefchaouen">
             </div>
             <div class="dest-card-eyebrow">RIF</div>
             <h2 class="dest-card-name">Chefchaouen</h2>
-            <p class="dest-card-desc">La perle bleue nichée dans les montagnes du Nord.</p>
+            <p class="dest-card-desc">
+              La perle bleue nichée dans les montagnes du Nord.
+            </p>
           </a>
         </div>
 
-        <!-- Card 4 — Essaouira -->
+        <!-- ④ Agadir -->
         <div class="col-lg-4 col-md-6 fade-up" data-delay="0">
+          <a href="agadir.html" class="dest-card-link">
+            <div class="dest-card-img-wrap">
+              <span class="dest-card-badge">Atlantique</span>
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80"
+                   alt="Grande plage d'Agadir et océan Atlantique">
+            </div>
+            <div class="dest-card-eyebrow">ATLANTIQUE</div>
+            <h2 class="dest-card-name">Agadir</h2>
+            <p class="dest-card-desc">
+              Grande plage de sable, douceur marine et soleil toute l'année.
+            </p>
+          </a>
+        </div>
+
+        <!-- ⑤ Essaouira -->
+        <div class="col-lg-4 col-md-6 fade-up" data-delay="100">
           <a href="essaouira.html" class="dest-card-link">
             <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=800&q=80" alt="Essaouira">
+              <span class="dest-card-badge">Côte Atlantique</span>
+              <img src="https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=800&q=80"
+                   alt="Remparts et port de pêche d'Essaouira">
             </div>
             <div class="dest-card-eyebrow">CÔTE ATLANTIQUE</div>
             <h2 class="dest-card-name">Essaouira</h2>
-            <p class="dest-card-desc">Remparts portugais et vents de l'Atlantique.</p>
+            <p class="dest-card-desc">
+              Médina blanche classée UNESCO, remparts portugais et vents alizés.
+            </p>
           </a>
         </div>
 
-        <!-- Card 5 — Sahara -->
-        <div class="col-lg-4 col-md-6 fade-up" data-delay="100">
-          <a href="sahara.html" class="dest-card-link">
-            <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=800&q=80" alt="Sahara">
-            </div>
-            <div class="dest-card-eyebrow">GRAND SUD</div>
-            <h2 class="dest-card-name">Sahara</h2>
-            <p class="dest-card-desc">Dunes de l'Erg Chebbi, nuits sous les étoiles.</p>
-          </a>
-        </div>
-
-        <!-- Card 6 — Jbel Atlas -->
+        <!-- ⑥ Merzouga -->
         <div class="col-lg-4 col-md-6 fade-up" data-delay="200">
-          <a href="atlas.html" class="dest-card-link">
+          <a href="merzouga.html" class="dest-card-link">
             <div class="dest-card-img-wrap">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80" alt="Jbel Atlas">
+              <span class="dest-card-badge">Sahara</span>
+              <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=800&q=80"
+                   alt="Dunes de l'Erg Chebbi à Merzouga au coucher du soleil">
             </div>
-            <div class="dest-card-eyebrow">HAUT ATLAS</div>
-            <h2 class="dest-card-name">Jbel Atlas</h2>
-            <p class="dest-card-desc">Sommets enneigés, vallées berbères et Toubkal.</p>
+            <div class="dest-card-eyebrow">SAHARA</div>
+            <h2 class="dest-card-name">Merzouga</h2>
+            <p class="dest-card-desc">
+              Dunes de l'Erg Chebbi, nuits berbères et silence du grand désert.
+            </p>
           </a>
         </div>
+
+        <!-- ⑦ Ifrane -->
+        <div class="col-lg-4 col-md-6 fade-up" data-delay="0">
+          <a href="ifrane.html" class="dest-card-link">
+            <div class="dest-card-img-wrap">
+              <span class="dest-card-badge">Moyen Atlas</span>
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80"
+                   alt="Paysage enneigé et chalets d'Ifrane dans le Moyen Atlas">
+            </div>
+            <div class="dest-card-eyebrow">MOYEN ATLAS</div>
+            <h2 class="dest-card-name">Ifrane</h2>
+            <p class="dest-card-desc">
+              La "Suisse marocaine" : chalets, neige en hiver et forêts de cèdres.
+            </p>
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION: FOOTER === -->
+  <!-- === FOOTER === -->
   <footer class="footer-simple">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
-  <!-- === Bootstrap Bundle JS === -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /* ============================================================
-       === JavaScript — destinations.html ===
-       ============================================================ */
-
-    // 1. Menu plein écran : ouverture/fermeture + sections dépliables
+    /* === Menu === */
     (function() {
       const toggle = document.getElementById('menuToggle');
       const menu   = document.getElementById('siteMenu');
@@ -744,8 +628,7 @@
         groups.forEach(g => {
           const on = g === group;
           g.classList.toggle('open', on);
-          g.querySelector('.menu-head')
-           .setAttribute('aria-expanded', on ? 'true' : 'false');
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
         });
       }
 
@@ -753,57 +636,36 @@
         document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         document.body.style.overflow = open ? 'hidden' : '';
-        if (open && isDesktop() &&
-            !menu.querySelector('.menu-group[data-group].open')) {
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
           activate(groups[0]);
         }
       }
 
-      toggle.addEventListener('click', () => {
-        setMenu(!document.body.classList.contains('menu-open'));
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setMenu(false);
-      });
-      menu.addEventListener('click', (e) => {
-        if (e.target === menu) setMenu(false);
-      });
+      toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+      menu.addEventListener('click', (e) => { if (e.target === menu) setMenu(false); });
 
       groups.forEach(group => {
-        const head = group.querySelector('.menu-head');
-        head.addEventListener('click', () => {
-          if (isDesktop()) {
-            activate(group);
-          } else {
-            const willOpen = !group.classList.contains('open');
-            willOpen ? activate(group) : activate(null);
-          }
-        });
-      });
-
-      menu.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-          setMenu(false);
+        group.querySelector('.menu-head').addEventListener('click', () => {
+          isDesktop() ? activate(group)
+                      : (!group.classList.contains('open') ? activate(group) : activate(null));
         });
       });
     })();
 
-    // 2. Animations scroll (IntersectionObserver + data-delay)
+    /* === Scroll Reveal === */
     (function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const delay = entry.target.dataset.delay || 0;
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, parseInt(delay));
+            setTimeout(() => entry.target.classList.add('visible'), parseInt(delay));
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.12 });
 
-      document.querySelectorAll('.fade-up')
-        .forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     })();
   </script>
 
