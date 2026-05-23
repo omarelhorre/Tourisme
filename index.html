@@ -54,7 +54,7 @@
     }
     /* Décalage d'ancrage pour ne pas passer sous la navbar fixe */
     #mapSection, #dishesSection, #experiencesSection,
-    #guideSection, #flightsSection {
+    #itinerairesSection {
       scroll-margin-top: 84px;
     }
     body {
@@ -289,29 +289,6 @@
       transform: translateX(0);
     }
 
-    /* Lien CTA "Réserver un Vol" en bas */
-    .menu-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-top: 2rem;
-      padding: 0.95rem 2rem;
-      background: var(--jaune-btn);
-      color: var(--encre);
-      font-weight: 900;
-      font-size: 1.05rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 999px;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .menu-cta:hover {
-      background: #f5cd00;
-      color: #000;
-      transform: translateY(-2px);
-    }
-
     /* === Pied de menu : langue + animations === */
     .menu-foot {
       display: flex;
@@ -484,16 +461,17 @@
         gap: 0;
         border-bottom: none;
         border-radius: 999px;
-        padding: 0.6rem 1.4rem;
-        font-size: 0.92rem;
-        letter-spacing: 0.08em;
+        padding: 0.5rem 1rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
         white-space: nowrap;        /* l'intitulé ne se coupe jamais */
         background: transparent;
         transition: background 0.25s var(--ease-doux), color 0.25s var(--ease-doux);
       }
       .menu-head:hover,
       .menu-head:focus-visible {
-        padding-left: 1.4rem;
+        padding: 0.5rem 1rem;       /* pas de décalage : la pastille
+                                       reste centrée pendant le survol */
         background: rgba(192, 85, 42, 0.12);
         color: var(--terracotta);
       }
@@ -540,14 +518,7 @@
       }
       .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
 
-      /* CTA + pied (langue/animations) ancrés en bas du panneau */
-      .menu-cta {
-        position: absolute;
-        z-index: 2;
-        left: 4rem;
-        bottom: 6rem;
-        margin-top: 0;
-      }
+      /* Pied (langue/animations) ancré en bas du panneau */
       .menu-foot {
         position: absolute;
         z-index: 2;
@@ -651,8 +622,8 @@
     .map-section {
       background-color: #fff;
       position: relative;
-      /* 100vh d'entrée + 60vh par ville = 580vh pour 8 villes */
-      height: 580vh;
+      /* 100vh d'entrée + 60vh par ville = 700vh pour 10 villes */
+      height: 700vh;
     }
     .map-intro {
       padding: 4rem 0 1rem;
@@ -674,9 +645,10 @@
       width: 100%;
       max-width: 460px;
       margin: 0 auto;
-      /* Même ratio que le viewBox SVG (400×500) pour que les points
-         (positionnés en %) tombent pile sur les villes. */
-      aspect-ratio: 4 / 5;
+      /* Aspect calé exactement sur la bounding box du silhouette dans
+         morocco-map.png (994 × 1002 px) — les points en % tombent
+         alors pile sur les villes réelles. */
+      aspect-ratio: 994 / 1002;
     }
     .map-svg {
       width: 100%;
@@ -684,21 +656,15 @@
       display: block;
       overflow: visible;
     }
-    .map-outline {
-      fill: var(--sable-fonce);
-      stroke: var(--terracotta);
-      stroke-width: 2;
-      stroke-linejoin: round;
-      filter: drop-shadow(0 10px 18px rgba(60, 30, 10, 0.18));
-    }
-    /* Chemin tracé entre les villes */
+    /* Chemin tracé entre les villes — épaisseurs adaptées au nouveau
+       viewBox (≈ 1110 unités de large au lieu de 400). */
     .map-trace {
       fill: none;
       stroke: var(--terracotta);
-      stroke-width: 2.5;
+      stroke-width: 7;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 4 6;
+      stroke-dasharray: 12 16;
       stroke-dashoffset: var(--dashoffset, 9999);
       filter: drop-shadow(0 0 4px rgba(192,85,42,0.4));
     }
@@ -706,7 +672,7 @@
     .map-traveler {
       fill: var(--or);
       stroke: #fff;
-      stroke-width: 3;
+      stroke-width: 8;
       filter: drop-shadow(0 0 8px rgba(212,175,55,0.8));
       transition: opacity 0.3s;
     }
@@ -756,68 +722,128 @@
       100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
     }
 
-    /* === Fiche ville — design épuré === */
+    /* === Fiche ville — image de fond plein cadre === */
     .city-info-stage {
       position: relative;
-      min-height: 320px;
+      height: 220px;
     }
     .city-info-item {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0;
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.9s var(--ease-doux), transform 0.9s var(--ease-doux);
-      padding: 2.2rem 2.4rem;
-      background: #fff;
-      border-radius: 4px;
-      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 18px 40px -20px rgba(0,0,0,0.18);
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 0.85s var(--ease-doux), transform 0.85s var(--ease-doux);
+      border-radius: 14px;
+      overflow: hidden;
       pointer-events: none;
+      background: #100804;
+      box-shadow: 0 16px 48px -12px rgba(0,0,0,0.42);
+      display: block;
+    }
+    /* Image stretches across the FULL card */
+    .city-info-item .city-info-img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .city-info-item .city-info-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      transform: scale(1.07);
+      transition: transform 1.3s var(--ease-doux), filter 1.3s var(--ease-doux);
+      filter: brightness(1.05) saturate(1.05);
+    }
+    .city-info-item.active .city-info-img img {
+      transform: scale(1.0);
+      filter: brightness(1.0) saturate(1.1);
+    }
+    /* Creamy fade from left — warm sable tone */
+    .city-info-item .city-info-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(245,230,200,0.96) 0%,
+          rgba(245,230,200,0.82) 28%,
+          rgba(245,230,200,0.35) 52%,
+          rgba(245,230,200,0.0)  68%);
+      pointer-events: none;
+    }
+    .city-info-item .city-info-img.placeholder {
+      background: linear-gradient(135deg, #2a0e04, #1a1008);
+    }
+    .city-info-item .city-info-img.placeholder::before {
+      content: "Bientôt";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.35);
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      font-size: 0.8rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    /* Text overlaid bottom-left, compact */
+    .city-info-item .city-info-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.6rem 1.8rem;
+      max-width: 58%;
     }
     .city-info-item.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
       pointer-events: auto;
     }
     .city-info-item .city-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #999;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
       font-weight: 700;
     }
     .city-info-item .city-eyebrow::before {
       content: "";
-      width: 28px;
+      width: 24px;
       height: 1px;
       background: var(--terracotta);
     }
     .city-info-item h3 {
-      margin: 0 0 0.8rem 0;
+      margin: 0 0 0.6rem 0;
       color: var(--encre);
-      font-size: 2.4rem;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
       letter-spacing: -0.02em;
     }
     .city-info-item p {
-      margin: 0 0 1.5rem 0;
-      font-size: 1.02rem;
-      line-height: 1.7;
+      margin: 0 0 1.2rem 0;
+      font-size: 0.97rem;
+      line-height: 1.68;
       color: #555;
     }
     .city-info-item a {
       color: var(--terracotta);
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       letter-spacing: 0.05em;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
+      width: fit-content;
       transition: gap 0.2s;
     }
     .city-info-item a:hover {
@@ -888,7 +914,7 @@
       /* On GARDE l'effet de défilement sur mobile : carte en haut,
          une seule fiche ville en dessous, qui change au scroll. */
       .map-progress { display: none; }
-      .map-section { height: 480vh; }
+      .map-section { height: 600vh; }
       .map-sticky {
         position: sticky;
         top: 0;
@@ -909,10 +935,11 @@
       /* Carte au-dessus, fiche en dessous (1 colonne) */
       .map-sticky .row { flex-direction: column; }
       .map-wrapper { max-width: 230px; }
-      .city-info-stage { min-height: 210px; margin-top: 1.25rem; }
-      .city-info-item { padding: 1.4rem 1.3rem; }
-      .city-info-item h3 { font-size: 1.7rem; margin-bottom: 0.5rem; }
-      .city-info-item p { font-size: 0.95rem; margin-bottom: 1rem; }
+      .city-info-stage { height: 200px; margin-top: 1rem; }
+      .city-info-item { border-radius: 10px; }
+      .city-info-item .city-info-text { max-width: 100%; padding: 1.2rem 1.3rem; }
+      .city-info-item h3 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+      .city-info-item p { display: none; }
     }
 
     /* ============================================================
@@ -1120,29 +1147,211 @@
     }
 
     /* ============================================================
-       === SECTION : Experiences Teaser ===
+       === SECTION : Expériences — réplique du stack Plats, miroir ===
+       Même mécanique 3D pilotée au scroll que .dishes-teaser, mais :
+         - le texte est à GAUCHE et la pile d'images à DROITE
+         - palette terracotta chaude (pour contraster avec le vert
+           foncé de la section Plats juste au-dessus)
        ============================================================ */
-    .exp-teaser {
-      background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
-      color: #fff;
-      padding: 6rem 1.25rem;
-      text-align: center;
-      /* Contenu centré (horizontal + vertical) dans la section */
-      min-height: 56vh;
+    .experiences-teaser {
+      position: relative;
+      background:
+        radial-gradient(ellipse at top right, rgba(212,175,55,0.10), transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(26,26,26,0.18), transparent 55%),
+        linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+      color: #f5e6c8;
+      height: 240vh;
+    }
+    .exp-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .exp-teaser h2 {
+    .exp-sticky::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23F5E6C8' stroke-width='1' opacity='0.10'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      pointer-events: none;
+    }
+    .exp-layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 3rem;
+      display: grid;
+      /* Inversion : texte en colonne 1, scène en colonne 2 (à droite) */
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .exp-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      gap: 1.5rem;
+      color: #f5e6c8;
+    }
+    .exp-side .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--or);
+      font-weight: 700;
+    }
+    .exp-side .eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: var(--or);
+    }
+    .exp-side h2 {
+      margin: 0;
       color: #fff;
-      margin-bottom: 1rem;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
     }
-    .exp-teaser p {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      font-size: 1.1rem;
-      line-height: 1.7;
+    .exp-side p {
+      margin: 0;
+      color: rgba(245, 230, 200, 0.85);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .exp-see-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--encre);
+      background: var(--or);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      padding: 0.85rem 1.5rem;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .exp-see-all i { font-size: 1rem; transition: transform 0.3s ease; }
+    .exp-see-all:hover {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255,255,255,0.55);
+    }
+    .exp-see-all:hover i { transform: translate(2px, -2px); }
+
+    /* === Scène 3D — identique au stack des plats === */
+    .exp-stage {
+      position: relative;
+      height: 360px;
+      perspective: 1400px;
+    }
+    .exp-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+    .exp-thumb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      border: 2px solid rgba(245, 230, 200, 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--terracotta-dark);
+      transition: transform var(--duree-image) var(--ease-doux),
+                  z-index 0s linear 0.55s,
+                  box-shadow 0.8s var(--ease-doux),
+                  border-color 0.6s var(--ease-doux);
+      will-change: transform;
+      --tx: -50%;
+      --ty: -50%;
+      --tz: 0px;
+      --rz: 0deg;
+      transform: translate(var(--tx), var(--ty))
+                 translateZ(var(--tz))
+                 rotate(var(--rz));
+    }
+    .exp-thumb-inner {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s var(--ease-doux),
+                  filter 0.8s var(--ease-doux);
+      transform: scale(1.06);
+    }
+    .exp-thumb-name {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      transition: padding 0.4s ease;
+      pointer-events: none;
+    }
+    .exp-thumb.pos-center {
+      --tx: -50%; --ty: -50%; --tz: 0px; --rz: 0deg;
+      z-index: 5;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.55);
+    }
+    .exp-thumb.pos-left {
+      --tx: -82%; --ty: -52%; --tz: -30px; --rz: -3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .exp-thumb.pos-left .exp-thumb-inner { filter: brightness(0.85); }
+    .exp-thumb.pos-right {
+      --tx: -18%; --ty: -48%; --tz: -30px; --rz: 3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .exp-thumb.pos-right .exp-thumb-inner { filter: brightness(0.85); }
+    .exp-thumb.pos-back {
+      --tx: -50%; --ty: -48%; --tz: -90px; --rz: 1deg;
+      z-index: 1;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+    .exp-thumb.pos-back .exp-thumb-inner { filter: brightness(0.7); }
+    .exp-thumb:hover {
+      border-color: var(--or);
+      box-shadow: 0 24px 50px rgba(212, 175, 55, 0.4);
+    }
+    .exp-thumb:hover .exp-thumb-inner {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    @media (max-width: 991px) {
+      .experiences-teaser { height: 220vh; }
+      .exp-sticky { padding: 2rem 1rem; }
+      .exp-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+      /* Sur mobile, la pile passe au-dessus du texte (lecture naturelle) */
+      .exp-stage { order: 1; height: 300px; }
+      .exp-side  { order: 2; align-items: center; text-align: center; }
+      .exp-thumb { width: 230px; height: 230px; }
     }
 
     /* ============================================================
@@ -1171,23 +1380,6 @@
     .guide-icon-card span {
       font-weight: 700;
       font-size: 0.95rem;
-    }
-
-    /* ============================================================
-       === SECTION : Flights Teaser ===
-       ============================================================ */
-    .flights-teaser {
-      background: linear-gradient(135deg, var(--vert), var(--vert-fonce));
-      color: #fff;
-      padding: 5rem 1rem;
-      text-align: center;
-    }
-    .flights-teaser h2 { color: #fff; }
-    .flights-teaser p {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      font-size: 1.1rem;
-      line-height: 1.7;
     }
 
     /* === Boutons généraux === */
@@ -1272,7 +1464,7 @@
       clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
       margin-top: -55px;
     }
-    .exp-teaser {
+    .experiences-teaser {
       clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
       margin-top: -55px;
     }
@@ -1281,18 +1473,16 @@
       margin-top: -55px;
       padding-top: 5.5rem !important;
     }
-    .flights-teaser {
-      clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
-      margin-top: -55px;
-    }
+    /* Le footer reprend la pente inverse pour conserver l'alternance
+       des bords inclinés maintenant que la section Vols est retirée. */
     .footer-maroc {
-      clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
       margin-top: -55px;
       padding-top: 3.5rem !important;
     }
     @media (max-width: 768px) {
       .stats-section, .map-section, .dishes-teaser,
-      .exp-teaser, .guide-teaser, .flights-teaser, .footer-maroc {
+      .experiences-teaser, .guide-teaser, .footer-maroc {
         clip-path: none;
         margin-top: 0;
       }
@@ -1307,15 +1497,12 @@
       html { overflow-x: clip; }
       .stats-section { padding: 3rem 0 !important; }
       .guide-teaser { padding: 3.5rem 0; }
-      .flights-teaser { padding: 3.5rem 1.25rem; }
     }
 
     @media (max-width: 768px) {
       /* Étiquette de ville plus petite (1 seule affichée au scroll) */
       .city-dot-label { font-size: 0.62rem; padding: 1px 4px; }
 
-      .exp-teaser { min-height: auto; padding: 4rem 1.25rem; }
-      .exp-teaser p, .flights-teaser p { font-size: 1rem; }
 
       /* Pile de plats : on réduit pour rester dans l'écran */
       .dish-stage { height: 260px; }
@@ -1335,7 +1522,7 @@
       .dish-thumb { width: 175px; height: 175px; }
       .section-subtitle { margin-bottom: 2rem; }
       .btn-maroc, .btn-outline-white { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
-      .exp-teaser, .guide-teaser, .flights-teaser { padding-left: 1rem; padding-right: 1rem; }
+      .experiences-teaser, .guide-teaser { padding-left: 1rem; padding-right: 1rem; }
     }
   </style>
 </head>
@@ -1367,8 +1554,7 @@
             <li><a href="#mapSection">Explorez le Maroc</a></li>
             <li><a href="#dishesSection">Gastronomie</a></li>
             <li><a href="#experiencesSection">Expériences</a></li>
-            <li><a href="#guideSection">Votre Guide de Voyage Complet</a></li>
-            <li><a href="#flightsSection">Trouver le vol parfait</a></li>
+            <li><a href="#itinerairesSection">Découvrir les Itinéraires</a></li>
           </ul>
         </div>
       </div>
@@ -1381,22 +1567,46 @@
         </button>
         <div class="menu-sub">
           <ul class="menu-sub-list cities">
-            <li><a href="marrakech.html">Marrakech</a></li>
-            <li><a href="fes.html">Fès</a></li>
-            <li><a href="chefchaouen.html">Chefchaouen</a></li>
-            <li><a href="tetouan.html">Tétouan</a></li>
-            <li><a href="casablanca.html">Casablanca</a></li>
-            <li><a href="agadir.html">Agadir</a></li>
             <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="rabat.html">Rabat</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="ifrane.html">Ifrane</a></li>
+            <li><a href="merzouga.html">Merzouga</a></li>
+            <li><a href="marrakech.html">Marrakech</a></li>
             <li><a href="essaouira.html">Essaouira</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
           </ul>
         </div>
       </div>
 
       <!-- Liens directs -->
-      <div class="menu-group">
-        <a class="menu-head" href="dishes.html">
+      <!-- PLATS — section dépliable vers les plats -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
           Plats
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="dishes.html#dish-couscous">Couscous Royal</a></li>
+            <li><a href="dishes.html#dish-harira">Harira</a></li>
+            <li><a href="dishes.html#dish-pastilla">Pastilla au Poulet</a></li>
+            <li><a href="dishes.html#dish-tanjia">Tanjia Marrakchia</a></li>
+            <li><a href="dishes.html#dish-tajine">Tagine Poulet &amp; Citrons Confits</a></li>
+            <li><a href="dishes.html">Voir tous les plats →</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="activites.html">
+          Activités
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="itineraire.html">
+          Itinéraires
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
@@ -1406,10 +1616,6 @@
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
-
-      <a class="menu-cta" href="flights.html">
-        <i class="bi bi-airplane"></i>Réserver un Vol
-      </a>
 
       <!-- Pied de menu : sélecteur de langue + bascule animations -->
       <div class="menu-foot">
@@ -1490,56 +1696,132 @@
           <!-- Carte SVG + tracé -->
           <div class="col-lg-5">
             <div class="map-wrapper" id="mapWrapper">
-              <svg class="map-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                <!-- Contour réaliste du Maroc (côte méditerranéenne au
-                     nord, façade atlantique courbée, effilé vers le sud) -->
-                <path class="map-outline" d="M 193 21
-                  C 205 19, 250 38, 271 61
-                  C 290 54, 330 60, 346 70
-                  C 360 110, 379 215, 381 288
-                  C 360 330, 250 430, 190 458
-                  C 140 470, 95 470, 73 464
-                  C 50 445, 30 425, 27 415
-                  C 32 390, 42 372, 44 354
-                  C 41 320, 38 305, 40 288
-                  C 48 262, 56 250, 64 240
-                  C 72 215, 84 195, 93 182
-                  C 106 172, 118 168, 127 161
-                  C 138 145, 150 142, 158 135
-                  C 166 110, 178 85, 184 64
-                  C 186 50, 188 32, 193 21 Z" />
-                <!-- Chemin reliant les villes dans l'ordre du voyage -->
+              <!-- viewBox cadré pile sur la bounding box de la
+                   silhouette mesurée dans morocco-map.png : x[336–1330]
+                   y[175–1177] → 994 × 1002. Toutes les coordonnées du
+                   tracé et des points en % se calent dessus. -->
+              <svg class="map-svg" viewBox="336 175 994 1002" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- Fondu vertical : le Sahara occidental, vide de
+                       villes, s'estompe doucement vers le bas pour
+                       équilibrer visuellement la composition. -->
+                  <linearGradient id="fadeOut" x1="0" y1="175" x2="0" y2="1177" gradientUnits="userSpaceOnUse">
+                    <!-- Plus de paliers intermédiaires → courbe d'opacité
+                         en ease-out, le bord bas devient diffus au lieu
+                         d'une coupure linéaire nette. -->
+                    <stop offset="0"    stop-color="#fff" stop-opacity="1"/>
+                    <stop offset="0.30" stop-color="#fff" stop-opacity="1"/>
+                    <stop offset="0.50" stop-color="#fff" stop-opacity="0.78"/>
+                    <stop offset="0.70" stop-color="#fff" stop-opacity="0.45"/>
+                    <stop offset="0.85" stop-color="#fff" stop-opacity="0.18"/>
+                    <stop offset="1"    stop-color="#fff" stop-opacity="0"/>
+                  </linearGradient>
+                  <mask id="fadeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1667" height="1333">
+                    <rect x="0" y="0" width="1667" height="1333" fill="url(#fadeOut)"/>
+                  </mask>
+                  <!-- Le PNG source a un fond blanc opaque (pas
+                       transparent). On dérive l'alpha de la luminance :
+                       pixels noirs → alpha=1, blancs → alpha=0. Puis on
+                       reteinte (sable à l'intérieur, terracotta sur le
+                       contour dilaté) et on ajoute une ombre douce. -->
+                  <filter id="moroccoTint" x="-5%" y="-5%" width="110%" height="115%">
+                    <feColorMatrix in="SourceGraphic" type="matrix"
+                      values="0 0 0 0 0
+                              0 0 0 0 0
+                              0 0 0 0 0
+                             -1 0 0 0 1" result="luma"/>
+                    <!-- Restreindre au domaine réel de l'image (hors
+                         image SourceAlpha=0, sinon la matrice ci-dessus
+                         génère alpha=1 partout et on obtient un grand
+                         rectangle sable). -->
+                    <feComposite in="luma" in2="SourceAlpha" operator="in" result="mask"/>
+                    <feMorphology in="mask" operator="dilate" radius="6" result="dil"/>
+                    <feFlood flood-color="#C0552A" result="strokeColor"/>
+                    <feComposite in="strokeColor" in2="dil" operator="in" result="strokeRing"/>
+                    <feFlood flood-color="#E9D6AE" result="fillColor"/>
+                    <feComposite in="fillColor" in2="mask" operator="in" result="filled"/>
+                    <feGaussianBlur in="mask" stdDeviation="6" result="blurred"/>
+                    <feOffset in="blurred" dx="0" dy="22" result="shadow"/>
+                    <feFlood flood-color="#3C1E0A" flood-opacity="0.22" result="shadowColor"/>
+                    <feComposite in="shadowColor" in2="shadow" operator="in" result="shadowed"/>
+                    <feMerge>
+                      <feMergeNode in="shadowed"/>
+                      <feMergeNode in="strokeRing"/>
+                      <feMergeNode in="filled"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <!-- Silhouette réelle du Maroc rendue depuis l'EPS source.
+                     Le filtre reteinte la silhouette et le mask la fond
+                     en douceur dans sa moitié sud (Sahara occidental). -->
+                <g mask="url(#fadeMask)">
+                  <image href="assets/morocco-map.png" x="0" y="0" width="1667" height="1333"
+                         preserveAspectRatio="none" filter="url(#moroccoTint)" />
+                </g>
+                <!-- Chemin reliant les villes dans l'ordre du voyage.
+                     Coordonnées en px-image obtenues par projection
+                     équirectangulaire calibrée sur deux ancrages
+                     géographiques exacts : Cap Spartel (35.92°N -5.93°W
+                     → 1076,175) et Cap Blanc (20.77°N -17.04°W →
+                     338,1177). Formule : x = 1469.91 + 66.427·lng,
+                     y = 2550.70 − 66.139·lat. Villes côtières snappées
+                     sur la côte du silhouette. La courbe est un
+                     spline Catmull-Rom (tension subtile) converti en
+                     Bezier cubique pour adoucir les sauts de tracé. -->
                 <path class="map-trace" id="mapTrace"
-                      d="M 198 28 L 215 41 L 219 65 L 229 135 L 128 162 L 113 280 L 43 287 L 50 354" />
+                      d="M 1079 183 C 1090 195, 1108 215, 1120 224 C 1111.6 233.0, 1013.2 293.4, 1015 301 C 1016.8 308.6, 1126.5 296.8, 1138 300 C 1149.5 303.2, 1125.4 312.3, 1130 333 C 1134.6 353.7, 1203.0 494.4, 1184 507 C 1165.0 519.6, 975.9 462.7, 940 459 C 904.1 455.3, 835.8 462.1, 825 470 C 814.2 477.9, 830.6 524.4, 832 538" />
                 <!-- Point voyageur qui se déplace le long du tracé -->
-                <circle id="mapTraveler" class="map-traveler" r="8" cx="198" cy="28" />
+                <circle id="mapTraveler" class="map-traveler" r="18" cx="1079" cy="183" />
               </svg>
 
-              <!-- Points des villes (positions en % du wrapper) -->
-              <div class="city-dot" data-city="Tanger" data-step="0" style="top: 5.6%; left: 49.5%;"></div>
-              <div class="city-dot" data-city="Tétouan" data-step="1" style="top: 8.2%; left: 53.75%;"></div>
-              <div class="city-dot" data-city="Chefchaouen" data-step="2" style="top: 13%; left: 54.75%;"></div>
-              <div class="city-dot" data-city="Fès" data-step="3" style="top: 27%; left: 57.25%;"></div>
-              <div class="city-dot" data-city="Casablanca" data-step="4" style="top: 32.4%; left: 32%;"></div>
-              <div class="city-dot" data-city="Marrakech" data-step="5" style="top: 56%; left: 28.25%;"></div>
-              <div class="city-dot" data-city="Essaouira" data-step="6" style="top: 57.4%; left: 10.75%;"></div>
-              <div class="city-dot" data-city="Agadir" data-step="7" style="top: 70.8%; left: 12.5%;"></div>
+              <!-- Points des villes — positions calibrées géographiquement.
+                   La projection équirectangulaire est ancrée sur deux
+                   points connus (Cap Spartel, Cap Blanc) : pour chaque
+                   ville on convertit (lat,lng) → (x,y) en px image,
+                   puis on snappe sur la côte si la ville est littorale.
+                   left% = (x-336)/994 ; top% = (y-175)/1002. -->
+              <div class="city-dot" data-city="Tanger"      data-step="0" style="top:  0.80%; left: 74.75%;"></div>
+              <div class="city-dot" data-city="Chefchaouen" data-step="1" style="top:  4.89%; left: 78.87%;"></div>
+              <div class="city-dot" data-city="Rabat"       data-step="2" style="top: 12.57%; left: 68.31%;"></div>
+              <div class="city-dot" data-city="Fès"         data-step="3" style="top: 12.48%; left: 80.68%;"></div>
+              <div class="city-dot" data-city="Ifrane"      data-step="4" style="top: 15.77%; left: 79.88%;"></div>
+              <div class="city-dot" data-city="Merzouga"    data-step="5" style="top: 33.13%; left: 85.31%;"></div>
+              <div class="city-dot" data-city="Marrakech"   data-step="6" style="top: 28.34%; left: 60.76%;"></div>
+              <div class="city-dot" data-city="Essaouira"   data-step="7" style="top: 29.44%; left: 49.20%;"></div>
+              <div class="city-dot" data-city="Agadir"      data-step="8" style="top: 36.23%; left: 49.90%;"></div>
 
-              <!-- Labels qui apparaissent au-dessus du point courant -->
-              <div class="city-dot-label" data-city="Tanger" style="top: 5.6%; left: 49.5%;">Tanger</div>
-              <div class="city-dot-label" data-city="Tétouan" style="top: 8.2%; left: 53.75%;">Tétouan</div>
-              <div class="city-dot-label" data-city="Chefchaouen" style="top: 13%; left: 54.75%;">Chefchaouen</div>
-              <div class="city-dot-label" data-city="Fès" style="top: 27%; left: 57.25%;">Fès</div>
-              <div class="city-dot-label" data-city="Casablanca" style="top: 32.4%; left: 32%;">Casablanca</div>
-              <div class="city-dot-label" data-city="Marrakech" style="top: 56%; left: 28.25%;">Marrakech</div>
-              <div class="city-dot-label" data-city="Essaouira" style="top: 57.4%; left: 10.75%;">Essaouira</div>
-              <div class="city-dot-label" data-city="Agadir" style="top: 70.8%; left: 12.5%;">Agadir</div>
+              <!-- Labels qui apparaissent au-dessus du point courant.
+                   Pour les villes de la côte atlantique (Casablanca,
+                   Essaouira, Agadir) le label est décalé vers l'est
+                   afin de rester au-dessus des terres plutôt que dans
+                   l'océan. -->
+              <div class="city-dot-label" data-city="Tanger"      style="top:  0.80%; left: 74.75%;">Tanger</div>
+              <div class="city-dot-label" data-city="Chefchaouen" style="top:  4.89%; left: 78.87%;">Chefchaouen</div>
+              <div class="city-dot-label" data-city="Rabat"       style="top: 12.57%; left: 68.31%;">Rabat</div>
+              <div class="city-dot-label" data-city="Fès"         style="top: 12.48%; left: 80.68%;">Fès</div>
+              <!-- Ifrane et Merzouga : labels à DROITE du point (à la
+                   même hauteur que le point) pour ne pas chevaucher
+                   le tracé qui descend au-dessus d'eux. -->
+              <!-- Ifrane et Merzouga : labels à DROITE du point (à la
+                   même hauteur que le point) pour ne pas chevaucher
+                   le tracé qui descend au-dessus d'eux. -->
+              <div class="city-dot-label" data-city="Ifrane"      style="top: 15.77%; left: 86%; transform: translate(0, -50%);">Ifrane</div>
+              <div class="city-dot-label" data-city="Merzouga"    style="top: 33.13%; left: 91%; transform: translate(0, -50%);">Merzouga</div>
+              <div class="city-dot-label" data-city="Marrakech"   style="top: 28.34%; left: 60.76%;">Marrakech</div>
+              <!-- Essaouira : label dans l'océan à gauche du point
+                   pour ne pas couvrir le tracé. -->
+              <div class="city-dot-label" data-city="Essaouira"   style="top: 29.44%; left: 43%; transform: translate(-100%, -50%);">Essaouira</div>
+              <!-- Agadir : label posé à GAUCHE du point (dans l'océan,
+                   à la même hauteur que le point) pour ne pas masquer
+                   le tracé qui passe au-dessus. -->
+              <div class="city-dot-label" data-city="Agadir"      style="top: 36.23%; left: 44%; transform: translate(-100%, -50%);">Agadir</div>
 
               <!-- Barre de progression verticale à gauche de la carte -->
               <div class="map-progress">
                 <div class="map-progress-bar">
                   <div class="map-progress-fill" id="mapProgressFill"></div>
                   <div class="map-progress-steps" id="mapProgressSteps">
+                    <span class="step-tick"></span>
                     <span class="step-tick"></span>
                     <span class="step-tick"></span>
                     <span class="step-tick"></span>
@@ -1558,52 +1840,85 @@
           <div class="col-lg-7">
             <div class="city-info-stage" id="cityInfoStage">
               <div class="city-info-item active" data-city="Tanger">
-                <div class="city-eyebrow">Nord — Côte méditerranéenne</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Nord — Côte méditerranéenne</div>
                 <h3>Tanger</h3>
                 <p>Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.</p>
                 <a href="tanger.html">Voir la ville →</a>
-              </div>
-              <div class="city-info-item" data-city="Tétouan">
-                <div class="city-eyebrow">Nord — Rif</div>
-                <h3>Tétouan</h3>
-                <p>La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.</p>
-                <a href="tetouan.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img placeholder" aria-hidden="true"></div>
               </div>
               <div class="city-info-item" data-city="Chefchaouen">
-                <div class="city-eyebrow">Nord — Montagnes du Rif</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Nord — Montagnes du Rif</div>
                 <h3>Chefchaouen</h3>
                 <p>La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.</p>
                 <a href="chefchaouen.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/na_5cebb7d51da90_7d0b8b61.jpg" alt="Chefchaouen" loading="lazy" /></div>
+              </div>
+              <div class="city-info-item" data-city="Rabat">
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Côte atlantique — Capitale</div>
+                <h3>Rabat</h3>
+                <p>Capitale du royaume aux jardins andalous, à la kasbah des Oudayas et à la tour Hassan, face à l'océan.</p>
+                <a href="rabat.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/hassan_d5d61092.jpg" alt="Rabat" loading="lazy" /></div>
               </div>
               <div class="city-info-item" data-city="Fès">
-                <div class="city-eyebrow">Centre — Capitale spirituelle</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Centre — Capitale spirituelle</div>
                 <h3>Fès</h3>
                 <p>Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.</p>
                 <a href="fes.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="images/fes.png" alt="Fès" loading="lazy" /></div>
               </div>
-              <div class="city-info-item" data-city="Casablanca">
-                <div class="city-eyebrow">Centre — Façade atlantique</div>
-                <h3>Casablanca</h3>
-                <p>Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.</p>
-                <a href="casablanca.html">Voir la ville →</a>
+              <div class="city-info-item" data-city="Ifrane">
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Moyen Atlas — Montagne</div>
+                <h3>Ifrane</h3>
+                <p>Surnommée la « petite Suisse » du Maroc : chalets, lacs et cèdres, perchée à 1650 m d'altitude dans le Moyen Atlas.</p>
+                <a href="ifrane.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/images_openai_com_36b2a2c50f.jpg" alt="Ifrane" loading="lazy" style="object-position: center 40%;" /></div>
+              </div>
+              <div class="city-info-item" data-city="Merzouga">
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Sud-Est — Sahara</div>
+                <h3>Merzouga</h3>
+                <p>Porte des dunes dorées de l'erg Chebbi : nuits sous les étoiles, dromadaires et silence absolu du désert.</p>
+                <a href="merzouga.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/88_fc54e6b2.jpg" alt="Merzouga" loading="lazy" /></div>
               </div>
               <div class="city-info-item" data-city="Marrakech">
-                <div class="city-eyebrow">Centre-Sud — Cité ocre</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Centre-Sud — Cité ocre</div>
                 <h3>Marrakech</h3>
                 <p>La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.</p>
                 <a href="marrakech.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/photo-1597212618440-806262de4f6b_7589f204.jpg" alt="Marrakech" loading="lazy" /></div>
               </div>
               <div class="city-info-item" data-city="Essaouira">
-                <div class="city-eyebrow">Côte atlantique</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Côte atlantique</div>
                 <h3>Essaouira</h3>
                 <p>Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.</p>
                 <a href="essaouira.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/88_68134e13.jpg" alt="Essaouira" loading="lazy" /></div>
               </div>
               <div class="city-info-item" data-city="Agadir">
-                <div class="city-eyebrow">Sud — Souss</div>
+                <div class="city-info-text">
+                  <div class="city-eyebrow">Sud — Souss</div>
                 <h3>Agadir</h3>
                 <p>Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.</p>
                 <a href="agadir.html">Voir la ville →</a>
+                </div>
+                <div class="city-info-img"><img src="assets/Things-to-do-in-Agadir-Morocco-12-1536x1152_c772f49b.jpg" alt="Agadir" loading="lazy" /></div>
               </div>
             </div>
           </div>
@@ -1623,7 +1938,7 @@
               <div class="dish-thumb-name">Couscous</div>
             </div>
             <div class="dish-thumb" data-index="1">
-              <div class="dish-thumb-inner" style="background-image: url('assets/dish-harira.jpg');"></div>
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-harira.jpg'); background-position: 28% 55%;"></div>
               <div class="dish-thumb-name">Harira</div>
             </div>
             <div class="dish-thumb" data-index="2">
@@ -1648,53 +1963,41 @@
     </div>
   </section>
 
-  <!-- === SECTION : Teaser Expériences === -->
-  <section class="exp-teaser" id="experiencesSection">
-    <h2>Prêt pour les Meilleures Expériences ?</h2>
-    <p>
-      Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et
-      les cours de cuisine — le Maroc vous attend.
-    </p>
-    <a href="experiences.html" class="btn-outline-white">Découvrir les Expériences →</a>
-  </section>
-
-  <!-- === SECTION : Teaser Guide Pratique === -->
-  <section class="guide-teaser" id="guideSection">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <h2>Votre Guide de Voyage Complet</h2>
-          <p style="font-size: 1.05rem; line-height: 1.7;">
-            Quand partir, quels documents préparer, comment vous déplacer, combien prévoir —
-            toutes les informations essentielles pour un voyage serein au Maroc.
+  <!-- === SECTION : Expériences — réplique miroir du stack Plats === -->
+  <section class="experiences-teaser" id="experiencesSection">
+    <div class="exp-sticky">
+      <div class="exp-layout">
+        <!-- Bloc texte à GAUCHE -->
+        <div class="exp-side">
+          <div class="eyebrow">Expériences</div>
+          <h2>Envie de découvrir de nouvelles expériences au Maroc ?</h2>
+          <p>
+            Du hammam traditionnel aux treks dans l'Atlas, en passant par les
+            riads authentiques et les cours de cuisine — vivez le Maroc autrement.
           </p>
-          <a href="guide.html" class="btn-maroc">Consulter le Guide →</a>
+          <a href="experiences.html" class="exp-see-all">
+            Voir tout <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+          </a>
         </div>
-        <div class="col-lg-6">
-          <div class="row g-3">
-            <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
-                <i class="bi bi-calendar3"></i>
-                <span>Quand partir</span>
-              </div>
+
+        <!-- Scène 3D : pile d'images à DROITE -->
+        <div class="exp-stage">
+          <div class="exp-track">
+            <div class="exp-thumb" data-index="0">
+              <div class="exp-thumb-inner" style="background-image: url('assets/casablanca-hassan2.webp');"></div>
+              <div class="exp-thumb-name">Patrimoine</div>
             </div>
-            <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
-                <i class="bi bi-file-earmark-text"></i>
-                <span>Visas &amp; Formalités</span>
-              </div>
+            <div class="exp-thumb" data-index="1">
+              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #D4AF37 0%, #8a6b13 100%);"></div>
+              <div class="exp-thumb-name">Désert</div>
             </div>
-            <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
-                <i class="bi bi-bus-front"></i>
-                <span>Transport</span>
-              </div>
+            <div class="exp-thumb" data-index="2">
+              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #2D5016 0%, #1F2A1A 100%);"></div>
+              <div class="exp-thumb-name">Atlas</div>
             </div>
-            <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
-                <i class="bi bi-currency-dollar"></i>
-                <span>Budget</span>
-              </div>
+            <div class="exp-thumb" data-index="3">
+              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #C0552A 0%, #9C4520 100%);"></div>
+              <div class="exp-thumb-name">Riads</div>
             </div>
           </div>
         </div>
@@ -1702,14 +2005,49 @@
     </div>
   </section>
 
-  <!-- === SECTION : Teaser Vols === -->
-  <section class="flights-teaser" id="flightsSection">
-    <h2>Trouvez le Vol Parfait</h2>
-    <p>
-      Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc.
-      Comparez les compagnies et choisissez ce qui vous convient.
-    </p>
-    <a href="flights.html" class="btn-maroc btn-or">Voir les Vols →</a>
+  <!-- === SECTION : Teaser Itinéraires === -->
+  <section class="guide-teaser" id="itinerairesSection">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2>Découvrez les Itinéraires</h2>
+          <p style="font-size: 1.05rem; line-height: 1.7;">
+            Du sable de l'Erg Chebbi aux remparts d'Essaouira, en passant par les
+            cités impériales et les sommets de l'Atlas — composez le voyage qui
+            vous ressemble parmi nos itinéraires inspirants.
+          </p>
+          <a href="itineraire .html" class="btn-maroc">Explorer les Itinéraires →</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-sun-fill"></i>
+                <span>Désert</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-buildings"></i>
+                <span>Villes impériales</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-tree-fill"></i>
+                <span>Atlas</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-water"></i>
+                <span>Côte Atlantique</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- === SECTION : Footer === -->
@@ -1842,7 +2180,7 @@
     mapTrace.style.strokeDasharray = traceLength;
     mapTrace.style.strokeDashoffset = traceLength;
 
-    const totalSteps = cityDots.length; // 8 villes
+    const totalSteps = cityDots.length; // 9 villes
 
     function updateMapAnimation() {
       // L'effet de défilement (tracé progressif + fiche ville unique)
@@ -1935,11 +2273,15 @@
     }, { passive: true });
     updateParallax();
 
-    /* === 5. Plats : stack 3D piloté par le scroll de la section === */
-    (function() {
-      const section = document.getElementById('dishesSection');
-      const thumbs = document.querySelectorAll('.dish-thumb');
-      if (!section || !thumbs.length) return;
+    /* === 5. Stack 3D piloté par le scroll : factorisé pour Plats
+           ET Expériences (mêmes positions pos-center/left/right/back,
+           juste portée à un id de section et une classe de vignette
+           différents). === */
+    function setupStack(sectionId, thumbSelector) {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+      const thumbs = section.querySelectorAll(thumbSelector);
+      if (!thumbs.length) return;
       const total = thumbs.length; // 4
 
       function render(currentIndex) {
@@ -1965,22 +2307,23 @@
         render(idx);
       }
 
-      // Clic sur une vignette latérale → l'amener au centre
       thumbs.forEach((t, i) => {
         t.addEventListener('click', () => render(i));
       });
 
-      let dTicking = false;
+      let ticking = false;
       window.addEventListener('scroll', () => {
-        if (!dTicking) {
-          requestAnimationFrame(() => { update(); dTicking = false; });
-          dTicking = true;
+        if (!ticking) {
+          requestAnimationFrame(() => { update(); ticking = false; });
+          ticking = true;
         }
       }, { passive: true });
       window.addEventListener('resize', update);
       render(0);
       update();
-    })();
+    }
+    setupStack('dishesSection', '.dish-thumb');
+    setupStack('experiencesSection', '.exp-thumb');
 
     /* === 6. Langue (FR/EN/AR) + bascule Animations === */
     (function() {
@@ -2017,29 +2360,28 @@
           "Explorez la Gastronomie Marocaine": "Explore Moroccan Cuisine",
           "Des saveurs uniques qui racontent l'histoire d'un peuple.": "Unique flavours that tell the story of a people.",
           "En savoir plus sur les plats marocains →": "Learn more about Moroccan dishes →",
-          "Prêt pour les Meilleures Expériences ?": "Ready for the Best Experiences?",
-          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — le Maroc vous attend.": "From traditional hammams to treks in the Atlas, through authentic riads and cooking classes — Morocco awaits you.",
-          "Découvrir les Expériences →": "Discover the Experiences →",
-          "Votre Guide de Voyage Complet": "Your Complete Travel Guide",
-          "Quand partir, quels documents préparer, comment vous déplacer, combien prévoir — toutes les informations essentielles pour un voyage serein au Maroc.": "When to go, what documents to prepare, how to get around, how much to budget — all the essentials for a smooth trip to Morocco.",
-          "Consulter le Guide →": "View the Guide →",
-          "Quand partir": "When to Go",
-          "Visas & Formalités": "Visas & Formalities",
-          "Transport": "Transport",
-          "Budget": "Budget",
-          "Trouvez le Vol Parfait": "Find the Perfect Flight",
-          "Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc. Comparez les compagnies et choisissez ce qui vous convient.": "Book your flight now to enjoy the best experience in Morocco. Compare airlines and choose what suits you.",
-          "Voir les Vols →": "See Flights →",
+          "Expériences": "Experiences",
+          "Envie de découvrir de nouvelles expériences au Maroc ?": "Eager to discover new experiences in Morocco?",
+          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — vivez le Maroc autrement.": "From traditional hammams to treks in the Atlas, through authentic riads and cooking classes — experience Morocco differently.",
+          "Voir tout": "View all",
+          "Patrimoine": "Heritage",
+          "Désert": "Desert",
+          "Atlas": "Atlas",
+          "Riads": "Riads",
+          "Découvrez les Itinéraires": "Discover the Itineraries",
+          "Découvrir les Itinéraires": "Discover the Itineraries",
+          "Du sable de l'Erg Chebbi aux remparts d'Essaouira, en passant par les cités impériales et les sommets de l'Atlas — composez le voyage qui vous ressemble parmi nos itinéraires inspirants.": "From the sands of Erg Chebbi to the ramparts of Essaouira, by way of the imperial cities and the Atlas peaks — craft the journey that suits you among our inspiring itineraries.",
+          "Explorer les Itinéraires →": "Explore the Itineraries →",
+          "Villes impériales": "Imperial Cities",
+          "Côte Atlantique": "Atlantic Coast",
           "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — Created for the Web Development module | Supervised by Mr. Reda Jourani | ENSA Tétouan 2026",
           "Accueil": "Home",
           "Villes": "Cities",
           "Plats": "Dishes",
           "Guide": "Guide",
-          "Trouver le vol parfait": "Find the perfect flight",
           "Marrakech": "Marrakech", "Fès": "Fès", "Chefchaouen": "Chefchaouen",
-          "Tétouan": "Tétouan", "Casablanca": "Casablanca", "Agadir": "Agadir",
-          "Tanger": "Tangier", "Essaouira": "Essaouira",
-          "Réserver un Vol": "Book a Flight",
+          "Rabat": "Rabat", "Ifrane": "Ifrane", "Merzouga": "Merzouga",
+          "Agadir": "Agadir", "Tanger": "Tangier", "Essaouira": "Essaouira",
           "Animations": "Animations"
         },
         ar: {
@@ -2073,29 +2415,28 @@
           "Explorez la Gastronomie Marocaine": "اكتشف المطبخ المغربي",
           "Des saveurs uniques qui racontent l'histoire d'un peuple.": "نكهات فريدة تروي تاريخ شعب.",
           "En savoir plus sur les plats marocains →": "اعرف المزيد عن الأطباق المغربية →",
-          "Prêt pour les Meilleures Expériences ?": "مستعدّ لأفضل التجارب؟",
-          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — le Maroc vous attend.": "من الحمّام التقليدي إلى رحلات الأطلس، مرورًا بالرياضات الأصيلة ودروس الطبخ — المغرب في انتظاركم.",
-          "Découvrir les Expériences →": "اكتشف التجارب →",
-          "Votre Guide de Voyage Complet": "دليلك الكامل للسفر",
-          "Quand partir, quels documents préparer, comment vous déplacer, combien prévoir — toutes les informations essentielles pour un voyage serein au Maroc.": "متى تسافر، ما الوثائق اللازمة، كيف تتنقّل، وكم تُحضّر من ميزانية — كل ما يلزم لرحلة هانئة إلى المغرب.",
-          "Consulter le Guide →": "اطّلع على الدليل →",
-          "Quand partir": "متى تسافر",
-          "Visas & Formalités": "التأشيرات والإجراءات",
-          "Transport": "النقل",
-          "Budget": "الميزانية",
-          "Trouvez le Vol Parfait": "اعثر على الرحلة المثالية",
-          "Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc. Comparez les compagnies et choisissez ce qui vous convient.": "احجز رحلتك الآن لتعيش أفضل تجربة في المغرب. قارن بين شركات الطيران واختر ما يناسبك.",
-          "Voir les Vols →": "عرض الرحلات →",
+          "Expériences": "تجارب",
+          "Envie de découvrir de nouvelles expériences au Maroc ?": "متشوّق لاكتشاف تجارب جديدة في المغرب؟",
+          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — vivez le Maroc autrement.": "من الحمّام التقليدي إلى رحلات الأطلس، مرورًا بالرياضات الأصيلة ودروس الطبخ — عش المغرب بطريقة مختلفة.",
+          "Voir tout": "عرض الكل",
+          "Patrimoine": "التراث",
+          "Désert": "الصحراء",
+          "Atlas": "الأطلس",
+          "Riads": "الرياضات",
+          "Découvrez les Itinéraires": "اكتشف المسارات السياحية",
+          "Découvrir les Itinéraires": "اكتشف المسارات السياحية",
+          "Du sable de l'Erg Chebbi aux remparts d'Essaouira, en passant par les cités impériales et les sommets de l'Atlas — composez le voyage qui vous ressemble parmi nos itinéraires inspirants.": "من رمال عرق الشبي إلى أسوار الصويرة، مروراً بالمدن الإمبراطورية وقمم الأطلس — صمّم رحلتك التي تشبهك من بين مساراتنا الملهمة.",
+          "Explorer les Itinéraires →": "استكشف المسارات →",
+          "Villes impériales": "المدن الإمبراطورية",
+          "Côte Atlantique": "الساحل الأطلسي",
           "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — أُنجز في إطار وحدة تطوير الويب | تأطير الأستاذ رضا جوراني | المدرسة الوطنية للعلوم التطبيقية تطوان 2026",
           "Accueil": "الرئيسية",
           "Villes": "المدن",
           "Plats": "الأطباق",
           "Guide": "الدليل",
-          "Trouver le vol parfait": "اعثر على الرحلة المثالية",
           "Marrakech": "مراكش", "Fès": "فاس", "Chefchaouen": "شفشاون",
-          "Tétouan": "تطوان", "Casablanca": "الدار البيضاء", "Agadir": "أكادير",
-          "Tanger": "طنجة", "Essaouira": "الصويرة",
-          "Réserver un Vol": "احجز رحلة",
+          "Rabat": "الرباط", "Ifrane": "إفران", "Merzouga": "مرزوقة",
+          "Agadir": "أكادير", "Tanger": "طنجة", "Essaouira": "الصويرة",
           "Animations": "الحركات"
         }
       };
@@ -2106,13 +2447,12 @@
         '.city-info-item .city-eyebrow', '.city-info-item h3',
         '.city-info-item p', '.city-info-item a',
         '.dish-side .eyebrow', '.dish-side h2', '.dish-side p', '.dish-side .btn-maroc',
-        '.exp-teaser h2', '.exp-teaser p', '.exp-teaser .btn-outline-white',
+        '.exp-side .eyebrow', '.exp-side h2', '.exp-side p', '.exp-see-all',
         '.guide-teaser h2', '.guide-teaser p', '.guide-teaser .btn-maroc',
         '.guide-icon-card span',
-        '.flights-teaser h2', '.flights-teaser p', '.flights-teaser .btn-or',
         '.footer-maroc',
         '#siteMenu .menu-head', '#siteMenu .menu-sub-list a',
-        '.menu-cta', '.motion-label'
+        '.motion-label'
       ].join(',');
 
       // Premier nœud texte significatif (conserve les icônes <i>)
