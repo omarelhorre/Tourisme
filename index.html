@@ -1546,15 +1546,15 @@
       <!-- ACCUEIL — section dépliable vers les sections de la page -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Accueil
+          <span data-i18n="nav.home">Accueil</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
           <ul class="menu-sub-list">
-            <li><a href="#mapSection">Explorez le Maroc</a></li>
-            <li><a href="#dishesSection">Gastronomie</a></li>
-            <li><a href="#experiencesSection">Expériences</a></li>
-            <li><a href="#itinerairesSection">Découvrir les Itinéraires</a></li>
+            <li><a href="#mapSection" data-i18n="nav.explore">Explorez le Maroc</a></li>
+            <li><a href="#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
+            <li><a href="#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
+            <li><a href="#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
           </ul>
         </div>
       </div>
@@ -1562,7 +1562,7 @@
       <!-- VILLES — section dépliable vers les pages des villes -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Villes
+          <span data-i18n="nav.cities">Villes</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
@@ -1580,11 +1580,10 @@
         </div>
       </div>
 
-      <!-- Liens directs -->
       <!-- PLATS — section dépliable vers les plats -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Plats
+          <span data-i18n="nav.dishes">Plats</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
@@ -1594,25 +1593,27 @@
             <li><a href="dishes.html#dish-pastilla">Pastilla au Poulet</a></li>
             <li><a href="dishes.html#dish-tanjia">Tanjia Marrakchia</a></li>
             <li><a href="dishes.html#dish-tajine">Tagine Poulet &amp; Citrons Confits</a></li>
-            <li><a href="dishes.html">Voir tous les plats →</a></li>
+            <li><a href="dishes.html" data-i18n="nav.all_dishes">Voir tous les plats →</a></li>
           </ul>
         </div>
       </div>
+
+      <!-- Liens directs -->
       <div class="menu-group">
         <a class="menu-head" href="activites.html">
-          Activités
+          <span data-i18n="nav.activities">Activités</span>
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
       <div class="menu-group">
         <a class="menu-head" href="itineraire.html">
-          Itinéraires
+          <span data-i18n="nav.itineraries">Itinéraires</span>
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
       <div class="menu-group">
         <a class="menu-head" href="guide.html">
-          Guide
+          <span data-i18n="nav.guide">Guide</span>
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
@@ -1628,7 +1629,7 @@
         <button type="button" class="motion-toggle" id="motionToggle"
                 role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
-          <span class="motion-label">Animations</span>
+          <span class="motion-label" data-i18n="nav.animations">Animations</span>
         </button>
       </div>
     </div>
@@ -1846,7 +1847,7 @@
                 <p>Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.</p>
                 <a href="tanger.html">Voir la ville →</a>
                 </div>
-                <div class="city-info-img placeholder" aria-hidden="true"></div>
+                <div class="city-info-img"><img src="assets/images_openai_com_b4ae09c5bd.jpg" alt="Tanger" loading="lazy" /></div>
               </div>
               <div class="city-info-item" data-city="Chefchaouen">
                 <div class="city-info-text">
@@ -2325,176 +2326,11 @@
     setupStack('dishesSection', '.dish-thumb');
     setupStack('experiencesSection', '.exp-thumb');
 
-    /* === 6. Langue (FR/EN/AR) + bascule Animations === */
+    /* === 6. Bascule Animations (le système de langue FR/EN/AR
+           est désormais fourni par assets/i18n.js, partagé entre toutes les pages). === */
     (function() {
-      // Dictionnaire indexé sur le texte FR source (normalisé).
-      const DICT = {
-        en: {
-          "Bienvenue au Royaume du Maroc": "Welcome to the Kingdom of Morocco",
-          "Là où l'orient rencontre l'occident": "Where the East meets the West",
-          "Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques — découvrez un pays aux mille visages.": "From ancient medinas to the dunes of the Sahara, from the peaks of the Atlas to the Atlantic shores — discover a country of a thousand faces.",
-          "Villes à Découvrir": "Cities to Discover",
-          "Sites UNESCO": "UNESCO Sites",
-          "Plats Traditionnels": "Traditional Dishes",
-          "Expériences Uniques": "Unique Experiences",
-          "Explorez le Maroc": "Explore Morocco",
-          "Faites défiler pour tracer votre voyage": "Scroll to trace your journey",
-          "Nord — Côte méditerranéenne": "North — Mediterranean Coast",
-          "Nord — Rif": "North — Rif",
-          "Nord — Montagnes du Rif": "North — Rif Mountains",
-          "Centre — Capitale spirituelle": "Centre — Spiritual Capital",
-          "Centre — Façade atlantique": "Centre — Atlantic Coast",
-          "Centre-Sud — Cité ocre": "Centre-South — The Ochre City",
-          "Côte atlantique": "Atlantic Coast",
-          "Sud — Souss": "South — Souss",
-          "Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.": "Gateway to Africa, a cosmopolitan city between the Atlantic and the Mediterranean — a millennia-old crossroads of cultures and flavours.",
-          "La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.": "The “white dove” of the Rif; its white medina is a UNESCO World Heritage Site.",
-          "La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.": "The blue pearl of the mountains: alleys, stairways and façades painted in every shade of azure.",
-          "Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.": "A spiritual and intellectual capital; its medina holds the oldest still-operating university in the world.",
-          "Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.": "The kingdom’s modern economic heart, crowned by the majestic Hassan II Mosque at the ocean’s edge.",
-          "La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.": "The ochre city: Jemaa el-Fna square, the fragrant souks, and the Majorelle gardens.",
-          "Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.": "City of winds: a lively fishing port and Portuguese ramparts battered by the Atlantic.",
-          "Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.": "Golden Atlantic beaches; a seaside resort prized for its mild year-round climate.",
-          "Voir la ville →": "See the city →",
-          "Gastronomie": "Gastronomy",
-          "Explorez la Gastronomie Marocaine": "Explore Moroccan Cuisine",
-          "Des saveurs uniques qui racontent l'histoire d'un peuple.": "Unique flavours that tell the story of a people.",
-          "En savoir plus sur les plats marocains →": "Learn more about Moroccan dishes →",
-          "Expériences": "Experiences",
-          "Envie de découvrir de nouvelles expériences au Maroc ?": "Eager to discover new experiences in Morocco?",
-          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — vivez le Maroc autrement.": "From traditional hammams to treks in the Atlas, through authentic riads and cooking classes — experience Morocco differently.",
-          "Voir tout": "View all",
-          "Patrimoine": "Heritage",
-          "Désert": "Desert",
-          "Atlas": "Atlas",
-          "Riads": "Riads",
-          "Découvrez les Itinéraires": "Discover the Itineraries",
-          "Découvrir les Itinéraires": "Discover the Itineraries",
-          "Du sable de l'Erg Chebbi aux remparts d'Essaouira, en passant par les cités impériales et les sommets de l'Atlas — composez le voyage qui vous ressemble parmi nos itinéraires inspirants.": "From the sands of Erg Chebbi to the ramparts of Essaouira, by way of the imperial cities and the Atlas peaks — craft the journey that suits you among our inspiring itineraries.",
-          "Explorer les Itinéraires →": "Explore the Itineraries →",
-          "Villes impériales": "Imperial Cities",
-          "Côte Atlantique": "Atlantic Coast",
-          "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — Created for the Web Development module | Supervised by Mr. Reda Jourani | ENSA Tétouan 2026",
-          "Accueil": "Home",
-          "Villes": "Cities",
-          "Plats": "Dishes",
-          "Guide": "Guide",
-          "Marrakech": "Marrakech", "Fès": "Fès", "Chefchaouen": "Chefchaouen",
-          "Rabat": "Rabat", "Ifrane": "Ifrane", "Merzouga": "Merzouga",
-          "Agadir": "Agadir", "Tanger": "Tangier", "Essaouira": "Essaouira",
-          "Animations": "Animations"
-        },
-        ar: {
-          "Bienvenue au Royaume du Maroc": "مرحبًا بكم في المملكة المغربية",
-          "Là où l'orient rencontre l'occident": "حيث يلتقي الشرق بالغرب",
-          "Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques — découvrez un pays aux mille visages.": "من المدن العتيقة إلى كثبان الصحراء، ومن قمم الأطلس إلى السواحل الأطلسية — اكتشفوا بلدًا بألف وجه.",
-          "Villes à Découvrir": "مدن لاكتشافها",
-          "Sites UNESCO": "مواقع اليونسكو",
-          "Plats Traditionnels": "أطباق تقليدية",
-          "Expériences Uniques": "تجارب فريدة",
-          "Explorez le Maroc": "استكشف المغرب",
-          "Faites défiler pour tracer votre voyage": "مرّر لرسم رحلتك",
-          "Nord — Côte méditerranéenne": "الشمال — الساحل المتوسطي",
-          "Nord — Rif": "الشمال — الريف",
-          "Nord — Montagnes du Rif": "الشمال — جبال الريف",
-          "Centre — Capitale spirituelle": "الوسط — العاصمة الروحية",
-          "Centre — Façade atlantique": "الوسط — الواجهة الأطلسية",
-          "Centre-Sud — Cité ocre": "الوسط الجنوبي — المدينة الحمراء",
-          "Côte atlantique": "الساحل الأطلسي",
-          "Sud — Souss": "الجنوب — سوس",
-          "Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.": "بوابة إفريقيا، مدينة كوزموبوليتية بين الأطلسي والمتوسط — ملتقى حضارات ونكهات منذ آلاف السنين.",
-          "La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.": "«الحمامة البيضاء» للريف، مدينتها العتيقة البيضاء مُدرَجة ضمن التراث العالمي لليونسكو.",
-          "La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.": "لؤلؤة الجبال الزرقاء: أزقّة ودرجات وواجهات مطليّة بكل درجات الأزرق.",
-          "Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.": "عاصمة روحية وفكرية، تضمّ مدينتها العتيقة أقدم جامعة لا تزال تعمل في العالم.",
-          "Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.": "القلب الاقتصادي الحديث للمملكة، يعلوها مسجد الحسن الثاني المهيب على حافة المحيط.",
-          "La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.": "المدينة الحمراء: ساحة جامع الفنا، الأسواق العطرة، وحدائق ماجوريل.",
-          "Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.": "مدينة الرياح، ميناء صيد نابض بالحياة وأسوار برتغالية تلاطمها أمواج الأطلسي.",
-          "Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.": "شواطئ ذهبية على الساحل الأطلسي، ومنتجع بحري مرغوب لمناخه المعتدل طوال العام.",
-          "Voir la ville →": "اكتشف المدينة →",
-          "Gastronomie": "فنّ الطهي",
-          "Explorez la Gastronomie Marocaine": "اكتشف المطبخ المغربي",
-          "Des saveurs uniques qui racontent l'histoire d'un peuple.": "نكهات فريدة تروي تاريخ شعب.",
-          "En savoir plus sur les plats marocains →": "اعرف المزيد عن الأطباق المغربية →",
-          "Expériences": "تجارب",
-          "Envie de découvrir de nouvelles expériences au Maroc ?": "متشوّق لاكتشاف تجارب جديدة في المغرب؟",
-          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — vivez le Maroc autrement.": "من الحمّام التقليدي إلى رحلات الأطلس، مرورًا بالرياضات الأصيلة ودروس الطبخ — عش المغرب بطريقة مختلفة.",
-          "Voir tout": "عرض الكل",
-          "Patrimoine": "التراث",
-          "Désert": "الصحراء",
-          "Atlas": "الأطلس",
-          "Riads": "الرياضات",
-          "Découvrez les Itinéraires": "اكتشف المسارات السياحية",
-          "Découvrir les Itinéraires": "اكتشف المسارات السياحية",
-          "Du sable de l'Erg Chebbi aux remparts d'Essaouira, en passant par les cités impériales et les sommets de l'Atlas — composez le voyage qui vous ressemble parmi nos itinéraires inspirants.": "من رمال عرق الشبي إلى أسوار الصويرة، مروراً بالمدن الإمبراطورية وقمم الأطلس — صمّم رحلتك التي تشبهك من بين مساراتنا الملهمة.",
-          "Explorer les Itinéraires →": "استكشف المسارات →",
-          "Villes impériales": "المدن الإمبراطورية",
-          "Côte Atlantique": "الساحل الأطلسي",
-          "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — أُنجز في إطار وحدة تطوير الويب | تأطير الأستاذ رضا جوراني | المدرسة الوطنية للعلوم التطبيقية تطوان 2026",
-          "Accueil": "الرئيسية",
-          "Villes": "المدن",
-          "Plats": "الأطباق",
-          "Guide": "الدليل",
-          "Marrakech": "مراكش", "Fès": "فاس", "Chefchaouen": "شفشاون",
-          "Rabat": "الرباط", "Ifrane": "إفران", "Merzouga": "مرزوقة",
-          "Agadir": "أكادير", "Tanger": "طنجة", "Essaouira": "الصويرة",
-          "Animations": "الحركات"
-        }
-      };
-
-      const SEL = [
-        '.hero h1', '.hero .sous-titre', '.hero p.desc', '.stat-label',
-        '.map-intro h2', '.map-intro .section-subtitle',
-        '.city-info-item .city-eyebrow', '.city-info-item h3',
-        '.city-info-item p', '.city-info-item a',
-        '.dish-side .eyebrow', '.dish-side h2', '.dish-side p', '.dish-side .btn-maroc',
-        '.exp-side .eyebrow', '.exp-side h2', '.exp-side p', '.exp-see-all',
-        '.guide-teaser h2', '.guide-teaser p', '.guide-teaser .btn-maroc',
-        '.guide-icon-card span',
-        '.footer-maroc',
-        '#siteMenu .menu-head', '#siteMenu .menu-sub-list a',
-        '.motion-label'
-      ].join(',');
-
-      // Premier nœud texte significatif (conserve les icônes <i>)
-      function labelNode(el) {
-        for (const n of el.childNodes) {
-          if (n.nodeType === 3 && n.nodeValue.trim()) return n;
-        }
-        return null;
-      }
-      const norm = s => s.replace(/\s+/g, ' ').trim();
-
-      const registry = [];
-      document.querySelectorAll(SEL).forEach(el => {
-        const node = labelNode(el);
-        if (!node) return;
-        registry.push({ node, fr: node.nodeValue, key: norm(node.nodeValue) });
-      });
-
-      function applyLang(lang) {
-        const table = DICT[lang];
-        registry.forEach(({ node, fr, key }) => {
-          if (lang === 'fr' || !table || !table[key]) { node.nodeValue = fr; return; }
-          const lead = (fr.match(/^\s*/) || [''])[0];
-          const trail = (fr.match(/\s*$/) || [''])[0];
-          node.nodeValue = lead + table[key] + trail;
-        });
-        document.documentElement.lang = lang;
-        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      }
-
-      const langBtns = document.querySelectorAll('.lang-btn');
-      function setLang(lang) {
-        if (!DICT[lang] && lang !== 'fr') lang = 'fr';
-        langBtns.forEach(b =>
-          b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'));
-        applyLang(lang);
-        try { localStorage.setItem('mdLang', lang); } catch (e) {}
-      }
-      langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-
-      // Bascule Animations (aria-checked=true → animations actives)
       const motionToggle = document.getElementById('motionToggle');
+      if (!motionToggle) return;
       function setMotion(animOn) {
         document.body.classList.toggle('reduce-motion', !animOn);
         motionToggle.setAttribute('aria-checked', animOn ? 'true' : 'false');
@@ -2504,18 +2340,17 @@
       motionToggle.addEventListener('click', () =>
         setMotion(document.body.classList.contains('reduce-motion')));
 
-      // État initial (mémorisé, sinon préférence système pour le mouvement)
-      let storedLang = 'fr', storedMotion = null;
-      try {
-        storedLang = localStorage.getItem('mdLang') || 'fr';
-        storedMotion = localStorage.getItem('mdMotion');
-      } catch (e) {}
+      let storedMotion = null;
+      try { storedMotion = localStorage.getItem('mdMotion'); } catch (e) {}
       const prefersReduce =
         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       setMotion(storedMotion ? storedMotion === 'on' : !prefersReduce);
-      setLang(storedLang);
     })();
+
   </script>
+
+  <!-- Shared multilingual engine (FR / EN / AR) -->
+  <script src="assets/i18n.js"></script>
 
 </body>
 </html>

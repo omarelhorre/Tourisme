@@ -110,6 +110,15 @@
     .motion-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.25s; }
     .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
     .motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
+    .lang-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--texte-doux); }
+    .lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
+    .lang-btn { border: none; background: transparent; color: var(--texte-doux); font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; padding: 0.4rem 0.75rem; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .lang-btn:hover { color: var(--terracotta); }
+    .lang-btn[aria-pressed="true"] { background: var(--terracotta); color: #fff; }
+    body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    html[dir="rtl"] body { direction: rtl; text-align: right; }
+    html[dir="rtl"] .nav-fab-logo { right: 2.5rem; left: auto; }
+    html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
 
     @media (min-width: 992px) {
       .site-menu { background: transparent; padding: 0; overflow: hidden; opacity: 1; visibility: visible; transform: none; pointer-events: none; transition: none; }
@@ -620,43 +629,95 @@
   </button>
 
   <!-- MENU -->
-  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
+
+      <!-- ACCUEIL -->
       <div class="menu-group" data-group>
-        <button type="button" class="menu-head" aria-expanded="false">Accueil <i class="bi bi-chevron-down chev"></i></button>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.home">Accueil</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
         <div class="menu-sub">
           <ul class="menu-sub-list">
-            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
-            <li><a href="index.html#dishesSection">Gastronomie</a></li>
-            <li><a href="index.html#experiencesSection">Expériences</a></li>
-            <li><a href="index.html#guideSection">Guide de Voyage</a></li>
-            <li><a href="index.html#flightsSection">Vols</a></li>
+            <li><a href="index.html#mapSection" data-i18n="nav.explore">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
+            <li><a href="index.html#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
           </ul>
         </div>
       </div>
+
+      <!-- VILLES -->
       <div class="menu-group" data-group>
-        <button type="button" class="menu-head" aria-expanded="false">Villes <i class="bi bi-chevron-down chev"></i></button>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.cities">Villes</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
         <div class="menu-sub">
           <ul class="menu-sub-list cities">
-            <li><a href="marrakech.html">Marrakech</a></li>
-            <li><a href="fes.html">Fès</a></li>
-            <li><a href="chefchaouen.html">Chefchaouen</a></li>
-            <li><a href="tetouan.html">Tétouan</a></li>
-            <li><a href="casablanca.html">Casablanca</a></li>
-            <li><a href="agadir.html">Agadir</a></li>
             <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="rabat.html">Rabat</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="ifrane.html">Ifrane</a></li>
+            <li><a href="merzouga.html">Merzouga</a></li>
+            <li><a href="marrakech.html">Marrakech</a></li>
             <li><a href="essaouira.html">Essaouira</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
           </ul>
         </div>
       </div>
-      <div class="menu-group"><a class="menu-head" href="dishes.html">Plats <i class="bi bi-arrow-right chev"></i></a></div>
-      <div class="menu-group"><a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">Activités <i class="bi bi-arrow-right chev"></i></a></div>
-      <div class="menu-group"><a class="menu-head" href="guide.html">Guide <i class="bi bi-arrow-right chev"></i></a></div>
-      <a class="menu-cta" href="flights.html"><i class="bi bi-airplane"></i>Réserver un Vol</a>
+
+      <!-- PLATS -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.dishes">Plats</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="dishes.html#dish-couscous">Couscous Royal</a></li>
+            <li><a href="dishes.html#dish-harira">Harira</a></li>
+            <li><a href="dishes.html#dish-pastilla">Pastilla au Poulet</a></li>
+            <li><a href="dishes.html#dish-tanjia">Tanjia Marrakchia</a></li>
+            <li><a href="dishes.html#dish-tajine">Tagine Poulet &amp; Citrons Confits</a></li>
+            <li><a href="dishes.html" data-i18n="nav.all_dishes">Voir tous les plats →</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Direct links -->
+      <div class="menu-group">
+        <a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">
+          <span data-i18n="nav.activities">Activités</span>
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="itineraire.html">
+          <span data-i18n="nav.itineraries">Itinéraires</span>
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          <span data-i18n="nav.guide">Guide</span>
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <!-- Footer : language + motion -->
       <div class="menu-foot">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+          <i class="bi bi-globe2" aria-hidden="true"></i>
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+        </div>
         <button type="button" class="motion-toggle" id="motionToggle" role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
-          <span>Animations</span>
+          <span class="motion-label" data-i18n="nav.animations">Animations</span>
         </button>
       </div>
     </div>
@@ -1602,5 +1663,8 @@
   })();
 
 </script>
+
+<!-- Shared multilingual engine (FR / EN / AR) -->
+<script src="assets/i18n.js"></script>
 </body>
 </html>

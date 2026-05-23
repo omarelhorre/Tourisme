@@ -6,6 +6,7 @@
 <title>Notre Équipe de Développement</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
 <style>
 :root {
@@ -16,16 +17,19 @@
   --vert-light:   #3D6B20;
   --ivoire:       #1A1A1A;
   --creme:        #FDF8F0;
+  --sable-cream:  #F5E6C8;
   --sable:        #8B7355;
   --blanc:        #FFFFFF;
   --gris-light:   #E8DFD0;
+  --texte-doux:   #6B5640;
+  --font-corps:   'Lato', sans-serif;
+  --ease-doux:    cubic-bezier(0.22, 1, 0.36, 1);
   /* Aliases on the unified Moroccan palette (dishes / cities theme) */
   --terracotta:      var(--terre);
   --terracotta-dark: #9C4520;
   --vert:            var(--vert-light);
   --or-fonce:        #B8961F;
   --encre:           var(--ivoire);
-  --sable-cream:     #F5E6C8;
   --shadow-card:  
     0 2px 4px rgba(139,37,0,0.06),
     0 8px 16px rgba(139,37,0,0.08),
@@ -377,10 +381,232 @@ body {
   .membre-card { width: 260px; }
   body { padding: 30px 15px; }
 }
+
+/* ═══════════════════════════════════════════════════
+   NAVBAR — unified site menu (injected for coherence)
+═══════════════════════════════════════════════════ */
+.nav-fab {
+  position: fixed; top: 1.75rem; z-index: 1045;
+  width: 46px; height: 46px; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; background: rgba(255,255,255,0.85); border: none; border-radius: 50%;
+  cursor: pointer; padding: 0; overflow: hidden; line-height: 1; text-decoration: none;
+  box-shadow: 0 6px 18px -8px rgba(0,0,0,0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.nav-fab:hover { background: #fff; transform: scale(1.06); }
+.nav-fab-logo { left: 2.5rem; }
+.nav-fab-burger { right: 2.5rem; }
+.nav-fab-logo i { color: var(--terracotta); font-size: 1.5rem; }
+.nav-fab-burger span {
+  display: block; width: 22px; height: 2.5px; background: var(--terracotta);
+  border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease;
+}
+body.menu-open .nav-fab-burger span:nth-child(1) { transform: translateY(4.25px) rotate(45deg); }
+body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-4.25px) rotate(-45deg); }
+body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
+
+.site-menu {
+  position: fixed; inset: 0; z-index: 1044;
+  background: var(--sable-cream);
+  display: flex; flex-direction: column; padding: 6.5rem 2.5rem 3rem;
+  overflow-y: auto; opacity: 0; visibility: hidden; transform: scale(1.02);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+}
+body.menu-open .site-menu {
+  opacity: 1; visibility: visible; transform: scale(1);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.site-menu::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+  opacity: 0.5; pointer-events: none;
+}
+.site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
+.menu-group { border-bottom: 1px solid rgba(192,85,42,0.22); }
+.menu-head {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 1.05rem 0; background: transparent; border: none;
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem); color: var(--ivoire);
+  letter-spacing: -0.01em; cursor: pointer; text-align: left; text-decoration: none;
+  transition: color 0.25s var(--ease-doux);
+}
+.menu-head:hover, .menu-head:focus-visible { color: var(--terracotta); outline: none; }
+.menu-head .chev { font-size: 1rem; transition: transform 0.3s ease; color: var(--terracotta); }
+.menu-group.open .menu-head .chev { transform: rotate(180deg); }
+.menu-group.open .menu-head { color: var(--terracotta); }
+.menu-sub {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.4s var(--ease-doux), opacity 0.3s ease;
+}
+.menu-group.open .menu-sub { max-height: 640px; opacity: 1; }
+.menu-sub-list { list-style: none; margin: 0; padding: 0 0 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.menu-sub-list.cities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 1.5rem; }
+.menu-sub-list a {
+  display: inline-block; position: relative; padding: 0.3rem 0.2rem;
+  color: var(--ivoire); text-decoration: none; font-weight: 400;
+  font-size: 1.05rem; letter-spacing: 0.01em;
+  transition: color 0.2s var(--ease-doux), padding 0.2s var(--ease-doux);
+}
+.menu-sub-list a::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 0; height: 1px;
+  background: var(--terracotta); transition: width 0.25s var(--ease-doux);
+}
+.menu-sub-list a:hover { color: var(--terracotta); padding-left: 1.2rem; }
+.menu-sub-list a:hover::before { width: 0.9rem; }
+
+.menu-foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-top: 2.25rem; padding-top: 1.25rem;
+  border-top: 1px solid rgba(192,85,42,0.22);
+}
+.lang-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--texte-doux); }
+.lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
+.lang-btn {
+  border: none; background: transparent; color: var(--texte-doux);
+  font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem;
+  letter-spacing: 0.06em; padding: 0.4rem 0.75rem; border-radius: 999px;
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.lang-btn:hover { color: var(--terracotta); }
+.lang-btn[aria-pressed="true"] { background: var(--terracotta); color: #fff; }
+.motion-toggle {
+  display: inline-flex; align-items: center; gap: 0.6rem; border: none;
+  background: transparent; color: var(--texte-doux); font-family: var(--font-corps);
+  font-weight: 800; font-size: 0.85rem; letter-spacing: 0.04em;
+  text-transform: uppercase; cursor: pointer; padding: 0.25rem;
+}
+.motion-track {
+  position: relative; width: 42px; height: 22px; border-radius: 999px;
+  background: rgba(192,85,42,0.25); transition: background 0.25s; flex-shrink: 0;
+}
+.motion-thumb {
+  position: absolute; top: 3px; left: 3px; width: 16px; height: 16px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform 0.25s;
+}
+.motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
+.motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
+
+body.menu-open { overflow: hidden; }
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+html[dir="rtl"] body { direction: rtl; text-align: right; }
+html[dir="rtl"] .nav-fab-logo { right: 2.5rem; left: auto; }
+html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
 </style>
-<base target="_blank">
 </head>
 <body>
+
+<!-- === Floating navigation menu system === -->
+<a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil" target="_self">
+  <i class="bi bi-tree-fill"></i>
+</a>
+<button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+         aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+  <span></span>
+  <span></span>
+</button>
+
+<div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="site-menu-inner">
+
+    <!-- ACCUEIL -->
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
+        <span data-i18n="nav.home">Accueil</span>
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list">
+          <li><a href="index.html#mapSection" target="_self" data-i18n="nav.explore">Explorez le Maroc</a></li>
+          <li><a href="index.html#dishesSection" target="_self" data-i18n="nav.gastronomy">Gastronomie</a></li>
+          <li><a href="index.html#experiencesSection" target="_self" data-i18n="nav.experiences">Expériences</a></li>
+          <li><a href="index.html#itinerairesSection" target="_self" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VILLES -->
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
+        <span data-i18n="nav.cities">Villes</span>
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list cities">
+          <li><a href="tanger.html" target="_self">Tanger</a></li>
+          <li><a href="chefchaouen.html" target="_self">Chefchaouen</a></li>
+          <li><a href="rabat.html" target="_self">Rabat</a></li>
+          <li><a href="fes.html" target="_self">Fès</a></li>
+          <li><a href="ifrane.html" target="_self">Ifrane</a></li>
+          <li><a href="merzouga.html" target="_self">Merzouga</a></li>
+          <li><a href="marrakech.html" target="_self">Marrakech</a></li>
+          <li><a href="essaouira.html" target="_self">Essaouira</a></li>
+          <li><a href="agadir.html" target="_self">Agadir</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PLATS -->
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
+        <span data-i18n="nav.dishes">Plats</span>
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list">
+          <li><a href="dishes.html#dish-couscous" target="_self">Couscous Royal</a></li>
+          <li><a href="dishes.html#dish-harira" target="_self">Harira</a></li>
+          <li><a href="dishes.html#dish-pastilla" target="_self">Pastilla au Poulet</a></li>
+          <li><a href="dishes.html#dish-tanjia" target="_self">Tanjia Marrakchia</a></li>
+          <li><a href="dishes.html#dish-tajine" target="_self">Tagine Poulet &amp; Citrons Confits</a></li>
+          <li><a href="dishes.html" target="_self" data-i18n="nav.all_dishes">Voir tous les plats →</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Direct links -->
+    <div class="menu-group">
+      <a class="menu-head" href="activites.html" target="_self">
+        <span data-i18n="nav.activities">Activités</span>
+        <i class="bi bi-arrow-right chev"></i>
+      </a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="itineraire.html" target="_self">
+        <span data-i18n="nav.itineraries">Itinéraires</span>
+        <i class="bi bi-arrow-right chev"></i>
+      </a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="guide.html" target="_self">
+        <span data-i18n="nav.guide">Guide</span>
+        <i class="bi bi-arrow-right chev"></i>
+      </a>
+    </div>
+
+    <!-- Footer : language + motion -->
+    <div class="menu-foot">
+      <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <i class="bi bi-globe2" aria-hidden="true"></i>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+      </div>
+      <button type="button" class="motion-toggle" id="motionToggle"
+              role="switch" aria-checked="true" aria-label="Animations">
+        <span class="motion-track"><span class="motion-thumb"></span></span>
+        <span class="motion-label" data-i18n="nav.animations">Animations</span>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- TITRE -->
 <div class="equipe-header">
@@ -620,6 +846,68 @@ body {
   });
 })();
 </script>
+
+<!-- === Site navigation menu logic === -->
+<script>
+(function() {
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('siteMenu');
+  if (!toggle || !menu) return;
+  const groups = menu.querySelectorAll('.menu-group[data-group]');
+  const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+  function activate(group) {
+    groups.forEach(g => {
+      const on = g === group;
+      g.classList.toggle('open', on);
+      const h = g.querySelector('.menu-head');
+      if (h) h.setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+      activate(groups[0]);
+    }
+  }
+
+  toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  menu.addEventListener('click', e => { if (e.target === menu) setMenu(false); });
+
+  groups.forEach(group => {
+    const head = group.querySelector('.menu-head');
+    if (!head) return;
+    head.addEventListener('click', () => {
+      if (isDesktop()) {
+        activate(group);
+      } else {
+        group.classList.contains('open') ? activate(null) : activate(group);
+      }
+    });
+  });
+})();
+
+/* Motion toggle */
+(function() {
+  const btn = document.getElementById('motionToggle');
+  if (!btn) return;
+  function setMotion(on) {
+    document.body.classList.toggle('reduce-motion', !on);
+    btn.setAttribute('aria-checked', on ? 'true' : 'false');
+    try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch(e){}
+  }
+  btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+  let s = null; try { s = localStorage.getItem('mdMotion'); } catch(e){}
+  setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+})();
+</script>
+
+<!-- Shared multilingual engine (FR / EN / AR) -->
+<script src="assets/i18n.js"></script>
 
 </body>
 </html>

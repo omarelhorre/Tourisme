@@ -33,25 +33,27 @@
 
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
+
+      <!-- ACCUEIL -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Accueil
+          <span data-i18n="nav.home">Accueil</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
           <ul class="menu-sub-list">
-            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
-            <li><a href="index.html#dishesSection">Gastronomie</a></li>
-            <li><a href="index.html#experiencesSection">Expériences</a></li>
-            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
-            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+            <li><a href="index.html#mapSection" data-i18n="nav.explore">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
+            <li><a href="index.html#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
           </ul>
         </div>
       </div>
 
+      <!-- VILLES -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Villes
+          <span data-i18n="nav.cities">Villes</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
@@ -69,9 +71,10 @@
         </div>
       </div>
 
+      <!-- PLATS -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Plats
+          <span data-i18n="nav.dishes">Plats</span>
           <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
@@ -81,20 +84,45 @@
             <li><a href="dishes.html#dish-pastilla">Pastilla au Poulet</a></li>
             <li><a href="dishes.html#dish-tanjia">Tanjia Marrakchia</a></li>
             <li><a href="dishes.html#dish-tajine">Tagine Poulet &amp; Citrons Confits</a></li>
-            <li><a href="dishes.html">Voir tous les plats →</a></li>
+            <li><a href="dishes.html" data-i18n="nav.all_dishes">Voir tous les plats →</a></li>
           </ul>
         </div>
       </div>
+
+      <!-- Direct links -->
+      <div class="menu-group">
+        <a class="menu-head" href="activites.html">
+          <span data-i18n="nav.activities">Activités</span>
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="itineraire.html">
+          <span data-i18n="nav.itineraries">Itinéraires</span>
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
       <div class="menu-group">
         <a class="menu-head" href="guide.html">
-          Guide Pratique
+          <span data-i18n="nav.guide">Guide</span>
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
 
-      <a class="menu-cta" href="flights.html">
-        <i class="bi bi-airplane"></i>Réserver un Vol
-      </a>
+      <!-- Footer : language + motion -->
+      <div class="menu-foot">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+          <i class="bi bi-globe2" aria-hidden="true"></i>
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+        </div>
+        <button type="button" class="motion-toggle" id="motionToggle"
+                role="switch" aria-checked="true" aria-label="Animations">
+          <span class="motion-track"><span class="motion-thumb"></span></span>
+          <span class="motion-label" data-i18n="nav.animations">Animations</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -406,6 +434,25 @@
       }
     });
   });
+})();
+</script>
+
+<!-- Shared multilingual engine (FR / EN / AR) -->
+<script src="assets/i18n.js"></script>
+
+<!-- Motion toggle (animations on/off, persisted) -->
+<script>
+(function () {
+  const btn = document.getElementById('motionToggle');
+  if (!btn) return;
+  function setMotion(on) {
+    document.body.classList.toggle('reduce-motion', !on);
+    btn.setAttribute('aria-checked', on ? 'true' : 'false');
+    try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
+  }
+  btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+  let s = null; try { s = localStorage.getItem('mdMotion'); } catch (e) {}
+  setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 })();
 </script>
 </body>
