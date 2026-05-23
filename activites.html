@@ -13,14 +13,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
 
   <style>
-    /* === Variables — même palette que la page d'accueil === */
     :root {
       --terracotta: #C0552A;
       --terracotta-dark: #9C4520;
       --sable: #F5E6C8;
       --sable-fonce: #E9D6AE;
       --vert: #2D5016;
-      --vert-fonce: #1F2A1A;
       --or: #D4AF37;
       --or-fonce: #B8961F;
       --jaune-btn: #FFD700;
@@ -34,23 +32,18 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--font-corps);
       color: var(--texte);
-      background-color: #fff;
+      background-color: #FFF8E7;
       margin: 0;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-
     h1, h2, h3, h4 { font-family: var(--font-titre); font-weight: 700; }
     p { line-height: 1.7; }
     a { transition: color 0.25s var(--ease-doux); }
 
-    /* ============================================================
-       REDUCE MOTION
-    ============================================================ */
     body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
@@ -58,21 +51,17 @@
       scroll-behavior: auto !important;
     }
 
-    /* ============================================================
-       NAV FAB
-    ============================================================ */
+    /* ── NAV FAB ── */
     .nav-fab {
       position: fixed; top: 1.75rem; z-index: 1045;
       width: 46px; height: 46px;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
       background: rgba(255,255,255,0.85);
       border: none; border-radius: 50%; cursor: pointer; padding: 0;
-      text-decoration: none; white-space: nowrap;
+      text-decoration: none;
       box-shadow: 0 6px 18px -8px rgba(0,0,0,0.35);
       transition: background 0.2s ease, transform 0.2s ease;
     }
-    .nav-fab i { display: block; line-height: 1; }
-    .nav-fab-burger span { flex: 0 0 auto; }
     .nav-fab:hover { background: #fff; transform: scale(1.06); }
     .nav-fab-logo { left: 2.5rem; }
     .nav-fab-burger { right: 2.5rem; }
@@ -86,9 +75,7 @@
     body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-8.5px) rotate(-45deg); }
     body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
-    /* ============================================================
-       MENU
-    ============================================================ */
+    /* ── MENU ── */
     .site-menu {
       position: fixed; inset: 0; z-index: 1044;
       background: var(--sable);
@@ -98,27 +85,11 @@
       opacity: 0; visibility: hidden; transform: scale(1.02);
       transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
     }
-    body.menu-open .site-menu {
-      opacity: 1; visibility: visible; transform: scale(1);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .site-menu::before {
-      content: ""; position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-      opacity: 0.5; pointer-events: none;
-    }
+    body.menu-open .site-menu { opacity: 1; visibility: visible; transform: scale(1); transition: opacity 0.35s ease, transform 0.35s ease; }
+    .site-menu::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); opacity: 0.5; pointer-events: none; }
     .site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
     .menu-group { border-bottom: 1px solid rgba(192,85,42,0.22); }
-    .menu-head {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: 1.15rem 0.25rem;
-      background: transparent; border: none; cursor: pointer;
-      text-align: left; text-decoration: none; color: var(--texte);
-      font-family: 'Lato', sans-serif; font-weight: 900;
-      font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.1;
-      letter-spacing: -0.01em; text-transform: uppercase;
-      transition: color 0.2s ease, padding-left 0.2s ease;
-    }
+    .menu-head { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.15rem 0.25rem; background: transparent; border: none; cursor: pointer; text-align: left; text-decoration: none; color: var(--texte); font-family: 'Lato', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase; transition: color 0.2s ease, padding-left 0.2s ease; }
     .menu-head:hover, .menu-head:focus-visible { color: var(--terracotta); padding-left: 0.9rem; outline: none; }
     .menu-head .chev { font-size: 1.1rem; color: var(--terracotta); transition: transform 0.35s; flex-shrink: 0; margin-left: 1rem; }
     .menu-group.open .menu-head .chev { transform: rotate(180deg); }
@@ -127,36 +98,14 @@
     .menu-group.open .menu-sub { max-height: 640px; opacity: 1; }
     .menu-sub-list { list-style: none; margin: 0; padding: 0.3rem 0 1.2rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; }
     .menu-sub-list.cities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 1.5rem; }
-    .menu-sub-list a {
-      display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.55rem 0.6rem; color: var(--texte-doux);
-      text-decoration: none; font-weight: 700; font-size: 1.05rem;
-      letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px;
-      transition: color 0.2s, background 0.2s, transform 0.2s;
-    }
+    .menu-sub-list a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.6rem; color: var(--texte-doux); text-decoration: none; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px; transition: color 0.2s, background 0.2s; }
     .menu-sub-list a::before { content: "→"; color: var(--terracotta); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; }
     .menu-sub-list a:hover { color: var(--terracotta); background: rgba(255,255,255,0.6); }
     .menu-sub-list a:hover::before { opacity: 1; transform: translateX(0); }
-    .menu-cta {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      margin-top: 2rem; padding: 0.95rem 2rem;
-      background: var(--jaune-btn); color: var(--encre);
-      font-weight: 900; font-size: 1.05rem; letter-spacing: 0.04em;
-      text-transform: uppercase; text-decoration: none;
-      border-radius: 999px; transition: background 0.2s, transform 0.2s;
-    }
+    .menu-cta { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 2rem; padding: 0.95rem 2rem; background: var(--jaune-btn); color: var(--encre); font-weight: 900; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; border-radius: 999px; transition: background 0.2s, transform 0.2s; }
     .menu-cta:hover { background: #f5cd00; color: #000; transform: translateY(-2px); }
-    .menu-foot {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 1rem; margin-top: 2.25rem; padding-top: 1.25rem;
-      border-top: 1px solid rgba(192,85,42,0.22);
-    }
-    .motion-toggle {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      border: none; background: transparent; color: var(--texte-doux);
-      font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem;
-      letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0.25rem;
-    }
+    .menu-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(192,85,42,0.22); }
+    .motion-toggle { display: inline-flex; align-items: center; gap: 0.6rem; border: none; background: transparent; color: var(--texte-doux); font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0.25rem; }
     .motion-track { position: relative; width: 42px; height: 22px; border-radius: 999px; background: rgba(192,85,42,0.25); transition: background 0.25s; flex-shrink: 0; }
     .motion-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.25s; }
     .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
@@ -166,29 +115,11 @@
       .site-menu { background: transparent; padding: 0; overflow: hidden; opacity: 1; visibility: visible; transform: none; pointer-events: none; transition: none; }
       body.menu-open .site-menu { pointer-events: auto; }
       .site-menu::before { display: none; }
-      .site-menu-inner {
-        position: absolute; top: 0; right: 0; height: 100%; width: min(50vw, 760px);
-        max-width: none; margin: 0; padding: 5rem 4rem 3rem;
-        overflow-y: auto; background: var(--sable);
-        border-left: 1px solid rgba(192,85,42,0.18);
-        box-shadow: -30px 0 70px -25px rgba(60,30,10,0.45);
-        transform: translateX(100%);
-        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5rem;
-      }
+      .site-menu-inner { position: absolute; top: 0; right: 0; height: 100%; width: min(50vw, 760px); max-width: none; margin: 0; padding: 5rem 4rem 3rem; overflow-y: auto; background: var(--sable); border-left: 1px solid rgba(192,85,42,0.18); box-shadow: -30px 0 70px -25px rgba(60,30,10,0.45); transform: translateX(100%); transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5rem; }
       body.menu-open .site-menu-inner { transform: translateX(0); }
-      .site-menu-inner::before {
-        content: ""; position: absolute; inset: 0;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-        opacity: 0.5; pointer-events: none; z-index: 0;
-      }
+      .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); opacity: 0.5; pointer-events: none; z-index: 0; }
       .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
-      .menu-head {
-        position: relative; z-index: 1; width: auto;
-        justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem;
-        font-size: 0.92rem; letter-spacing: 0.08em; white-space: nowrap; background: transparent;
-        transition: background 0.25s, color 0.25s;
-      }
+      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: 0.08em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
       .menu-head:hover { padding-left: 1.4rem; background: rgba(192,85,42,0.12); }
       .menu-head .chev { display: none; }
       .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
@@ -201,1204 +132,483 @@
       .menu-foot { position: absolute; z-index: 2; left: 4rem; right: 4rem; bottom: 1.6rem; margin-top: 0; }
     }
 
-    /* ============================================================
-       HERO — Palette sable/terracotta, layout différent de l'accueil
-    ============================================================ */
-    .hero-act {
-      position: relative;
-      min-height: 100vh;
-      background: var(--sable);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      overflow: hidden;
-    }
-
-    /* Côté gauche : contenu texte */
-    .hero-left {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 7rem 3.5rem 5rem 4rem;
-      z-index: 2;
-    }
-
-    /* Pattern zellige en fond côté gauche */
-    .hero-left::before {
-      content: "";
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.1'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-      pointer-events: none;
-    }
-
-    /* Numéro géant watermark */
-    .hero-watermark {
-      position: absolute;
-      bottom: -2rem; right: -1rem;
-      font-family: var(--font-titre);
-      font-size: clamp(10rem, 18vw, 18rem);
-      color: rgba(192,85,42,0.07);
-      line-height: 1;
-      pointer-events: none; user-select: none;
-      letter-spacing: -0.02em;
-    }
-
-    /* Ligne déco qui se dessine */
-    .hero-deco-line {
-      display: flex; align-items: center; gap: 0.8rem;
-      margin-bottom: 1.8rem;
-    }
-    .hero-deco-line .line-seg {
-      height: 2px; background: var(--terracotta);
-      width: 0;
-      animation: lineGrow 1s var(--ease-doux) 0.3s forwards;
-    }
+    /* ── HERO ── */
+    .hero-act { position: relative; min-height: 100vh; background: var(--sable); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-left { position: relative; display: flex; flex-direction: column; justify-content: center; padding: 7rem 3.5rem 5rem 4rem; z-index: 2; }
+    .hero-left::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.1'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); pointer-events: none; }
+    .hero-deco-line { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.8rem; }
+    .hero-deco-line .line-seg { height: 2px; background: var(--terracotta); width: 0; animation: lineGrow 1s var(--ease-doux) 0.3s forwards; }
     @keyframes lineGrow { to { width: 50px; } }
-    .hero-deco-line .label {
-      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--terracotta);
-      opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.5s forwards;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-corps); font-weight: 900;
-      font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--or-fonce); margin-bottom: 0.8rem;
-      opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.7s forwards;
-    }
-
-    .hero-act h1 {
-      font-family: var(--font-titre);
-      font-size: clamp(3.5rem, 6.5vw, 6.5rem);
-      color: var(--encre);
-      line-height: 0.9;
-      margin: 0 0 1.5rem;
-      letter-spacing: 0.02em;
-    }
-    /* Chaque mot apparaît par clip-path */
-    .hero-act .word {
-      display: inline-block;
-      clip-path: inset(0 100% 0 0);
-      animation: wordReveal 0.85s var(--ease-doux) forwards;
-    }
+    .hero-deco-line .label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.5s forwards; }
+    .hero-eyebrow { font-family: var(--font-corps); font-weight: 900; font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--or-fonce); margin-bottom: 0.8rem; opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.7s forwards; }
+    .hero-act h1 { font-family: var(--font-titre); font-size: clamp(3.5rem, 6.5vw, 6.5rem); color: var(--encre); line-height: 0.9; margin: 0 0 1.5rem; letter-spacing: 0.02em; }
+    .hero-act .word { display: inline-block; clip-path: inset(0 100% 0 0); animation: wordReveal 0.85s var(--ease-doux) forwards; }
     .hero-act .word:nth-child(1) { animation-delay: 0.8s; }
     .hero-act .word:nth-child(2) { animation-delay: 1.0s; }
     .hero-act .word:nth-child(3) { color: var(--terracotta); animation-delay: 1.2s; }
     @keyframes wordReveal { to { clip-path: inset(0 0% 0 0); } }
-
-    .hero-sub {
-      font-family: var(--font-titre); font-style: italic;
-      font-size: 1.1rem; color: var(--texte-doux); margin-bottom: 1rem;
-      opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.5s forwards;
-    }
-    .hero-desc {
-      font-size: 0.98rem; color: #6b5640; line-height: 1.75; max-width: 420px;
-      margin-bottom: 2.2rem;
-      opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.7s forwards;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: var(--terracotta); color: #fff;
-      padding: 0.9rem 2rem; border-radius: 4px;
-      font-weight: 700; font-size: 0.88rem; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none;
-      transition: background 0.3s, gap 0.3s, transform 0.3s var(--ease-spring);
-      align-self: flex-start;
-      opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.9s forwards;
-    }
+    .hero-desc { font-size: 0.98rem; color: #6b5640; line-height: 1.75; max-width: 420px; margin-bottom: 2.2rem; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.7s forwards; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--terracotta); color: #fff; padding: 0.9rem 2rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, gap 0.3s, transform 0.3s var(--ease-spring); align-self: flex-start; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.9s forwards; }
     .hero-cta:hover { background: var(--terracotta-dark); color: #fff; gap: 1rem; transform: translateY(-2px); }
-    .hero-cta i { transition: transform 0.3s var(--ease-spring); }
-    .hero-cta:hover i { transform: translateX(4px); }
-
-    /* Scroll hint */
-    .hero-scroll {
-      position: absolute; bottom: 2.5rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      z-index: 10;
-      opacity: 0; animation: fadeIn 1s ease 2.5s forwards;
-    }
-    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--texte-doux); }
-    .scroll-track { width: 22px; height: 36px; border: 2px solid rgba(192,85,42,0.4); border-radius: 999px; display: flex; justify-content: center; padding-top: 5px; }
-    .scroll-track::before { content: ""; width: 3px; height: 7px; background: var(--terracotta); border-radius: 999px; animation: scrollBounce 2s ease-in-out infinite; }
-    @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 55%{transform:translateY(9px)} }
-
-    /* Côté droit : photo */
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-right img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.82) saturate(1.15);
-      transform: scale(1.05);
-      animation: imgDrift 20s ease-in-out infinite alternate;
-    }
-    @keyframes imgDrift {
-      from { transform: scale(1.05) translateX(0); }
-      to { transform: scale(1.1) translateX(-15px); }
-    }
-    /* Voile sablé sur le bord gauche de la photo */
-    .hero-right::before {
-      content: ""; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(90deg, var(--sable) 0%, rgba(245,230,200,0.3) 25%, transparent 55%);
-    }
-    /* Filigrane doré sur la photo */
-    .hero-right::after {
-      content: ""; position: absolute; inset: 0; z-index: 2;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='0.8' opacity='0.22'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-      pointer-events: none;
-    }
-    /* Badge flottant sur la photo */
-    .hero-photo-badge {
-      position: absolute; bottom: 2.5rem; right: 2.5rem; z-index: 5;
-      background: var(--terracotta); color: #fff;
-      padding: 1rem 1.5rem; border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 8px 24px -8px rgba(192,85,42,0.6);
-      animation: badgeFloat 4s ease-in-out infinite;
-    }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.82) saturate(1.15); transform: scale(1.05); animation: imgDrift 20s ease-in-out infinite alternate; }
+    @keyframes imgDrift { from { transform: scale(1.05) translateX(0); } to { transform: scale(1.1) translateX(-15px); } }
+    .hero-right::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, var(--sable) 0%, rgba(245,230,200,0.3) 25%, transparent 55%); }
+    .hero-right::after { content: ""; position: absolute; inset: 0; z-index: 2; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='0.8' opacity='0.22'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); pointer-events: none; }
+    50%{transform:translateY(-10px)} }
+    .hero-photo-badge { position: absolute; bottom: 2.5rem; right: 2.5rem; z-index: 5; background: var(--terracotta); color: #fff; padding: 1rem 1.5rem; border-radius: 8px; text-align: center; box-shadow: 0 8px 24px -8px rgba(192,85,42,0.6); animation: badgeFloat 4s ease-in-out infinite; }
     @keyframes badgeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    .hero-photo-badge .badge-num {
-      font-family: var(--font-titre); font-size: 2.8rem; line-height: 1;
-      display: block; color: #fff;
-    }
-    .hero-photo-badge .badge-label {
-      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; opacity: 0.85;
-    }
-
-    /* Particules flottantes (purement CSS) */
+    .hero-photo-badge .badge-num { font-family: var(--font-titre); font-size: 2.8rem; line-height: 1; display: block; }
+    .hero-photo-badge .badge-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
     .particles { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: var(--or);
-      opacity: 0;
-      animation: particleFloat linear infinite;
-    }
-    .particle:nth-child(1)  { width:4px; height:4px; left:12%; animation-duration:8s;  animation-delay:0s;   top:80%; }
-    .particle:nth-child(2)  { width:3px; height:3px; left:28%; animation-duration:11s; animation-delay:1.5s; top:90%; }
-    .particle:nth-child(3)  { width:5px; height:5px; left:45%; animation-duration:9s;  animation-delay:3s;   top:85%; }
-    .particle:nth-child(4)  { width:3px; height:3px; left:62%; animation-duration:13s; animation-delay:0.5s; top:88%; }
-    .particle:nth-child(5)  { width:4px; height:4px; left:78%; animation-duration:10s; animation-delay:2s;   top:82%; }
-    .particle:nth-child(6)  { width:2px; height:2px; left:20%; animation-duration:12s; animation-delay:4s;   top:92%; }
-    .particle:nth-child(7)  { width:3px; height:3px; left:55%; animation-duration:7s;  animation-delay:1s;   top:78%; }
-    .particle:nth-child(8)  { width:5px; height:5px; left:88%; animation-duration:14s; animation-delay:2.5s; top:75%; }
-    @keyframes particleFloat {
-      0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
-      10%  { opacity: 0.7; }
-      90%  { opacity: 0.3; }
-      100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
-    }
+    .particle { position: absolute; border-radius: 50%; background: var(--or); opacity: 0; animation: particleFloat linear infinite; }
+    .particle:nth-child(1) { width:4px; height:4px; left:12%; animation-duration:8s;  top:80%; }
+    .particle:nth-child(2) { width:3px; height:3px; left:28%; animation-duration:11s; animation-delay:1.5s; top:90%; }
+    .particle:nth-child(3) { width:5px; height:5px; left:45%; animation-duration:9s;  animation-delay:3s;   top:85%; }
+    .particle:nth-child(4) { width:3px; height:3px; left:62%; animation-duration:13s; animation-delay:0.5s; top:88%; }
+    .particle:nth-child(5) { width:4px; height:4px; left:78%; animation-duration:10s; animation-delay:2s;   top:82%; }
+    .particle:nth-child(6) { width:2px; height:2px; left:20%; animation-duration:12s; animation-delay:4s;   top:92%; }
+    .particle:nth-child(7) { width:3px; height:3px; left:55%; animation-duration:7s;  animation-delay:1s;   top:78%; }
+    .particle:nth-child(8) { width:5px; height:5px; left:88%; animation-duration:14s; animation-delay:2.5s; top:75%; }
+    @keyframes particleFloat { 0%{opacity:0;transform:translateY(0) rotate(0deg)} 10%{opacity:0.7} 90%{opacity:0.3} 100%{opacity:0;transform:translateY(-100vh) rotate(360deg)} }
+    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--texte-doux); }
+    .scroll-track::before { content: ""; width: 3px; height: 7px; background: var(--terracotta); border-radius: 999px; animation: scrollBounce 2s ease-in-out infinite; }
+    55%{transform:translateY(9px)} }
 
-    /* ============================================================
-       FILTER BAR
-    ============================================================ */
+    /* ── FILTER BAR ── */
     .filter-section {
-      background: var(--sable-fonce);
+      background: #fff;
       padding: 0;
-      position: relative; z-index: 50;
-      border-bottom: 2px solid rgba(192,85,42,0.2);
-      box-shadow: 0 4px 20px -8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .filter-inner {
-      display: flex; overflow-x: auto; scrollbar-width: none;
-      align-items: stretch;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      padding: 0.9rem 1rem;
     }
-    .filter-inner::-webkit-scrollbar { display: none; }
     .filter-tab {
-      flex-shrink: 0;
-      background: transparent; border: none;
-      color: var(--texte-doux);
-      padding: 1.1rem 1.6rem;
-      font-family: var(--font-corps); font-weight: 800; font-size: 0.8rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      cursor: pointer; position: relative;
-      transition: color 0.3s, background 0.3s;
-    }
-    .filter-tab i { margin-right: 6px; font-size: 0.9rem; }
-    .filter-tab::after {
-      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: var(--terracotta);
-      transform: scaleX(0); transform-origin: center;
-      transition: transform 0.35s var(--ease-doux);
+      background: transparent;
+      border: none;
+      color: #999;
+      padding: 0.55rem 1.3rem;
+      font-family: var(--font-corps);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 40px;
+      transition: all 0.25s ease;
     }
     .filter-tab:hover { color: var(--terracotta); background: rgba(192,85,42,0.06); }
-    .filter-tab.active { color: var(--terracotta); }
-    .filter-tab.active::after { transform: scaleX(1); }
+    .filter-tab.active { color: #fff; background: var(--terracotta); }
 
-    /* ============================================================
-       SECTION ACTIVITÉS
-    ============================================================ */
-    .activities-section {
-      background: #fff;
-      padding: 5rem 0 6rem;
-    }
+    /* ── ACTIVITIES SECTION ── */
+    .activities-section { background: #FFF8E7; padding: 3rem 0 6rem; }
 
-    /* Header section */
-    .sec-head {
-      margin-bottom: 3.5rem;
-      position: relative;
+    /* ── GRID FILTRÉ : toujours 2 colonnes ── */
+    /*
+      On utilise une grille CSS native sur #filtered-grid.
+      Chaque .act-item est une cellule ; quand on la cache,
+      elle est retirée du flow → les visibles se regroupent
+      automatiquement 2 par 2.
+    */
+    #filtered-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
     }
-    .sec-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.72rem; font-weight: 900; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--terracotta);
-      margin-bottom: 0.7rem;
-    }
-    .sec-eyebrow::before { content: ""; width: 24px; height: 2px; background: var(--terracotta); }
-    .sec-head h2 {
-      font-family: var(--font-titre);
-      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-      color: var(--encre); line-height: 0.95; margin: 0;
-    }
-    .sec-head h2 em {
-      font-style: italic; font-family: var(--font-titre); color: var(--terracotta);
-    }
-    .sec-head-right {
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding-bottom: 0.5rem;
-    }
-    .sec-count {
-      font-family: var(--font-corps); font-weight: 700; font-size: 0.82rem;
-      letter-spacing: 0.06em; text-transform: uppercase; color: var(--texte-doux);
-    }
-    .sec-count strong {
-      display: block; font-family: var(--font-titre); font-size: 3rem; color: var(--terracotta);
-      line-height: 1; transition: all 0.4s var(--ease-doux);
+    @media (max-width: 767px) {
+      #filtered-grid { grid-template-columns: 1fr; }
     }
 
-    /* ============================================================
-       CARTE ACTIVITÉ — Cadre repensé (arche marocaine)
-    ============================================================ */
+    /* Transition d'apparition/disparition */
+    .act-item {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .act-item.hidden {
+      display: none;
+    }
+
+    /* ── ACT CARD ── */
     .act-card {
-      position: relative;
-      background: #fff;
-      border: 1px solid rgba(192,85,42,0.12);
-      border-radius: 6px 6px 12px 12px;
-      overflow: hidden;
-      display: flex; flex-direction: column; height: 100%;
-      /* Ombre douce au repos */
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-      transition: transform 0.6s var(--ease-doux), box-shadow 0.6s var(--ease-doux);
-      will-change: transform;
+      position: relative; background: #fff;
+      border: 1px solid rgba(192,85,42,0.15); border-radius: 16px;
+      overflow: hidden; display: flex; flex-direction: column; height: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.4s var(--ease-doux), box-shadow 0.4s var(--ease-doux);
     }
+    .act-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -12px rgba(192,85,42,0.28); }
 
-    /* Hover : lift + glow terracotta */
-    .act-card:hover {
-      transform: translateY(-10px) scale(1.015);
-      box-shadow: 0 20px 50px -15px rgba(192,85,42,0.35), 0 0 0 2px var(--or);
-    }
+    .act-card-img { position: relative; height: 230px; overflow: hidden; cursor: zoom-in; }
+    .act-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-doux); }
+    .act-card:hover .act-card-img img { transform: scale(1.08); }
+    .act-card-img::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,0.18) 50%,transparent 65%); transform:translateX(-120%) skewX(-15deg); }
+    .act-card:hover .act-card-img::after { transform:translateX(180%) skewX(-15deg); transition:transform 0.7s ease; }
 
-    /* Image avec forme en arche marocaine (clip-path) */
-    .act-card-img {
-      position: relative;
-      height: 220px;
-      overflow: hidden;
-      /* Arche marocaine en haut */
-      clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
-    }
-    .act-card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1s var(--ease-doux), filter 0.6s;
-      filter: brightness(0.85);
-    }
-    .act-card:hover .act-card-img img { transform: scale(1.1); filter: brightness(1); }
-
-    /* Shimmer sweep animé au survol */
-    .act-card-img::after {
-      content: "";
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.25) 50%, transparent 65%);
-      transform: translateX(-120%) skewX(-15deg);
-    }
-    .act-card:hover .act-card-img::after {
-      transform: translateX(180%) skewX(-15deg);
-      transition: transform 0.8s ease;
-    }
-
-    .act-card-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.45) 100%);
-      z-index: 1;
-    }
-
-    /* Badges sur la photo */
-    .act-badges {
-      position: absolute; top: 12px; left: 12px; right: 12px;
-      display: flex; justify-content: space-between; align-items: flex-start; z-index: 3;
-    }
-    .city-badge {
-      background: rgba(245,230,200,0.92);
-      color: var(--texte-doux);
-      padding: 4px 12px; border-radius: 4px;
-      font-weight: 800; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .cat-badge {
-      background: var(--terracotta); color: #fff;
-      padding: 4px 12px; border-radius: 4px;
-      font-weight: 800; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
-      transition: background 0.3s;
-    }
+    .act-card-img-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%); z-index: 1; }
+    .act-badges { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 3; }
+    .city-badge { background: rgba(255,255,255,0.95); color: var(--terracotta); padding: 5px 13px; border-radius: 30px; font-weight: 800; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .cat-badge { background: var(--terracotta); color: #fff; padding: 5px 13px; border-radius: 30px; font-weight: 800; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; box-shadow: 0 2px 6px rgba(0,0,0,0.1); transition: background 0.3s; }
     .act-card:hover .cat-badge { background: var(--or); color: var(--encre); }
 
-    /* Numéro sur l'image (bottom) */
-    .act-num {
-      position: absolute; bottom: 14px; right: 14px; z-index: 3;
-      font-family: var(--font-titre); font-size: 2.2rem; line-height: 1;
-      color: rgba(255,255,255,0.5);
-      transition: color 0.4s, transform 0.4s var(--ease-spring);
-    }
-    .act-card:hover .act-num { color: var(--or); transform: scale(1.2) rotate(-5deg); }
-
-    /* Corps de la carte */
-    .act-card-body {
-      padding: 1.5rem 1.4rem 1.6rem;
-      flex: 1; display: flex; flex-direction: column;
-      position: relative;
-    }
-
-    /* Ligne terracotta animée sous le titre */
-    .act-card-title-wrap { position: relative; margin-bottom: 0.6rem; }
-    .act-card-title-wrap::after {
-      content: ""; position: absolute; bottom: -4px; left: 0;
-      height: 2px; background: var(--terracotta);
-      width: 0; transition: width 0.45s var(--ease-doux);
-    }
-    .act-card:hover .act-card-title-wrap::after { width: 100%; }
-
-    .act-card-body h3 {
-      font-size: 1.25rem; margin: 0; color: var(--encre); line-height: 1.2;
-      transition: color 0.3s;
-    }
+    .act-card-body { padding: 1.3rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .act-location { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); display: flex; align-items: center; gap: 5px; margin-bottom: 0.45rem; }
+    .act-card-body h3 { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.55rem; color: var(--encre); font-family: var(--font-titre); line-height: 1.25; transition: color 0.3s; }
     .act-card:hover .act-card-body h3 { color: var(--terracotta); }
-
-    .act-location {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--texte-doux);
-      display: flex; align-items: center; gap: 4px;
-      margin-bottom: 0.8rem;
-    }
-    .act-desc { color: #777; font-size: 0.9rem; line-height: 1.65; flex: 1; margin-bottom: 1.2rem; }
-
-    /* Bouton : grow de droite à gauche au hover */
-    .btn-decouvrir {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: transparent;
-      border: 1.5px solid rgba(192,85,42,0.35);
-      color: var(--terracotta);
-      padding: 0.55rem 1.2rem; border-radius: 4px;
-      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
-      text-decoration: none; align-self: flex-start;
-      position: relative; overflow: hidden;
-      transition: color 0.3s, border-color 0.3s;
-    }
-    .btn-decouvrir::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: var(--terracotta);
-      transform: scaleX(0); transform-origin: right;
-      transition: transform 0.35s var(--ease-doux);
-      z-index: 0;
-    }
-    .btn-decouvrir:hover::before { transform: scaleX(1); transform-origin: left; }
-    .btn-decouvrir:hover { color: #fff; border-color: var(--terracotta); }
-    .btn-decouvrir span, .btn-decouvrir i { position: relative; z-index: 1; }
+    .act-desc { color: #6B6B6B; font-size: 0.86rem; line-height: 1.65; flex: 1; margin-bottom: 1.2rem; }
+    .btn-decouvrir { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; border: 1.5px solid var(--terracotta); color: var(--terracotta); padding: 0.55rem 1.2rem; border-radius: 40px; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; align-self: flex-start; transition: all 0.3s ease; }
+    .btn-decouvrir:hover { background: var(--terracotta); color: #fff; gap: 0.9rem; }
     .btn-decouvrir i { transition: transform 0.3s var(--ease-spring); }
-    .btn-decouvrir:hover i { transform: translateX(5px); }
+    .btn-decouvrir:hover i { transform: translateX(4px); }
 
-    /* Coins dorés animés sur la carte */
-    .card-corners { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
-    .card-corner {
-      position: absolute; width: 0; height: 0;
-      transition: width 0.4s var(--ease-doux), height 0.4s var(--ease-doux), opacity 0.4s;
-      opacity: 0;
-    }
-    .act-card:hover .card-corner { width: 24px; height: 24px; opacity: 1; }
-    .card-corner.tl { top: 8px; left: 8px; border-top: 2px solid var(--or); border-left: 2px solid var(--or); }
-    .card-corner.tr { top: 8px; right: 8px; border-top: 2px solid var(--or); border-right: 2px solid var(--or); }
-    .card-corner.bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--or); border-left: 2px solid var(--or); }
-    .card-corner.br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--or); border-right: 2px solid var(--or); }
+    /* ── CARTE VEDETTE ── */
+    .featured-wrapper { grid-column: 1 / -1; } /* occupe toute la largeur dans la grille */
 
-    /* ============================================================
-       CARTE VEDETTE (featured) — Horizontale
-    ============================================================ */
     .act-featured {
-      display: grid; grid-template-columns: 5fr 4fr;
-      border-radius: 12px; overflow: hidden;
-      background: var(--sable);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-      border: 1px solid rgba(192,85,42,0.1);
-      transition: transform 0.6s var(--ease-doux), box-shadow 0.6s var(--ease-doux);
+      display: grid; grid-template-columns: 5fr 4fr; border-radius: 20px; overflow: hidden;
+      background: var(--sable); box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border: 1px solid rgba(192,85,42,0.15);
+      transition: transform 0.5s var(--ease-doux), box-shadow 0.5s var(--ease-doux);
     }
-    .act-featured:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 56px -18px rgba(192,85,42,0.3), 0 0 0 2px var(--terracotta);
-    }
-    .feat-img {
-      position: relative; overflow: hidden; min-height: 400px;
-    }
-    .feat-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1.2s var(--ease-doux), filter 0.7s;
-      filter: brightness(0.8);
-    }
-    .act-featured:hover .feat-img img { transform: scale(1.08); filter: brightness(0.9); }
-    .feat-img::after {
-      content: "";
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.2) 50%, transparent 65%);
-      transform: translateX(-120%) skewX(-15deg);
-    }
-    .act-featured:hover .feat-img::after {
-      transform: translateX(180%) skewX(-15deg);
-      transition: transform 0.9s ease;
-    }
-    .feat-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent 60%, rgba(245,230,200,0.2) 100%);
-      z-index: 1;
-    }
-    /* Badge ville sur featured */
-    .feat-badge {
-      position: absolute; top: 20px; left: 20px; z-index: 3;
-      background: rgba(245,230,200,0.9); color: var(--texte);
-      padding: 6px 16px; border-radius: 4px;
-      font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-      transition: background 0.3s;
-    }
-    .act-featured:hover .feat-badge { background: var(--or); }
-    .feat-body {
-      padding: 3rem 3rem 2.5rem;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    /* Gros numéro en fond */
-    .feat-bg-num {
-      position: absolute; right: -1rem; bottom: -1rem;
-      font-family: var(--font-titre); font-size: 8rem; line-height: 1;
-      color: rgba(192,85,42,0.07); pointer-events: none; user-select: none;
-      transition: color 0.5s, transform 0.5s var(--ease-doux);
-    }
-    .act-featured:hover .feat-bg-num { color: rgba(212,175,55,0.15); transform: scale(1.06) rotate(3deg); }
-    .feat-cat-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--terracotta); color: #fff;
-      padding: 5px 14px; border-radius: 4px;
-      font-size: 0.7rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase;
-      margin-bottom: 1rem; align-self: flex-start;
-      transition: background 0.3s, color 0.3s;
-    }
-    .act-featured:hover .feat-cat-pill { background: var(--or); color: var(--encre); }
-    .feat-city-label {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--texte-doux); margin-bottom: 0.5rem;
-      display: flex; align-items: center; gap: 4px;
-    }
-    .feat-body h3 {
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-      color: var(--encre); margin: 0 0 0.9rem; line-height: 1.15;
-    }
-    .feat-body p {
-      color: var(--texte-doux); font-size: 0.93rem; line-height: 1.7; margin-bottom: 1.5rem;
-    }
-    .feat-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      color: var(--terracotta); font-weight: 700; font-size: 0.82rem;
-      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-      position: relative; align-self: flex-start;
-      transition: gap 0.3s, color 0.3s;
-    }
-    .feat-link::after {
-      content: ""; position: absolute; bottom: -3px; left: 0; width: 0;
-      height: 1.5px; background: var(--terracotta);
-      transition: width 0.4s var(--ease-doux);
-    }
-    .feat-link:hover::after { width: 100%; }
-    .feat-link:hover { color: var(--terracotta-dark); gap: 0.9rem; }
+    .act-featured:hover { transform: translateY(-6px); box-shadow: 0 25px 50px -12px rgba(192,85,42,0.3); }
+    .feat-img { position: relative; overflow: hidden; min-height: 360px; cursor: zoom-in; }
+    .feat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-doux); }
+    .act-featured:hover .feat-img img { transform: scale(1.06); }
+    .feat-img-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, rgba(0,0,0,0.15) 100%); z-index: 1; }
+    .feat-badge { position: absolute; top: 20px; left: 20px; z-index: 3; background: rgba(255,255,255,0.95); color: var(--terracotta); padding: 7px 18px; border-radius: 40px; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .feat-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; position: relative; }
+    .feat-cat-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--terracotta); color: #fff; padding: 6px 16px; border-radius: 40px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; align-self: flex-start; }
+    .feat-city-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 5px; }
+    .feat-body h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--encre); margin: 0 0 0.8rem; line-height: 1.2; font-family: var(--font-titre); }
+    .feat-body p { color: var(--texte-doux); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .feat-link { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--terracotta); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: gap 0.3s, color 0.3s; }
+    .feat-link:hover { gap: 1rem; color: var(--terracotta-dark); }
     .feat-link i { transition: transform 0.3s var(--ease-spring); }
-    .feat-link:hover i { transform: translateX(5px); }
-
-
-    /* ============================================================
-       ANIMATIONS AU SCROLL
-    ============================================================ */
-
-    /* Fade + translate depuis le bas */
-    .reveal {
-      opacity: 0; transform: translateY(45px);
-      transition: opacity 0.85s var(--ease-doux), transform 0.85s var(--ease-doux);
-    }
-    .reveal.from-left  { transform: translateX(-55px) translateY(0); }
-    .reveal.from-right { transform: translateX(55px) translateY(0); }
-    .reveal.visible    { opacity: 1; transform: translate(0,0); }
-
-    /* Clip-path reveal pour la carte vedette */
-    .reveal-clip {
-      clip-path: inset(10% 0 10% 0 round 12px);
-      opacity: 0;
-      transition: clip-path 1.1s var(--ease-doux), opacity 0.6s ease;
-    }
-    .reveal-clip.visible {
-      clip-path: inset(0% 0 0% 0 round 12px);
-      opacity: 1;
-    }
-
-    /* Stagger pour les rangées de cartes */
-    .stagger-row .stagger-item {
-      opacity: 0; transform: translateY(55px) scale(0.97);
-      transition: opacity 0.75s var(--ease-doux), transform 0.75s var(--ease-doux);
-    }
-    .stagger-row.visible .stagger-item:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .stagger-row.visible .stagger-item:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
-    .stagger-row.visible .stagger-item:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.24s; }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    .footer-maroc {
-      background: var(--encre);
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      padding: 2.5rem 1rem;
-      font-size: 0.82rem;
-      position: relative;
-    }
-    .footer-maroc::before {
-      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 60px; height: 3px; background: var(--terracotta);
-    }
-    .footer-maroc a { color: rgba(255,255,255,0.5); text-decoration: none; }
-
-    /* ============================================================
-       KEYFRAMES GÉNÉRAUX
-    ============================================================ */
-    @keyframes fadeUp  { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
-    @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
-
-
-    /* ============================================================
-       ANIMATIONS DANS LES CARTES D'ACTIVITÉ
-    ============================================================ */
-
-    /* Numéro flottant avec léger mouvement */
-    .act-num {
-      animation: numFloat 3s ease-in-out infinite;
-    }
-    @keyframes numFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .act-card:hover .act-num {
-      animation: numPulse 0.6s ease;
-    }
-    @keyframes numPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3) rotate(-5deg); }
-      100% { transform: scale(1.2) rotate(-5deg); }
-    }
-
-    /* Badge ville qui pulse au hover */
-    .act-card:hover .city-badge {
-      animation: badgeGlow 1.5s ease-in-out infinite;
-    }
-    @keyframes badgeGlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(200,150,46,0); }
-      50% { box-shadow: 0 0 12px 2px rgba(200,150,46,0.3); }
-    }
-
-    /* Ligne shimmer qui traverse la carte au hover */
-    .act-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 50%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.7s ease;
-      z-index: 6; pointer-events: none;
-    }
-    .act-card:hover::before {
-      left: 150%;
-      transition: left 0.9s ease;
-    }
-
-    /* Image avec zoom doux continu au hover */
-    .act-card-img img {
-      transition: transform 1.2s var(--ease-doux), filter 0.6s;
-    }
-    .act-card:hover .act-card-img img {
-      transform: scale(1.12);
-      filter: brightness(1.05) saturate(1.1);
-    }
-
-    /* Titre avec soulignement animé */
-    .act-card-title-wrap h3 {
-      position: relative;
-      display: inline-block;
-    }
-    .act-card-title-wrap h3::after {
-      content: "";
-      position: absolute;
-      bottom: -3px; left: 0;
-      width: 0; height: 2px;
-      background: var(--terracotta);
-      transition: width 0.5s var(--ease-doux);
-    }
-    .act-card:hover .act-card-title-wrap h3::after {
-      width: 100%;
-    }
-
-    /* Bouton avec effet ripple au clic */
-    .btn-decouvrir {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-decouvrir::after {
-      content: "";
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 0; height: 0;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.5s, height 0.5s;
-    }
-    .btn-decouvrir:active::after {
-      width: 200px; height: 200px;
-    }
-
-    /* Icône de localisation qui danse */
-    .act-location i {
-      animation: locationBounce 2s ease-in-out infinite;
-    }
-    @keyframes locationBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
-    }
-
-    /* Coins dorés avec animation de dessin séquentielle */
-    .card-corner {
-      transition: width 0.5s var(--ease-doux), height 0.5s var(--ease-doux), opacity 0.4s;
-    }
-    .act-card:hover .card-corner.tl { animation: cornerDrawTL 0.4s var(--ease-doux) forwards; }
-    .act-card:hover .card-corner.tr { animation: cornerDrawTR 0.4s var(--ease-doux) 0.1s forwards; }
-    .act-card:hover .card-corner.bl { animation: cornerDrawBL 0.4s var(--ease-doux) 0.2s forwards; }
-    .act-card:hover .card-corner.br { animation: cornerDrawBR 0.4s var(--ease-doux) 0.3s forwards; }
-
-    @keyframes cornerDrawTL { from { width:0; height:0; } to { width:24px; height:24px; } }
-    @keyframes cornerDrawTR { from { width:0; height:0; } to { width:24px; height:24px; } }
-    @keyframes cornerDrawBL { from { width:0; height:0; } to { width:24px; height:24px; } }
-    @keyframes cornerDrawBR { from { width:0; height:0; } to { width:24px; height:24px; } }
-
-    /* Catégorie badge avec rotation subtile */
-    .cat-badge {
-      transition: background 0.3s, transform 0.3s var(--ease-spring);
-    }
-    .act-card:hover .cat-badge {
-      transform: translateY(-2px) scale(1.05);
-    }
-
-    /* Description qui s'éclaircit au hover */
-    .act-desc {
-      transition: color 0.4s;
-    }
-    .act-card:hover .act-desc {
-      color: var(--texte-doux);
-    }
-
-    /* Ombre portée qui pulse doucement en idle */
-    .act-card {
-      animation: cardShadowPulse 4s ease-in-out infinite;
-    }
-    @keyframes cardShadowPulse {
-      0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-      50% { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    }
-    .act-card:hover {
-      animation: none;
-    }
-
-
-
-    /* ============================================================
-       ANIMATION SWIPPING SUR CARTES EXISTANTES
-       ============================================================ */
-
-    /* Conteneur de rangée avec perspective pour l'effet 3D */
-    .stagger-row {
-      perspective: 1200px;
-      margin-bottom: 2rem;
-    }
-
-    /* Carte avec effet swipping au survol */
-    .act-card {
-      transition: transform 0.5s var(--ease-doux), 
-                  box-shadow 0.5s var(--ease-doux),
-                  margin 0.4s var(--ease-doux);
-    }
-
-    /* Lorsqu'une carte est survolée, elle se met en avant */
-    .act-card:hover {
-      transform: translateY(-10px) scale(1.03) rotateY(-2deg);
-      z-index: 10;
-    }
-
-    /* Les cartes voisines dans la même rangée s'écartent */
-    .stagger-row:hover .act-card:not(:hover) {
-      transform: scale(0.97) translateX(0);
-      opacity: 0.7;
-      filter: grayscale(0.3);
-    }
-
-    /* Effet swipping spécifique : glissement latéral au survol de la rangée */
-    .stagger-row .col-md-6:first-child:hover ~ .col-md-6 .act-card,
-    .stagger-row .col-md-6:nth-child(2):hover ~ .col-md-6 .act-card {
-      transform: translateX(20px) scale(0.97);
-    }
-
-    .stagger-row .col-md-6:nth-child(2):hover .act-card {
-      transform: translateX(-10px) scale(1.03);
-    }
-
-    /* Animation d'entrée swipping pour les cartes */
-    @keyframes cardSwipeIn {
-      from {
-        opacity: 0;
-        transform: translateX(-80px) rotateY(15deg) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0) rotateY(0) scale(1);
-      }
-    }
-
-    @keyframes cardSwipeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(80px) rotateY(-15deg) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0) rotateY(0) scale(1);
-      }
-    }
-
-    /* Application des animations d'entrée swipping */
-    .stagger-row.visible .stagger-item:nth-child(1) .act-card {
-      animation: cardSwipeIn 0.7s var(--ease-doux) forwards;
-      animation-delay: 0s;
-    }
-
-    .stagger-row.visible .stagger-item:nth-child(2) .act-card {
-      animation: cardSwipeInRight 0.7s var(--ease-doux) forwards;
-      animation-delay: 0.15s;
-    }
-
-    /* Effet de "swipe" sur l'image au survol */
-    .act-card-img {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .act-card-img::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.6s ease;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .act-card:hover .act-card-img::before {
-      left: 150%;
-    }
-
-    /* Badge catégorie qui glisse au survol */
-    .cat-badge {
-      transition: transform 0.3s var(--ease-spring), background 0.3s;
-    }
-
-    .act-card:hover .cat-badge {
-      transform: translateX(5px) translateY(-2px);
-    }
-
-    /* Numéro qui tourne au survol */
-    .act-num {
-      transition: transform 0.5s var(--ease-spring), color 0.3s;
-    }
-
-    .act-card:hover .act-num {
-      transform: scale(1.3) rotate(-10deg);
-      color: var(--or);
-    }
-
-    /* Carte vedette avec effet swipping */
-    .act-featured {
-      transition: transform 0.6s var(--ease-doux), box-shadow 0.6s var(--ease-doux);
-      transform-style: preserve-3d;
-    }
-
-    .act-featured:hover {
-      transform: translateY(-8px) rotateX(2deg);
-    }
-
-    .act-featured:hover .feat-img img {
-      transform: scale(1.08) translateX(-10px);
-    }
-
-    /* Animation d'entrée swipping pour la carte vedette */
-    @keyframes featuredSwipeIn {
-      from {
-        opacity: 0;
-        transform: translateY(60px) rotateX(10deg) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0) scale(1);
-      }
-    }
-
-    .reveal-clip.visible .act-featured {
-      animation: featuredSwipeIn 0.9s var(--ease-doux) forwards;
-    }
-
-/* Responsive : désactiver les effets swipping complexes sur mobile */
-    @media (max-width: 767px) {
-      .stagger-row:hover .act-card:not(:hover) {
-        transform: none;
-        opacity: 1;
-        filter: none;
-      }
-
-      .act-card:hover {
-        transform: translateY(-6px) scale(1.02);
-      }
-
-      @keyframes cardSwipeIn {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      @keyframes cardSwipeInRight {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    }
-
-
-    /* ============================================================
-       LIGHTBOX / MODAL — Photo qui s'ouvre en grand au clic
-       ============================================================ */
-
-    /* Overlay sombre */
-    .lightbox-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(26, 26, 26, 0.92);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
-      padding: 2rem;
-    }
-
-    .lightbox-overlay.active {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.4s ease, visibility 0s linear 0s;
-    }
-
-    /* Conteneur de l'image */
-    .lightbox-container {
-      position: relative;
-      max-width: 90vw;
-      max-height: 85vh;
-      transform: scale(0.7) translateY(40px);
-      opacity: 0;
-      transition: transform 0.5s var(--ease-spring), opacity 0.4s ease;
-    }
-
-    .lightbox-overlay.active .lightbox-container {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-
-    /* Image agrandie */
-    .lightbox-img {
-      max-width: 100%;
-      max-height: 85vh;
-      border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-      object-fit: contain;
-    }
-
-    /* Bouton fermeture */
-    .lightbox-close {
-      position: absolute;
-      top: -50px;
-      right: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.3);
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s, transform 0.3s var(--ease-spring);
-      z-index: 10;
-    }
-
-    .lightbox-close:hover {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
-      transform: scale(1.1) rotate(90deg);
-    }
-
-    /* Informations sous l'image */
-    .lightbox-info {
-      position: absolute;
-      bottom: -60px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
-    }
-
-    .lightbox-overlay.active .lightbox-info {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .lightbox-info h4 {
-      font-family: var(--font-titre);
-      font-size: 1.3rem;
-      margin: 0 0 0.3rem;
-      color: #fff;
-    }
-
-    .lightbox-info p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.7);
-      margin: 0;
-    }
-
-    /* Indicateur de clic sur les cartes */
-    .act-card-img {
-      cursor: zoom-in;
-    }
-
-    .act-featured .feat-img {
-      cursor: zoom-in;
-    }
-
-    /* Animation de l'image qui "vole" depuis la carte vers le centre */
-    .lightbox-fly {
-      position: fixed;
-      z-index: 1999;
-      border-radius: 6px;
-      object-fit: cover;
-      transition: all 0.5s var(--ease-doux);
-      pointer-events: none;
-    }
-
-    /* Navigation flèches */
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: 2px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: 1.3rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s, transform 0.3s;
-      z-index: 10;
-    }
-
-    .lightbox-nav:hover {
-      background: var(--terracotta);
-      border-color: var(--terracotta);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .lightbox-nav.prev { left: -80px; }
-    .lightbox-nav.next { right: -80px; }
-
-    /* Compteur d'images */
-    .lightbox-counter {
-      position: absolute;
-      top: -45px;
-      left: 0;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .lightbox-nav.prev { left: 10px; }
-      .lightbox-nav.next { right: 10px; }
-      .lightbox-container { max-width: 95vw; }
-      .lightbox-close { top: -40px; right: -10px; }
-    }
-
-
-    /* ============================================================
-       COULEURS DIFFÉRENCIÉES DES CARTES
-       ============================================================ */
-
-    /* Carte Terracotta - accent chaud */
-    .act-card.act-card {
-      border-color: rgba(192,85,42,0.25);
-    }
-    .act-card.act-card:hover {
-      box-shadow: 0 20px 50px -15px rgba(192,85,42,0.4), 0 0 0 2px var(--terracotta);
-    }
-    .act-card.act-card .act-card-title-wrap::after {
-      background: var(--terracotta);
-    }
-    .act-card.act-card:hover .act-card-body h3 {
-      color: var(--terracotta);
-    }
-    .act-card.act-card .btn-decouvrir {
-      border-color: rgba(192,85,42,0.4);
-      color: var(--terracotta);
-    }
-    .act-card.act-card .btn-decouvrir::before {
-      background: var(--terracotta);
-    }
-    .act-card.act-card .btn-decouvrir:hover {
-      border-color: var(--terracotta);
-    }
-    .act-card.act-card .cat-badge {
-      background: var(--terracotta);
-    }
-    .act-card.act-card:hover .cat-badge {
-      background: var(--or);
-      color: var(--encre);
-    }
-
-    /* Carte Vert - accent nature */
-    .act-card.act-card {
-      border-color: rgba(45,80,22,0.25);
-    }
-    .act-card.act-card:hover {
-      box-shadow: 0 20px 50px -15px rgba(45,80,22,0.4), 0 0 0 2px var(--vert);
-    }
-    .act-card.act-card .act-card-title-wrap::after {
-      background: var(--vert);
-    }
-    .act-card.act-card:hover .act-card-body h3 {
-      color: var(--vert);
-    }
-    .act-card.act-card .btn-decouvrir {
-      border-color: rgba(45,80,22,0.4);
-      color: var(--vert);
-    }
-    .act-card.act-card .btn-decouvrir::before {
-      background: var(--vert);
-    }
-    .act-card.act-card .btn-decouvrir:hover {
-      border-color: var(--vert);
-    }
-    .act-card.act-card .cat-badge {
-      background: var(--vert);
-    }
-    .act-card.act-card:hover .cat-badge {
-      background: var(--or);
-      color: var(--encre);
-    }
-
-    /* Carte Or - accent doré */
-    .act-card.act-card {
-      border-color: rgba(212,175,55,0.35);
-    }
-    .act-card.act-card:hover {
-      box-shadow: 0 20px 50px -15px rgba(212,175,55,0.4), 0 0 0 2px var(--or);
-    }
-    .act-card.act-card .act-card-title-wrap::after {
-      background: var(--or);
-    }
-    .act-card.act-card:hover .act-card-body h3 {
-      color: var(--or-fonce);
-    }
-    .act-card.act-card .btn-decouvrir {
-      border-color: rgba(212,175,55,0.5);
-      color: var(--or-fonce);
-    }
-    .act-card.act-card .btn-decouvrir::before {
-      background: var(--or);
-    }
-    .act-card.act-card .btn-decouvrir:hover {
-      border-color: var(--or);
-      color: var(--encre);
-    }
-    .act-card.act-card .cat-badge {
-      background: var(--or);
-      color: var(--encre);
-    }
-    .act-card.act-card:hover .cat-badge {
-      background: var(--terracotta);
-      color: #fff;
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
+    .feat-link:hover i { transform: translateX(4px); }
+
+    /* ── SCROLL REVEAL ── */
+    #filtered-grid { opacity: 1; }
+    .act-item { animation: itemIn 0.5s var(--ease-doux) both; }
+    @keyframes itemIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(26,26,26,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0s linear 0.4s; padding: 2rem; }
+    .lightbox-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.4s ease, visibility 0s; }
+    .lightbox-container { position: relative; max-width: 90vw; max-height: 85vh; transform: scale(0.9); opacity: 0; transition: transform 0.4s var(--ease-spring), opacity 0.3s ease; }
+    .lightbox-overlay.active .lightbox-container { transform: scale(1); opacity: 1; }
+    .lightbox-img { max-width: 100%; max-height: 85vh; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); object-fit: contain; display: block; }
+    .lightbox-close { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; color: #fff; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.3s; }
+    .lightbox-close:hover { background: var(--terracotta); transform: rotate(90deg); }
+    .lightbox-info { position: absolute; bottom: -62px; left: 0; right: 0; text-align: center; color: #fff; }
+    .lightbox-info h4 { font-family: var(--font-titre); font-size: 1.2rem; margin: 0 0 0.25rem; }
+    .lightbox-info p { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin: 0; }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.3s; }
+    .lightbox-nav:hover { background: var(--terracotta); transform: translateY(-50%) scale(1.1); }
+    .lightbox-nav.prev { left: -72px; }
+    .lightbox-nav.next { right: -72px; }
+    .lightbox-counter { position: absolute; top: -46px; left: 0; color: rgba(255,255,255,0.55); font-size: 0.78rem; letter-spacing: 0.08em; }
+
+    /* ── FOOTER ── */
+    .footer-maroc { background: var(--encre); color: rgba(255,255,255,0.3); text-align: center; padding: 2.5rem 1rem; font-size: 0.8rem; position: relative; }
+    .footer-maroc::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--terracotta); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    /* ── RESPONSIVE ── */
     @media (max-width: 991px) {
       .hero-act { grid-template-columns: 1fr; }
       .hero-right { height: 45vh; order: -1; }
-      .hero-left { padding: 5rem 2rem 3rem; }
+      .hero-left { padding: 4rem 1.5rem 2.5rem; }
       .act-featured { grid-template-columns: 1fr; }
-      .feat-img { min-height: 260px; }
-      .feat-body { padding: 2rem; }
-      .nav-fab { top: 1.1rem; }
+      .feat-img { min-height: 250px; }
+      .feat-body { padding: 1.8rem; }
+      .lightbox-nav.prev { left: 8px; }
+      .lightbox-nav.next { right: 8px; }
       .nav-fab-logo { left: 1.1rem; }
       .nav-fab-burger { right: 1.1rem; }
-      .site-menu { padding: 5.5rem 1.25rem 2.5rem; }
-      .menu-sub-list.cities { grid-template-columns: 1fr; }
+      .nav-fab { top: 1.1rem; }
     }
     @media (max-width: 767px) {
-      .hero-act h1 { font-size: clamp(3rem, 12vw, 5rem); }
-      .act-card-img { height: 190px; }
+      .act-card-img { height: 185px; }
       .act-card-body { padding: 1rem; }
-    }
-    @media (max-width: 480px) {
-      .hero-left { padding: 5rem 1.2rem 2.5rem; }
-      .act-card-img { height: 170px; }
       .act-card-body h3 { font-size: 1.1rem; }
+      .filter-tab { padding: 0.45rem 0.9rem; font-size: 0.7rem; }
     }
+
+
+    /* ═══════════════════════════════════════════════════════════════
+       ANIMATIONS SUPPLÉMENTAIRES — Activités Maroc 2026
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── 1. SCROLL-TRIGGERED REVEAL ── */
+    .reveal-hidden {
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      transition: opacity 0.7s var(--ease-doux), transform 0.7s var(--ease-doux);
+      will-change: transform, opacity;
+    }
+    .reveal-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+
+    /* ── 2. COUNTER ANIMATION ── */
+    @keyframes countUpBadge {
+      from { opacity: 0; transform: translateY(20px) scale(0.8); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .hero-photo-badge .badge-num {
+      display: inline-block;
+      animation: countUpBadge 0.8s var(--ease-doux) 2.2s both;
+    }
+
+    /* ── 3. FLOATING BADGES ── */
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-5px) rotate(0.5deg); }
+      75% { transform: translateY(5px) rotate(-0.5deg); }
+    }
+    .city-badge {
+      animation: floatBadge 5s ease-in-out infinite;
+    }
+    .cat-badge {
+      animation: floatBadge 5s ease-in-out infinite;
+      animation-delay: 0.35s;
+    }
+
+    /* ── 4. SHIMMER SUR CARTE VEDETTE ── */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .act-featured {
+      position: relative;
+      overflow: hidden;
+    }
+    .act-featured::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 20px;
+      z-index: 3;
+    }
+
+    /* ── 5. PULSE BADGE AU HOVER ── */
+    @keyframes pulseBadge {
+      0%, 100% { box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+      50% { box-shadow: 0 4px 14px rgba(192,85,42,0.35); }
+    }
+    .act-card:hover .cat-badge {
+      animation: pulseBadge 1.5s ease-in-out infinite;
+    }
+
+    /* ── 6. SCROLL PROGRESS BAR ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--terracotta), var(--or));
+      z-index: 9999;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.1s linear;
+    }
+
+    /* ── 7. CARD ENTRANCE STAGGER ── */
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .act-item:not(.hidden) {
+      animation: cardEntrance 0.55s var(--ease-doux) both;
+    }
+    .act-item:not(.hidden):nth-child(1)  { animation-delay: 0.00s; }
+    .act-item:not(.hidden):nth-child(2)  { animation-delay: 0.06s; }
+    .act-item:not(.hidden):nth-child(3)  { animation-delay: 0.12s; }
+    .act-item:not(.hidden):nth-child(4)  { animation-delay: 0.18s; }
+    .act-item:not(.hidden):nth-child(5)  { animation-delay: 0.24s; }
+    .act-item:not(.hidden):nth-child(6)  { animation-delay: 0.30s; }
+    .act-item:not(.hidden):nth-child(7)  { animation-delay: 0.36s; }
+    .act-item:not(.hidden):nth-child(8)  { animation-delay: 0.42s; }
+    .act-item:not(.hidden):nth-child(9)  { animation-delay: 0.48s; }
+    .act-item:not(.hidden):nth-child(10) { animation-delay: 0.54s; }
+    .act-item:not(.hidden):nth-child(11) { animation-delay: 0.60s; }
+    .act-item:not(.hidden):nth-child(12) { animation-delay: 0.66s; }
+    .act-item:not(.hidden):nth-child(13) { animation-delay: 0.72s; }
+    .act-item:not(.hidden):nth-child(14) { animation-delay: 0.78s; }
+    .act-item:not(.hidden):nth-child(15) { animation-delay: 0.84s; }
+    .act-item:not(.hidden):nth-child(16) { animation-delay: 0.90s; }
+    .act-item:not(.hidden):nth-child(17) { animation-delay: 0.96s; }
+    .act-item:not(.hidden):nth-child(18) { animation-delay: 1.02s; }
+    .act-item:not(.hidden):nth-child(19) { animation-delay: 1.08s; }
+    .act-item:not(.hidden):nth-child(20) { animation-delay: 1.14s; }
+    .act-item:not(.hidden):nth-child(21) { animation-delay: 1.20s; }
+    .act-item:not(.hidden):nth-child(22) { animation-delay: 1.26s; }
+    .act-item:not(.hidden):nth-child(23) { animation-delay: 1.32s; }
+    .act-item:not(.hidden):nth-child(24) { animation-delay: 1.38s; }
+    .act-item:not(.hidden):nth-child(25) { animation-delay: 1.44s; }
+    .act-item:not(.hidden):nth-child(26) { animation-delay: 1.50s; }
+    .act-item:not(.hidden):nth-child(27) { animation-delay: 1.56s; }
+
+    /* ── 8. WAVE SUR FILTER TAB ACTIF ── */
+    @keyframes tabWave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    .filter-tab.active {
+      animation: tabWave 2.5s ease-in-out infinite;
+    }
+
+    /* ── 9. GLOW SUR FEATURED ── */
+    @keyframes featuredGlow {
+      0%, 100% { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+      50% { box-shadow: 0 12px 40px rgba(192,85,42,0.12), 0 0 60px rgba(212,175,55,0.06); }
+    }
+    .act-featured {
+      animation: featuredGlow 4s ease-in-out infinite;
+    }
+
+    /* ── 10. BOUNCE IN BADGES ── */
+    @keyframes badgeBounceIn {
+      0%   { transform: scale(0) rotate(-8deg); opacity: 0; }
+      60%  { transform: scale(1.12) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .city-badge, .cat-badge {
+      animation: badgeBounceIn 0.6s var(--ease-spring) both;
+    }
+
+    /* ── 11. LINE DRAWING SUR BOUTONS ── */
+    .btn-decouvrir, .feat-link {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-decouvrir::after, .feat-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--terracotta);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s var(--ease-doux);
+    }
+    .btn-decouvrir:hover::after, .feat-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* ── 12. CURSOR FOLLOW GLOW ── */
+    .act-card {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .act-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                    rgba(192,85,42,0.07), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .act-card:hover::before {
+      opacity: 1;
+    }
+    .act-card:hover {
+      transform: translateY(-8px) rotateX(1deg) rotateY(-0.5deg);
+    }
+
+    /* ── 13. ROTATING DECO ── */
+    @keyframes rotateDeco {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .hero-deco-line .line-seg {
+      position: relative;
+    }
+    .hero-deco-line .line-seg::after {
+      content: "◆";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--or);
+      font-size: 0.5rem;
+      animation: rotateDeco 8s linear infinite;
+    }
+
+    /* ── 14. SMOOTH FILTER TRANSITION ── */
+    .act-item {
+      transition: opacity 0.4s var(--ease-doux), 
+                  transform 0.4s var(--ease-doux),
+                  filter 0.4s var(--ease-doux);
+    }
+    .act-item.hidden {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-hidden {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .act-item:not(.hidden) {
+        animation: none;
+      }
+      .city-badge, .cat-badge,
+      .hero-photo-badge .badge-num,
+      .act-featured,
+      .filter-tab.active,
+      .hero-deco-line .line-seg::after {
+        animation: none;
+      }
+      .act-card:hover {
+        transform: translateY(-4px);
+      }
+    }
+
   </style>
+  <base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
-
 <body>
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- NAV FABs -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
@@ -1409,13 +619,11 @@
     <span></span><span></span>
   </button>
 
-  <!-- MENU PLEIN ÉCRAN -->
-  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <!-- MENU -->
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Navigation">
     <div class="site-menu-inner">
       <div class="menu-group" data-group>
-        <button type="button" class="menu-head" aria-expanded="false">
-          Accueil <i class="bi bi-chevron-down chev"></i>
-        </button>
+        <button type="button" class="menu-head" aria-expanded="false">Accueil <i class="bi bi-chevron-down chev"></i></button>
         <div class="menu-sub">
           <ul class="menu-sub-list">
             <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
@@ -1427,44 +635,26 @@
         </div>
       </div>
       <div class="menu-group" data-group>
-        <button type="button" class="menu-head" aria-expanded="false">
-          Villes <i class="bi bi-chevron-down chev"></i>
-        </button>
+        <button type="button" class="menu-head" aria-expanded="false">Villes <i class="bi bi-chevron-down chev"></i></button>
         <div class="menu-sub">
           <ul class="menu-sub-list cities">
-            <li><a href="tanger.html">Tanger</a></li>
-            <li><a href="chefchaouen.html">Chefchaouen</a></li>
-            <li><a href="rabat.html">Rabat</a></li>
-            <li><a href="fes.html">Fès</a></li>
-            <li><a href="ifrane.html">Ifrane</a></li>
-            <li><a href="merzouga.html">Merzouga</a></li>
             <li><a href="marrakech.html">Marrakech</a></li>
-            <li><a href="essaouira.html">Essaouira</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
             <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
           </ul>
         </div>
       </div>
-      <div class="menu-group">
-        <a class="menu-head" href="dishes.html">Plats <i class="bi bi-arrow-right chev"></i></a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">
-          Activités <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="itineraire.html">Itinéraires <i class="bi bi-arrow-right chev"></i></a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="index.html#mapSection">Destinations <i class="bi bi-arrow-right chev"></i></a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="index.html#guideSection">Guide <i class="bi bi-arrow-right chev"></i></a>
-      </div>
-      <a class="menu-cta" href="index.html#flightsSection"><i class="bi bi-airplane"></i>Réserver un Vol</a>
+      <div class="menu-group"><a class="menu-head" href="dishes.html">Plats <i class="bi bi-arrow-right chev"></i></a></div>
+      <div class="menu-group"><a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">Activités <i class="bi bi-arrow-right chev"></i></a></div>
+      <div class="menu-group"><a class="menu-head" href="guide.html">Guide <i class="bi bi-arrow-right chev"></i></a></div>
+      <a class="menu-cta" href="flights.html"><i class="bi bi-airplane"></i>Réserver un Vol</a>
       <div class="menu-foot">
-        <button type="button" class="motion-toggle" id="motionToggle"
-                role="switch" aria-checked="true" aria-label="Animations">
+        <button type="button" class="motion-toggle" id="motionToggle" role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
           <span>Animations</span>
         </button>
@@ -1472,611 +662,945 @@
     </div>
   </div>
 
-  <!-- ================================================================
-       HERO — Split gauche/droite, palette sable
-  ================================================================ -->
+  <!-- HERO -->
   <section class="hero-act">
-    <!-- Particules dorées flottantes -->
     <div class="particles" aria-hidden="true">
-      <div class="particle"></div><div class="particle"></div>
-      <div class="particle"></div><div class="particle"></div>
-      <div class="particle"></div><div class="particle"></div>
-      <div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
     </div>
-
-    <!-- Gauche : texte -->
     <div class="hero-left">
-  
-      <div class="hero-deco-line">
-        <span class="line-seg"></span>
-        <span class="label">Maroc · 2026</span>
-        <span class="line-seg"></span>
-      </div>
-
+      <div class="hero-deco-line"><span class="line-seg"></span><span class="label">Maroc · 2026</span><span class="line-seg"></span></div>
       <p class="hero-eyebrow">Activités Incontournables</p>
-
-      <h1>
-        <span class="word">VIS&nbsp;</span><span class="word">LE&nbsp;</span><span class="word">MAROC</span>
-      </h1>
-
-      <p class="hero-sub"></p>
-      <p class="hero-desc">
-        Des ruelles azur de Chefchaouen aux dunes infinies de Merzouga — plongez au cœur d'aventures qui transforment chaque voyageur.
-      </p>
-      <a href="#activitesSection" class="hero-cta">
-        <span>Explorer les activités</span>
-        <i class="bi bi-arrow-down"></i>
-      </a>
+      <h1><span class="word">VIS&nbsp;</span><span class="word">LE&nbsp;</span><span class="word">MAROC</span></h1>
+      <p class="hero-desc">Des ruelles azur de Chefchaouen aux dunes infinies de Merzouga — plongez au cœur d'aventures qui transforment chaque voyageur.</p>
+      <a href="#activitesSection" class="hero-cta"><span>Explorer les activités</span><i class="bi bi-arrow-down"></i></a>
     </div>
-
-    <!-- Droite : photo -->
     <div class="hero-right">
-      <img src="assets/photo-1539020140153-e479b8c22e70_a7c6a5a9.jpg"
-           alt="Maroc — activités et paysages" />
-
-
-    </div>
-
-    <!-- Scroll hint -->
-    <div class="hero-scroll" aria-hidden="true">
-      <div class="scroll-track"></div>
-      <span>Défiler</span>
+      <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1200&q=80" alt="Maroc" />
+      <div class="hero-photo-badge"><span class="badge-num">25+</span><span class="badge-label">Activités</span></div>
     </div>
   </section>
 
-  <!-- ================================================================
-       FILTER BAR
-  ================================================================ -->
+  <!-- FILTER BAR -->
   <nav class="filter-section" id="filterSection" aria-label="Filtres">
     <div class="filter-inner">
-      <button class="filter-tab active" data-filter="all">
-        <i class="bi bi-grid-3x3-gap-fill"></i>Toutes
-      </button>
-      <button class="filter-tab" data-filter="culture">
-        <i class="bi bi-bank2"></i>Culture
-      </button>
-      <button class="filter-tab" data-filter="nature">
-        <i class="bi bi-tree"></i>Nature
-      </button>
-      <button class="filter-tab" data-filter="aventure">
-        <i class="bi bi-compass"></i>Aventure
-      </button>
+      <button class="filter-tab active" data-filter="all">Toutes</button>
+      <button class="filter-tab" data-filter="culture">Culture</button>
+      <button class="filter-tab" data-filter="nature">Nature</button>
+      <button class="filter-tab" data-filter="aventure">Aventure</button>
+      <button class="filter-tab" data-filter="sport">Sport</button>
+      <button class="filter-tab" data-filter="detente">Détente</button>
     </div>
   </nav>
 
   <!-- ================================================================
        SECTION ACTIVITÉS
+       Toutes les activités dans une grille CSS 2 colonnes.
+       Le filtre masque/affiche les .act-item — les visibles se
+       regroupent automatiquement 2 par 2 sans rangées vides.
   ================================================================ -->
   <section class="activities-section" id="activitesSection">
     <div class="container">
+      <div id="filtered-grid">
 
-      <!-- ── PAIRE 1 : Chefchaouen + Marrakech ── -->
-      <div class="row g-4 stagger-row" id="row-pair1">
-        <!-- Carte 1 : Chefchaouen -->
-        <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card" data-color="terracotta">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
+        <!-- 1 · Marrakech — Quad -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="aventure sport">
+          <div class="act-card">
             <div class="act-card-img">
-              <img src="assets/e8504f5dc25ce9385cfdf11a0cc48e7710addf4f_c4e58fa3.jpg"
-                   alt="Rivière d'Akchour — Chefchaouen" loading="lazy" />
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="Quad dans le désert" loading="lazy" />
               <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Chefchaouen</span>
-                <span class="cat-badge">Aventure</span>
-              </div>
+              <div class="act-badges"><span class="city-badge">MARRAKECH</span><span class="cat-badge">AVENTURE</span></div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Chefchaouen</span>
-              <div class="act-card-title-wrap"><h3>Tubing à Akchour</h3></div>
-              <p class="act-desc">Glissez sur les eaux cristallines d'Akchour en bouée, entre gorges sauvages et falaises vertigineuses. Une descente aquatique exaltante au cœur du Rif, entre baignades et paysages à couper le souffle.</p>
-              <a href="chefchaouen.html" class="btn-decouvrir">
-                <span>Découvrir Chefchaouen</span> <i class="bi bi-arrow-right"></i>
-              </a>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
+              <h3>Quad dans le Désert</h3>
+              <p class="act-desc">Conduisez un véhicule tout-terrain à travers les palmiers et les dunes aux portes de Marrakech. Pure adrénaline au cœur des paysages semi-désertiques.</p>
+              <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
         </div>
-        <!-- Carte 2 : Marrakech -->
-        <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card" data-color="vert">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
-            <div class="act-card-img">
-              <img src="assets/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0_fe59b2b8.jpeg"
-                   alt="Musiciens Gnawa traditionnels — Place Jemaa el-Fna, Marrakech" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Marrakech</span>
-                <span class="cat-badge">Culture</span>
-              </div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Marrakech</span>
-              <div class="act-card-title-wrap"><h3>Place Jemaa el-Fna</h3></div>
-              <p class="act-desc">À la tombée du jour, la place mythique s'embrase : spectacles de rue envoûtants, conteurs berbères, musiciens traditionnels au gnawa et étals de cuisine qui embaument les sens.</p>
-              <a href="marrakech.html" class="btn-decouvrir">
-                <span>Découvrir Marrakech</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- ── PAIRE 2 : Essaouira + Agadir ── -->
-      <div class="row g-4 stagger-row" id="row-pair2">
-        <!-- Carte 3 : Essaouira -->
-        <div class="col-md-6 stagger-item" data-tags="sport aventure">
-          <div class="act-card" data-color="or">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
+        <!-- 2 · Marrakech — Montgolfière -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="aventure detente">
+          <div class="act-card">
             <div class="act-card-img">
-              <img src="assets/e122637ef4920c7e0f818da119d2032e33779e99_8d2ecaa6.jpg"
-                   alt="Kitesurf à Essaouira" loading="lazy" />
+              <!-- Photo montgolfière au lever du soleil sur un paysage désertique -->
+              <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="Vol en Montgolfière au-dessus de Marrakech" loading="lazy" />
               <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Essaouira</span>
-                <span class="cat-badge">Sport</span>
-              </div>
+              <div class="act-badges"><span class="city-badge">MARRAKECH</span><span class="cat-badge">AVENTURE</span></div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Essaouira</span>
-              <div class="act-card-title-wrap"><h3>Kitesurf</h3></div>
-              <p class="act-desc">La baie d'Essaouira est un spot de kitesurf mondialement reconnu. Vent alizé constant, eaux peu profondes et vagues parfaites pour débutants comme experts.</p>
-              <a href="essaouira.html" class="btn-decouvrir">
-                <span>Découvrir Essaouira</span> <i class="bi bi-arrow-right"></i>
-              </a>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
+              <h3>Vol en Montgolfière</h3>
+              <p class="act-desc">Envolez-vous à l'aube au-dessus des palmeraies et des kasbahs. Vue panoramique sur l'Atlas enneigé depuis une nacelle suspendue dans le silence du ciel.</p>
+              <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
         </div>
-        <!-- Carte 4 : Agadir -->
-        <div class="col-md-6 stagger-item" data-tags="sport aventure">
-          <div class="act-card" data-color="terracotta">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
+
+        <!-- 3 · Marrakech — Hammam -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="detente culture">
+          <div class="act-card">
             <div class="act-card-img">
-              <img src="assets/80f3d47923a384909e1484b7b086649ac922d1db_ad3c470f.jpg"
-                   alt="Jet Ski à Agadir" loading="lazy" />
+              <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="Hammam marocain" loading="lazy" />
               <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Agadir</span>
-                <span class="cat-badge">Sport</span>
-              </div>
+              <div class="act-badges"><span class="city-badge">MARRAKECH</span><span class="cat-badge">DÉTENTE</span></div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Agadir</span>
-              <div class="act-card-title-wrap"><h3>Jet Ski</h3></div>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
+              <h3>Spa &amp; Hammam Traditionnel</h3>
+              <p class="act-desc">Plongez dans le rituel ancestral du hammam marocain — vapeur, savon beldi, kessa et huile d'argan. Un moment de pur ressourcement dans un riad historique.</p>
+              <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 · Marrakech — Jemaa el-Fna -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="culture">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="Place Jemaa el-Fna" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">MARRAKECH</span><span class="cat-badge">CULTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
+              <h3>Place Jemaa el-Fna</h3>
+              <p class="act-desc">À la tombée du jour, la place mythique s'embrase : spectacles de rue, conteurs berbères, musiciens gnawa et étals de cuisine qui embaument les sens.</p>
+              <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 · Agadir — Surf -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <!-- Photo surf côte marocaine Agadir -->
+              <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="Surf Atlantique à Agadir" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">AGADIR</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
+              <h3>Surf Atlantique</h3>
+              <p class="act-desc">Les plages d'Agadir offrent des vagues parfaites pour tous les niveaux. Débutants et experts profitent de cours encadrés ou de sessions libres sur des breaks de classe mondiale.</p>
+              <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 · Agadir — Jet Ski -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/cdn.rents.ma/ccd57b35856947b0a109afc4ee1f20e8dae27fd4.webp" alt="Jet Ski Agadir" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">AGADIR</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
+              <h3>Jet Ski</h3>
               <p class="act-desc">Fendez les vagues de l'Atlantique à bord d'un jet ski. Adrénaline garantie sur les eaux turquoise d'Agadir, entre vitesse et paysages côtiers spectaculaires.</p>
-              <a href="agadir.html" class="btn-decouvrir">
-                <span>Découvrir Agadir</span> <i class="bi bi-arrow-right"></i>
-              </a>
+              <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ── PAIRE 3 : Rabat + Ifrane ── -->
-      <div class="row g-4 stagger-row" id="row-pair3">
-        <!-- Carte 5 : Rabat -->
-        <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card" data-color="vert">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
+        <!-- 7 · Agadir — Paddle -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="sport detente">
+          <div class="act-card">
             <div class="act-card-img">
-              <img src="assets/84c374b7ef7ff296b91f03ec3f9e8e1fa035ddfd_80558b01.jpg"
-                   alt="Balade en bateau sur le Bouregreg — Rabat" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80" alt="Paddle Agadir" loading="lazy" />
               <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Rabat</span>
-                <span class="cat-badge">Détente</span>
-              </div>
+              <div class="act-badges"><span class="city-badge">AGADIR</span><span class="cat-badge">SPORT</span></div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Rabat</span>
-              <div class="act-card-title-wrap"><h3>Balade en Bateau sur le Bouregreg</h3></div>
-              <p class="act-desc">Naviguez sur les eaux calmes du Bouregreg à bord d'une embarcation traditionnelle, entre les rives de Rabat et Salé. Une perspective unique sur la Kasbah, la Tour Hassan et le théâtre Mohammed V.</p>
-              <a href="rabat.html" class="btn-decouvrir">
-                <span>Découvrir Rabat</span> <i class="bi bi-arrow-right"></i>
-              </a>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
+              <h3>Stand-up Paddle</h3>
+              <p class="act-desc">Naviguez debout sur une planche avec une pagaie le long de la baie d'Agadir. Idéal pour explorer les eaux calmes près de la plage et renforcer l'équilibre.</p>
+              <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
         </div>
-        <!-- Carte 6 : Ifrane -->
-        <div class="col-md-6 stagger-item" data-tags="nature aventure">
-          <div class="act-card" data-color="or">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
+
+        <!-- 8 · Dakhla — Kitesurf -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="sport aventure">
+          <div class="act-card">
             <div class="act-card-img">
-              <img src="assets/a25db5bfe7487b7122654bc747cc8981563cbc7a_9dd76ff5.jpg"
-                   alt="Camping à Ifrane" loading="lazy" />
+              <img src="https://kimi-web-img.moonshot.cn/img/cf.bstatic.com/89ad2052cdc5a675fb1d95174cd326d0d78b2281.jpg" alt="Kitesurf Dakhla" loading="lazy" />
               <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Ifrane</span>
-                <span class="cat-badge">Nature</span>
-              </div>
+              <div class="act-badges"><span class="city-badge">DAKHLA</span><span class="cat-badge">SPORT</span></div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Ifrane</span>
-              <div class="act-card-title-wrap"><h3>Camping en Forêt de Cèdres</h3></div>
-              <p class="act-desc">Bivouaquez sous les cèdres millénaires de l'Atlas, au cœur d'une nature préservée. Nuits étoilées, sentiers de randonnée et air pur de moyenne altitude.</p>
-              <a href="ifrane.html" class="btn-decouvrir">
-                <span>Découvrir Ifrane</span> <i class="bi bi-arrow-right"></i>
-              </a>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
+              <h3>Kitesurf</h3>
+              <p class="act-desc">La lagune de Dakhla est l'un des meilleurs spots de kitesurf au monde. Eaux peu profondes et vent constant toute l'année font de ce lieu un paradis pour les riders.</p>
+              <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ── CARTE VEDETTE : Merzouga (la plus spectaculaire) ── -->
-      <div class="mb-4 reveal-clip" data-tags="aventure culture">
-        <div class="act-featured">
-          <div class="feat-img">
-            <img src="assets/003a095dfb1300247b2f088d2d846d2e566eb0aa_e123a1c7.jpg"
-                 alt="Balade à dos de chameau — Merzouga" loading="lazy" />
-            <div class="feat-img-overlay"></div>
-            <span class="feat-badge">Merzouga</span>
-          </div>
-          <div class="feat-body">
-            <span class="feat-cat-pill"><i class="bi bi-compass"></i> Aventure</span>
-            <p class="feat-city-label"><i class="bi bi-geo-alt-fill"></i> Merzouga, Maroc</p>
-            <h3>Balade à dos de Chameau</h3>
-            <p>Partez en caravane à travers les dunes de l'Erg Chebbi au crépuscule. Une heure de dromadaire jusqu'à votre bivouac berbère, sous un ciel étoilé sans fin — l'expérience saharienne par excellence.</p>
-            <a href="merzouga.html" class="feat-link">
-              Découvrir Merzouga <i class="bi bi-arrow-right"></i>
-            </a>
+        <!-- 9 · Dakhla — Camping de Luxe -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="detente nature">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&q=80" alt="Camping de luxe Dakhla" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">DAKHLA</span><span class="cat-badge">DÉTENTE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
+              <h3>Camping de Luxe</h3>
+              <p class="act-desc">Dormez dans des tentes équipées face à la lagune, entre désert et océan. Coucher de soleil sur l'eau, dîner sous les étoiles dans un cadre préservé.</p>
+              <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
+            </div>
           </div>
         </div>
-      </div>
+
+        <!-- 10 · Dakhla — Kayak -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="sport nature aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/i0.wp.com/b676333a2009138cc6568fe7f9d79a77129fb202.jpg" alt="Kayak Dakhla" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">DAKHLA</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
+              <h3>Kayak en Lagune</h3>
+              <p class="act-desc">Pagayez à travers la lagune de Dakhla, en observant flamants roses et dauphins. Une aventure douce au milieu d'une nature encore sauvage.</p>
+              <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 · Chefchaouen — Tubing -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="aventure sport">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/e8504f5dc25ce9385cfdf11a0cc48e7710addf4f.jpg" alt="Tubing Akchour" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CHEFCHAOUEN</span><span class="cat-badge">AVENTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
+              <h3>Tubing à Akchour</h3>
+              <p class="act-desc">Glissez sur les eaux cristallines d'Akchour en bouée, entre gorges sauvages et falaises vertigineuses. Une descente exaltante au cœur du Rif.</p>
+              <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 · Chefchaouen — Randonnée -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="nature aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80" alt="Randonnée Rif" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CHEFCHAOUEN</span><span class="cat-badge">NATURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
+              <h3>Randonnée dans le Rif</h3>
+              <p class="act-desc">Sillonnez les sentiers escarpés du massif du Rif à travers forêts de pins et villages berbères. Vue panoramique sur la ville bleue depuis les crêtes.</p>
+              <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 · Chefchaouen — Photographie -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="culture detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/2e1b0564b7b6d4525ccac6b636c7776bc9fe118c.jpg" alt="Photographie Chefchaouen" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CHEFCHAOUEN</span><span class="cat-badge">CULTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
+              <h3>Photographie Artistique</h3>
+              <p class="act-desc">Chaque ruelle et chaque porte de Chefchaouen est un tableau. La ville bleue est un studio photo naturel unique, entre lumières dorées et bleus infinis.</p>
+              <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 · Chefchaouen — Escalade -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=80" alt="Escalade Rif" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CHEFCHAOUEN</span><span class="cat-badge">AVENTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
+              <h3>Escalade en Falaise</h3>
+              <p class="act-desc">Les falaises calcaires du Rif offrent des voies d'escalade exceptionnelles avec vue sur la médina bleue. Instructeurs certifiés et équipement fourni.</p>
+              <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15 · Essaouira — Kitesurf -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/kiteworldwide.com/e122637ef4920c7e0f818da119d2032e33779e99.jpg" alt="Kitesurf Essaouira" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">ESSAOUIRA</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
+              <h3>Kitesurf</h3>
+              <p class="act-desc">La baie d'Essaouira est un spot de kitesurf mondialement reconnu. Vent alizé constant, eaux peu profondes, vagues parfaites pour tous niveaux.</p>
+              <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 · Essaouira — Windsurf -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Windsurf Essaouira" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">ESSAOUIRA</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
+              <h3>Windsurf</h3>
+              <p class="act-desc">Hissez la voile et laissez les alizés vous porter. Essaouira figure parmi les spots de windsurf les plus réputés d'Afrique, conditions idéales de mai à octobre.</p>
+              <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17 · Essaouira — Musique Gnawa -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="culture detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80" alt="Musique Gnawa" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">ESSAOUIRA</span><span class="cat-badge">CULTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
+              <h3>Musique Live Gnawa</h3>
+              <p class="act-desc">Essaouira, capitale mondiale du gnawa, vibre au rythme des crotales et des guembris. Performances envoûtantes dans les cafés de la médina et lors du festival annuel.</p>
+              <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18 · Casablanca — Vie nocturne -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="detente culture">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&q=80" alt="Vie nocturne Casablanca" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CASABLANCA</span><span class="cat-badge">DÉTENTE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
+              <h3>Vie Nocturne</h3>
+              <p class="act-desc">La nuit à Casablanca ne dort jamais. Clubs branchés, bars à cocktails et restaurants animés jusqu'à l'aube composent une scène nocturne digne des grandes capitales.</p>
+              <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19 · Casablanca — Rooftop -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=800&q=80" alt="Rooftop Casablanca" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CASABLANCA</span><span class="cat-badge">DÉTENTE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
+              <h3>Rooftop avec Vue</h3>
+              <p class="act-desc">Depuis les terrasses perchées de Casa, admirez la skyline et l'océan. Cocktails, musique lounge et couchers de soleil sur la Grande Mosquée Hassan II.</p>
+              <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20 · Casablanca — Shopping -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="culture detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80" alt="Shopping Casablanca" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">CASABLANCA</span><span class="cat-badge">CULTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
+              <h3>Shopping &amp; Artisanat</h3>
+              <p class="act-desc">Souks de l'ancienne médina aux boutiques de luxe d'Anfa : Casablanca conjugue artisanat marocain authentique — zellige, maroquinerie, caftan — et mode internationale.</p>
+              <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 21 · Ifrane — Ski -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80" alt="Ski Ifrane" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">IFRANE</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
+              <h3>Ski à Michlifen</h3>
+              <p class="act-desc">La station de Michlifen accueille les amateurs de ski de décembre à mars. Pistes pour tous niveaux, remontées mécaniques et panorama sur l'Atlas Moyen enneigé.</p>
+              <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 22 · Ifrane — Camping Cèdres -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="nature detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="Camping forêt de cèdres" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">IFRANE</span><span class="cat-badge">NATURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
+              <h3>Camping en Forêt de Cèdres</h3>
+              <p class="act-desc">Bivouaquez sous les cèdres millénaires de l'Atlas. Nuits étoilées, sentiers de randonnée et air pur de moyenne altitude aux côtés des singes magots.</p>
+              <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 23 · Ifrane — VTT -->
+        <div class="act-item reveal-hidden reveal-delay-3" data-tags="sport nature aventure">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://ifrane.pnm.ma/wp-content/uploads/2025/10/vtt_parc_ifrane.jpg" alt="VTT Ifrane" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">IFRANE</span><span class="cat-badge">SPORT</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
+              <h3>Vélo de Montagne</h3>
+              <p class="act-desc">Roulez à travers les sentiers forestiers et les lacs de l'Atlas Moyen. Paysages de carte postale entre forêts de cèdres et cascades cachées.</p>
+              <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24 · Rabat — Bouregreg -->
+        <div class="act-item reveal-hidden reveal-delay-4" data-tags="culture detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://www.visitrabat.com/app/uploads/2025/12/DSC06493-min.jpg" alt="Bouregreg Rabat" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">RABAT</span><span class="cat-badge">DÉTENTE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>RABAT</span>
+              <h3>Balade sur le Bouregreg</h3>
+              <p class="act-desc">Naviguez sur les eaux calmes du Bouregreg à bord d'une embarcation traditionnelle entre Rabat et Salé. Vue unique sur la Kasbah et la Tour Hassan.</p>
+              <a href="rabat.html" class="btn-decouvrir">Découvrir Rabat <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ★ CARTE VEDETTE : Merzouga — Chameau (pleine largeur) -->
+        <div class="act-item featured-wrapper" data-tags="aventure culture">
+          <div class="act-featured">
+            <div class="feat-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/cameltripssahara.com/003a095dfb1300247b2f088d2d846d2e566eb0aa.jpg" alt="Balade à dos de chameau Merzouga" loading="lazy" />
+              <div class="feat-img-overlay"></div>
+              <span class="feat-badge">MERZOUGA</span>
+            </div>
+            <div class="feat-body">
+              <span class="feat-cat-pill"><i class="bi bi-compass"></i> AVENTURE</span>
+              <p class="feat-city-label"><i class="bi bi-geo-alt-fill"></i> MERZOUGA, MAROC</p>
+              <h3>Balade à dos de Chameau</h3>
+              <p>Partez en caravane à travers les dunes de l'Erg Chebbi au crépuscule. Une heure de dromadaire jusqu'à votre bivouac berbère, sous un ciel étoilé sans fin — l'expérience saharienne par excellence.</p>
+              <a href="merzouga.html" class="feat-link">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 25 · Merzouga — Sandboard -->
+        <div class="act-item reveal-hidden reveal-delay-1" data-tags="aventure sport">
+          <div class="act-card">
+            <div class="act-card-img">
+              <img src="https://saharaquads.com/wp-content/uploads/2024/04/Merzouga-sandboarding-5.jpg" alt="Sandboard dunes Merzouga" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">MERZOUGA</span><span class="cat-badge">AVENTURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MERZOUGA</span>
+              <h3>Sandboard</h3>
+              <p class="act-desc">Dévalez les dunes géantes de l'Erg Chebbi sur une planche de sandboard. Sensation de glisse unique sur un terrain naturel exceptionnel.</p>
+              <a href="merzouga.html" class="btn-decouvrir">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 26 · Merzouga — Observation des Étoiles -->
+        <div class="act-item reveal-hidden reveal-delay-2" data-tags="nature detente">
+          <div class="act-card">
+            <div class="act-card-img">
+              <!--
+                Photo spécifique : ciel étoilé au-dessus des dunes de l'Erg Chebbi / Merzouga.
+                Unsplash — photo de Sean Foley, dunes du Sahara marocain la nuit.
+              -->
+              <img src="https://kimi-web-img.moonshot.cn/img/moroccodeserttrips.com/d7bd7ff1af261a66c6b737a61f3e891a88d41e4f.webp" alt="Observation des étoiles dans le désert de Merzouga" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges"><span class="city-badge">MERZOUGA</span><span class="cat-badge">NATURE</span></div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MERZOUGA</span>
+              <h3>Observation des Étoiles</h3>
+              <p class="act-desc">Loin de toute pollution lumineuse, le ciel du Sahara dévoile la Voie Lactée dans toute sa splendeur. Allongé sur les dunes de l'Erg Chebbi, des milliers d'étoiles vous entourent — un spectacle inoubliable.</p>
+              <a href="merzouga.html" class="btn-decouvrir">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#filtered-grid -->
     </div>
   </section>
 
-
-
-  <!-- ================================================================
-       LIGHTBOX / MODAL — Photos des activités en grand
-  ================================================================ -->
+  <!-- LIGHTBOX -->
   <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Galerie photo">
     <div class="lightbox-container">
-      <span class="lightbox-counter" id="lightboxCounter">1 / 7</span>
-      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
-        <i class="bi bi-x-lg"></i>
-      </button>
-      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Photo précédente">
-        <i class="bi bi-chevron-left"></i>
-      </button>
+      <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer"><i class="bi bi-x-lg"></i></button>
+      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Précédent"><i class="bi bi-chevron-left"></i></button>
       <img class="lightbox-img" id="lightboxImg" src="" alt="" />
-      <button class="lightbox-nav next" id="lightboxNext" aria-label="Photo suivante">
-        <i class="bi bi-chevron-right"></i>
-      </button>
-      <div class="lightbox-info" id="lightboxInfo">
+      <button class="lightbox-nav next" id="lightboxNext" aria-label="Suivant"><i class="bi bi-chevron-right"></i></button>
+      <div class="lightbox-info">
         <h4 id="lightboxTitle"></h4>
         <p id="lightboxLocation"></p>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer-maroc">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    /* === 1. MENU === */
-    (function () {
-      const toggle = document.getElementById('menuToggle');
-      const menu = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
-      const groups = menu.querySelectorAll('.menu-group[data-group]');
-      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+  /* ── MENU ── */
+  (function () {
+    const toggle = document.getElementById('menuToggle');
+    const menu   = document.getElementById('siteMenu');
+    if (!toggle || !menu) return;
+    const groups = menu.querySelectorAll('.menu-group[data-group]');
+    const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+    function activate(g) {
+      groups.forEach(x => { const on=x===g; x.classList.toggle('open',on); const h=x.querySelector('.menu-head'); if(h) h.setAttribute('aria-expanded',on?'true':'false'); });
+    }
+    function setMenu(open) {
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open?'true':'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) activate(groups[0]);
+    }
+    toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+    document.addEventListener('keydown', e => { if(e.key==='Escape') setMenu(false); });
+    menu.addEventListener('click', e => { if(e.target===menu) setMenu(false); });
+    groups.forEach(g => {
+      const h = g.querySelector('.menu-head');
+      if (!h) return;
+      h.addEventListener('click', () => isDesktop() ? activate(g) : (g.classList.contains('open') ? activate(null) : activate(g)));
+    });
+  })();
 
-      function activate(group) {
-        groups.forEach(g => {
-          const on = g === group;
-          g.classList.toggle('open', on);
-          const h = g.querySelector('.menu-head');
-          if (h) h.setAttribute('aria-expanded', on ? 'true' : 'false');
-        });
-      }
+  /* ── MOTION TOGGLE ── */
+  (function () {
+    const btn = document.getElementById('motionToggle');
+    if (!btn) return;
+    function setMotion(on) {
+      document.body.classList.toggle('reduce-motion', !on);
+      btn.setAttribute('aria-checked', on?'true':'false');
+      try { localStorage.setItem('mdMotion', on?'on':'off'); } catch(e){}
+    }
+    btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+    let s=null; try{s=localStorage.getItem('mdMotion');}catch(e){}
+    setMotion(s ? s==='on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  })();
 
-      function setMenu(open) {
-        document.body.classList.toggle('menu-open', open);
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        document.body.style.overflow = open ? 'hidden' : '';
-        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) activate(groups[0]);
-      }
+  /* ── FILTRES — regroupement 2 par 2 automatique via CSS grid ──
+     On ajoute/retire la classe .hidden sur chaque .act-item.
+     La grille CSS (#filtered-grid) fait le reste : les items
+     visibles se placent automatiquement 2 par 2 sans lignes vides.
+  */
+  (function () {
+    const tabs  = document.querySelectorAll('.filter-tab');
+    const items = document.querySelectorAll('#filtered-grid .act-item');
 
-      toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-      menu.addEventListener('click', e => { if (e.target === menu) setMenu(false); });
-
-      groups.forEach(group => {
-        const head = group.querySelector('.menu-head');
-        if (!head) return;
-        head.addEventListener('click', () => {
-          isDesktop() ? activate(group) : (group.classList.contains('open') ? activate(null) : activate(group));
-        });
-      });
-
-      menu.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', e => {
-          const t = document.querySelector(link.getAttribute('href'));
-          if (t) { e.preventDefault(); setMenu(false); setTimeout(() => t.scrollIntoView({ behavior: 'smooth' }), 120); }
-          else { setMenu(false); }
-        });
-      });
-    })();
-
-    /* === 2. INTERSECTION OBSERVER — Révélations au scroll === */
-    (function () {
-      /* Reveal simple */
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-      /* Clip-path reveal */
-      const ioClip = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ioClip.unobserve(e.target); } });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal-clip').forEach(el => ioClip.observe(el));
-
-      /* Stagger rows */
-      const ioStagger = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ioStagger.unobserve(e.target); } });
-      }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
-      document.querySelectorAll('.stagger-row').forEach(el => ioStagger.observe(el));
-    })();
-
-    /* === 3. FILTRES === */
-    (function () {
-      const tabs = document.querySelectorAll('.filter-tab');
-
-      function setCount() {
-        let n = 0;
-        document.querySelectorAll('[data-tags]').forEach(el => { if (el.style.display !== 'none') n++; });
-        // Counter display removed per design request
-      }
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const filter = tab.dataset.filter;
-
-          document.querySelectorAll('[data-tags]').forEach(el => {
-            const tags = (el.dataset.tags || '').split(' ');
-            const show = filter === 'all' || tags.includes(filter);
-            if (show) {
-              el.style.display = '';
-              el.style.opacity = '1';
-              el.style.transform = '';
-              el.style.transition = 'opacity 0.4s ease, transform 0.45s var(--ease-doux)';
-            } else {
-              el.style.opacity = '0';
-              el.style.transform = 'scale(0.9) translateY(10px)';
-              el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-              setTimeout(() => { el.style.display = 'none'; }, 310);
-            }
-          });
-
-          setTimeout(setCount, 350);
-        });
-      });
-    })();
-
-    /* === 4. TILT 3D SUR CARTES (desktop) === */
-    (function () {
-      if (!window.matchMedia('(min-width: 992px)').matches) return;
-      document.querySelectorAll('.act-card, .act-featured').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          if (document.body.classList.contains('reduce-motion')) return;
-          const rect = card.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
-          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
-          card.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-10px) scale(1.015)`;
-        });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-      });
-    })();
-
-    /* === 5. PARALLAXE HERO PHOTO === */
-    (function () {
-      const img = document.querySelector('.hero-right img');
-      if (!img) return;
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            if (!document.body.classList.contains('reduce-motion')) {
-              const y = window.pageYOffset * 0.15;
-              img.style.transform = `scale(1.08) translateY(${y}px)`;
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-    })();
-
-    /* === 6. MOTION TOGGLE === */
-    (function () {
-      const btn = document.getElementById('motionToggle');
-      if (!btn) return;
-      function setMotion(on) {
-        document.body.classList.toggle('reduce-motion', !on);
-        btn.setAttribute('aria-checked', on ? 'true' : 'false');
-        try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
-      }
-      btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
-      let stored = null;
-      try { stored = localStorage.getItem('mdMotion'); } catch (e) {}
-      setMotion(stored ? stored === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    })();
-
-    /* === 7. EFFET MAGNÉTIQUE sur boutons CTA === */
-    (function () {
-      if (!window.matchMedia('(min-width: 992px)').matches) return;
-      document.querySelectorAll('.hero-cta, .menu-cta').forEach(btn => {
-        btn.addEventListener('mousemove', e => {
-          if (document.body.classList.contains('reduce-motion')) return;
-          const rect = btn.getBoundingClientRect();
-          const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
-          const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
-          btn.style.transform = `translate(${x}px, ${y}px)`;
-        });
-        btn.addEventListener('mouseleave', () => {
-          btn.style.transform = '';
-          btn.style.transition = 'transform 0.4s var(--ease-spring)';
-        });
-      });
-    })();
-
-
-
-    /* ============================================================
-       LIGHTBOX / MODAL — Ouverture photo au clic sur carte
-       ============================================================ */
-    (function() {
-      const overlay = document.getElementById('lightboxOverlay');
-      const lightboxImg = document.getElementById('lightboxImg');
-      const lightboxTitle = document.getElementById('lightboxTitle');
-      const lightboxLocation = document.getElementById('lightboxLocation');
-      const lightboxCounter = document.getElementById('lightboxCounter');
-      const btnClose = document.getElementById('lightboxClose');
-      const btnPrev = document.getElementById('lightboxPrev');
-      const btnNext = document.getElementById('lightboxNext');
-
-      if (!overlay) return;
-
-      // Collecter toutes les cartes avec leurs données
-      const cards = [];
-      document.querySelectorAll('.act-card').forEach((card, index) => {
-        const img = card.querySelector('.act-card-img img');
-        const title = card.querySelector('h3')?.textContent || '';
-        const location = card.querySelector('.act-location')?.textContent || '';
-        if (img) {
-          cards.push({
-            src: img.src,
-            alt: img.alt,
-            title: title,
-            location: location,
-            element: img
-          });
+    function applyFilter(filter) {
+      let delay = 0;
+      items.forEach(item => {
+        const tags = (item.dataset.tags || '').split(' ');
+        const show = filter === 'all' || tags.includes(filter);
+        if (show) {
+          item.classList.remove('hidden');
+          item.style.animationDelay = delay * 0.06 + 's';
+          // Re-trigger animation
+          item.style.animation = 'none';
+          item.offsetHeight; // reflow
+          item.style.animation = '';
+          delay++;
+        } else {
+          item.classList.add('hidden');
         }
       });
+    }
 
-      // Ajouter aussi la carte vedette
-      const featured = document.querySelector('.act-featured');
-      if (featured) {
-        const featImg = featured.querySelector('.feat-img img');
-        const featTitle = featured.querySelector('h3')?.textContent || '';
-        const featLocation = featured.querySelector('.feat-city-label')?.textContent || '';
-        if (featImg) {
-          cards.push({
-            src: featImg.src,
-            alt: featImg.alt,
-            title: featTitle,
-            location: featLocation,
-            element: featImg
-          });
-        }
-      }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        applyFilter(tab.dataset.filter);
+      });
+    });
+  })();
 
-      let currentIndex = 0;
+  /* ── LIGHTBOX ── */
+  (function () {
+    const overlay  = document.getElementById('lightboxOverlay');
+    const lbImg    = document.getElementById('lightboxImg');
+    const lbTitle  = document.getElementById('lightboxTitle');
+    const lbLoc    = document.getElementById('lightboxLocation');
+    const lbCount  = document.getElementById('lightboxCounter');
+    const btnClose = document.getElementById('lightboxClose');
+    const btnPrev  = document.getElementById('lightboxPrev');
+    const btnNext  = document.getElementById('lightboxNext');
+    if (!overlay) return;
 
-      function openLightbox(index) {
-        if (index < 0 || index >= cards.length) return;
-        currentIndex = index;
-        const card = cards[index];
+    // Collect ALL images (cards + featured)
+    const cards = [];
+    document.querySelectorAll('.act-card').forEach(card => {
+      const img  = card.querySelector('.act-card-img img');
+      const h3   = card.querySelector('h3');
+      const loc  = card.querySelector('.act-location');
+      if (img) cards.push({ src: img.src, alt: img.alt, title: h3?.textContent||'', location: loc?.textContent||'', el: img });
+    });
+    const feat = document.querySelector('.act-featured');
+    if (feat) {
+      const img = feat.querySelector('.feat-img img');
+      const h3  = feat.querySelector('h3');
+      const loc = feat.querySelector('.feat-city-label');
+      if (img) cards.push({ src: img.src, alt: img.alt, title: h3?.textContent||'', location: loc?.textContent||'', el: img });
+    }
 
-        lightboxImg.src = card.src;
-        lightboxImg.alt = card.alt;
-        lightboxTitle.textContent = card.title;
-        lightboxLocation.textContent = card.location;
-        lightboxCounter.textContent = `${index + 1} / ${cards.length}`;
+    let current = 0;
 
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
+    function open(i) {
+      if (i < 0 || i >= cards.length) return;
+      current = i;
+      const c = cards[i];
+      lbImg.src = c.src; lbImg.alt = c.alt;
+      lbTitle.textContent = c.title;
+      lbLoc.textContent   = c.location;
+      lbCount.textContent = `${i+1} / ${cards.length}`;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() { overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    function next()  { open((current+1) % cards.length); }
+    function prev()  { open((current-1+cards.length) % cards.length); }
 
-      function closeLightbox() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-        setTimeout(() => {
-          lightboxImg.src = '';
-        }, 400);
-      }
+    cards.forEach((c,i) => {
+      if (c.el) { c.el.style.cursor='zoom-in'; c.el.addEventListener('click', e => { e.preventDefault(); open(i); }); }
+    });
+    btnClose?.addEventListener('click', close);
+    btnNext?.addEventListener('click', next);
+    btnPrev?.addEventListener('click', prev);
+    overlay.addEventListener('click', e => { if(e.target===overlay) close(); });
+    document.addEventListener('keydown', e => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key==='Escape') close();
+      if (e.key==='ArrowRight') next();
+      if (e.key==='ArrowLeft')  prev();
+    });
+    let tx=0;
+    overlay.addEventListener('touchstart', e => { tx=e.touches[0].clientX; }, {passive:true});
+    overlay.addEventListener('touchend',   e => { const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>50) d>0?next():prev(); }, {passive:true});
+  })();
+  
 
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % cards.length;
-        openLightbox(currentIndex);
-      }
+  /* ═══════════════════════════════════════════════════════════════
+     ANIMATIONS SUPPLÉMENTAIRES — JavaScript
+     ═══════════════════════════════════════════════════════════════ */
 
-      function prevImage() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        openLightbox(currentIndex);
-      }
+  /* ── 1. INTERSECTION OBSERVER — Scroll Reveal ── */
+  (function () {
+    const revealElements = document.querySelectorAll('.reveal-hidden');
+    if (!revealElements.length) return;
 
-      // Clic sur les images des cartes
-      cards.forEach((card, index) => {
-        if (card.element) {
-          card.element.style.cursor = 'zoom-in';
-          card.element.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            openLightbox(index);
-          });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target);
         }
       });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-      // Contrôles
-      btnClose.addEventListener('click', closeLightbox);
-      btnNext.addEventListener('click', nextImage);
-      btnPrev.addEventListener('click', prevImage);
+    revealElements.forEach(el => observer.observe(el));
+  })();
 
-      // Clic sur l'overlay pour fermer
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeLightbox();
+  /* ── 2. SCROLL PROGRESS BAR ── */
+  (function () {
+    const progressBar = document.getElementById('scrollProgress');
+    if (!progressBar) return;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  })();
+
+  /* ── 3. MAGNETIC BUTTONS ── */
+  (function () {
+    const magneticBtns = document.querySelectorAll('.btn-decouvrir, .hero-cta, .menu-cta, .feat-link');
+    if (!magneticBtns.length) return;
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
       });
-
-      // Navigation clavier
-      document.addEventListener('keydown', (e) => {
-        if (!overlay.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') prevImage();
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
       });
+    });
+  })();
 
-      // Swipe tactile pour mobile
-      let touchStartX = 0;
-      overlay.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
+  /* ── 4. CURSOR FOLLOW GLOW ── */
+  (function () {
+    const cards = document.querySelectorAll('.act-card');
+    if (!cards.length) return;
 
-      overlay.addEventListener('touchend', (e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) nextImage();
-          else prevImage();
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', x + '%');
+        card.style.setProperty('--mouse-y', y + '%');
+      });
+    });
+  })();
+
+  /* ── 5. COUNTER ANIMATION (badge 25+) ── */
+  (function () {
+    const badgeNum = document.querySelector('.badge-num');
+    if (!badgeNum) return;
+
+    const target = parseInt(badgeNum.textContent) || 25;
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          let current = 0;
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function animate(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            current = Math.floor(eased * target);
+            badgeNum.textContent = current + (target > current ? '+' : '');
+            if (progress < 1) requestAnimationFrame(animate);
+            else badgeNum.textContent = target + '+';
+          }
+          requestAnimationFrame(animate);
+          observer.unobserve(entry.target);
         }
-      }, { passive: true });
-    })();
+      });
+    }, { threshold: 0.5 });
 
-    console.log('✨ activites.html v4 — 7 villes · Palette Maroc · Animations créatives chargées.');
-  </script>
+    observer.observe(badgeNum);
+  })();
 
+  /* ── 6. PARALLAX HERO ── */
+  (function () {
+    const heroRight = document.querySelector('.hero-right img');
+    const heroLeft = document.querySelector('.hero-left');
+    if (!heroRight || !heroLeft) return;
+
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const heroHeight = document.querySelector('.hero-act').offsetHeight;
+      const progress = Math.min(scrollY / heroHeight, 1);
+
+      heroRight.style.transform = `scale(${1.05 + progress * 0.05}) translateY(${progress * -30}px)`;
+      heroLeft.style.transform = `translateY(${progress * -20}px)`;
+      heroLeft.style.opacity = 1 - progress * 0.5;
+    }
+
+    window.addEventListener('scroll', updateParallax, { passive: true });
+  })();
+
+  /* ── 7. TEXT SCRAMBLE (hero h1) ── */
+  (function () {
+    const words = document.querySelectorAll('.hero-act .word');
+    if (!words.length) return;
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    words.forEach((word, idx) => {
+      const original = word.textContent;
+      const delay = 800 + idx * 200;
+
+      setTimeout(() => {
+        let iterations = 0;
+        const interval = setInterval(() => {
+          word.textContent = original.split('').map((char, i) => {
+            if (char === ' ' || char === '&') return char;
+            if (i < iterations) return original[i];
+            return chars[Math.floor(Math.random() * chars.length)];
+          }).join('');
+
+          iterations += 0.4;
+          if (iterations >= original.length) {
+            word.textContent = original;
+            clearInterval(interval);
+          }
+        }, 45);
+      }, delay);
+    });
+  })();
+
+  /* ── 8. SMOOTH SCROLL ANCHORS ── */
+  (function () {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  })();
+
+  /* ── 9. RIPPLE EFFECT ── */
+  (function () {
+    const buttons = document.querySelectorAll('.btn-decouvrir, .hero-cta, .filter-tab, .menu-cta');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.style.cssText = `
+          position: absolute;
+          background: rgba(255,255,255,0.3);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: rippleEffect 0.6s linear;
+          pointer-events: none;
+          left: ${x}px;
+          top: ${y}px;
+          width: 20px;
+          height: 20px;
+          margin-left: -10px;
+          margin-top: -10px;
+        `;
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    const style = document.createElement('style');
+    style.textContent = `@keyframes rippleEffect { to { transform: scale(15); opacity: 0; } }`;
+    document.head.appendChild(style);
+  })();
+
+  /* ── 10. LAZY LOAD FADE IN ── */
+  (function () {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.style.opacity = '0';
+          img.style.transition = 'opacity 0.6s var(--ease-doux)';
+
+          if (img.complete) {
+            img.style.opacity = '1';
+          } else {
+            img.addEventListener('load', () => { img.style.opacity = '1'; }, { once: true });
+          }
+          imgObserver.unobserve(img);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '50px' });
+
+    images.forEach(img => imgObserver.observe(img));
+  })();
+
+  /* ── 11. 3D TILT CARDS ── */
+  (function () {
+    const cards = document.querySelectorAll('.act-card');
+    if (!cards.length) return;
+
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch) return;
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 25;
+        const rotateY = (centerX - x) / 25;
+
+        card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  })();
+
+</script>
 </body>
 </html>
