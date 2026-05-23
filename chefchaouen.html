@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chefchaouen — La Perle Bleue | Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- === Shared Destination Styling === -->
+  <link href="city-page.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- === Floating navigation menu system === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION 1: HERO === -->
+  <section class="city-hero">
+    <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=1920&q=80" alt="Chefchaouen" class="city-hero-img">
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <span class="city-eyebrow hero-animate-1">La Perle Bleue</span>
+      <h1 class="hero-animate-2">Chefchaouen</h1>
+      <p class="city-tagline hero-animate-3">Une symphonie d'indigo et de cobalt blottie au creux du Rif</p>
+      <div class="city-breadcrumb hero-animate-3">
+        <a href="index.html">Accueil</a> → <a href="destinations.html">Destinations</a> → <span>Chefchaouen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Chaîne du Rif — Tanger-Tétouan-Al Hoceïma</span>
+          <h2>L'émerveillement bleu d'une cité andalouse</h2>
+          <p>Fondée au XVe siècle pour résister aux invasions portugaises, Chefchaouen est une cité fortifiée unique au monde, mondialement réputée pour sa médina dont les façades, les portes et les escaliers pavés sont peints de camaïeux de bleus hypnotiques. Blottie au pied des cimes spectaculaires du Rif, elle dégage une sérénité bohème et un calme d'un autre temps.</p>
+          <p>Pourquoi ce bleu ? Les hypothèses abondent : de la tradition spirituelle juive introduite par les réfugiés andalous au XVe siècle (le bleu rappelant le ciel et le divin) à l'effet répulsif naturel contre les moustiques, ou simplement pour conserver la fraîcheur des habitations sous la chaleur de l'été. Aujourd'hui, cette teinte signature confère à la cité un charme surréel.</p>
+          <p>Chefchaouen est également le camp de base idéal pour explorer la nature verdoyante du Rif. Des sentiers exceptionnels vous guideront vers la Mosquée Espagnole isolée dominant la vallée au crépuscule, ou vers les eaux émeraude translucides des gorges d'Akchour et le Pont de Dieu, monumentale arche rocheuse naturelle sculptée par le torrent.</p>
+        </div>
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>1-2 jours</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Printemps ou Automne (climats cléments, nature en fleur)</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Tanger-Tétouan-Al Hoceïma / Rif</p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-img-wrap">
+            <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=800&q=80" alt="Chefchaouen ruelles bleues">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <section class="city-highlights">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DÉCOUVERTES</span>
+        <h2>À ne pas manquer à Chefchaouen</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Activité 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-image"></i></div>
+              <img src="https://images.unsplash.com/photo-1553244619-cfd23e3e4ed5?w=600&q=80" alt="Mosquée Espagnole">
+            </div>
+            <h3 class="city-card-title">Mosquée Espagnole</h3>
+            <p class="city-card-desc">Faites une balade sur les collines à l'heure dorée pour le plus beau panorama sur la médina.</p>
+          </div>
+        </div>
+        <!-- Activité 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-droplet"></i></div>
+              <img src="https://images.unsplash.com/photo-1482862549707-f63cb32c5fd9?w=600&q=80" alt="Cascades d'Akchour">
+            </div>
+            <h3 class="city-card-title">Cascades d'Akchour</h3>
+            <p class="city-card-desc">Baignez-vous dans des piscines de montagne d'une limpidité absolue le long de sentiers verdoyants.</p>
+          </div>
+        </div>
+        <!-- Activité 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-compass"></i></div>
+              <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80" alt="Le Pont de Dieu">
+            </div>
+            <h3 class="city-card-title">Le Pont de Dieu</h3>
+            <p class="city-card-desc">Admirez cette arche naturelle géante suspendue au-dessus d'un splendide canyon calcaire.</p>
+          </div>
+        </div>
+        <!-- Activité 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-shop-window"></i></div>
+              <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=600&q=80" alt="Place Uta el-Hammam">
+            </div>
+            <h3 class="city-card-title">Plaza Uta el-Hammam</h3>
+            <p class="city-card-desc">Détendez-vous en terrasse sur cette place animée dominée par l'ancienne Kasbah.</p>
+          </div>
+        </div>
+        <!-- Activité 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-bank"></i></div>
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Musée Kasbah">
+            </div>
+            <h3 class="city-card-title">Musée de la Kasbah</h3>
+            <p class="city-card-desc">Explorez le fort médiéval berbère, ses remparts restaurés et ses frais jardins andalous.</p>
+          </div>
+        </div>
+        <!-- Activité 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-water"></i></div>
+              <img src="https://images.unsplash.com/photo-1482862549707-f63cb32c5fd9?w=600&q=80" alt="Ras el-Maa">
+            </div>
+            <h3 class="city-card-title">Source Ras el-Maa</h3>
+            <p class="city-card-desc">Observez les femmes laver les tapis traditionnels à la source jaillissante de la montagne.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 4: GASTRONOMIE === -->
+  <section class="city-food">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SAVEURS</span>
+        <h2>Gastronomie du Rif</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Plat 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge">Incontournable</span>
+              <img src="https://images.unsplash.com/photo-1593504049359-74330189a345?w=600&q=80" alt="Fromage J'ben">
+            </div>
+            <h3 class="city-card-title">J'ben (Fromage frais)</h3>
+            <p class="city-card-desc">Fromage frais de chèvre traditionnel du Rif, élaboré de façon artisanale et arrosé d'huile d'olive.</p>
+          </div>
+        </div>
+        <!-- Plat 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge">Incontournable</span>
+              <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80" alt="La Bissara">
+            </div>
+            <h3 class="city-card-title">Bissara au Cumin</h3>
+            <p class="city-card-desc">Une purée veloutée de fèves sèches servie bouillante avec de l'huile d'olive sauvage et du cumin moulu.</p>
+          </div>
+        </div>
+        <!-- Plat 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge badge-sec">Spécialité locale</span>
+              <img src="https://images.unsplash.com/photo-1585934812687-2dc724f72993?w=600&q=80" alt="Tagine poulet citron">
+            </div>
+            <h3 class="city-card-title">Tagine au citron confit</h3>
+            <p class="city-card-desc">Mijoté savoureux de poulet fermier aux olives rouges sauvages et écorces de citrons confits maison.</p>
+          </div>
+        </div>
+        <!-- Plat 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <span class="food-badge badge-sec">Spécialité locale</span>
+              <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&q=80" alt="Thé à la verveine">
+            </div>
+            <h3 class="city-card-title">Thé à la Verveine</h3>
+            <p class="city-card-desc">Infusion parfumée de verveine sauvage du Rif et de marjolaine des montagnes ("L'ouiza"), apaisante.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 5: HABILLEMENT === -->
+  <section class="city-dress">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DRESS CODE</span>
+        <h2>Comment s'habiller à Chefchaouen</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Vêtement 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Chapeau Riffain">
+            </div>
+            <div class="dress-icon-tag"><i class="bi bi-sun"></i>Traditionnel</div>
+            <h3 class="city-card-title">Chapeau Riffain</h3>
+            <p class="city-card-desc">Le chapeau de paille traditionnel orné de pompons multicolores, symbole des tisseuses de montagne.</p>
+          </div>
+        </div>
+        <!-- Vêtement 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80" alt="Chaussures de trail">
+            </div>
+            <div class="dress-icon-tag"><i class="bi bi-backpack"></i>Randonnée</div>
+            <h3 class="city-card-title">Chaussures crantées</h3>
+            <p class="city-card-desc">Baskets confortables adhérentes nécessaires pour aborder les sentiers calcaires et glissants d'Akchour.</p>
+          </div>
+        </div>
+        <!-- Vêtement 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=600&q=80" alt="Vêtements respectueux">
+            </div>
+            <div class="dress-icon-tag"><i class="bi bi-person-dress"></i>Médina</div>
+            <h3 class="city-card-title">Tenues décentes</h3>
+            <p class="city-card-desc">Optez pour des étoffes couvrantes (épaules et genoux couverts) pour respecter la tranquillité des familles locales.</p>
+          </div>
+        </div>
+        <!-- Vêtement 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?w=600&q=80" alt="Veste de mi-saison">
+            </div>
+            <div class="dress-icon-tag"><i class="bi bi-cloud-moon"></i>Soirée</div>
+            <h3 class="city-card-title">Sweat de mi-saison</h3>
+            <p class="city-card-desc">L'air de la montagne rafraîchit grandement les nuits rifaines. Un pull chaud est fort appréciable en soirée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <section class="city-hotels">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SÉJOURS</span>
+        <h2>Hébergements d'exception</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Hôtel 1 -->
+        <div class="col-md-4 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Lina Ryad & Spa">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€</span>
+            </div>
+            <h3 class="city-card-title">Lina Ryad & Spa</h3>
+            <p class="city-card-desc">Riad luxueux très calme avec spa d'eau douce, piscine de relaxation chauffée et terrasse panoramique sur le Rif.</p>
+          </div>
+        </div>
+        <!-- Hôtel 2 -->
+        <div class="col-md-4 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Casa Hassan">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+            </div>
+            <h3 class="city-card-title">Casa Hassan</h3>
+            <p class="city-card-desc">Maison d'hôtes mythique célèbre pour ses salons andalous chaleureux à cheminée et son excellente cuisine du Rif.</p>
+          </div>
+        </div>
+        <!-- Hôtel 3 -->
+        <div class="col-md-4 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&q=80" alt="Dar Gabriel">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€</span>
+            </div>
+            <h3 class="city-card-title">Dar Gabriel</h3>
+            <p class="city-card-desc">Demeure traditionnelle intimiste décorée avec goût dans les dégradés bleus, proposant des prix doux.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <section class="city-culture">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">CONSEILS</span>
+        <h2>Culture & Conseils de Voyage</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Conseil 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-house-heart"></i></div>
+            <h3 class="culture-card-title">Respect de l'intimité</h3>
+            <p class="culture-card-desc">La médina bleue est un lieu de vie résidentiel. Évitez de photographier les intérieurs de cours privées et les visages.</p>
+          </div>
+        </div>
+        <!-- Conseil 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-arrow-up-right"></i></div>
+            <h3 class="culture-card-title">Escaliers très raides</h3>
+            <p class="culture-card-desc">La cité est construite à flanc de montagne. Attendez-vous à gravir quotidiennement des centaines de marches raides.</p>
+          </div>
+        </div>
+        <!-- Conseil 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-droplet"></i></div>
+            <h3 class="culture-card-title">Qualité de l'eau</h3>
+            <p class="culture-card-desc">L'eau pure de Ras el-Maa est d'une fraîcheur superbe, mais préférez l'eau minérale capsulée pour ménager votre digestion.</p>
+          </div>
+        </div>
+        <!-- Conseil 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-scissors"></i></div>
+            <h3 class="culture-card-title">Artisanat équitable</h3>
+            <p class="culture-card-desc">La ville excelle dans le tissage de laine. Achetez en direct dans les coopératives pour soutenir l'artisanat du Rif.</p>
+          </div>
+        </div>
+        <!-- Conseil 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-volume-mute"></i></div>
+            <h3 class="culture-card-title">Quiétude locale</h3>
+            <p class="culture-card-desc">Les résidents chérissent le calme de leur cité montagnarde. Veillez à modérer votre voix dans les venelles bleues.</p>
+          </div>
+        </div>
+        <!-- Conseil 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-shield-exclamation"></i></div>
+            <h3 class="culture-card-title">Randonnées d'Akchour</h3>
+            <p class="culture-card-desc">Le terrain calcaire d'Akchour peut s'avérer glissant et abrupt. Recrutez un guide de montagne certifié en toute sécurité.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 8: CTA FINAL === -->
+  <section class="city-cta">
+    <div class="city-cta-content container">
+      <h2>Prêt à succomber au charme bleu de Chefchaouen ?</h2>
+      <p>Laissez-vous transporter par l'atmosphère andalouse unique et les senteurs de montagne. Composez votre voyage de rêve.</p>
+      <div class="city-cta-buttons">
+        <a href="flights.html" class="btn-maroc-primary"><i class="bi bi-airplane"></i>Planifier mon voyage</a>
+        <a href="destinations.html" class="btn-maroc-outline"><i class="bi bi-map"></i>Toutes les destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 9: FOOTER === -->
+  <footer class="footer-simple">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === Navigation Drawer & Scroll Reveal Logic ===
+       ============================================================ */
+
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+    })();
+
+    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
