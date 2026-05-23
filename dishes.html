@@ -129,6 +129,14 @@
       font-weight:800; font-size:0.85rem; padding:0.3rem 0.75rem;
       border-radius:999px; box-shadow:0 4px 10px rgba(0,0,0,0.18);
     }
+    .dish-card-variations {
+      position:absolute; bottom:0.9rem; left:0.9rem;
+      background:rgba(0,0,0,0.62); color:#fff;
+      font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+      padding:0.3rem 0.7rem; border-radius:999px; backdrop-filter:blur(6px);
+      display:inline-flex; align-items:center; gap:0.4rem; font-weight:700;
+    }
+    .dish-card-variations i { font-size:0.85rem; color:var(--or); }
     .dish-card-body { padding:1.2rem 1.3rem 1.4rem; flex:1; display:flex; flex-direction:column; }
     .dish-card-body h3 { margin:0 0 0.35rem; font-size:1.22rem; letter-spacing:-0.01em; }
     .dish-card-body .desc {
@@ -220,6 +228,31 @@
     .allergen-tag.high { background:rgba(192,85,42,0.12); color:var(--terracotta-dark); border:1px solid rgba(192,85,42,0.3); }
     .allergen-tag.medium { background:rgba(212,175,55,0.15); color:#876606; border:1px solid rgba(212,175,55,0.35); }
 
+    .dish-variations-row {
+      margin-top:0.2rem;
+      padding-top:1.1rem; border-top:1px solid rgba(0,0,0,0.07);
+    }
+    .dish-variations-row .var-title {
+      font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+      color:rgba(0,0,0,0.5); font-weight:700; margin-bottom:0.6rem;
+    }
+    .var-chips { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .var-chip {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      padding:0.5rem 1rem; border-radius:999px;
+      border:1.5px solid rgba(0,0,0,0.1); background:#fff;
+      font-family:'Lato',sans-serif; font-size:0.85rem; font-weight:700;
+      color:var(--encre); cursor:pointer;
+      transition:background .25s, color .25s, border-color .25s, transform .25s;
+    }
+    .var-chip i { font-size:1rem; opacity:0.75; }
+    .var-chip:hover { border-color:var(--terracotta); color:var(--terracotta); transform:translateY(-1px); }
+    .var-chip.active {
+      background:var(--terracotta); border-color:var(--terracotta);
+      color:#fff; box-shadow:0 6px 16px rgba(192,85,42,0.32);
+    }
+    .var-chip.active i { opacity:1; color:var(--or); }
+
     .btn-ingredients {
       align-self:flex-start; margin-top:0.4rem;
       display:inline-flex; align-items:center; gap:0.55rem;
@@ -280,8 +313,280 @@
       .ingredients-modal .modal-body { padding:1rem 1.2rem 1.4rem; }
       .ingredients-modal .modal-header { padding:1.3rem 1.4rem 1.1rem; }
     }
+    /* ==========================================================
+       Cinematic polish — atmosphere, motion, microinteractions
+       ========================================================== */
+
+    /* Page-wide subtle zellige pattern + soft vignette */
+    body { position:relative; }
+    body::before {
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><g fill='none' stroke='%23C0552A' stroke-width='0.8' opacity='0.45'><polygon points='80,18 96,52 134,58 106,84 114,124 80,104 46,124 54,84 26,58 64,52'/><circle cx='80' cy='80' r='3'/></g></svg>");
+      background-size:160px 160px;
+      opacity:0.05;
+      animation: bg-drift 90s linear infinite;
+    }
+    body::after {
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.12) 100%);
+    }
+    @keyframes bg-drift { from { background-position:0 0; } to { background-position:160px 160px; } }
+
+    .top-bar { z-index:50; }
+    .dishes-hero, .dishes-section { position:relative; z-index:2; }
+
+    /* === Hero atmosphere === */
+    .dishes-hero { overflow:hidden; isolation:isolate; }
+    .dishes-hero .container { position:relative; z-index:3; }
+    .amb-layer { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    .amb-glow {
+      position:absolute; border-radius:50%; filter:blur(80px);
+      will-change:transform;
+      animation-timing-function: cubic-bezier(.5,.05,.5,.95);
+    }
+    .amb-glow.g1 {
+      width:640px; height:640px; top:-220px; left:-180px;
+      background: radial-gradient(circle, rgba(212,175,55,0.55), transparent 70%);
+      opacity:0.85;
+      animation: drift-1 26s ease-in-out infinite alternate;
+    }
+    .amb-glow.g2 {
+      width:760px; height:760px; bottom:-300px; right:-220px;
+      background: radial-gradient(circle, rgba(192,85,42,0.45), transparent 72%);
+      opacity:0.75;
+      animation: drift-2 32s ease-in-out infinite alternate;
+    }
+    .amb-glow.g3 {
+      width:420px; height:420px; top:30%; left:40%;
+      background: radial-gradient(circle, rgba(255,210,120,0.32), transparent 75%);
+      opacity:0.6;
+      animation: drift-3 38s ease-in-out infinite alternate;
+    }
+    @keyframes drift-1 { from { transform:translate3d(0,0,0); } to { transform:translate3d(80px,50px,0); } }
+    @keyframes drift-2 { from { transform:translate3d(0,0,0); } to { transform:translate3d(-90px,-40px,0); } }
+    @keyframes drift-3 { from { transform:translate3d(-30px,-20px,0) scale(1); } to { transform:translate3d(40px,30px,0) scale(1.08); } }
+
+    /* Hero spotlight that follows the cursor */
+    .hero-spot {
+      position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(circle 360px at var(--mx,50%) var(--my,40%),
+                  rgba(255,235,180,0.22), transparent 65%);
+      opacity:0; transition: opacity .6s ease;
+      mix-blend-mode: screen;
+    }
+    .dishes-hero:hover .hero-spot { opacity:1; }
+
+    /* Floating dust particles */
+    .particles { position:absolute; inset:0; pointer-events:none; }
+    .particle {
+      position:absolute; width:4px; height:4px; border-radius:50%;
+      background: radial-gradient(circle, rgba(255,236,196,0.95), rgba(255,236,196,0));
+      will-change: transform, opacity;
+      animation: float-up linear infinite;
+    }
+    @keyframes float-up {
+      0%   { transform: translate3d(0,40px,0) scale(0.55); opacity:0; }
+      12%  { opacity:0.7; }
+      88%  { opacity:0.5; }
+      100% { transform: translate3d(var(--drift,0px),-260px,0) scale(1.1); opacity:0; }
+    }
+
+    /* Feathered tajine portrait in hero */
+    .hero-tajine {
+      position:absolute; right:-60px; top:50%;
+      width:clamp(260px, 32vw, 460px);
+      aspect-ratio:1/1;
+      border-radius:50%;
+      background-image:url('assets/tajine.jpeg');
+      background-size:cover; background-position:center;
+      transform: translateY(-50%) rotate(-3deg);
+      filter: saturate(1.08) contrast(1.03);
+      opacity:0.46;
+      -webkit-mask-image: radial-gradient(circle, black 38%, transparent 72%);
+              mask-image: radial-gradient(circle, black 38%, transparent 72%);
+      pointer-events:auto;
+      z-index:2;
+      transition: transform 1.1s cubic-bezier(.2,.8,.2,1),
+                  filter .8s ease, opacity .8s ease;
+      will-change: transform, filter;
+    }
+    .hero-tajine::after {
+      content:""; position:absolute; inset:-12% -12% -12% -12%;
+      background: radial-gradient(circle, rgba(212,175,55,0.35), transparent 65%);
+      filter: blur(40px); z-index:-1; opacity:0.65;
+      animation: halo-pulse 6s ease-in-out infinite alternate;
+    }
+    @keyframes halo-pulse { from { opacity:0.45; transform:scale(0.96); } to { opacity:0.8; transform:scale(1.06); } }
+    @media (max-width:980px) { .hero-tajine { display:none; } }
+
+    /* Hero text reveal */
+    .dishes-hero .eyebrow,
+    .dishes-hero p.lead,
+    .dishes-hero .search-wrap {
+      opacity:0; transform: translateY(18px);
+      animation: fade-up .95s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .dishes-hero .eyebrow  { animation-delay:.15s; }
+    .dishes-hero p.lead    { animation-delay:1.0s; }
+    .dishes-hero .search-wrap { animation-delay:1.25s; }
+    @keyframes fade-up { to { opacity:1; transform:translateY(0); } }
+
+    .dishes-hero h1 { letter-spacing:-0.015em; line-height:1.04; }
+    .dishes-hero h1 .word {
+      display:inline-block;
+      opacity:0;
+      transform: translateY(34px) rotateX(-30deg);
+      transform-origin: 50% 100%;
+      animation: word-rise 1s cubic-bezier(.2,.8,.2,1) forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes word-rise {
+      to { opacity:1; transform: translateY(0) rotateX(0); }
+    }
+    .dishes-hero p.lead { letter-spacing:0.005em; }
+
+    .search-wrap input { transition: border-color .35s, box-shadow .45s var(--ease-doux); }
+    .search-wrap:focus-within input {
+      box-shadow: 0 10px 38px rgba(192,85,42,0.22),
+                  0 0 0 4px rgba(192,85,42,0.08);
+    }
+
+    /* === Scroll-reveal choreography on dish cards === */
+    .dish-card {
+      opacity:0;
+      transform: translateY(32px) scale(0.985);
+      animation: card-rise .9s cubic-bezier(.2,.8,.2,1) forwards;
+      animation-delay: var(--reveal-delay, 0ms);
+    }
+    @keyframes card-rise {
+      to { opacity:1; transform: translateY(0) scale(1); }
+    }
+    .dish-card.in-view {
+      opacity:1; transform: translateY(0) scale(1);
+    }
+
+    /* === 3D tilt + glare on dish cards === */
+    .dishes-grid { perspective: 1400px; }
+    .dish-card {
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    .dish-card.in-view.tilt {
+      transform:
+        translateY(-6px)
+        rotateX(var(--rx,0deg))
+        rotateY(var(--ry,0deg));
+      box-shadow:
+        calc(var(--ry,0deg) * -0.6px) calc(var(--rx,0deg) * 0.6px + 18px) 36px rgba(0,0,0,0.18),
+        0 22px 50px rgba(0,0,0,0.10);
+    }
+    .dish-card-img-wrap {
+      transform-style: preserve-3d;
+    }
+    .dish-card-img {
+      transform: scale(1) translateZ(0);
+      transition: transform .7s var(--ease-doux), filter .7s ease;
+    }
+    .dish-card.tilt .dish-card-img {
+      transform: scale(1.05) translateZ(20px);
+      filter: brightness(1.04) saturate(1.06);
+    }
+    .dish-card-img-wrap::after {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,30%),
+                  rgba(255,255,255,0.34), transparent 45%);
+      opacity:0; transition: opacity .45s ease;
+      z-index:2; mix-blend-mode: screen;
+    }
+    .dish-card.tilt .dish-card-img-wrap::after { opacity:1; }
+
+    /* === City-origin highlight === */
+    .city-tag {
+      position:relative; display:inline-block; font-weight:700;
+      background-image: var(--city-gradient, linear-gradient(90deg, var(--terracotta), var(--or)));
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      text-decoration: none;
+      padding-bottom:2px;
+      transition: filter .35s ease, letter-spacing .35s ease;
+    }
+    a.city-tag { cursor: pointer; }
+    .city-tag::after {
+      content:""; position:absolute; left:0; right:0; bottom:0; height:1.6px;
+      background-image: var(--city-gradient, linear-gradient(90deg, var(--terracotta), var(--or)));
+      border-radius:2px;
+      transform: scaleX(0.45); transform-origin: left center;
+      transition: transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .city-tag:hover {
+      filter: brightness(1.15);
+      letter-spacing:0.012em;
+    }
+    .city-tag:hover::after {
+      transform: scaleX(1);
+    }
+    .city-tag::before {
+      content:""; position:absolute; inset:-2px -3px; border-radius:4px;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+      background-size: 240% 100%; background-position:200% 0;
+      opacity:0; pointer-events:none;
+      transition: opacity .4s ease;
+      -webkit-mask-image: linear-gradient(black, black);
+      mix-blend-mode: overlay;
+    }
+    .city-tag:hover::before {
+      opacity:0.85;
+      animation: shimmer 1.6s ease-in-out;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-100% 0} }
+
+    .city-tag.marrakech    { --city-gradient: linear-gradient(90deg,#C0552A,#F2A23A,#E64C2A); --city-glow: rgba(230,76,42,0.55); }
+    .city-tag.chefchaouen  { --city-gradient: linear-gradient(90deg,#1B6FA6,#4AA9E0,#6DC2FF); --city-glow: rgba(74,169,224,0.55); }
+    .city-tag.fes          { --city-gradient: linear-gradient(90deg,#8B5E2A,#D4AF37,#B8860B); --city-glow: rgba(212,175,55,0.55); }
+    .city-tag.casablanca   { --city-gradient: linear-gradient(90deg,#5E6B72,#C8D2D6,#34424A); --city-glow: rgba(184,194,198,0.5); }
+    .city-tag.essaouira    { --city-gradient: linear-gradient(90deg,#2D6A6F,#5BC0BE,#A9E5E5); --city-glow: rgba(91,192,190,0.55); }
+    .city-tag.safi         { --city-gradient: linear-gradient(90deg,#1A3A6B,#2E78B5,#84B6D6); --city-glow: rgba(46,120,181,0.55); }
+    .city-tag.tetouan      { --city-gradient: linear-gradient(90deg,#2E5A52,#6FB29A,#B8E1C9); --city-glow: rgba(111,178,154,0.55); }
+
+    /* === Subtle magnetic buttons / cards === */
+    .btn-ingredients {
+      position:relative; overflow:hidden;
+    }
+    .btn-ingredients::after {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at var(--bx,50%) var(--by,50%), rgba(255,255,255,0.18), transparent 55%);
+      opacity:0; transition:opacity .35s ease;
+    }
+    .btn-ingredients:hover::after { opacity:1; }
+
+    /* Detail panel reveal */
+    .dish-detail-img { transition: transform 1s var(--ease-doux), filter .8s ease; }
+    .dish-detail.open .dish-detail-img {
+      animation: img-pan 14s ease-in-out infinite alternate;
+    }
+    @keyframes img-pan {
+      from { transform: scale(1.02); background-position: 50% 45%; }
+      to   { transform: scale(1.06); background-position: 50% 55%; }
+    }
+
+    /* Variation chip ripple */
+    .var-chip { position:relative; overflow:hidden; }
+    .var-chip::after {
+      content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.4), transparent 55%);
+      opacity:0; transform: scale(0.6);
+      transition: opacity .5s ease, transform .6s var(--ease-doux);
+      pointer-events:none;
+    }
+    .var-chip:active::after { opacity:1; transform: scale(1.4); transition-duration: .15s; }
+
     @media (prefers-reduced-motion:reduce) {
-      *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+      *,*::before,*::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+      .dish-card, .dishes-hero h1 .word, .dishes-hero .eyebrow,
+      .dishes-hero p.lead, .dishes-hero .search-wrap {
+        opacity:1 !important; transform:none !important;
+      }
+      .hero-tajine, .amb-glow, .particle, body::before { animation:none !important; }
     }
   </style>
 </head>
@@ -293,6 +598,14 @@
 </nav>
 
 <section class="dishes-hero">
+  <div class="amb-layer" aria-hidden="true">
+    <div class="amb-glow g1"></div>
+    <div class="amb-glow g2"></div>
+    <div class="amb-glow g3"></div>
+  </div>
+  <div class="particles" aria-hidden="true"></div>
+  <div class="hero-spot" aria-hidden="true"></div>
+  <div class="hero-tajine" aria-hidden="true" role="presentation"></div>
   <div class="container">
     <span class="eyebrow">Gastronomie</span>
     <h1>Plats Marocains</h1>
@@ -339,6 +652,7 @@ const RISK_LEVELS = {
   'lait':           { level: 'high',   label: '⚠ Lactose' },
   'arachides':      { level: 'high',   label: '⚠ Arachides' },
   'fruits de mer':  { level: 'high',   label: '⚠ Fruits de mer' },
+  'poisson':        { level: 'high',   label: '⚠ Poisson' },
   'œufs':           { level: 'high',   label: '⚠ Œufs' },
   'fruits à coque': { level: 'high',   label: '⚠ Fruits à coque' },
   'soja':           { level: 'medium', label: '⚠ Soja' },
@@ -453,26 +767,262 @@ const DISHES = [
     ]
   },
   {
-    id: 'tagine-poulet',
-    name: 'Tagine Poulet & Citrons Confits',
+    id: 'tajine',
+    name: 'Tajine',
     category: 'Tagine',
-    price: '75 MAD',
-    calories: '410 kcal',
-    image: 'assets/tajine.jpeg',
+    description: "Plat emblématique cuit à feu doux dans un récipient en terre cuite à couvercle conique. Le tajine se décline en trois grandes traditions — poulet aux citrons confits, viande mijotée aux légumes, et poisson à la chermoula — chacune avec ses épices et sa région de prédilection.",
+    variations: [
+      {
+        id: 'poulet',
+        label: 'Poulet',
+        icon: 'bi-egg-fried',
+        price: '75 MAD',
+        calories: '410 kcal',
+        image: 'assets/tajine.jpeg',
+        imagePosition: '50% 50%',
+        description: "Poulet fermier mijoté lentement avec olives violettes, citrons confits et coriandre fraîche. Un classique du repas familial marocain, servi avec du khobz tiède.",
+        allergens: [],
+        ingredients: [
+          { name: 'Poulet fermier (cuisses)',    qty: '220g' },
+          { name: 'Citrons confits',             qty: '50g'  },
+          { name: 'Olives violettes',            qty: '80g'  },
+          { name: 'Oignon',                      qty: '60g'  },
+          { name: 'Ail',                         qty: '10g'  },
+          { name: 'Coriandre, persil',           qty: '25g'  },
+          { name: 'Gingembre frais',             qty: '3g'   },
+          { name: 'Safran',                      qty: '0.3g' },
+          { name: 'Curcuma, cumin',              qty: '3g'   },
+          { name: 'Huile d\'olive',              qty: '20g'  },
+        ]
+      },
+      {
+        id: 'viande',
+        label: 'Viande (Agneau)',
+        icon: 'bi-circle-fill',
+        price: '95 MAD',
+        calories: '580 kcal',
+        image: 'assets/dish-tajine-viande.jpg',
+        imagePosition: '50% 50%',
+        description: "Épaule d'agneau fondante mijotée 2 à 3 heures avec carottes, pommes de terre, courgettes et petits pois, parfumée au ras el hanout, gingembre et safran. Le tajine du dimanche par excellence.",
+        allergens: ['lait'],
+        ingredients: [
+          { name: 'Épaule d\'agneau',            qty: '250g' },
+          { name: 'Carottes',                    qty: '120g' },
+          { name: 'Pommes de terre',             qty: '180g' },
+          { name: 'Courgettes',                  qty: '100g' },
+          { name: 'Petits pois',                 qty: '60g'  },
+          { name: 'Tomates',                     qty: '100g' },
+          { name: 'Oignon',                      qty: '80g'  },
+          { name: 'Ail',                         qty: '12g'  },
+          { name: 'Coriandre, persil',           qty: '25g'  },
+          { name: 'Ras el hanout',               qty: '6g'   },
+          { name: 'Gingembre, curcuma',          qty: '4g'   },
+          { name: 'Safran',                      qty: '0.3g' },
+          { name: 'Smen (beurre rance)',         qty: '15g', allergen: 'lait' },
+          { name: 'Huile d\'olive',              qty: '20g'  },
+        ]
+      },
+      {
+        id: 'poisson',
+        label: 'Poisson',
+        icon: 'bi-water',
+        price: '85 MAD',
+        calories: '380 kcal',
+        image: 'assets/dish-tajine-poisson.jpg',
+        imagePosition: '50% 50%',
+        description: "Filets de poisson blanc (cabillaud, merlu ou bar) marinés à la chermoula — coriandre, ail, cumin, paprika — puis braisés sur un lit de tomates, poivrons et pommes de terre. Spécialité côtière de Safi et d'Essaouira.",
+        allergens: ['poisson'],
+        ingredients: [
+          { name: 'Filet de poisson blanc',      qty: '250g', allergen: 'poisson' },
+          { name: 'Tomates fraîches',            qty: '180g' },
+          { name: 'Poivron vert',                qty: '80g'  },
+          { name: 'Pommes de terre',             qty: '150g' },
+          { name: 'Citrons confits',             qty: '30g'  },
+          { name: 'Olives vertes',               qty: '50g'  },
+          { name: 'Coriandre fraîche',           qty: '20g'  },
+          { name: 'Persil plat',                 qty: '15g'  },
+          { name: 'Ail',                         qty: '12g'  },
+          { name: 'Paprika doux',                qty: '5g'   },
+          { name: 'Cumin moulu',                 qty: '4g'   },
+          { name: 'Harissa (facultatif)',        qty: '5g'   },
+          { name: 'Jus de citron',               qty: '15g'  },
+          { name: 'Huile d\'olive',              qty: '25g'  },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'djaj-mhammar',
+    name: 'Djaj M\'hammar',
+    category: 'Plat principal',
+    price: '80 MAD',
+    calories: '520 kcal',
+    image: 'assets/dish-djaj-mhammar.jpg',
     imagePosition: '50% 50%',
-    description: "Poulet fermier mijoté lentement dans un tagine en terre cuite avec olives violettes, citrons confits et coriandre fraîche. Un classique du repas familial marocain, servi avec du khobz tiède.",
+    description: "Poulet fermier rôti en deux temps : d'abord mijoté dans une daghmira d'oignons confits au safran, gingembre et curcuma, puis doré au four jusqu'à obtenir une peau croustillante. Servi nappé de sa sauce onctueuse aux olives violettes et citrons confits — un classique du repas du vendredi.",
+    allergens: ['lait'],
+    ingredients: [
+      { name: 'Poulet fermier entier',       qty: '350g' },
+      { name: 'Oignons doux',                qty: '200g' },
+      { name: 'Citrons confits',             qty: '40g'  },
+      { name: 'Olives violettes',            qty: '60g'  },
+      { name: 'Ail',                         qty: '12g'  },
+      { name: 'Coriandre, persil',           qty: '25g'  },
+      { name: 'Gingembre moulu',             qty: '4g'   },
+      { name: 'Curcuma, paprika doux',       qty: '5g'   },
+      { name: 'Safran',                      qty: '0.3g' },
+      { name: 'Smen (beurre rance)',         qty: '15g', allergen: 'lait' },
+      { name: 'Huile d\'olive',              qty: '25g'  },
+      { name: 'Jus de citron',               qty: '10g'  },
+    ]
+  },
+  {
+    id: 'bisara',
+    name: 'Bisara',
+    category: 'Soupe / Entrée',
+    price: '15 MAD',
+    calories: '260 kcal',
+    image: 'assets/dish-bisara.jpg',
+    imagePosition: '50% 50%',
+    description: "Velouté épais de fèves cassées séchées, mixé à l'ail, au cumin et au paprika, puis nappé d'un généreux filet d'huile d'olive. Petit-déjeuner emblématique du nord marocain (Chefchaouen, Tétouan), servi brûlant dans un bol en terre avec du khobz frais — réconfortant et 100% végétal.",
     allergens: [],
     ingredients: [
-      { name: 'Poulet fermier (cuisses)',    qty: '200g' },
-      { name: 'Citrons confits',             qty: '50g'  },
-      { name: 'Olives violettes',            qty: '80g'  },
-      { name: 'Oignon',                      qty: '60g'  },
-      { name: 'Ail',                         qty: '10g'  },
-      { name: 'Coriandre, persil',           qty: '25g'  },
-      { name: 'Gingembre frais',             qty: '3g'   },
+      { name: 'Fèves cassées séchées',       qty: '150g' },
+      { name: 'Ail',                         qty: '15g'  },
+      { name: 'Huile d\'olive vierge',       qty: '30g'  },
+      { name: 'Cumin moulu',                 qty: '5g'   },
+      { name: 'Paprika doux',                qty: '4g'   },
+      { name: 'Piment fort (facultatif)',    qty: '1g'   },
+      { name: 'Sel',                         qty: '3g'   },
+      { name: 'Jus de citron',               qty: '8g'   },
+    ]
+  },
+  {
+    id: 'lhem-barkouk',
+    name: 'Lhem bel Barkouk',
+    category: 'Tagine',
+    price: '105 MAD',
+    calories: '640 kcal',
+    image: 'assets/dish-lhem-barkouk.jpg',
+    imagePosition: '50% 50%',
+    description: "Tagine d'agneau (ou de bœuf) mijoté longuement dans une sauce onctueuse aux oignons caramélisés et à la cannelle, surmonté de pruneaux glacés au miel et d'amandes grillées. Plat sucré-salé des grandes occasions — mariages, fêtes religieuses — où l'équilibre entre viande fondante et fruit confit signe la grande cuisine marocaine.",
+    allergens: ['fruits à coque','lait'],
+    ingredients: [
+      { name: 'Épaule d\'agneau (ou bœuf)',  qty: '250g' },
+      { name: 'Pruneaux dénoyautés',         qty: '120g' },
+      { name: 'Amandes émondées',            qty: '40g',  allergen: 'fruits à coque' },
+      { name: 'Oignons',                     qty: '180g' },
+      { name: 'Miel',                        qty: '25g'  },
+      { name: 'Cannelle moulue',             qty: '4g'   },
+      { name: 'Bâton de cannelle',           qty: '2g'   },
+      { name: 'Gingembre moulu',             qty: '3g'   },
       { name: 'Safran',                      qty: '0.3g' },
-      { name: 'Curcuma, cumin',              qty: '3g'   },
+      { name: 'Beurre',                      qty: '20g',  allergen: 'lait' },
+      { name: 'Eau de fleur d\'oranger',     qty: '5g'   },
+      { name: 'Graines de sésame grillées',  qty: '5g'   },
       { name: 'Huile d\'olive',              qty: '20g'  },
+    ]
+  },
+  {
+    id: 'rfisa',
+    name: 'Rfisa',
+    category: 'Plat principal',
+    price: '70 MAD',
+    calories: '550 kcal',
+    image: 'assets/dish-rfisa.jpg',
+    imagePosition: '50% 50%',
+    description: "Lit de msemen (ou trid) effilochés, nappé d'un bouillon parfumé au ras el hanout, fenugrec et safran, garni de poulet fermier et de lentilles fondantes. Plat réconfortant traditionnellement servi aux jeunes mères après l'accouchement — la helba (fenugrec) étant réputée fortifiante.",
+    allergens: ['gluten','lait'],
+    ingredients: [
+      { name: 'Msemen ou trid',              qty: '180g', allergen: 'gluten' },
+      { name: 'Poulet fermier',              qty: '200g' },
+      { name: 'Lentilles vertes',            qty: '80g'  },
+      { name: 'Oignons',                     qty: '150g' },
+      { name: 'Graines de fenugrec (helba)', qty: '8g'   },
+      { name: 'Ras el hanout',               qty: '6g'   },
+      { name: 'Safran',                      qty: '0.3g' },
+      { name: 'Gingembre moulu',             qty: '3g'   },
+      { name: 'Curcuma',                     qty: '3g'   },
+      { name: 'Smen (beurre rance)',         qty: '20g', allergen: 'lait' },
+      { name: 'Huile d\'olive',              qty: '20g'  },
+      { name: 'Coriandre, persil',           qty: '20g'  },
+    ]
+  },
+  {
+    id: 'seffa',
+    name: 'Seffa Medfouna',
+    category: 'Plat sucré-salé',
+    price: '90 MAD',
+    calories: '610 kcal',
+    image: 'assets/seffa-vermicelli-picturepartners-bigstock.jpg.webp',
+    imagePosition: '50% 50%',
+    description: "Dôme de vermicelles (chaariya) ou de couscous fin cuits à la vapeur et beurrés, dressés en pyramide sur un poulet (ou agneau) safrané « enterré » au cœur du plat. Saupoudré d'amandes grillées, de cannelle et de sucre glace. Plat de cérémonie incontournable des mariages et des grandes fêtes familiales.",
+    allergens: ['gluten','fruits à coque','lait','œufs'],
+    ingredients: [
+      { name: 'Vermicelles (chaariya)',       qty: '200g', allergen: 'gluten' },
+      { name: 'Poulet fermier',               qty: '180g' },
+      { name: 'Oignons',                      qty: '120g' },
+      { name: 'Amandes émondées',             qty: '60g',  allergen: 'fruits à coque' },
+      { name: 'Raisins secs',                 qty: '40g'  },
+      { name: 'Beurre',                       qty: '50g',  allergen: 'lait' },
+      { name: 'Sucre glace',                  qty: '30g'  },
+      { name: 'Cannelle moulue',              qty: '5g'   },
+      { name: 'Œufs durs (garniture)',        qty: '50g',  allergen: 'œufs' },
+      { name: 'Safran',                       qty: '0.3g' },
+      { name: 'Gingembre, ras el hanout',     qty: '5g'   },
+      { name: 'Huile d\'olive',               qty: '20g'  },
+      { name: 'Eau de fleur d\'oranger',      qty: '5g'   },
+    ]
+  },
+  {
+    id: 'brochettes',
+    name: 'Brochettes (L\'hem Mechoui)',
+    category: 'Grillade',
+    price: '60 MAD',
+    calories: '430 kcal',
+    image: 'assets/dish-brochettes.jpg',
+    imagePosition: '50% 50%',
+    description: "Cubes d'agneau (ou de bœuf) alternés avec du gras de mouton, marinés au cumin, paprika, ail et coriandre, puis grillés sur braises. Star de la street-food marocaine — de Jemaa el-Fna à la médina de Fès — servis avec pain khobz, salade marocaine, harissa et thé à la menthe.",
+    allergens: [],
+    ingredients: [
+      { name: 'Épaule ou gigot d\'agneau',    qty: '220g' },
+      { name: 'Gras de mouton (queue grasse)', qty: '40g'  },
+      { name: 'Oignon râpé',                  qty: '60g'  },
+      { name: 'Ail écrasé',                   qty: '12g'  },
+      { name: 'Persil plat',                  qty: '15g'  },
+      { name: 'Coriandre fraîche',            qty: '15g'  },
+      { name: 'Cumin moulu',                  qty: '6g'   },
+      { name: 'Paprika doux',                 qty: '5g'   },
+      { name: 'Poivre noir',                  qty: '2g'   },
+      { name: 'Jus de citron',                qty: '10g'  },
+      { name: 'Huile d\'olive',               qty: '20g'  },
+      { name: 'Sel de cumin (service)',       qty: '3g'   },
+    ]
+  },
+  {
+    id: 'lkourain',
+    name: 'L\'kour3ine (Hergma)',
+    category: 'Plat traditionnel',
+    price: '55 MAD',
+    calories: '590 kcal',
+    image: 'assets/dish-lkourain.jpg',
+    imagePosition: '50% 50%',
+    description: "Pieds de veau (ou de mouton) mijotés 4 à 6 heures avec pois chiches, blé concassé et raisins secs, dans une sauce épaisse et gélatineuse parfumée au curcuma, gingembre et paprika. Plat populaire des marchés et des matins d'Aïd al-Adha — réputé pour ses vertus nourrissantes et sa sauce qui se mange avec du pain.",
+    allergens: ['gluten'],
+    ingredients: [
+      { name: 'Pieds de veau ou de mouton',   qty: '350g' },
+      { name: 'Pois chiches (trempés)',       qty: '120g' },
+      { name: 'Blé concassé (frik)',          qty: '60g',  allergen: 'gluten' },
+      { name: 'Raisins secs',                 qty: '40g'  },
+      { name: 'Oignons',                      qty: '120g' },
+      { name: 'Ail',                          qty: '15g'  },
+      { name: 'Concentré de tomate',          qty: '20g'  },
+      { name: 'Paprika doux',                 qty: '6g'   },
+      { name: 'Curcuma',                      qty: '4g'   },
+      { name: 'Gingembre moulu',              qty: '3g'   },
+      { name: 'Cumin moulu',                  qty: '3g'   },
+      { name: 'Huile d\'olive',               qty: '25g'  },
+      { name: 'Sel, poivre',                  qty: '4g'   },
     ]
   },
 ];
@@ -480,16 +1030,57 @@ const DISHES = [
 /* ── Helpers ── */
 const RISK_UNIQUE = (allergens) => [...new Set(allergens)];
 
-function getCardAllergens(dish) {
+/* Returns the currently-active variation (or the dish itself if it has no
+   variations). Variation data overrides parent fields. */
+function getActiveVariation(dish, varId) {
+  if (!dish.variations || !dish.variations.length) return dish;
+  return dish.variations.find(v => v.id === varId) || dish.variations[0];
+}
+function getView(dish, varId) {
+  const v = getActiveVariation(dish, varId);
+  if (v === dish) return dish;
+  return Object.assign({}, dish, v);
+}
+
+function getCardAllergens(view) {
   const seen = new Set();
   const out = [];
-  dish.ingredients.forEach(ing => {
+  (view.ingredients || []).forEach(ing => {
     if (ing.allergen && !seen.has(ing.allergen)) {
       seen.add(ing.allergen);
       out.push(ing.allergen);
     }
   });
   return out;
+}
+
+/* City-origin decorator: wraps known city names in styled spans,
+   or links them to the corresponding city page when one exists. */
+const CITIES = [
+  ['Marrakech',   'marrakech',   'marrakech.html'],
+  ['Marrakchia',  'marrakech',   'marrakech.html'],
+  ['Chefchaouen', 'chefchaouen', 'chefchaouen.html'],
+  ['Fès',         'fes',         null],
+  ['Fez',         'fes',         null],
+  ['Casablanca',  'casablanca',  null],
+  ['Essaouira',   'essaouira',   'essaouira.html'],
+  ['Safi',        'safi',        null],
+  ['Tétouan',     'tetouan',     null],
+  ['Tetouan',     'tetouan',     null],
+];
+const CITY_INFO = Object.fromEntries(CITIES.map(c => [c[0], { cls: c[1], href: c[2] }]));
+const CITY_RE = new RegExp(
+  '\\b(' + CITIES.map(c => c[0].replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')).join('|') + ')\\b',
+  'g'
+);
+function decorateCities(text) {
+  return (text || '').replace(CITY_RE, (m) => {
+    const info = CITY_INFO[m];
+    if (info.href) {
+      return `<a class="city-tag ${info.cls}" href="${info.href}" aria-label="Découvrir ${m}">${m}</a>`;
+    }
+    return `<span class="city-tag ${info.cls}">${m}</span>`;
+  });
 }
 
 function allergenTagsHtml(allergens, cls='allergen-tag') {
@@ -508,31 +1099,36 @@ let openCard = null;
 
 function renderGrid() {
   grid.innerHTML = DISHES.map(dish => {
-    const cardAllergens = getCardAllergens(dish);
+    const view = getView(dish);
+    const cardAllergens = getCardAllergens(view);
     const miniTagsHtml = cardAllergens.length
       ? cardAllergens.map(a => {
           const r = RISK_LEVELS[a];
           return r ? `<span class="mini-badge ${r.level}">${r.label}</span>` : '';
         }).join('')
       : '';
+    const variationsHint = dish.variations
+      ? `<span class="dish-card-variations"><i class="bi bi-stack"></i> ${dish.variations.length} variations</span>`
+      : '';
     return `
     <article class="dish-card" data-id="${dish.id}" tabindex="0" role="button"
              aria-expanded="false" aria-label="Voir le détail de ${dish.name}">
       <div class="dish-card-img-wrap">
         <img class="dish-card-img"
-             src="${dish.image}"
+             src="${view.image}"
              alt="${dish.name}"
-             style="${dish.imagePosition ? `object-position:${dish.imagePosition};` : ''}"
+             style="${view.imagePosition ? `object-position:${view.imagePosition};` : ''}"
              loading="lazy" />
         <span class="dish-card-badge">${dish.category}</span>
-        <span class="dish-card-price">${dish.price}</span>
+        <span class="dish-card-price">${view.price}</span>
+        ${variationsHint}
       </div>
       <div class="dish-card-body">
         <h3>${dish.name}</h3>
-        <p class="desc">${dish.description}</p>
+        <p class="desc">${decorateCities(view.description)}</p>
         ${miniTagsHtml ? `<div class="dish-card-allergens">${miniTagsHtml}</div>` : ''}
         <div class="dish-card-foot">
-          <span class="cal"><i class="bi bi-fire"></i> ${dish.calories}</span>
+          <span class="cal"><i class="bi bi-fire"></i> ${view.calories}</span>
           <span class="more">Voir le détail <i class="bi bi-arrow-right"></i></span>
         </div>
       </div>
@@ -552,38 +1148,59 @@ function closeOpenDetail() {
   openCard = null;
 }
 
+function detailInnerHtml(dish, varId) {
+  const view = getView(dish, varId);
+  const cardAllergens = getCardAllergens(view);
+  const variationsHtml = dish.variations
+    ? `<div class="dish-variations-row">
+         <div class="var-title">Variations</div>
+         <div class="var-chips">
+           ${dish.variations.map(v => `
+             <button class="var-chip${v.id === view.id ? ' active' : ''}"
+                     data-action="switch-variation" data-var="${v.id}" type="button">
+               <i class="bi ${v.icon || 'bi-circle'}"></i> ${v.label}
+             </button>`).join('')}
+         </div>
+       </div>`
+    : '';
+  return `
+    <div class="dish-detail-inner">
+      <div class="dish-detail-img" style="background-image:url('${view.image}');${view.imagePosition?`background-position:${view.imagePosition};`:''}"></div>
+      <div class="dish-detail-body">
+        <button class="dish-detail-close" aria-label="Fermer"><i class="bi bi-x-lg"></i></button>
+        <span class="category-chip">${dish.category}</span>
+        <h2>${dish.name}${dish.variations ? ` <span style="color:var(--terracotta);font-size:0.65em;font-weight:400;">— ${view.label}</span>` : ''}</h2>
+        <p class="desc">${decorateCities(view.description)}</p>
+        <div class="dish-detail-meta">
+          <div class="meta-item"><span class="label">Prix</span><span class="value price">${view.price}</span></div>
+          <div class="meta-item"><span class="label">Calories</span><span class="value">${view.calories}</span></div>
+          <div class="meta-item"><span class="label">Ingrédients</span><span class="value">${view.ingredients.length}</span></div>
+        </div>
+        <div class="allergen-section">
+          <div class="alg-title">Allergènes détectés</div>
+          <div class="allergen-tags">${allergenTagsHtml(cardAllergens,'allergen-tag')}</div>
+        </div>
+        ${variationsHtml}
+        <button class="btn-ingredients" data-action="open-ingredients" data-id="${dish.id}">
+          <i class="bi bi-flower2"></i> Voir tous les ingrédients
+        </button>
+      </div>
+    </div>`;
+}
+
 function openDetail(card) {
   const dish = DISHES.find(d => d.id === card.dataset.id);
   if (!dish) return;
   if (openCard && openCard !== card) closeOpenDetail();
   if (openCard === card) { closeOpenDetail(); return; }
 
-  const cardAllergens = getCardAllergens(dish);
-
+  const initialVar = dish.variations ? dish.variations[0].id : null;
   const detail = document.createElement('div');
   detail.className = 'dish-detail';
-  detail.innerHTML = `
-    <div class="dish-detail-inner">
-      <div class="dish-detail-img" style="background-image:url('${dish.image}');${dish.imagePosition?`background-position:${dish.imagePosition};`:''}"></div>
-      <div class="dish-detail-body">
-        <button class="dish-detail-close" aria-label="Fermer"><i class="bi bi-x-lg"></i></button>
-        <span class="category-chip">${dish.category}</span>
-        <h2>${dish.name}</h2>
-        <p class="desc">${dish.description}</p>
-        <div class="dish-detail-meta">
-          <div class="meta-item"><span class="label">Prix</span><span class="value price">${dish.price}</span></div>
-          <div class="meta-item"><span class="label">Calories</span><span class="value">${dish.calories}</span></div>
-          <div class="meta-item"><span class="label">Ingrédients</span><span class="value">${dish.ingredients.length}</span></div>
-        </div>
-        <div class="allergen-section">
-          <div class="alg-title">Allergènes détectés</div>
-          <div class="allergen-tags">${allergenTagsHtml(cardAllergens,'allergen-tag')}</div>
-        </div>
-        <button class="btn-ingredients" data-action="open-ingredients" data-id="${dish.id}">
-          <i class="bi bi-flower2"></i> Voir tous les ingrédients
-        </button>
-      </div>
-    </div>`;
+  detail.dataset.id = dish.id;
+  if (initialVar) detail.dataset.activeVar = initialVar;
+  detail.innerHTML = detailInnerHtml(dish, initialVar);
+
   card.insertAdjacentElement('afterend', detail);
   requestAnimationFrame(() => requestAnimationFrame(() => detail.classList.add('open')));
   card.setAttribute('aria-expanded','true');
@@ -591,11 +1208,20 @@ function openDetail(card) {
   setTimeout(() => detail.scrollIntoView({ behavior:'smooth', block:'center' }), 80);
 }
 
+function switchVariation(detail, varId) {
+  const dish = DISHES.find(d => d.id === detail.dataset.id);
+  if (!dish) return;
+  detail.dataset.activeVar = varId;
+  detail.innerHTML = detailInnerHtml(dish, varId);
+}
+
 /* ── Ingredients Modal ── */
-function openIngredientsModal(dish) {
-  ingredientsModalEl.querySelector('#ingredientsModalLabel').textContent = dish.name;
+function openIngredientsModal(dish, varId) {
+  const view = getView(dish, varId);
+  const title = dish.variations ? `${dish.name} — ${view.label}` : dish.name;
+  ingredientsModalEl.querySelector('#ingredientsModalLabel').textContent = title;
   const list = ingredientsModalEl.querySelector('#ingredientsList');
-  list.innerHTML = dish.ingredients.map((ing, idx) => {
+  list.innerHTML = view.ingredients.map((ing, idx) => {
     const risk = ing.allergen ? RISK_LEVELS[ing.allergen] : null;
     const badge = risk ? `<span class="allergen-badge ${risk.level}">${risk.label}</span>` : '';
     return `<li class="ing-item" style="animation-delay:${idx*35}ms">
@@ -608,8 +1234,20 @@ function openIngredientsModal(dish) {
 
 /* ── Event delegation ── */
 grid.addEventListener('click', (e) => {
+  const varBtn = e.target.closest('[data-action="switch-variation"]');
+  if (varBtn) {
+    const detail = varBtn.closest('.dish-detail');
+    if (detail) switchVariation(detail, varBtn.dataset.var);
+    return;
+  }
   const ingBtn = e.target.closest('[data-action="open-ingredients"]');
-  if (ingBtn) { const dish = DISHES.find(d=>d.id===ingBtn.dataset.id); if(dish) openIngredientsModal(dish); return; }
+  if (ingBtn) {
+    const dish = DISHES.find(d=>d.id===ingBtn.dataset.id);
+    const detail = ingBtn.closest('.dish-detail');
+    const varId = detail ? detail.dataset.activeVar : null;
+    if (dish) openIngredientsModal(dish, varId);
+    return;
+  }
   const closeBtn = e.target.closest('.dish-detail-close');
   if (closeBtn) { closeOpenDetail(); return; }
   const card = e.target.closest('.dish-card');
@@ -630,8 +1268,16 @@ const cards = () => Array.from(document.querySelectorAll('.dish-card'));
 function normalize(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 function dishMatches(dish, q) {
   if (!q) return true;
-  const hay = [dish.name, dish.category, dish.description, ...dish.ingredients.map(i=>i.name)].map(normalize).join(' | ');
-  return hay.includes(q);
+  const parts = [dish.name, dish.category, dish.description || ''];
+  if (dish.variations) {
+    dish.variations.forEach(v => {
+      parts.push(v.label, v.description || '');
+      (v.ingredients || []).forEach(i => parts.push(i.name));
+    });
+  } else {
+    (dish.ingredients || []).forEach(i => parts.push(i.name));
+  }
+  return parts.map(normalize).join(' | ').includes(q);
 }
 
 function applyFilter() {
@@ -662,6 +1308,138 @@ searchClear.addEventListener('click', () => { searchInput.value=''; applyFilter(
 
 renderGrid();
 applyFilter();
+
+/* =========================================================================
+   Cinematic polish — initialization
+   ========================================================================= */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── Hero headline reveal: split into per-word spans ── */
+(function splitHeadline() {
+  const h1 = document.querySelector('.dishes-hero h1');
+  if (!h1) return;
+  const words = h1.textContent.trim().split(/\s+/);
+  h1.innerHTML = words.map((w, i) => {
+    const delay = (0.25 + i * 0.18).toFixed(2);
+    return `<span class="word" style="animation-delay:${delay}s">${w}</span>`;
+  }).join(' ');
+})();
+
+/* ── Floating dust particles in the hero ── */
+(function setupParticles() {
+  if (prefersReducedMotion) return;
+  const host = document.querySelector('.particles');
+  if (!host) return;
+  const count = 16;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = (3 + Math.random() * 4).toFixed(1);
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = (Math.random() * 100).toFixed(2) + '%';
+    p.style.bottom = (-5 + Math.random() * 30).toFixed(0) + '%';
+    p.style.animationDuration = (9 + Math.random() * 10).toFixed(1) + 's';
+    p.style.animationDelay = (-Math.random() * 12).toFixed(1) + 's';
+    p.style.setProperty('--drift', ((Math.random() - 0.5) * 60).toFixed(0) + 'px');
+    p.style.opacity = (0.35 + Math.random() * 0.35).toFixed(2);
+    host.appendChild(p);
+  }
+})();
+
+/* ── Cursor-follow spotlight in the hero ── */
+(function setupHeroSpotlight() {
+  const hero = document.querySelector('.dishes-hero');
+  const spot = document.querySelector('.hero-spot');
+  if (!hero || !spot) return;
+  let raf;
+  hero.addEventListener('pointermove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const r = hero.getBoundingClientRect();
+      const mx = ((e.clientX - r.left) / r.width) * 100;
+      const my = ((e.clientY - r.top) / r.height) * 100;
+      spot.style.setProperty('--mx', mx + '%');
+      spot.style.setProperty('--my', my + '%');
+      raf = null;
+    });
+  });
+})();
+
+/* ── Multi-layer parallax on ambient glows + hero tajine ── */
+(function setupParallax() {
+  if (prefersReducedMotion) return;
+  const glows = document.querySelectorAll('.amb-glow');
+  const tajine = document.querySelector('.hero-tajine');
+  let raf;
+  function update() {
+    const y = window.scrollY;
+    glows.forEach((g, i) => {
+      const speed = [0.22, 0.12, 0.30][i] || 0.18;
+      g.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+    });
+    if (tajine) {
+      tajine.style.translate = `0 ${(-50 + y * -0.08).toFixed(1)}%`;
+    }
+    raf = null;
+  }
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(update);
+  }, { passive: true });
+})();
+
+/* ── 3D tilt + cursor glare on dish cards (delegated via grid) ── */
+(function setupCardTilt() {
+  if (prefersReducedMotion) return;
+  let activeCard = null;
+  grid.addEventListener('pointermove', (e) => {
+    const card = e.target.closest('.dish-card');
+    if (!card || card.classList.contains('hidden')) return;
+    const r = card.getBoundingClientRect();
+    const dx = (e.clientX - r.left) / r.width - 0.5;
+    const dy = (e.clientY - r.top) / r.height - 0.5;
+    card.style.setProperty('--rx', (-dy * 5).toFixed(2) + 'deg');
+    card.style.setProperty('--ry', (dx * 7).toFixed(2) + 'deg');
+    card.style.setProperty('--mx', ((dx + 0.5) * 100).toFixed(0) + '%');
+    card.style.setProperty('--my', ((dy + 0.5) * 100).toFixed(0) + '%');
+    if (activeCard !== card) {
+      if (activeCard) resetCard(activeCard);
+      card.classList.add('tilt');
+      activeCard = card;
+    }
+  });
+  function resetCard(card) {
+    card.classList.remove('tilt');
+    card.style.removeProperty('--rx');
+    card.style.removeProperty('--ry');
+  }
+  grid.addEventListener('pointerout', (e) => {
+    if (!activeCard) return;
+    if (e.relatedTarget && activeCard.contains(e.relatedTarget)) return;
+    resetCard(activeCard);
+    activeCard = null;
+  });
+})();
+
+/* ── Staggered card reveal via CSS animation delays ── */
+(function setupReveal() {
+  const items = document.querySelectorAll('.dish-card');
+  items.forEach((c, i) => {
+    const row = Math.floor(i / 3);
+    const col = i % 3;
+    c.style.setProperty('--reveal-delay', (120 + row * 90 + col * 70) + 'ms');
+  });
+})();
+
+/* ── Button glare position tracking ── */
+document.addEventListener('pointermove', (e) => {
+  const btn = e.target.closest('.btn-ingredients');
+  if (!btn) return;
+  const r = btn.getBoundingClientRect();
+  btn.style.setProperty('--bx', ((e.clientX - r.left) / r.width * 100).toFixed(0) + '%');
+  btn.style.setProperty('--by', ((e.clientY - r.top) / r.height * 100).toFixed(0) + '%');
+}, { passive: true });
 </script>
 </body>
 </html>
