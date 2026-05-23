@@ -721,16 +721,6 @@
     .feat-link i { transition: transform 0.3s var(--ease-spring); }
     .feat-link:hover i { transform: translateX(5px); }
 
-    /* ============================================================
-       SÉPARATEUR ORNEMENTAL
-    ============================================================ */
-    .ornament-sep {
-      display: flex; align-items: center; gap: 1.5rem; margin: 3rem 0;
-    }
-    .ornament-sep::before, .ornament-sep::after {
-      content: ""; flex: 1; height: 1px; background: rgba(192,85,42,0.18);
-    }
-    .ornament-sep svg { flex-shrink: 0; }
 
     /* ============================================================
        ANIMATIONS AU SCROLL
@@ -931,6 +921,452 @@
       animation: none;
     }
 
+
+
+    /* ============================================================
+       ANIMATION SWIPPING SUR CARTES EXISTANTES
+       ============================================================ */
+
+    /* Conteneur de rangée avec perspective pour l'effet 3D */
+    .stagger-row {
+      perspective: 1200px;
+      margin-bottom: 2rem;
+    }
+
+    /* Carte avec effet swipping au survol */
+    .act-card {
+      transition: transform 0.5s var(--ease-doux), 
+                  box-shadow 0.5s var(--ease-doux),
+                  margin 0.4s var(--ease-doux);
+    }
+
+    /* Lorsqu'une carte est survolée, elle se met en avant */
+    .act-card:hover {
+      transform: translateY(-10px) scale(1.03) rotateY(-2deg);
+      z-index: 10;
+    }
+
+    /* Les cartes voisines dans la même rangée s'écartent */
+    .stagger-row:hover .act-card:not(:hover) {
+      transform: scale(0.97) translateX(0);
+      opacity: 0.7;
+      filter: grayscale(0.3);
+    }
+
+    /* Effet swipping spécifique : glissement latéral au survol de la rangée */
+    .stagger-row .col-md-6:first-child:hover ~ .col-md-6 .act-card,
+    .stagger-row .col-md-6:nth-child(2):hover ~ .col-md-6 .act-card {
+      transform: translateX(20px) scale(0.97);
+    }
+
+    .stagger-row .col-md-6:nth-child(2):hover .act-card {
+      transform: translateX(-10px) scale(1.03);
+    }
+
+    /* Animation d'entrée swipping pour les cartes */
+    @keyframes cardSwipeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-80px) rotateY(15deg) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0) scale(1);
+      }
+    }
+
+    @keyframes cardSwipeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(80px) rotateY(-15deg) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0) scale(1);
+      }
+    }
+
+    /* Application des animations d'entrée swipping */
+    .stagger-row.visible .stagger-item:nth-child(1) .act-card {
+      animation: cardSwipeIn 0.7s var(--ease-doux) forwards;
+      animation-delay: 0s;
+    }
+
+    .stagger-row.visible .stagger-item:nth-child(2) .act-card {
+      animation: cardSwipeInRight 0.7s var(--ease-doux) forwards;
+      animation-delay: 0.15s;
+    }
+
+    /* Effet de "swipe" sur l'image au survol */
+    .act-card-img {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .act-card-img::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .act-card:hover .act-card-img::before {
+      left: 150%;
+    }
+
+    /* Badge catégorie qui glisse au survol */
+    .cat-badge {
+      transition: transform 0.3s var(--ease-spring), background 0.3s;
+    }
+
+    .act-card:hover .cat-badge {
+      transform: translateX(5px) translateY(-2px);
+    }
+
+    /* Numéro qui tourne au survol */
+    .act-num {
+      transition: transform 0.5s var(--ease-spring), color 0.3s;
+    }
+
+    .act-card:hover .act-num {
+      transform: scale(1.3) rotate(-10deg);
+      color: var(--or);
+    }
+
+    /* Carte vedette avec effet swipping */
+    .act-featured {
+      transition: transform 0.6s var(--ease-doux), box-shadow 0.6s var(--ease-doux);
+      transform-style: preserve-3d;
+    }
+
+    .act-featured:hover {
+      transform: translateY(-8px) rotateX(2deg);
+    }
+
+    .act-featured:hover .feat-img img {
+      transform: scale(1.08) translateX(-10px);
+    }
+
+    /* Animation d'entrée swipping pour la carte vedette */
+    @keyframes featuredSwipeIn {
+      from {
+        opacity: 0;
+        transform: translateY(60px) rotateX(10deg) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) scale(1);
+      }
+    }
+
+    .reveal-clip.visible .act-featured {
+      animation: featuredSwipeIn 0.9s var(--ease-doux) forwards;
+    }
+
+/* Responsive : désactiver les effets swipping complexes sur mobile */
+    @media (max-width: 767px) {
+      .stagger-row:hover .act-card:not(:hover) {
+        transform: none;
+        opacity: 1;
+        filter: none;
+      }
+
+      .act-card:hover {
+        transform: translateY(-6px) scale(1.02);
+      }
+
+      @keyframes cardSwipeIn {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes cardSwipeInRight {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+
+    /* ============================================================
+       LIGHTBOX / MODAL — Photo qui s'ouvre en grand au clic
+       ============================================================ */
+
+    /* Overlay sombre */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+      padding: 2rem;
+    }
+
+    .lightbox-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s ease, visibility 0s linear 0s;
+    }
+
+    /* Conteneur de l'image */
+    .lightbox-container {
+      position: relative;
+      max-width: 90vw;
+      max-height: 85vh;
+      transform: scale(0.7) translateY(40px);
+      opacity: 0;
+      transition: transform 0.5s var(--ease-spring), opacity 0.4s ease;
+    }
+
+    .lightbox-overlay.active .lightbox-container {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* Image agrandie */
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    /* Bouton fermeture */
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.3s var(--ease-spring);
+      z-index: 10;
+    }
+
+    .lightbox-close:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      transform: scale(1.1) rotate(90deg);
+    }
+
+    /* Informations sous l'image */
+    .lightbox-info {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+    }
+
+    .lightbox-overlay.active .lightbox-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lightbox-info h4 {
+      font-family: var(--font-titre);
+      font-size: 1.3rem;
+      margin: 0 0 0.3rem;
+      color: #fff;
+    }
+
+    .lightbox-info p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+    }
+
+    /* Indicateur de clic sur les cartes */
+    .act-card-img {
+      cursor: zoom-in;
+    }
+
+    .act-featured .feat-img {
+      cursor: zoom-in;
+    }
+
+    /* Animation de l'image qui "vole" depuis la carte vers le centre */
+    .lightbox-fly {
+      position: fixed;
+      z-index: 1999;
+      border-radius: 6px;
+      object-fit: cover;
+      transition: all 0.5s var(--ease-doux);
+      pointer-events: none;
+    }
+
+    /* Navigation flèches */
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 10;
+    }
+
+    .lightbox-nav:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-nav.prev { left: -80px; }
+    .lightbox-nav.next { right: -80px; }
+
+    /* Compteur d'images */
+    .lightbox-counter {
+      position: absolute;
+      top: -45px;
+      left: 0;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .lightbox-nav.prev { left: 10px; }
+      .lightbox-nav.next { right: 10px; }
+      .lightbox-container { max-width: 95vw; }
+      .lightbox-close { top: -40px; right: -10px; }
+    }
+
+
+    /* ============================================================
+       COULEURS DIFFÉRENCIÉES DES CARTES
+       ============================================================ */
+
+    /* Carte Terracotta - accent chaud */
+    .act-card.act-card {
+      border-color: rgba(192,85,42,0.25);
+    }
+    .act-card.act-card:hover {
+      box-shadow: 0 20px 50px -15px rgba(192,85,42,0.4), 0 0 0 2px var(--terracotta);
+    }
+    .act-card.act-card .act-card-title-wrap::after {
+      background: var(--terracotta);
+    }
+    .act-card.act-card:hover .act-card-body h3 {
+      color: var(--terracotta);
+    }
+    .act-card.act-card .btn-decouvrir {
+      border-color: rgba(192,85,42,0.4);
+      color: var(--terracotta);
+    }
+    .act-card.act-card .btn-decouvrir::before {
+      background: var(--terracotta);
+    }
+    .act-card.act-card .btn-decouvrir:hover {
+      border-color: var(--terracotta);
+    }
+    .act-card.act-card .cat-badge {
+      background: var(--terracotta);
+    }
+    .act-card.act-card:hover .cat-badge {
+      background: var(--or);
+      color: var(--encre);
+    }
+
+    /* Carte Vert - accent nature */
+    .act-card.act-card {
+      border-color: rgba(45,80,22,0.25);
+    }
+    .act-card.act-card:hover {
+      box-shadow: 0 20px 50px -15px rgba(45,80,22,0.4), 0 0 0 2px var(--vert);
+    }
+    .act-card.act-card .act-card-title-wrap::after {
+      background: var(--vert);
+    }
+    .act-card.act-card:hover .act-card-body h3 {
+      color: var(--vert);
+    }
+    .act-card.act-card .btn-decouvrir {
+      border-color: rgba(45,80,22,0.4);
+      color: var(--vert);
+    }
+    .act-card.act-card .btn-decouvrir::before {
+      background: var(--vert);
+    }
+    .act-card.act-card .btn-decouvrir:hover {
+      border-color: var(--vert);
+    }
+    .act-card.act-card .cat-badge {
+      background: var(--vert);
+    }
+    .act-card.act-card:hover .cat-badge {
+      background: var(--or);
+      color: var(--encre);
+    }
+
+    /* Carte Or - accent doré */
+    .act-card.act-card {
+      border-color: rgba(212,175,55,0.35);
+    }
+    .act-card.act-card:hover {
+      box-shadow: 0 20px 50px -15px rgba(212,175,55,0.4), 0 0 0 2px var(--or);
+    }
+    .act-card.act-card .act-card-title-wrap::after {
+      background: var(--or);
+    }
+    .act-card.act-card:hover .act-card-body h3 {
+      color: var(--or-fonce);
+    }
+    .act-card.act-card .btn-decouvrir {
+      border-color: rgba(212,175,55,0.5);
+      color: var(--or-fonce);
+    }
+    .act-card.act-card .btn-decouvrir::before {
+      background: var(--or);
+    }
+    .act-card.act-card .btn-decouvrir:hover {
+      border-color: var(--or);
+      color: var(--encre);
+    }
+    .act-card.act-card .cat-badge {
+      background: var(--or);
+      color: var(--encre);
+    }
+    .act-card.act-card:hover .cat-badge {
+      background: var(--terracotta);
+      color: #fff;
+    }
+
     /* ============================================================
        RESPONSIVE
     ============================================================ */
@@ -1056,7 +1492,7 @@
         <span class="word">VIS&nbsp;</span><span class="word">LE&nbsp;</span><span class="word">MAROC</span>
       </h1>
 
-      <p class="hero-sub">Sept expériences qui capturent l'âme du Royaume</p>
+      <p class="hero-sub"></p>
       <p class="hero-desc">
         Des ruelles azur de Chefchaouen aux dunes infinies de Merzouga — plongez au cœur d'aventures qui transforment chaque voyageur.
       </p>
@@ -1095,9 +1531,6 @@
       <button class="filter-tab" data-filter="nature">
         <i class="bi bi-tree"></i>Nature
       </button>
-      <button class="filter-tab" data-filter="detente">
-        <i class="bi bi-water"></i>Détente
-      </button>
       <button class="filter-tab" data-filter="aventure">
         <i class="bi bi-compass"></i>Aventure
       </button>
@@ -1114,7 +1547,7 @@
       <div class="row g-4 stagger-row" id="row-pair1">
         <!-- Carte 1 : Chefchaouen -->
         <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card">
+          <div class="act-card" data-color="terracotta">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1140,7 +1573,7 @@
         </div>
         <!-- Carte 2 : Marrakech -->
         <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card">
+          <div class="act-card" data-color="vert">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1166,19 +1599,11 @@
         </div>
       </div>
 
-      <!-- Séparateur -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-
       <!-- ── PAIRE 2 : Essaouira + Agadir ── -->
       <div class="row g-4 stagger-row" id="row-pair2">
         <!-- Carte 3 : Essaouira -->
         <div class="col-md-6 stagger-item" data-tags="sport aventure">
-          <div class="act-card">
+          <div class="act-card" data-color="or">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1204,7 +1629,7 @@
         </div>
         <!-- Carte 4 : Agadir -->
         <div class="col-md-6 stagger-item" data-tags="sport aventure">
-          <div class="act-card">
+          <div class="act-card" data-color="terracotta">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1230,19 +1655,11 @@
         </div>
       </div>
 
-      <!-- Séparateur -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-
       <!-- ── PAIRE 3 : Rabat + Ifrane ── -->
       <div class="row g-4 stagger-row" id="row-pair3">
         <!-- Carte 5 : Rabat -->
         <div class="col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card">
+          <div class="act-card" data-color="vert">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1268,7 +1685,7 @@
         </div>
         <!-- Carte 6 : Ifrane -->
         <div class="col-md-6 stagger-item" data-tags="nature aventure">
-          <div class="act-card">
+          <div class="act-card" data-color="or">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
@@ -1294,14 +1711,6 @@
         </div>
       </div>
 
-      <!-- Séparateur -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-
       <!-- ── CARTE VEDETTE : Merzouga (la plus spectaculaire) ── -->
       <div class="mb-4 reveal-clip" data-tags="aventure culture">
         <div class="act-featured">
@@ -1324,6 +1733,31 @@
       </div>
     </div>
   </section>
+
+
+
+  <!-- ================================================================
+       LIGHTBOX / MODAL — Photos des activités en grand
+  ================================================================ -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Galerie photo">
+    <div class="lightbox-container">
+      <span class="lightbox-counter" id="lightboxCounter">1 / 7</span>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Photo précédente">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      <button class="lightbox-nav next" id="lightboxNext" aria-label="Photo suivante">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+      <div class="lightbox-info" id="lightboxInfo">
+        <h4 id="lightboxTitle"></h4>
+        <p id="lightboxLocation"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer-maroc">
@@ -1501,6 +1935,137 @@
           btn.style.transition = 'transform 0.4s var(--ease-spring)';
         });
       });
+    })();
+
+
+
+    /* ============================================================
+       LIGHTBOX / MODAL — Ouverture photo au clic sur carte
+       ============================================================ */
+    (function() {
+      const overlay = document.getElementById('lightboxOverlay');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxLocation = document.getElementById('lightboxLocation');
+      const lightboxCounter = document.getElementById('lightboxCounter');
+      const btnClose = document.getElementById('lightboxClose');
+      const btnPrev = document.getElementById('lightboxPrev');
+      const btnNext = document.getElementById('lightboxNext');
+
+      if (!overlay) return;
+
+      // Collecter toutes les cartes avec leurs données
+      const cards = [];
+      document.querySelectorAll('.act-card').forEach((card, index) => {
+        const img = card.querySelector('.act-card-img img');
+        const title = card.querySelector('h3')?.textContent || '';
+        const location = card.querySelector('.act-location')?.textContent || '';
+        if (img) {
+          cards.push({
+            src: img.src,
+            alt: img.alt,
+            title: title,
+            location: location,
+            element: img
+          });
+        }
+      });
+
+      // Ajouter aussi la carte vedette
+      const featured = document.querySelector('.act-featured');
+      if (featured) {
+        const featImg = featured.querySelector('.feat-img img');
+        const featTitle = featured.querySelector('h3')?.textContent || '';
+        const featLocation = featured.querySelector('.feat-city-label')?.textContent || '';
+        if (featImg) {
+          cards.push({
+            src: featImg.src,
+            alt: featImg.alt,
+            title: featTitle,
+            location: featLocation,
+            element: featImg
+          });
+        }
+      }
+
+      let currentIndex = 0;
+
+      function openLightbox(index) {
+        if (index < 0 || index >= cards.length) return;
+        currentIndex = index;
+        const card = cards[index];
+
+        lightboxImg.src = card.src;
+        lightboxImg.alt = card.alt;
+        lightboxTitle.textContent = card.title;
+        lightboxLocation.textContent = card.location;
+        lightboxCounter.textContent = `${index + 1} / ${cards.length}`;
+
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          lightboxImg.src = '';
+        }, 400);
+      }
+
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % cards.length;
+        openLightbox(currentIndex);
+      }
+
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        openLightbox(currentIndex);
+      }
+
+      // Clic sur les images des cartes
+      cards.forEach((card, index) => {
+        if (card.element) {
+          card.element.style.cursor = 'zoom-in';
+          card.element.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openLightbox(index);
+          });
+        }
+      });
+
+      // Contrôles
+      btnClose.addEventListener('click', closeLightbox);
+      btnNext.addEventListener('click', nextImage);
+      btnPrev.addEventListener('click', prevImage);
+
+      // Clic sur l'overlay pour fermer
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeLightbox();
+      });
+
+      // Navigation clavier
+      document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      });
+
+      // Swipe tactile pour mobile
+      let touchStartX = 0;
+      overlay.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      overlay.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) nextImage();
+          else prevImage();
+        }
+      }, { passive: true });
     })();
 
     console.log('✨ activites.html v4 — 7 villes · Palette Maroc · Animations créatives chargées.');
