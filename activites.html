@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Lato:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
 
   <style>
     /* === Variables — même palette que la page d'accueil === */
@@ -29,7 +29,6 @@
       --encre: #1A1A1A;
       --font-titre: 'Playfair Display', serif;
       --font-corps: 'Lato', sans-serif;
-      --font-display: 'Bebas Neue', sans-serif;
       --ease-doux: cubic-bezier(0.22, 1, 0.36, 1);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -236,7 +235,7 @@
     .hero-watermark {
       position: absolute;
       bottom: -2rem; right: -1rem;
-      font-family: var(--font-display);
+      font-family: var(--font-titre);
       font-size: clamp(10rem, 18vw, 18rem);
       color: rgba(192,85,42,0.07);
       line-height: 1;
@@ -269,7 +268,7 @@
     }
 
     .hero-act h1 {
-      font-family: var(--font-display);
+      font-family: var(--font-titre);
       font-size: clamp(3.5rem, 6.5vw, 6.5rem);
       color: var(--encre);
       line-height: 0.9;
@@ -361,7 +360,7 @@
     }
     @keyframes badgeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
     .hero-photo-badge .badge-num {
-      font-family: var(--font-display); font-size: 2.8rem; line-height: 1;
+      font-family: var(--font-titre); font-size: 2.8rem; line-height: 1;
       display: block; color: #fff;
     }
     .hero-photo-badge .badge-label {
@@ -399,7 +398,7 @@
     .filter-section {
       background: var(--sable-fonce);
       padding: 0;
-      position: sticky; top: 0; z-index: 50;
+      position: relative; z-index: 50;
       border-bottom: 2px solid rgba(192,85,42,0.2);
       box-shadow: 0 4px 20px -8px rgba(0,0,0,0.1);
     }
@@ -450,7 +449,7 @@
     }
     .sec-eyebrow::before { content: ""; width: 24px; height: 2px; background: var(--terracotta); }
     .sec-head h2 {
-      font-family: var(--font-display);
+      font-family: var(--font-titre);
       font-size: clamp(2.5rem, 5.5vw, 4.5rem);
       color: var(--encre); line-height: 0.95; margin: 0;
     }
@@ -466,7 +465,7 @@
       letter-spacing: 0.06em; text-transform: uppercase; color: var(--texte-doux);
     }
     .sec-count strong {
-      display: block; font-family: var(--font-display); font-size: 3rem; color: var(--terracotta);
+      display: block; font-family: var(--font-titre); font-size: 3rem; color: var(--terracotta);
       line-height: 1; transition: all 0.4s var(--ease-doux);
     }
 
@@ -547,7 +546,7 @@
     /* Numéro sur l'image (bottom) */
     .act-num {
       position: absolute; bottom: 14px; right: 14px; z-index: 3;
-      font-family: var(--font-display); font-size: 2.2rem; line-height: 1;
+      font-family: var(--font-titre); font-size: 2.2rem; line-height: 1;
       color: rgba(255,255,255,0.5);
       transition: color 0.4s, transform 0.4s var(--ease-spring);
     }
@@ -679,7 +678,7 @@
     /* Gros numéro en fond */
     .feat-bg-num {
       position: absolute; right: -1rem; bottom: -1rem;
-      font-family: var(--font-display); font-size: 8rem; line-height: 1;
+      font-family: var(--font-titre); font-size: 8rem; line-height: 1;
       color: rgba(192,85,42,0.07); pointer-events: none; user-select: none;
       transition: color 0.5s, transform 0.5s var(--ease-doux);
     }
@@ -789,6 +788,149 @@
     @keyframes fadeUp  { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
     @keyframes fadeIn  { from { opacity:0 } to { opacity:1 } }
 
+
+    /* ============================================================
+       ANIMATIONS DANS LES CARTES D'ACTIVITÉ
+    ============================================================ */
+
+    /* Numéro flottant avec léger mouvement */
+    .act-num {
+      animation: numFloat 3s ease-in-out infinite;
+    }
+    @keyframes numFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .act-card:hover .act-num {
+      animation: numPulse 0.6s ease;
+    }
+    @keyframes numPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3) rotate(-5deg); }
+      100% { transform: scale(1.2) rotate(-5deg); }
+    }
+
+    /* Badge ville qui pulse au hover */
+    .act-card:hover .city-badge {
+      animation: badgeGlow 1.5s ease-in-out infinite;
+    }
+    @keyframes badgeGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200,150,46,0); }
+      50% { box-shadow: 0 0 12px 2px rgba(200,150,46,0.3); }
+    }
+
+    /* Ligne shimmer qui traverse la carte au hover */
+    .act-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.7s ease;
+      z-index: 6; pointer-events: none;
+    }
+    .act-card:hover::before {
+      left: 150%;
+      transition: left 0.9s ease;
+    }
+
+    /* Image avec zoom doux continu au hover */
+    .act-card-img img {
+      transition: transform 1.2s var(--ease-doux), filter 0.6s;
+    }
+    .act-card:hover .act-card-img img {
+      transform: scale(1.12);
+      filter: brightness(1.05) saturate(1.1);
+    }
+
+    /* Titre avec soulignement animé */
+    .act-card-title-wrap h3 {
+      position: relative;
+      display: inline-block;
+    }
+    .act-card-title-wrap h3::after {
+      content: "";
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--terracotta);
+      transition: width 0.5s var(--ease-doux);
+    }
+    .act-card:hover .act-card-title-wrap h3::after {
+      width: 100%;
+    }
+
+    /* Bouton avec effet ripple au clic */
+    .btn-decouvrir {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-decouvrir::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+    .btn-decouvrir:active::after {
+      width: 200px; height: 200px;
+    }
+
+    /* Icône de localisation qui danse */
+    .act-location i {
+      animation: locationBounce 2s ease-in-out infinite;
+    }
+    @keyframes locationBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* Coins dorés avec animation de dessin séquentielle */
+    .card-corner {
+      transition: width 0.5s var(--ease-doux), height 0.5s var(--ease-doux), opacity 0.4s;
+    }
+    .act-card:hover .card-corner.tl { animation: cornerDrawTL 0.4s var(--ease-doux) forwards; }
+    .act-card:hover .card-corner.tr { animation: cornerDrawTR 0.4s var(--ease-doux) 0.1s forwards; }
+    .act-card:hover .card-corner.bl { animation: cornerDrawBL 0.4s var(--ease-doux) 0.2s forwards; }
+    .act-card:hover .card-corner.br { animation: cornerDrawBR 0.4s var(--ease-doux) 0.3s forwards; }
+
+    @keyframes cornerDrawTL { from { width:0; height:0; } to { width:24px; height:24px; } }
+    @keyframes cornerDrawTR { from { width:0; height:0; } to { width:24px; height:24px; } }
+    @keyframes cornerDrawBL { from { width:0; height:0; } to { width:24px; height:24px; } }
+    @keyframes cornerDrawBR { from { width:0; height:0; } to { width:24px; height:24px; } }
+
+    /* Catégorie badge avec rotation subtile */
+    .cat-badge {
+      transition: background 0.3s, transform 0.3s var(--ease-spring);
+    }
+    .act-card:hover .cat-badge {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    /* Description qui s'éclaircit au hover */
+    .act-desc {
+      transition: color 0.4s;
+    }
+    .act-card:hover .act-desc {
+      color: var(--texte-doux);
+    }
+
+    /* Ombre portée qui pulse doucement en idle */
+    .act-card {
+      animation: cardShadowPulse 4s ease-in-out infinite;
+    }
+    @keyframes cardShadowPulse {
+      0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+      50% { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    }
+    .act-card:hover {
+      animation: none;
+    }
+
     /* ============================================================
        RESPONSIVE
     ============================================================ */
@@ -816,6 +958,8 @@
       .act-card-body h3 { font-size: 1.1rem; }
     }
   </style>
+<base target="_blank">
+<base target="_blank">
 </head>
 
 <body>
@@ -899,8 +1043,7 @@
 
     <!-- Gauche : texte -->
     <div class="hero-left">
-      <div class="hero-watermark" aria-hidden="true">6</div>
-
+  
       <div class="hero-deco-line">
         <span class="line-seg"></span>
         <span class="label">Maroc · 2026</span>
@@ -913,7 +1056,7 @@
         <span class="word">VIS&nbsp;</span><span class="word">LE&nbsp;</span><span class="word">MAROC</span>
       </h1>
 
-      <p class="hero-sub">Six expériences qui capturent l'âme du Royaume</p>
+      <p class="hero-sub">Sept expériences qui capturent l'âme du Royaume</p>
       <p class="hero-desc">
         Des ruelles azur de Chefchaouen aux dunes infinies de Merzouga — plongez au cœur d'aventures qui transforment chaque voyageur.
       </p>
@@ -928,11 +1071,7 @@
       <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1200&q=80"
            alt="Maroc — activités et paysages" />
 
-      <!-- Badge flottant -->
-      <div class="hero-photo-badge" aria-hidden="true">
-        <span class="badge-num">6</span>
-        <span class="badge-label">Expériences</span>
-      </div>
+
     </div>
 
     <!-- Scroll hint -->
@@ -971,146 +1110,9 @@
   <section class="activities-section" id="activitesSection">
     <div class="container">
 
-      <!-- En-tête -->
-      <div class="row align-items-end sec-head reveal">
-        <div class="col-lg-8">
-          <p class="sec-eyebrow">Expériences authentiques</p>
-          <h2>Six <em>moments</em> inoubliables</h2>
-        </div>
-        <div class="col-lg-4 sec-head-right">
-          <div class="sec-count">
-            Activités disponibles
-            <strong id="visibleCount">6</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── CARTE VEDETTE : Médina Bleue ── -->
-      <div class="mb-4 reveal-clip" data-tags="culture">
-        <div class="act-featured">
-          <div class="feat-img">
-            <img src="https://images.unsplash.com/photo-1548011241-415c1f67c9b9?w=900&q=80"
-                 alt="Médina Bleue de Chefchaouen" loading="lazy" />
-            <div class="feat-img-overlay"></div>
-            <span class="feat-badge">Chefchaouen</span>
-          </div>
-          <div class="feat-body">
-            <span class="feat-cat-pill"><i class="bi bi-bank2"></i> Culture</span>
-            <p class="feat-city-label"><i class="bi bi-geo-alt-fill"></i> Chefchaouen, Maroc</p>
-            <h3>Médina Bleue</h3>
-            <p>Perdez-vous dans le labyrinthe azur de la médina, entre poteries artisanales et ateliers de tissage. Chaque ruelle est un tableau vivant que le temps semble avoir oublié.</p>
-            <a href="chefchaouen.html" class="feat-link">
-              Découvrir Chefchaouen <i class="bi bi-arrow-right"></i>
-            </a>
-            <div class="feat-bg-num" aria-hidden="true">01</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Séparateur -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-
-      <!-- ── RANGÉE : 3 cartes ── -->
-      <div class="row g-4 stagger-row" id="row-3cards">
-        <!-- Carte 2 -->
-        <div class="col-lg-4 col-md-6 stagger-item" data-tags="culture">
-          <div class="act-card">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600&q=80"
-                   alt="Place Jemaa el-Fna Marrakech" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Marrakech</span>
-                <span class="cat-badge">Culture</span>
-              </div>
-              <div class="act-num" aria-hidden="true">02</div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Marrakech</span>
-              <div class="act-card-title-wrap"><h3>Place Jemaa el-Fna</h3></div>
-              <p class="act-desc">À la tombée du jour, la place mythique s'embrase : charmeurs de serpents, conteurs, musiciens et étals de cuisine traditionnelle.</p>
-              <a href="marrakech.html" class="btn-decouvrir">
-                <span>Découvrir</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Carte 3 -->
-        <div class="col-lg-4 col-md-6 stagger-item" data-tags="culture nature">
-          <div class="act-card">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80"
-                   alt="Remparts Essaouira" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Essaouira</span>
-                <span class="cat-badge">Nature</span>
-              </div>
-              <div class="act-num" aria-hidden="true">03</div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Essaouira</span>
-              <div class="act-card-title-wrap"><h3>Remparts &amp; Port</h3></div>
-              <p class="act-desc">Face à l'Atlantique, les remparts sculptés par le vent offrent une vue spectaculaire. Port aux barques bleues, ateliers de thuya et festival Gnaoua.</p>
-              <a href="essaouira.html" class="btn-decouvrir">
-                <span>Découvrir</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Carte 4 -->
-        <div class="col-lg-4 col-md-6 stagger-item" data-tags="nature detente">
-          <div class="act-card">
-            <div class="card-corners">
-              <div class="card-corner tl"></div><div class="card-corner tr"></div>
-              <div class="card-corner bl"></div><div class="card-corner br"></div>
-            </div>
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=600&q=80"
-                   alt="Plage Agadir" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-badges">
-                <span class="city-badge">Agadir</span>
-                <span class="cat-badge">Détente</span>
-              </div>
-              <div class="act-num" aria-hidden="true">04</div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Agadir</span>
-              <div class="act-card-title-wrap"><h3>Plage &amp; Sunset</h3></div>
-              <p class="act-desc">Étendue sur plus de 10 km, la baie d'Agadir est un havre de douceur. Surf au coucher du soleil ou farniente face aux vagues atlantiques.</p>
-              <a href="agadir.html" class="btn-decouvrir">
-                <span>Découvrir</span> <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Séparateur -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
-          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
-        </svg>
-      </div>
-
-      <!-- ── RANGÉE : 2 cartes finales ── -->
-      <div class="row g-4 stagger-row" id="row-2cards">
-        <!-- Carte 5 -->
+      <!-- ── PAIRE 1 : Chefchaouen + Marrakech ── -->
+      <div class="row g-4 stagger-row" id="row-pair1">
+        <!-- Carte 1 : Chefchaouen -->
         <div class="col-md-6 stagger-item" data-tags="culture">
           <div class="act-card">
             <div class="card-corners">
@@ -1118,54 +1120,208 @@
               <div class="card-corner bl"></div><div class="card-corner br"></div>
             </div>
             <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1578603727901-ff75e1c4f98b?w=600&q=80"
-                   alt="Kasbah des Oudayas Rabat" loading="lazy" />
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/e8504f5dc25ce9385cfdf11a0cc48e7710addf4f.jpg"
+                   alt="Rivière d'Akchour — Chefchaouen" loading="lazy" />
               <div class="act-card-img-overlay"></div>
               <div class="act-badges">
-                <span class="city-badge">Rabat</span>
-                <span class="cat-badge">Culture</span>
+                <span class="city-badge">Chefchaouen</span>
+                <span class="cat-badge">Aventure</span>
               </div>
-              <div class="act-num" aria-hidden="true">05</div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Rabat</span>
-              <div class="act-card-title-wrap"><h3>Kasbah des Oudayas</h3></div>
-              <p class="act-desc">Forteresse blanche et bleue au bord du Bouregreg, ses jardins andalous apaisants et ses ruelles fleuries offrent une vue panoramique sur Salé.</p>
-              <a href="rabat.html" class="btn-decouvrir">
-                <span>Découvrir</span> <i class="bi bi-arrow-right"></i>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Chefchaouen</span>
+              <div class="act-card-title-wrap"><h3>Tubing à Akchour</h3></div>
+              <p class="act-desc">Glissez sur les eaux cristallines d'Akchour en bouée, entre gorges sauvages et falaises vertigineuses. Une descente aquatique exaltante au cœur du Rif, entre baignades et paysages à couper le souffle.</p>
+              <a href="chefchaouen.html" class="btn-decouvrir">
+                <span>Découvrir Chefchaouen</span> <i class="bi bi-arrow-right"></i>
               </a>
             </div>
           </div>
         </div>
-        <!-- Carte 6 -->
-        <div class="col-md-6 stagger-item" data-tags="aventure nature">
+        <!-- Carte 2 : Marrakech -->
+        <div class="col-md-6 stagger-item" data-tags="culture">
           <div class="act-card">
             <div class="card-corners">
               <div class="card-corner tl"></div><div class="card-corner tr"></div>
               <div class="card-corner bl"></div><div class="card-corner br"></div>
             </div>
             <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?w=600&q=80"
-                   alt="Dunes Merzouga" loading="lazy" />
+              <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg"
+                   alt="Musiciens Gnawa traditionnels — Place Jemaa el-Fna, Marrakech" loading="lazy" />
               <div class="act-card-img-overlay"></div>
               <div class="act-badges">
-                <span class="city-badge">Merzouga</span>
-                <span class="cat-badge">Aventure</span>
+                <span class="city-badge">Marrakech</span>
+                <span class="cat-badge">Culture</span>
               </div>
-              <div class="act-num" aria-hidden="true">06</div>
             </div>
             <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Merzouga</span>
-              <div class="act-card-title-wrap"><h3>Dunes de l'Erg Chebbi</h3></div>
-              <p class="act-desc">Caravane de dromadaires au crépuscule, nuit étoilée en bivouac berbère, lever de soleil sur les dunes dorées — l'expérience ultime du Sahara.</p>
-              <a href="merzouga.html" class="btn-decouvrir">
-                <span>Découvrir</span> <i class="bi bi-arrow-right"></i>
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Marrakech</span>
+              <div class="act-card-title-wrap"><h3>Place Jemaa el-Fna</h3></div>
+              <p class="act-desc">À la tombée du jour, la place mythique s'embrase : spectacles de rue envoûtants, conteurs berbères, musiciens traditionnels au gnawa et étals de cuisine qui embaument les sens.</p>
+              <a href="marrakech.html" class="btn-decouvrir">
+                <span>Découvrir Marrakech</span> <i class="bi bi-arrow-right"></i>
               </a>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Séparateur -->
+      <div class="ornament-sep reveal">
+        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
+          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- ── PAIRE 2 : Essaouira + Agadir ── -->
+      <div class="row g-4 stagger-row" id="row-pair2">
+        <!-- Carte 3 : Essaouira -->
+        <div class="col-md-6 stagger-item" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="card-corners">
+              <div class="card-corner tl"></div><div class="card-corner tr"></div>
+              <div class="card-corner bl"></div><div class="card-corner br"></div>
+            </div>
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/kiteworldwide.com/e122637ef4920c7e0f818da119d2032e33779e99.jpg"
+                   alt="Kitesurf à Essaouira" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges">
+                <span class="city-badge">Essaouira</span>
+                <span class="cat-badge">Sport</span>
+              </div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Essaouira</span>
+              <div class="act-card-title-wrap"><h3>Kitesurf</h3></div>
+              <p class="act-desc">La baie d'Essaouira est un spot de kitesurf mondialement reconnu. Vent alizé constant, eaux peu profondes et vagues parfaites pour débutants comme experts.</p>
+              <a href="essaouira.html" class="btn-decouvrir">
+                <span>Découvrir Essaouira</span> <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Carte 4 : Agadir -->
+        <div class="col-md-6 stagger-item" data-tags="sport aventure">
+          <div class="act-card">
+            <div class="card-corners">
+              <div class="card-corner tl"></div><div class="card-corner tr"></div>
+              <div class="card-corner bl"></div><div class="card-corner br"></div>
+            </div>
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/80f3d47923a384909e1484b7b086649ac922d1db.jpg"
+                   alt="Jet Ski à Agadir" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges">
+                <span class="city-badge">Agadir</span>
+                <span class="cat-badge">Sport</span>
+              </div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Agadir</span>
+              <div class="act-card-title-wrap"><h3>Jet Ski</h3></div>
+              <p class="act-desc">Fendez les vagues de l'Atlantique à bord d'un jet ski. Adrénaline garantie sur les eaux turquoise d'Agadir, entre vitesse et paysages côtiers spectaculaires.</p>
+              <a href="agadir.html" class="btn-decouvrir">
+                <span>Découvrir Agadir</span> <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Séparateur -->
+      <div class="ornament-sep reveal">
+        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
+          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- ── PAIRE 3 : Rabat + Ifrane ── -->
+      <div class="row g-4 stagger-row" id="row-pair3">
+        <!-- Carte 5 : Rabat -->
+        <div class="col-md-6 stagger-item" data-tags="culture">
+          <div class="act-card">
+            <div class="card-corners">
+              <div class="card-corner tl"></div><div class="card-corner tr"></div>
+              <div class="card-corner bl"></div><div class="card-corner br"></div>
+            </div>
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/84c374b7ef7ff296b91f03ec3f9e8e1fa035ddfd.jpg"
+                   alt="Balade en bateau sur le Bouregreg — Rabat" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges">
+                <span class="city-badge">Rabat</span>
+                <span class="cat-badge">Détente</span>
+              </div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Rabat</span>
+              <div class="act-card-title-wrap"><h3>Balade en Bateau sur le Bouregreg</h3></div>
+              <p class="act-desc">Naviguez sur les eaux calmes du Bouregreg à bord d'une embarcation traditionnelle, entre les rives de Rabat et Salé. Une perspective unique sur la Kasbah, la Tour Hassan et le théâtre Mohammed V.</p>
+              <a href="rabat.html" class="btn-decouvrir">
+                <span>Découvrir Rabat</span> <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Carte 6 : Ifrane -->
+        <div class="col-md-6 stagger-item" data-tags="nature aventure">
+          <div class="act-card">
+            <div class="card-corners">
+              <div class="card-corner tl"></div><div class="card-corner tr"></div>
+              <div class="card-corner bl"></div><div class="card-corner br"></div>
+            </div>
+            <div class="act-card-img">
+              <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg"
+                   alt="Camping à Ifrane" loading="lazy" />
+              <div class="act-card-img-overlay"></div>
+              <div class="act-badges">
+                <span class="city-badge">Ifrane</span>
+                <span class="cat-badge">Nature</span>
+              </div>
+            </div>
+            <div class="act-card-body">
+              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Ifrane</span>
+              <div class="act-card-title-wrap"><h3>Camping en Forêt de Cèdres</h3></div>
+              <p class="act-desc">Bivouaquez sous les cèdres millénaires de l'Atlas, au cœur d'une nature préservée. Nuits étoilées, sentiers de randonnée et air pur de moyenne altitude.</p>
+              <a href="ifrane.html" class="btn-decouvrir">
+                <span>Découvrir Ifrane</span> <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Séparateur -->
+      <div class="ornament-sep reveal">
+        <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
+          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <polygon points="40,20 48,36 62,40 48,44 40,60 32,44 18,40 32,36" stroke="#D4AF37" stroke-width="1" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- ── CARTE VEDETTE : Merzouga (la plus spectaculaire) ── -->
+      <div class="mb-4 reveal-clip" data-tags="aventure culture">
+        <div class="act-featured">
+          <div class="feat-img">
+            <img src="https://kimi-web-img.moonshot.cn/img/cameltripssahara.com/003a095dfb1300247b2f088d2d846d2e566eb0aa.jpg"
+                 alt="Balade à dos de chameau — Merzouga" loading="lazy" />
+            <div class="feat-img-overlay"></div>
+            <span class="feat-badge">Merzouga</span>
+          </div>
+          <div class="feat-body">
+            <span class="feat-cat-pill"><i class="bi bi-compass"></i> Aventure</span>
+            <p class="feat-city-label"><i class="bi bi-geo-alt-fill"></i> Merzouga, Maroc</p>
+            <h3>Balade à dos de Chameau</h3>
+            <p>Partez en caravane à travers les dunes de l'Erg Chebbi au crépuscule. Une heure de dromadaire jusqu'à votre bivouac berbère, sous un ciel étoilé sans fin — l'expérience saharienne par excellence.</p>
+            <a href="merzouga.html" class="feat-link">
+              Découvrir Merzouga <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1246,16 +1402,11 @@
     /* === 3. FILTRES === */
     (function () {
       const tabs = document.querySelectorAll('.filter-tab');
-      const countEl = document.getElementById('visibleCount');
 
       function setCount() {
         let n = 0;
         document.querySelectorAll('[data-tags]').forEach(el => { if (el.style.display !== 'none') n++; });
-        if (countEl) {
-          countEl.style.transform = 'scale(1.3)';
-          countEl.textContent = n;
-          setTimeout(() => { countEl.style.transform = ''; }, 300);
-        }
+        // Counter display removed per design request
       }
 
       tabs.forEach(tab => {
@@ -1352,7 +1503,7 @@
       });
     })();
 
-    console.log('✨ activites.html v3 — Palette Maroc · Animations créatives chargées.');
+    console.log('✨ activites.html v4 — 7 villes · Palette Maroc · Animations créatives chargées.');
   </script>
 
 </body>

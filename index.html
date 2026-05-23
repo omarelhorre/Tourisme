@@ -3,834 +3,1381 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Activités Incontournables — Maroc</title>
+  <title>Bienvenue au Royaume du Maroc</title>
 
+  <!-- === Bootstrap 5 CSS === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Lato:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* ============================================================
+       index.html — Feuille de styles
+       Palette : terracotta #C0552A, sable #F5E6C8, vert #2D5016,
+                 or #D4AF37, blanc #FFFFFF
+       ============================================================ */
+
+    /* === Variables de couleurs === */
     :root {
+      /* Palette unifiée — une seule source de vérité */
       --terracotta: #C0552A;
       --terracotta-dark: #9C4520;
       --sable: #F5E6C8;
       --sable-fonce: #E9D6AE;
       --vert: #2D5016;
+      --vert-fonce: #1F2A1A;
       --or: #D4AF37;
       --or-fonce: #B8961F;
       --jaune-btn: #FFD700;
       --texte: #2A2A2A;
       --texte-doux: #6B5640;
       --encre: #1A1A1A;
-      --encre-fonce: #0D0D0D;
+
+      /* Police unifiée */
       --font-titre: 'Playfair Display', serif;
       --font-corps: 'Lato', sans-serif;
-      --font-display: 'Bebas Neue', sans-serif;
+
+      /* Mouvement unifié — transitions d'images plus douces et lentes */
       --ease-doux: cubic-bezier(0.22, 1, 0.36, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --duree-image: 1.1s;
     }
 
-    html { scroll-behavior: smooth; }
-
+    /* === Base typographique === */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Décalage d'ancrage pour ne pas passer sous la navbar fixe */
+    #mapSection, #dishesSection, #experiencesSection,
+    #guideSection, #flightsSection {
+      scroll-margin-top: 84px;
+    }
     body {
       font-family: var(--font-corps);
       color: var(--texte);
-      background-color: var(--encre-fonce);
+      background-color: #fff;
       margin: 0;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
     }
-
-    h1, h2, h3, h4 { font-family: var(--font-titre); font-weight: 700; }
+    h1, h2, h3, h4, h5, .titre {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
     p { line-height: 1.7; }
     a { transition: color 0.25s var(--ease-doux); }
 
-    /* ============================================================
-       NAV FAB
-    ============================================================ */
-    .nav-fab {
-      position: fixed; top: 1.75rem; z-index: 1045;
-      width: 46px; height: 46px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 50%; cursor: pointer; padding: 0;
-      text-decoration: none; white-space: nowrap;
-      box-shadow: 0 6px 18px -8px rgba(0,0,0,0.5);
-      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s;
+    /* === Image placeholder partagé === */
+    .img-placeholder {
+      background: #e0d5c5;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      border-radius: 8px;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
     }
-    .nav-fab:hover { background: rgba(192,85,42,0.85); border-color: var(--terracotta); transform: scale(1.08); }
-    .nav-fab i { display: block; line-height: 1; }
+
+    /* ============================================================
+       === Icônes flottantes (palmier + burger) — pas de header ===
+       ============================================================ */
+    .nav-fab {
+      position: fixed;
+      top: 1.75rem;
+      z-index: 1045;
+      width: 46px;
+      height: 46px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;          /* l'icône ne passe jamais à la ligne */
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      padding: 0;
+      overflow: hidden;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .nav-fab i {
+      display: block;
+      line-height: 1;
+    }
+    .nav-fab-burger span { flex: 0 0 auto; }
+    .nav-fab:hover {
+      background: #fff;
+      transform: scale(1.06);
+    }
     .nav-fab-logo { left: 2.5rem; }
     .nav-fab-burger { right: 2.5rem; }
-    .nav-fab-logo i { color: #fff; font-size: 1.4rem; }
-    .nav-fab-burger span {
-      display: block; width: 22px; height: 2px; background: #fff;
-      border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease;
+    .nav-fab-logo i {
+      color: var(--terracotta);
+      font-size: 1.5rem;
     }
-    body.menu-open .nav-fab-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-8px) rotate(-45deg); }
+    /* Les 2 barres du burger */
+    .nav-fab-burger span {
+      display: block;
+      width: 22px;
+      height: 2.5px;
+      background: var(--terracotta);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    /* Burger → croix quand le menu est ouvert */
+    body.menu-open .nav-fab-burger span:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    body.menu-open .nav-fab-burger span:nth-child(2) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
     body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
     /* ============================================================
-       MENU
-    ============================================================ */
+       === Menu plein écran (palette Maroc, esprit GTA VI) ===
+       ============================================================ */
     .site-menu {
-      position: fixed; inset: 0; z-index: 1044;
-      background: var(--encre);
-      display: flex; flex-direction: column;
-      padding: 6.5rem 2.5rem 3rem;
-      overflow-y: auto;
-      opacity: 0; visibility: hidden; transform: scale(1.02);
-      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
-    }
-    body.menu-open .site-menu {
-      opacity: 1; visibility: visible; transform: scale(1);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .site-menu::before {
-      content: ""; position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.15'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-      pointer-events: none;
-    }
-    .site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
-    .menu-group { border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .menu-head {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: 1.1rem 0.25rem;
-      background: transparent; border: none; cursor: pointer;
-      color: rgba(255,255,255,0.85);
-      font-family: 'Lato', sans-serif; font-weight: 900;
-      font-size: clamp(1.6rem, 4vw, 2.8rem); text-transform: uppercase;
-      transition: color 0.2s, padding-left 0.2s;
-      text-decoration: none;
-    }
-    .menu-head:hover { color: var(--terracotta); padding-left: 0.8rem; }
-    .menu-head .chev { font-size: 1.1rem; color: var(--terracotta); transition: transform 0.3s; margin-left: 1rem; }
-    .menu-group.open .menu-head .chev { transform: rotate(180deg); }
-    .menu-group.open .menu-head { color: var(--terracotta); }
-    .menu-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; opacity: 0; }
-    .menu-group.open .menu-sub { max-height: 640px; opacity: 1; }
-    .menu-sub-list { list-style: none; margin: 0; padding: 0.3rem 0 1.2rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; }
-    .menu-sub-list.cities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 1.5rem; }
-    .menu-sub-list a {
-      display: flex; align-items: center; gap: 0.6rem;
-      padding: 0.5rem 0.6rem; color: rgba(255,255,255,0.55);
-      text-decoration: none; font-weight: 700; font-size: 1rem;
-      letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .menu-sub-list a:hover { color: var(--terracotta); background: rgba(192,85,42,0.12); }
-    .menu-cta {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      margin-top: 2rem; padding: 0.95rem 2rem;
-      background: var(--jaune-btn); color: var(--encre);
-      font-weight: 900; font-size: 1rem; letter-spacing: 0.04em;
-      text-transform: uppercase; text-decoration: none;
-      border-radius: 999px; transition: background 0.2s, transform 0.2s;
-    }
-    .menu-cta:hover { background: #f5cd00; color: #000; transform: translateY(-2px); }
-    .menu-foot {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 1rem; margin-top: 2rem; padding-top: 1.25rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .motion-toggle {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      border: none; background: transparent; color: rgba(255,255,255,0.5);
-      font-family: var(--font-corps); font-weight: 800; font-size: 0.82rem;
-      letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0.25rem;
-    }
-    .motion-track {
-      position: relative; width: 42px; height: 22px; border-radius: 999px;
-      background: rgba(192,85,42,0.3); transition: background 0.25s; flex-shrink: 0;
-    }
-    .motion-thumb {
-      position: absolute; top: 3px; left: 3px; width: 16px; height: 16px;
-      border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-      transition: transform 0.25s;
-    }
-    .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
-    .motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
-    body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
-      animation-duration: 0.001ms !important; animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important; scroll-behavior: auto !important;
-    }
-
-    @media (min-width: 992px) {
-      .site-menu { background: transparent; padding: 0; overflow: hidden; opacity: 1; visibility: visible; transform: none; pointer-events: none; transition: none; }
-      body.menu-open .site-menu { pointer-events: auto; }
-      .site-menu::before { display: none; }
-      .site-menu-inner {
-        position: absolute; top: 0; right: 0; height: 100%; width: min(50vw, 760px);
-        max-width: none; margin: 0; padding: 5rem 4rem 3rem;
-        overflow-y: auto; background: var(--encre);
-        border-left: 1px solid rgba(192,85,42,0.2);
-        box-shadow: -30px 0 70px -25px rgba(0,0,0,0.7);
-        transform: translateX(100%);
-        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5rem;
-      }
-      body.menu-open .site-menu-inner { transform: translateX(0); }
-      .site-menu-inner::before {
-        content: ""; position: absolute; inset: 0;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.15'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
-        pointer-events: none; z-index: 0;
-      }
-      .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
-      .menu-head {
-        position: relative; z-index: 1; width: auto;
-        justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem;
-        font-size: 0.9rem; letter-spacing: 0.08em; white-space: nowrap;
-        background: transparent; transition: background 0.25s, color 0.25s;
-      }
-      .menu-head:hover { padding-left: 1.4rem; background: rgba(192,85,42,0.15); }
-      .menu-head .chev { display: none; }
-      .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
-      .menu-sub {
-        position: absolute; left: 4rem; right: 4rem; top: 9.5rem; bottom: 11rem; z-index: 1;
-        padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);
-        max-height: none; overflow-y: auto;
-        opacity: 0; visibility: hidden; transform: translateY(14px);
-        transition: opacity 0.35s, transform 0.35s, visibility 0s linear 0.35s;
-      }
-      .menu-group.open .menu-sub { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.35s, transform 0.35s; }
-      .menu-sub-list { padding: 0; gap: 0.1rem; }
-      .menu-sub-list a { font-size: clamp(1.2rem, 2vw, 1.9rem); font-weight: 900; padding: 0.4rem 0.7rem; }
-      .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
-      .menu-cta { position: absolute; z-index: 2; left: 4rem; bottom: 6rem; margin-top: 0; }
-      .menu-foot { position: absolute; z-index: 2; left: 4rem; right: 4rem; bottom: 1.6rem; margin-top: 0; }
-    }
-
-    /* ============================================================
-       HERO — Cinématique, pas de photo de fond pleine page
-    ============================================================ */
-    .hero-act {
-      position: relative;
-      min-height: 100vh;
-      background: var(--encre-fonce);
+      position: fixed;
+      inset: 0;
+      z-index: 1044;
+      /* Fond = couleur primaire du site (sable) */
+      background: var(--sable);
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-end;
-      padding: 0 0 4rem;
-      overflow: hidden;
+      padding: 6.5rem 2.5rem 3rem;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.02);
+      transition: opacity 0.35s ease, transform 0.35s ease,
+                  visibility 0s linear 0.35s;
     }
-
-    /* Zellige animé en fond */
-    .hero-act-bg {
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%23C0552A' stroke-width='1.2' opacity='0.12'><polygon points='60,8 74,34 102,42 82,68 86,98 60,86 34,98 38,68 18,42 46,34'/><polygon points='60,25 70,43 90,49 75,66 78,88 60,79 42,88 45,66 30,49 50,43'/></g></svg>");
-      animation: bgPulse 12s ease-in-out infinite alternate;
-      transform-origin: center;
+    body.menu-open .site-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
-    @keyframes bgPulse {
-      from { transform: scale(1) rotate(0deg); opacity: 0.7; }
-      to { transform: scale(1.06) rotate(2deg); opacity: 1; }
-    }
-
-    /* Photo en split droite */
-    .hero-act-photo {
+    /* Motif zellige discret en fond du menu */
+    .site-menu::before {
+      content: "";
       position: absolute;
-      right: 0; top: 0; bottom: 0;
-      width: 52%;
-      overflow: hidden;
-    }
-    .hero-act-photo img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.55) saturate(1.2);
-      transform: scale(1.05);
-      animation: imgBreath 18s ease-in-out infinite alternate;
-    }
-    @keyframes imgBreath {
-      from { transform: scale(1.05); }
-      to { transform: scale(1.12); }
-    }
-    /* Gradient de fondu gauche */
-    .hero-act-photo::before {
-      content: ""; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(90deg, var(--encre-fonce) 0%, rgba(13,13,13,0.6) 55%, transparent 100%);
-    }
-    /* Filigrane or sur la photo */
-    .hero-act-photo::after {
-      content: ""; position: absolute; inset: 0; z-index: 2;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='0.8' opacity='0.2'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      opacity: 0.5;
       pointer-events: none;
     }
 
-    /* Contenu texte */
-    .hero-act-content {
-      position: relative; z-index: 10;
-      padding: 0 4rem;
-      max-width: 700px;
+    .site-menu-inner {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
     }
 
-    /* Ligne décorative */
-    .hero-act-line {
-      display: flex; align-items: center; gap: 1rem;
-      margin-bottom: 2rem;
+    /* Élément de menu : lien direct OU section dépliable */
+    .menu-group {
+      border-bottom: 1px solid rgba(192, 85, 42, 0.22);
     }
-    .hero-act-line span {
-      display: block; height: 2px; background: var(--terracotta);
-      width: 0;
-      animation: lineGrow 1.2s var(--ease-doux) 0.4s forwards;
+    .menu-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1.15rem 0.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      color: var(--texte);
+      font-family: 'Lato', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, padding-left 0.2s ease;
     }
-    .hero-act-line span:first-child { width: 0; animation-delay: 0.4s; }
-    @keyframes lineGrow {
-      to { width: 60px; }
-    }
-    .hero-act-line em {
-      font-family: var(--font-corps); font-style: normal; font-weight: 700;
-      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    .menu-head:hover,
+    .menu-head:focus-visible {
       color: var(--terracotta);
-      opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 0.6s forwards;
+      padding-left: 0.9rem;
+      outline: none;
     }
-
-    /* Numéro géant en watermark */
-    .hero-act-number {
-      position: absolute;
-      top: 8%;
-      left: -2rem;
-      font-family: var(--font-display);
-      font-size: clamp(10rem, 22vw, 20rem);
-      color: rgba(192,85,42,0.06);
-      line-height: 1;
-      user-select: none;
-      pointer-events: none;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-act-kicker {
-      font-family: var(--font-corps); font-weight: 900; font-size: 0.78rem;
-      letter-spacing: 0.25em; text-transform: uppercase; color: var(--or);
-      margin-bottom: 1rem;
-      opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 0.8s forwards;
-    }
-    .hero-act h1 {
-      font-family: var(--font-display);
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      color: #fff;
-      line-height: 0.92;
-      margin: 0 0 1.5rem;
-      letter-spacing: 0.02em;
-    }
-    .hero-act h1 .word {
-      display: inline-block;
-      clip-path: inset(0 100% 0 0);
-      animation: wordReveal 0.9s var(--ease-doux) forwards;
-    }
-    .hero-act h1 .word:nth-child(1) { animation-delay: 0.9s; }
-    .hero-act h1 .word:nth-child(2) { animation-delay: 1.1s; }
-    .hero-act h1 .word:nth-child(3) { animation-delay: 1.3s; }
-    .hero-act h1 .word:nth-child(4) { animation-delay: 1.5s; }
-    @keyframes wordReveal {
-      to { clip-path: inset(0 0% 0 0); }
-    }
-
-    .hero-act-desc {
-      font-size: 1.05rem; color: rgba(255,255,255,0.62);
-      max-width: 480px; line-height: 1.75;
-      opacity: 0; animation: fadeUp 0.9s var(--ease-doux) 1.8s forwards;
-    }
-    .hero-act-cta {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      margin-top: 2rem;
-      padding: 0.85rem 2rem;
-      border: 2px solid var(--terracotta);
-      color: #fff; background: transparent;
-      font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none; border-radius: 4px;
-      transition: background 0.3s, color 0.3s, gap 0.3s;
-      opacity: 0; animation: fadeUp 0.9s var(--ease-doux) 2s forwards;
-    }
-    .hero-act-cta:hover { background: var(--terracotta); color: #fff; gap: 1rem; }
-
-    /* Scroll indicator */
-    .hero-scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 10;
-      opacity: 0; animation: fadeIn 1s ease 2.5s forwards;
-    }
-    .hero-scroll-hint span { font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.35); text-transform: uppercase; }
-    .scroll-dot {
-      width: 24px; height: 38px; border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 999px; display: flex; justify-content: center; padding-top: 6px;
-    }
-    .scroll-dot::before {
-      content: ""; width: 4px; height: 8px; background: var(--terracotta);
-      border-radius: 999px; animation: scrollBounce 2s ease-in-out infinite;
-    }
-    @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
-
-    /* ============================================================
-       FILTER BAR — Redesigned horizontal tabs
-    ============================================================ */
-    .filter-section {
-      background: var(--encre);
-      padding: 0;
-      position: sticky; top: 0; z-index: 50;
-      border-bottom: 1px solid rgba(192,85,42,0.2);
-    }
-    .filter-tabs {
-      display: flex; overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .filter-tabs::-webkit-scrollbar { display: none; }
-    .filter-tab {
+    .menu-head .chev {
+      font-size: 1.1rem;
+      color: var(--terracotta);
+      transition: transform 0.35s ease;
       flex-shrink: 0;
-      background: transparent; border: none;
-      color: rgba(255,255,255,0.4);
-      padding: 1.2rem 1.8rem;
-      font-family: var(--font-corps); font-weight: 700; font-size: 0.8rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      cursor: pointer; position: relative;
-      transition: color 0.25s;
+      margin-left: 1rem;
     }
-    .filter-tab::after {
-      content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: var(--terracotta); transform: scaleX(0); transform-origin: left;
-      transition: transform 0.35s var(--ease-doux);
+    .menu-group.open .menu-head .chev {
+      transform: rotate(180deg);
     }
-    .filter-tab:hover { color: rgba(255,255,255,0.8); }
-    .filter-tab.active { color: #fff; }
-    .filter-tab.active::after { transform: scaleX(1); }
-    .filter-tab i { margin-right: 6px; font-size: 0.95rem; }
-
-    /* ============================================================
-       ACTIVITIES SECTION — Magazine Editorial Layout
-    ============================================================ */
-    .activities-section {
-      background: var(--sable);
-      padding: 5rem 0 6rem;
+    .menu-group.open .menu-head {
+      color: var(--terracotta);
     }
 
-    /* Section header */
-    .section-header {
-      margin-bottom: 4rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(192,85,42,0.2);
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 2rem; flex-wrap: wrap;
+    /* Sous-section dépliable (Accueil → sections, Villes → villes) */
+    .menu-sub {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
     }
-    .section-header-left {}
-    .section-eyebrow {
-      font-family: var(--font-corps); font-weight: 900;
-      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--terracotta); margin-bottom: 0.6rem;
+    .menu-group.open .menu-sub {
+      max-height: 640px;
+      opacity: 1;
     }
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      color: var(--encre); line-height: 0.95;
+    .menu-sub-list {
+      list-style: none;
       margin: 0;
-      letter-spacing: 0.01em;
+      padding: 0.3rem 0 1.2rem 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
     }
-    .section-header h2 em {
-      font-style: italic; font-family: var(--font-titre); color: var(--terracotta);
-      font-size: 0.75em; vertical-align: super; letter-spacing: 0;
-    }
-    .section-count {
-      font-family: var(--font-corps); font-weight: 700; font-size: 0.82rem;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--texte-doux);
-    }
-    .section-count strong { color: var(--terracotta); font-size: 1.8rem; font-family: var(--font-display); vertical-align: -4px; margin-right: 4px; }
-
-    /* ============================================================
-       FEATURED CARD — horizontal, big
-    ============================================================ */
-    .act-featured {
+    .menu-sub-list.cities {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-radius: 0;
-      overflow: hidden;
-      background: var(--encre);
-      margin-bottom: 2px;
-      position: relative;
-      min-height: 460px;
+      gap: 0.1rem 1.5rem;
     }
-    .act-featured-img {
-      position: relative; overflow: hidden;
+    .menu-sub-list a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 0.6rem;
+      color: var(--texte-doux);
+      text-decoration: none;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
-    .act-featured-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 1.2s var(--ease-doux), filter 0.8s;
-      filter: brightness(0.75);
-      transform-origin: center;
+    .menu-sub-list a::before {
+      content: "→";
+      color: var(--terracotta);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .act-featured:hover .act-featured-img img {
-      transform: scale(1.07);
-      filter: brightness(0.85);
+    .menu-sub-list a:hover {
+      color: var(--terracotta);
+      background: rgba(255, 255, 255, 0.6);
     }
-    /* Shimmer sweep on hover */
-    .act-featured-img::after {
-      content: "";
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
-      transform: translateX(-100%);
-      transition: transform 0s;
-    }
-    .act-featured:hover .act-featured-img::after {
-      transform: translateX(200%);
-      transition: transform 0.8s ease;
-    }
-    .act-featured-body {
-      padding: 3rem;
-      display: flex; flex-direction: column; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .act-num {
-      font-family: var(--font-display);
-      font-size: 7rem; line-height: 1;
-      color: rgba(192,85,42,0.12);
-      position: absolute; right: -0.5rem; bottom: -1rem;
-      pointer-events: none; user-select: none;
-      transition: color 0.5s, transform 0.5s var(--ease-doux);
-    }
-    .act-featured:hover .act-num { color: rgba(192,85,42,0.22); transform: scale(1.08); }
-    .act-cat-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--terracotta); color: #fff;
-      padding: 5px 14px; border-radius: 4px;
-      font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
-      margin-bottom: 1.2rem; align-self: flex-start;
-      transition: background 0.3s;
-    }
-    .act-featured:hover .act-cat-pill { background: var(--or); color: var(--encre); }
-    .act-city-label {
-      font-family: var(--font-corps); font-weight: 700; font-size: 0.72rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4); margin-bottom: 0.6rem;
-    }
-    .act-featured-body h3 {
-      font-family: var(--font-titre); font-size: clamp(1.8rem, 3vw, 2.5rem);
-      color: #fff; line-height: 1.15; margin: 0 0 1rem;
-    }
-    .act-featured-body p {
-      color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
-    }
-    /* Underline link */
-    .act-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      color: var(--or); font-weight: 700; font-size: 0.82rem;
-      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-      position: relative; align-self: flex-start;
-    }
-    .act-link::after {
-      content: ""; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
-      background: var(--or); transform: scaleX(0); transform-origin: left;
-      transition: transform 0.35s var(--ease-doux);
-    }
-    .act-link:hover::after { transform: scaleX(1); }
-    .act-link:hover { color: #fff; }
-    .act-link i { transition: transform 0.3s var(--ease-spring); }
-    .act-link:hover i { transform: translateX(6px); }
-
-    /* ============================================================
-       STANDARD CARD — vertical stacked
-    ============================================================ */
-    .act-card {
-      background: #fff;
-      overflow: hidden;
-      position: relative;
-      display: flex; flex-direction: column;
-      height: 100%;
-      /* Border reveal animation */
-      box-shadow: 0 0 0 0 transparent;
-      transition: box-shadow 0.5s var(--ease-doux), transform 0.5s var(--ease-doux);
-    }
-    .act-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px -12px rgba(60,30,10,0.25), 0 0 0 2px var(--terracotta);
-    }
-    .act-card-img {
-      position: relative; height: 240px; overflow: hidden;
-    }
-    .act-card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.9s var(--ease-doux), filter 0.6s;
-      filter: brightness(0.82);
-    }
-    .act-card:hover .act-card-img img { transform: scale(1.09); filter: brightness(0.95); }
-
-    /* Shimmer on card image hover */
-    .act-card-img::after {
-      content: "";
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
-      transform: translateX(-100%);
-    }
-    .act-card:hover .act-card-img::after {
-      transform: translateX(200%);
-      transition: transform 0.7s ease 0.05s;
+    .menu-sub-list a:hover::before {
+      opacity: 1;
+      transform: translateX(0);
     }
 
-    .act-card-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5) 100%);
+    /* Lien CTA "Réserver un Vol" en bas */
+    .menu-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      padding: 0.95rem 2rem;
+      background: var(--jaune-btn);
+      color: var(--encre);
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
-    .act-card-badges {
-      position: absolute; top: 14px; left: 14px; right: 14px;
-      display: flex; justify-content: space-between; align-items: center; z-index: 3;
+    .menu-cta:hover {
+      background: #f5cd00;
+      color: #000;
+      transform: translateY(-2px);
     }
-    .city-tag {
-      background: rgba(26,26,26,0.75); backdrop-filter: blur(6px);
-      color: rgba(255,255,255,0.9); padding: 4px 12px; border-radius: 4px;
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+
+    /* === Pied de menu : langue + animations === */
+    .menu-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(192, 85, 42, 0.22);
     }
-    .cat-tag {
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--texte-doux);
+    }
+    .lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--texte-doux);
+      font-family: var(--font-corps);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s var(--ease-doux), color 0.2s var(--ease-doux);
+    }
+    .lang-btn:hover { color: var(--terracotta); }
+    .lang-btn[aria-pressed="true"] {
       background: var(--terracotta);
-      color: #fff; padding: 4px 12px; border-radius: 4px;
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff;
     }
-
-    /* Animated corner brackets */
-    .act-card::before,
-    .act-card::after {
-      content: ''; position: absolute; z-index: 4; pointer-events: none;
-      width: 20px; height: 20px; opacity: 0;
-      transition: opacity 0.35s var(--ease-doux), width 0.45s var(--ease-doux), height 0.45s var(--ease-doux);
+    .motion-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: none;
+      background: transparent;
+      color: var(--texte-doux);
+      font-family: var(--font-corps);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.25rem;
     }
-    .act-card::before { top: 10px; left: 10px; border-top: 2px solid var(--or); border-left: 2px solid var(--or); }
-    .act-card::after { bottom: 10px; right: 10px; border-bottom: 2px solid var(--or); border-right: 2px solid var(--or); }
-    .act-card:hover::before,
-    .act-card:hover::after { opacity: 1; width: 28px; height: 28px; }
-
-    .act-card-body {
-      padding: 1.4rem; flex: 1; display: flex; flex-direction: column;
+    .motion-track {
       position: relative;
+      width: 42px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(192, 85, 42, 0.25);
+      transition: background 0.25s var(--ease-doux);
+      flex-shrink: 0;
     }
-    /* Animated left accent bar */
-    .act-card-body::before {
-      content: ""; position: absolute; left: 0; top: 1.4rem; bottom: 1.4rem;
-      width: 3px; background: var(--terracotta);
-      transform: scaleY(0); transform-origin: top;
-      transition: transform 0.4s var(--ease-doux);
+    .motion-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transition: transform 0.25s var(--ease-doux);
     }
-    .act-card:hover .act-card-body::before { transform: scaleY(1); }
+    /* aria-checked=true → animations ACTIVÉES (mouvement réduit OFF) */
+    .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
+    .motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
 
-    .act-card-body h3 {
-      font-size: 1.25rem; margin: 0 0 0.3rem;
-      color: var(--encre); line-height: 1.25;
-      transition: color 0.25s;
-    }
-    .act-card:hover .act-card-body h3 { color: var(--terracotta); }
-    .act-location {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--texte-doux); margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 4px;
-    }
-    .act-desc { color: #666; font-size: 0.9rem; line-height: 1.65; flex: 1; margin-bottom: 1.2rem; }
-    .btn-decouvrir {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      color: var(--terracotta); background: transparent;
-      border: 1.5px solid rgba(192,85,42,0.3);
-      padding: 0.55rem 1.2rem; border-radius: 4px;
-      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
-      text-decoration: none; align-self: flex-start;
-      transition: background 0.25s, border-color 0.25s, color 0.25s, gap 0.25s;
-    }
-    .btn-decouvrir:hover { background: var(--terracotta); border-color: var(--terracotta); color: #fff; gap: 0.8rem; }
-    .btn-decouvrir i { transition: transform 0.3s var(--ease-spring); }
-    .btn-decouvrir:hover i { transform: translateX(4px); }
-
-    /* ============================================================
-       WIDE CARD — horizontal layout (image left, text right)
-    ============================================================ */
-    .act-wide {
-      display: grid; grid-template-columns: 1fr 1.2fr;
-      background: var(--encre);
-      overflow: hidden;
-      position: relative;
-      min-height: 280px;
-    }
-    .act-wide-img { position: relative; overflow: hidden; }
-    .act-wide-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.9s var(--ease-doux), filter 0.6s;
-      filter: brightness(0.7);
-    }
-    .act-wide:hover .act-wide-img img { transform: scale(1.08); filter: brightness(0.85); }
-    .act-wide-img::after {
-      content: "";
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
-      transform: translateX(-100%);
-    }
-    .act-wide:hover .act-wide-img::after {
-      transform: translateX(200%);
-      transition: transform 0.75s ease;
-    }
-    .act-wide-body {
-      padding: 2.5rem; display: flex; flex-direction: column; justify-content: center;
-      position: relative; overflow: hidden;
-    }
-    .act-wide-num {
-      font-family: var(--font-display);
-      font-size: 5.5rem; line-height: 1; color: rgba(192,85,42,0.1);
-      position: absolute; right: -0.3rem; bottom: -0.8rem;
-      pointer-events: none; user-select: none;
-      transition: color 0.5s, transform 0.5s var(--ease-doux);
-    }
-    .act-wide:hover .act-wide-num { color: rgba(212,175,55,0.18); transform: scale(1.06); }
-    .act-wide .act-city-label { color: rgba(255,255,255,0.35); }
-    .act-wide h3 { font-size: 1.6rem; color: #fff; margin: 0.4rem 0 0.8rem; line-height: 1.2; }
-    .act-wide p { color: rgba(255,255,255,0.55); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1.3rem; }
-    .act-wide-body .act-cat-pill { background: rgba(192,85,42,0.7); }
-    .act-wide:hover .act-wide-body .act-cat-pill { background: var(--or); color: var(--encre); }
-
-    /* ============================================================
-       GRID LAYOUT
-    ============================================================ */
-    .act-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 2px;
-    }
-    .act-row { display: grid; gap: 2px; }
-    .act-row-2 { grid-template-columns: 1fr 1fr; }
-    .act-row-1 { grid-template-columns: 1fr; }
-
-    /* Séparateur ornemental */
-    .ornament-sep {
-      display: flex; align-items: center; gap: 1.5rem;
-      margin: 3.5rem 0;
-    }
-    .ornament-sep::before,
-    .ornament-sep::after {
-      content: ""; flex: 1; height: 1px; background: rgba(192,85,42,0.25);
-    }
-    .ornament-sep svg { flex-shrink: 0; }
-
-    /* ============================================================
-       SCROLL REVEAL ANIMATIONS
-    ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s var(--ease-doux), transform 0.8s var(--ease-doux);
-    }
-    .reveal.from-left { transform: translateX(-50px) translateY(0); }
-    .reveal.from-right { transform: translateX(50px) translateY(0); }
-    .reveal.visible { opacity: 1; transform: translate(0, 0); }
-
-    /* Stagger for grid items */
-    .reveal-stagger .act-card-wrap,
-    .reveal-stagger .act-wide-wrap {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.75s var(--ease-doux), transform 0.75s var(--ease-doux);
-    }
-    .reveal-stagger.visible .act-card-wrap:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .reveal-stagger.visible .act-card-wrap:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
-    .reveal-stagger.visible .act-card-wrap:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
-    .reveal-stagger.visible .act-card-wrap:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
-    .reveal-stagger.visible .act-card-wrap:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
-
-    /* Clip-path reveal for featured */
-    .reveal-clip {
-      clip-path: inset(0 100% 0 0);
-      transition: clip-path 1s var(--ease-doux);
-    }
-    .reveal-clip.visible { clip-path: inset(0 0% 0 0); }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    .footer-maroc {
-      background: var(--encre-fonce);
-      color: rgba(255,255,255,0.28);
-      text-align: center;
-      padding: 2.5rem 1rem;
-      font-size: 0.82rem;
-      border-top: 1px solid rgba(192,85,42,0.15);
-      position: relative;
-    }
-    .footer-maroc::before {
-      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 60px; height: 2px; background: var(--terracotta);
+    /* === Mouvement réduit : on neutralise animations/transitions === */
+    body.reduce-motion *,
+    body.reduce-motion *::before,
+    body.reduce-motion *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
     }
 
-    /* ============================================================
-       KEYFRAMES HELPERS
-    ============================================================ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 991px) {
-      .hero-act-photo { width: 40%; }
-      .hero-act-content { padding: 0 2rem; max-width: 500px; }
-      .act-featured { grid-template-columns: 1fr; }
-      .act-featured-img { height: 280px; }
-      .act-wide { grid-template-columns: 1fr; }
-      .act-wide-img { height: 220px; }
-      .act-grid { grid-template-columns: 1fr 1fr; }
-    }
     @media (max-width: 768px) {
-      .hero-act-photo { display: none; }
-      .hero-act-content { padding: 0 1.5rem; max-width: 100%; }
-      .hero-act h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
-      .act-grid { grid-template-columns: 1fr; }
-      .act-row-2 { grid-template-columns: 1fr; }
-      .section-header { flex-direction: column; gap: 1rem; }
       .nav-fab { top: 1.1rem; }
       .nav-fab-logo { left: 1.1rem; }
       .nav-fab-burger { right: 1.1rem; }
       .site-menu { padding: 5.5rem 1.25rem 2.5rem; }
       .menu-sub-list.cities { grid-template-columns: 1fr; }
     }
+
+    /* === Desktop : panneau coulissant à droite (esprit GTA VI) ===
+       Sur ≥992px le menu n'est plus plein écran : il glisse depuis
+       la droite sur ~la moitié de l'écran, la page reste visible à
+       gauche. La version mobile (plein écran) reste inchangée. */
+    @media (min-width: 992px) {
+      .site-menu {
+        /* La couche devient un calque transparent qui découpe le
+           panneau coulissant (évite toute barre de défilement). */
+        background: transparent;
+        padding: 0;
+        overflow: hidden;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        pointer-events: none;
+        transition: none;
+      }
+      body.menu-open .site-menu {
+        pointer-events: auto;
+      }
+      .site-menu::before { display: none; }
+
+      .site-menu-inner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: min(50vw, 760px);
+        max-width: none;
+        margin: 0;
+        padding: 7rem 4.5rem 3rem;
+        overflow-y: auto;
+        background: var(--sable);
+        border-left: 1px solid rgba(192, 85, 42, 0.18);
+        box-shadow: -30px 0 70px -25px rgba(60, 30, 10, 0.45);
+        transform: translateX(100%);
+        transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      body.menu-open .site-menu-inner {
+        transform: translateX(0);
+      }
+      /* Motif zellige reporté sur le panneau lui-même */
+      .site-menu-inner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* ---- Disposition en onglets (rangée en haut + contenu en bas) ----
+         Rangée compacte d'onglets en haut ; le contenu de l'onglet
+         sélectionné occupe la zone du bas du panneau. */
+      .site-menu-inner {
+        padding: 5rem 4rem 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 0.5rem;
+      }
+      /* Chaque groupe = un onglet compact (son contenu est en absolu,
+         donc le groupe se réduit à la taille de son intitulé). */
+      .menu-group {
+        display: block;
+        flex: 0 0 auto;
+        border-bottom: none;
+        margin: 0;
+      }
+
+      /* Intitulé = onglet pastille dans la rangée */
+      .menu-head {
+        position: relative;
+        z-index: 1;
+        width: auto;
+        justify-content: center;
+        gap: 0;
+        border-bottom: none;
+        border-radius: 999px;
+        padding: 0.6rem 1.4rem;
+        font-size: 0.92rem;
+        letter-spacing: 0.08em;
+        white-space: nowrap;        /* l'intitulé ne se coupe jamais */
+        background: transparent;
+        transition: background 0.25s var(--ease-doux), color 0.25s var(--ease-doux);
+      }
+      .menu-head:hover,
+      .menu-head:focus-visible {
+        padding-left: 1.4rem;
+        background: rgba(192, 85, 42, 0.12);
+        color: var(--terracotta);
+      }
+      .menu-head .chev { display: none; }
+      /* Onglet actif = pastille pleine (esprit GTA VI) */
+      .menu-group.open .menu-head {
+        background: var(--terracotta);
+        color: #fff;
+      }
+
+      /* Zone du bas : contenu de l'onglet sélectionné */
+      .menu-sub {
+        position: absolute;
+        left: 4rem;
+        right: 4rem;
+        top: 9.5rem;
+        bottom: 11rem;
+        z-index: 1;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(192, 85, 42, 0.18);
+        max-height: none;
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(14px);
+        transition: opacity 0.35s ease, transform 0.35s ease,
+                    visibility 0s linear 0.35s;
+      }
+      .menu-group.open .menu-sub {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      .menu-sub-list {
+        padding: 0;
+        gap: 0.1rem;
+      }
+      .menu-sub-list a {
+        font-size: clamp(1.3rem, 2.1vw, 2rem);
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        padding: 0.45rem 0.7rem;
+      }
+      .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
+
+      /* CTA + pied (langue/animations) ancrés en bas du panneau */
+      .menu-cta {
+        position: absolute;
+        z-index: 2;
+        left: 4rem;
+        bottom: 6rem;
+        margin-top: 0;
+      }
+      .menu-foot {
+        position: absolute;
+        z-index: 2;
+        left: 4rem;
+        right: 4rem;
+        bottom: 1.6rem;
+        margin-top: 0;
+      }
+    }
+
+    /* ============================================================
+       === SECTION : Hero ===
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(10, 15, 40, 0.15) 0%, rgba(10, 15, 40, 0.35) 35%, rgba(5, 10, 30, 0.78) 100%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%),
+        url("assets/casablanca-hassan2.webp") center/cover no-repeat;
+    }
+    .hero::after {
+      /* Pattern marocain très discret */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.25'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 2rem 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.35);
+    }
+    .hero .sous-titre {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #F5C76E;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .hero p.desc {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* ============================================================
+       === SECTION : Stats Counter ===
+       ============================================================ */
+    .stats-section {
+      background-color: var(--sable);
+      padding: 4rem 0;
+    }
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+    .stat-card i {
+      font-size: 2.5rem;
+      color: var(--terracotta);
+      margin-bottom: 0.8rem;
+    }
+    .stat-card .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--vert);
+      line-height: 1;
+    }
+    .stat-card .stat-label {
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      color: var(--texte);
+    }
+
+    /* ============================================================
+       === SECTION : Carte interactive (scroll + tracé) ===
+       ============================================================ */
+    .map-section {
+      background-color: #fff;
+      position: relative;
+      /* 100vh d'entrée + 60vh par ville = 580vh pour 8 villes */
+      height: 580vh;
+    }
+    .map-intro {
+      padding: 4rem 0 1rem;
+      text-align: center;
+    }
+    .map-intro h2 {
+      color: var(--terracotta);
+    }
+    .map-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      /* Même ratio que le viewBox SVG (400×500) pour que les points
+         (positionnés en %) tombent pile sur les villes. */
+      aspect-ratio: 4 / 5;
+    }
+    .map-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+    .map-outline {
+      fill: var(--sable-fonce);
+      stroke: var(--terracotta);
+      stroke-width: 2;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 10px 18px rgba(60, 30, 10, 0.18));
+    }
+    /* Chemin tracé entre les villes */
+    .map-trace {
+      fill: none;
+      stroke: var(--terracotta);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 4 6;
+      stroke-dashoffset: var(--dashoffset, 9999);
+      filter: drop-shadow(0 0 4px rgba(192,85,42,0.4));
+    }
+    /* Point doré qui se déplace le long du tracé */
+    .map-traveler {
+      fill: var(--or);
+      stroke: #fff;
+      stroke-width: 3;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.8));
+      transition: opacity 0.3s;
+    }
+    .city-dot {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--terracotta);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), background-color 0.2s;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .city-dot.visible {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .city-dot.current {
+      background: var(--or);
+      transform: translate(-50%, -50%) scale(1.5);
+      animation: pulse 1.5s infinite;
+    }
+    .city-dot-label {
+      position: absolute;
+      transform: translate(-50%, -180%);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--vert);
+      background: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .city-dot-label.visible {
+      opacity: 1;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(212,175,55,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+    }
+
+    /* === Fiche ville — design épuré === */
+    .city-info-stage {
+      position: relative;
+      min-height: 320px;
+    }
+    .city-info-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s var(--ease-doux), transform 0.9s var(--ease-doux);
+      padding: 2.2rem 2.4rem;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 18px 40px -20px rgba(0,0,0,0.18);
+      pointer-events: none;
+    }
+    .city-info-item.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .city-info-item .city-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .city-info-item .city-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--terracotta);
+    }
+    .city-info-item h3 {
+      margin: 0 0 0.8rem 0;
+      color: var(--encre);
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+    }
+    .city-info-item p {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: #555;
+    }
+    .city-info-item a {
+      color: var(--terracotta);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .city-info-item a:hover {
+      gap: 0.8rem;
+    }
+
+    /* Barre de progression verticale à GAUCHE de la carte */
+    .map-progress {
+      position: absolute;
+      top: 5%;
+      left: -50px;
+      bottom: 5%;
+      width: 32px;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+    .map-progress-bar {
+      position: relative;
+      width: 3px;
+      height: 100%;
+      background: rgba(192,85,42,0.15);
+      border-radius: 2px;
+    }
+    .map-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--terracotta), var(--or));
+      border-radius: 2px;
+      transition: height 0.1s linear;
+    }
+    /* Marqueurs d'étapes (un par ville, verticaux) */
+    .map-progress-steps {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+    .step-tick {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border: 2px solid rgba(192,85,42,0.4);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .step-tick.reached {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+    }
+    .step-tick.current {
+      background: var(--or);
+      border-color: var(--or);
+      transform: translateX(-50%) scale(1.4);
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.25);
+    }
+    @media (max-width: 991px) {
+      /* On GARDE l'effet de défilement sur mobile : carte en haut,
+         une seule fiche ville en dessous, qui change au scroll. */
+      .map-progress { display: none; }
+      .map-section { height: 480vh; }
+      .map-sticky {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        align-items: flex-start;
+        padding: 0;
+      }
+      .map-sticky > .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 4.5rem 1rem 1.5rem;
+      }
+      .map-intro { padding: 0 0 0.75rem; }
+      .map-intro h2 { font-size: 1.6rem; }
+      .map-intro .section-subtitle { margin-bottom: 0.5rem; font-size: 0.9rem; }
+      /* Carte au-dessus, fiche en dessous (1 colonne) */
+      .map-sticky .row { flex-direction: column; }
+      .map-wrapper { max-width: 230px; }
+      .city-info-stage { min-height: 210px; margin-top: 1.25rem; }
+      .city-info-item { padding: 1.4rem 1.3rem; }
+      .city-info-item h3 { font-size: 1.7rem; margin-bottom: 0.5rem; }
+      .city-info-item p { font-size: 0.95rem; margin-bottom: 1rem; }
+    }
+
+    /* ============================================================
+       === SECTION : Plats — Stack 3D piloté par le scroll ===
+       ============================================================ */
+    .dishes-teaser {
+      position: relative;
+      background:
+        radial-gradient(ellipse at top left, rgba(212,175,55,0.08), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(192,85,42,0.1), transparent 55%),
+        var(--vert-fonce);
+      color: #f5e6c8;
+      height: 240vh;
+    }
+    .dishes-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    /* Décor pattern subtil */
+    .dishes-sticky::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.10'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      pointer-events: none;
+    }
+    .dish-layout {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 3rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* Scène 3D */
+    .dish-stage {
+      position: relative;
+      height: 360px;
+      perspective: 1400px;
+    }
+    .dish-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    /* Bloc texte à droite — centré */
+    .dish-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      color: #f5e6c8;
+    }
+    .dish-side .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #D4AF37;
+      font-weight: 700;
+    }
+    .dish-side .eyebrow::before {
+      content: ""; width: 28px; height: 1px; background: #D4AF37;
+    }
+    .dish-side h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .dish-side p {
+      margin: 0;
+      color: rgba(245, 230, 200, 0.75);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+    .dish-side .btn-maroc {
+      background-color: #D4AF37;
+      color: var(--vert-fonce);
+    }
+    .dish-side .btn-maroc:hover {
+      background-color: var(--or-fonce);
+      color: var(--vert-fonce);
+    }
+
+    /* === PLATS : effet shuffle / paquet de cartes === */
+    .dish-thumb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      border: 2px solid rgba(245, 230, 200, 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--vert-fonce);
+      transition: transform var(--duree-image) var(--ease-doux),
+                  z-index 0s linear 0.55s,
+                  box-shadow 0.8s var(--ease-doux),
+                  border-color 0.6s var(--ease-doux);
+      will-change: transform;
+      --tx: -50%;
+      --ty: -50%;
+      --tz: 0px;
+      --rz: 0deg;
+      transform: translate(var(--tx), var(--ty))
+                 translateZ(var(--tz))
+                 rotate(var(--rz));
+    }
+    /* Image intérieure — c'est elle qui se redimensionne au hover */
+    .dish-thumb-inner {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s var(--ease-doux),
+                  filter 0.8s var(--ease-doux);
+      transform: scale(1.06);
+    }
+    .dish-thumb-name {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 0.8rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      transition: padding 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* Position centrale */
+    .dish-thumb.pos-center {
+      --tx: -50%; --ty: -50%; --tz: 0px; --rz: 0deg;
+      z-index: 5;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.55);
+    }
+    /* Gauche : décalée + rotation -3°, partiellement derrière la centrale */
+    .dish-thumb.pos-left {
+      --tx: -82%; --ty: -52%; --tz: -30px; --rz: -3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .dish-thumb.pos-left .dish-thumb-inner { filter: brightness(0.85); }
+    /* Droite : symétrique */
+    .dish-thumb.pos-right {
+      --tx: -18%; --ty: -48%; --tz: -30px; --rz: 3deg;
+      z-index: 3;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    }
+    .dish-thumb.pos-right .dish-thumb-inner { filter: brightness(0.85); }
+    /* "Back" : restée dans le paquet, derrière */
+    .dish-thumb.pos-back {
+      --tx: -50%; --ty: -48%; --tz: -90px; --rz: 1deg;
+      z-index: 1;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+    .dish-thumb.pos-back .dish-thumb-inner { filter: brightness(0.7); }
+
+    /* === Hover : seule l'image intérieure se rétracte === */
+    .dish-thumb:hover {
+      border-color: var(--or);
+      box-shadow: 0 24px 50px rgba(212, 175, 55, 0.4);
+    }
+    .dish-thumb:hover .dish-thumb-inner {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    @media (max-width: 991px) {
+      /* On CONSERVE l'effet de défilement des plats sur mobile :
+         section haute + sticky + pile pilotée au scroll. Seule la
+         disposition passe en une colonne (pile au-dessus, texte
+         en dessous). */
+      .dishes-teaser { height: 220vh; }
+      .dishes-sticky { padding: 2rem 1rem; }
+      .dish-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+      .dish-stage { order: 1; height: 300px; }
+      .dish-side { order: 2; align-items: center; }
+      .dish-thumb { width: 230px; height: 230px; }
+    }
+
+    /* ============================================================
+       === SECTION : Experiences Teaser ===
+       ============================================================ */
+    .exp-teaser {
+      background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+      color: #fff;
+      padding: 6rem 1.25rem;
+      text-align: center;
+      /* Contenu centré (horizontal + vertical) dans la section */
+      min-height: 56vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .exp-teaser h2 {
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .exp-teaser p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       === SECTION : Guide Pratique Teaser ===
+       ============================================================ */
+    .guide-teaser {
+      padding: 5rem 0;
+      background-color: var(--sable);
+    }
+    .guide-teaser h2 {
+      color: var(--vert);
+    }
+    .guide-icon-card {
+      text-align: center;
+      padding: 1.5rem 0.8rem;
+      background: #fff;
+      border-radius: 10px;
+      height: 100%;
+    }
+    .guide-icon-card i {
+      font-size: 2.2rem;
+      color: var(--terracotta);
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .guide-icon-card span {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* ============================================================
+       === SECTION : Flights Teaser ===
+       ============================================================ */
+    .flights-teaser {
+      background: linear-gradient(135deg, var(--vert), var(--vert-fonce));
+      color: #fff;
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+    .flights-teaser h2 { color: #fff; }
+    .flights-teaser p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* === Boutons généraux === */
+    .btn-maroc {
+      background-color: var(--terracotta);
+      color: #fff;
+      padding: 0.7rem 1.6rem;
+      border-radius: 4px;
+      border: none;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.2s;
+    }
+    .btn-maroc:hover {
+      background-color: var(--terracotta-dark);
+      color: #fff;
+    }
+    .btn-or {
+      background-color: var(--or);
+      color: #000;
+    }
+    .btn-or:hover {
+      background-color: var(--or-fonce);
+      color: #000;
+    }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 0.65rem 1.6rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+    }
+    .btn-outline-white:hover {
+      background: #fff;
+      color: var(--terracotta);
+    }
+
+    /* === Titres de section === */
+    .section-title {
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+    .section-subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       === Footer ===
+       ============================================================ */
+    .footer-maroc {
+      background-color: var(--encre);
+      color: #aaa;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================================
+       === Bords inclinés (haut uniquement) — pas de gap ===
+       ============================================================ */
+    /* Inclinaison FIXE (55px) — identique partout, quelle que soit
+       la hauteur de la section (le % rendait la pente démesurée sur
+       les grandes sections comme la carte). Le chevauchement négatif
+       est égal à la pente → aucun trou blanc. */
+    .stats-section {
+      clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
+      margin-top: -55px;
+      padding-top: 5rem !important;
+    }
+    .map-section {
+      clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
+      margin-top: -55px;
+    }
+    .dishes-teaser {
+      clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
+      margin-top: -55px;
+    }
+    .exp-teaser {
+      clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
+      margin-top: -55px;
+    }
+    .guide-teaser {
+      clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
+      margin-top: -55px;
+      padding-top: 5.5rem !important;
+    }
+    .flights-teaser {
+      clip-path: polygon(0 0, 100% 55px, 100% 100%, 0 100%);
+      margin-top: -55px;
+    }
+    .footer-maroc {
+      clip-path: polygon(0 55px, 100% 0, 100% 100%, 0 100%);
+      margin-top: -55px;
+      padding-top: 3.5rem !important;
+    }
+    @media (max-width: 768px) {
+      .stats-section, .map-section, .dishes-teaser,
+      .exp-teaser, .guide-teaser, .flights-teaser, .footer-maroc {
+        clip-path: none;
+        margin-top: 0;
+      }
+    }
+
+    /* ============================================================
+       === Passe responsive mobile ===
+       ============================================================ */
+    @media (max-width: 991px) {
+      /* Pas de défilement horizontal — `clip` (et pas `hidden`) pour
+         ne PAS casser le position:sticky de la section Plats. */
+      html { overflow-x: clip; }
+      .stats-section { padding: 3rem 0 !important; }
+      .guide-teaser { padding: 3.5rem 0; }
+      .flights-teaser { padding: 3.5rem 1.25rem; }
+    }
+
+    @media (max-width: 768px) {
+      /* Étiquette de ville plus petite (1 seule affichée au scroll) */
+      .city-dot-label { font-size: 0.62rem; padding: 1px 4px; }
+
+      .exp-teaser { min-height: auto; padding: 4rem 1.25rem; }
+      .exp-teaser p, .flights-teaser p { font-size: 1rem; }
+
+      /* Pile de plats : on réduit pour rester dans l'écran */
+      .dish-stage { height: 260px; }
+      .dish-thumb { width: 210px; height: 210px; }
+      .dish-thumb-name { font-size: 1.05rem; padding: 1rem 0.6rem 0.8rem; }
+      .dish-layout { padding: 0 1.25rem; }
+
+      /* Cartes & grilles : espacement plus compact */
+      .stat-card { padding: 1.5rem 0.75rem; }
+      .stat-card i { font-size: 2rem; }
+      .stat-card .stat-number { font-size: 2.2rem; }
+      .guide-teaser .row { --bs-gutter-x: 1rem; }
+    }
+
     @media (max-width: 480px) {
-      .hero-act-content { padding: 0 1rem; }
-      .act-featured-body { padding: 1.8rem 1.5rem; }
-      .act-card-img { height: 200px; }
+      .dish-stage { height: 230px; }
+      .dish-thumb { width: 175px; height: 175px; }
+      .section-subtitle { margin-bottom: 2rem; }
+      .btn-maroc, .btn-outline-white { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+      .exp-teaser, .guide-teaser, .flights-teaser { padding-left: 1rem; padding-right: 1rem; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV FABs -->
+  <!-- === SECTION : Icônes flottantes (palmier + burger) === -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
-          aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
 
-  <!-- MENU -->
+  <!-- === SECTION : Menu plein écran (sections dépliables) === -->
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
+
+      <!-- ACCUEIL — section dépliable vers les sections de la page -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Accueil <i class="bi bi-chevron-down chev"></i>
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
           <ul class="menu-sub-list">
-            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
-            <li><a href="index.html#dishesSection">Gastronomie</a></li>
-            <li><a href="index.html#experiencesSection">Expériences</a></li>
-            <li><a href="index.html#guideSection">Guide de Voyage</a></li>
-            <li><a href="index.html#flightsSection">Vols</a></li>
+            <li><a href="#mapSection">Explorez le Maroc</a></li>
+            <li><a href="#dishesSection">Gastronomie</a></li>
+            <li><a href="#experiencesSection">Expériences</a></li>
+            <li><a href="#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="#flightsSection">Trouver le vol parfait</a></li>
           </ul>
         </div>
       </div>
+
+      <!-- VILLES — section dépliable vers les pages des villes -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
-          Villes <i class="bi bi-chevron-down chev"></i>
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
         </button>
         <div class="menu-sub">
           <ul class="menu-sub-list cities">
@@ -845,435 +1392,789 @@
           </ul>
         </div>
       </div>
+
+      <!-- Liens directs -->
       <div class="menu-group">
-        <a class="menu-head" href="dishes.html">Plats <i class="bi bi-arrow-right chev"></i></a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">
-          Activités <i class="bi bi-arrow-right chev"></i>
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
       <div class="menu-group">
-        <a class="menu-head" href="guide.html">Guide <i class="bi bi-arrow-right chev"></i></a>
+        <a class="menu-head" href="guide.html">
+          Guide
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
       </div>
-      <a class="menu-cta" href="flights.html"><i class="bi bi-airplane"></i>Réserver un Vol</a>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+
+      <!-- Pied de menu : sélecteur de langue + bascule animations -->
       <div class="menu-foot">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+          <i class="bi bi-globe2" aria-hidden="true"></i>
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+        </div>
         <button type="button" class="motion-toggle" id="motionToggle"
                 role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
-          <span>Animations</span>
+          <span class="motion-label">Animations</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       HERO — Cinématique sombre
-  ============================================================ -->
-  <section class="hero-act">
-    <div class="hero-act-bg"></div>
-
-    <!-- Photo split droite -->
-    <div class="hero-act-photo">
-      <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=1000&q=80" alt="Maroc activités" />
-    </div>
-
-    <!-- Numéro watermark -->
-    <div class="hero-act-number" aria-hidden="true">6</div>
-
-    <div class="hero-act-content">
-      <div class="hero-act-line">
-        <span></span>
-        <em>Maroc · 2026</em>
-        <span></span>
-      </div>
-      <p class="hero-act-kicker">Activités Incontournables</p>
-      <h1>
-        <span class="word">VIS&nbsp;</span>
-        <span class="word">LE&nbsp;</span>
-        <span class="word">MAROC</span><br>
-        <span class="word" style="color:var(--terracotta);">VRAI</span>
-      </h1>
-      <p class="hero-act-desc">
-        Six expériences qui transcendent le tourisme ordinaire — des médinas labyrinthiques aux dunes sans fin du Sahara. Choisissez votre aventure.
+  <!-- === SECTION : Hero === -->
+  <section class="hero" data-parallax="0.3" data-parallax-bg>
+    <div class="hero-content">
+      <h1>Bienvenue au Royaume du Maroc</h1>
+      <div class="sous-titre">Là où l'orient rencontre l'occident</div>
+      <p class="desc">
+        Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques —
+        découvrez un pays aux mille visages.
       </p>
-      <a href="#activitesSection" class="hero-act-cta">
-        Explorer les activités <i class="bi bi-arrow-down"></i>
-      </a>
-    </div>
-
-    <div class="hero-scroll-hint" aria-hidden="true">
-      <div class="scroll-dot"></div>
-      <span>Défiler</span>
     </div>
   </section>
 
-  <!-- ============================================================
-       FILTER BAR
-  ============================================================ -->
-  <section class="filter-section" id="filterSection">
-    <div class="container-fluid px-0">
-      <div class="filter-tabs">
-        <button class="filter-tab active" data-filter="all">
-          <i class="bi bi-grid-3x3-gap-fill"></i>Toutes
-        </button>
-        <button class="filter-tab" data-filter="culture">
-          <i class="bi bi-bank2"></i>Culture
-        </button>
-        <button class="filter-tab" data-filter="nature">
-          <i class="bi bi-tree"></i>Nature
-        </button>
-        <button class="filter-tab" data-filter="detente">
-          <i class="bi bi-water"></i>Détente
-        </button>
-        <button class="filter-tab" data-filter="aventure">
-          <i class="bi bi-compass"></i>Aventure
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       ACTIVITÉS — Layout éditorial
-  ============================================================ -->
-  <section class="activities-section" id="activitesSection">
+  <!-- === SECTION : Stats / Compteurs === -->
+  <section class="stats-section">
     <div class="container">
-
-      <!-- Header -->
-      <div class="section-header reveal">
-        <div class="section-header-left">
-          <p class="section-eyebrow">✦ Expériences authentiques</p>
-          <h2>Six <em>moments</em><br>inoubliables</h2>
-        </div>
-        <div class="section-count">
-          <strong id="visibleCount">6</strong> activités disponibles
-        </div>
-      </div>
-
-      <!-- ── BLOC 1 : CARTE VEDETTE (featured) ── -->
-      <div class="mb-1 reveal reveal-clip" data-tags="culture">
-        <div class="act-featured">
-          <div class="act-featured-img">
-            <img src="https://images.unsplash.com/photo-1548011241-415c1f67c9b9?w=900&q=80"
-                 alt="Médina Bleue de Chefchaouen" loading="lazy" />
-          </div>
-          <div class="act-featured-body">
-            <span class="act-cat-pill"><i class="bi bi-bank2"></i> Culture</span>
-            <p class="act-city-label"><i class="bi bi-geo-alt-fill"></i> Chefchaouen</p>
-            <h3>Médina Bleue</h3>
-            <p>Perdez-vous dans le labyrinthe azur de la médina, entre poteries artisanales et ateliers de tissage. Chaque ruelle est un tableau vivant que le temps semble avoir oublié.</p>
-            <a href="chefchaouen.html" class="act-link">Découvrir Chefchaouen <i class="bi bi-arrow-right"></i></a>
-            <div class="act-num" aria-hidden="true">01</div>
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-buildings-fill"></i>
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Villes à Découvrir</div>
           </div>
         </div>
-      </div>
-
-      <!-- ── BLOC 2 : 2 cartes verticales ── -->
-      <div class="act-row act-row-2 mb-1 reveal-stagger" id="grid-row-2">
-        <div class="act-card-wrap" data-tags="culture">
-          <div class="act-card" style="height:100%">
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=600&q=80"
-                   alt="Place Jemaa el-Fna" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-card-badges">
-                <span class="city-tag">Marrakech</span>
-                <span class="cat-tag">Culture</span>
-              </div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Marrakech</span>
-              <h3>Place Jemaa el-Fna</h3>
-              <p class="act-desc">À la tombée du jour, la place mythique s'embrase : charmeurs de serpents, conteurs, musiciens et étals de cuisine traditionnelle.</p>
-              <a href="marrakech.html" class="btn-decouvrir">Découvrir <i class="bi bi-arrow-right"></i></a>
-            </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-bank2"></i>
+            <div class="stat-number" data-target="9">0</div>
+            <div class="stat-label">Sites UNESCO</div>
           </div>
         </div>
-        <div class="act-card-wrap" data-tags="culture nature">
-          <div class="act-card" style="height:100%">
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80"
-                   alt="Remparts Essaouira" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-card-badges">
-                <span class="city-tag">Essaouira</span>
-                <span class="cat-tag">Nature</span>
-              </div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Essaouira</span>
-              <h3>Remparts &amp; Port Atlantique</h3>
-              <p class="act-desc">Face à l'Atlantique, les remparts sculptés par le vent offrent une vue spectaculaire. Port aux barques bleues, ateliers de thuya et festival Gnaoua.</p>
-              <a href="essaouira.html" class="btn-decouvrir">Découvrir <i class="bi bi-arrow-right"></i></a>
-            </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-egg-fried"></i>
+            <div class="stat-number" data-target="50" data-suffix="+">0</div>
+            <div class="stat-label">Plats Traditionnels</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card" data-parallax="0.05">
+            <i class="bi bi-stars"></i>
+            <div class="stat-number" data-target="4" data-suffix="+">0</div>
+            <div class="stat-label">Expériences Uniques</div>
           </div>
         </div>
       </div>
-
-      <!-- Séparateur ornemental -->
-      <div class="ornament-sep reveal">
-        <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.5">
-          <polygon points="40,8 52,32 76,40 52,48 40,72 28,48 4,40 28,32" stroke="#C0552A" stroke-width="2" fill="none"/>
-          <polygon points="40,20 48,34 62,40 48,46 40,60 32,46 18,40 32,34" stroke="#D4AF37" stroke-width="1" fill="none"/>
-        </svg>
-      </div>
-
-      <!-- ── BLOC 3 : Carte wide horizontale ── -->
-      <div class="mb-1 reveal from-left" data-tags="nature detente">
-        <div class="act-wide">
-          <div class="act-wide-img">
-            <img src="https://images.unsplash.com/photo-1515238152791-8216bfdf89a7?w=700&q=80"
-                 alt="Plage Agadir" loading="lazy" />
-          </div>
-          <div class="act-wide-body">
-            <span class="act-cat-pill"><i class="bi bi-water"></i> Détente</span>
-            <p class="act-city-label"><i class="bi bi-geo-alt-fill"></i> Agadir</p>
-            <h3>Plage &amp; Sunset Agadir</h3>
-            <p>Étendue sur plus de 10 km, la baie d'Agadir est un havre de douceur. Promenade en front de mer, surf au coucher du soleil ou farniente face aux vagues de l'Atlantique.</p>
-            <a href="agadir.html" class="act-link">Découvrir Agadir <i class="bi bi-arrow-right"></i></a>
-            <div class="act-wide-num" aria-hidden="true">04</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── BLOC 4 : 2 cartes verticales restantes ── -->
-      <div class="act-row act-row-2 mt-1 reveal-stagger" id="grid-row-4">
-        <div class="act-card-wrap" data-tags="culture">
-          <div class="act-card" style="height:100%">
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1578603727901-ff75e1c4f98b?w=600&q=80"
-                   alt="Kasbah des Oudayas Rabat" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-card-badges">
-                <span class="city-tag">Rabat</span>
-                <span class="cat-tag">Culture</span>
-              </div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Rabat</span>
-              <h3>Kasbah des Oudayas</h3>
-              <p class="act-desc">Forteresse blanche et bleue au bord du Bouregreg, ses jardins andalous apaisants offrent une vue panoramique sur Salé et l'océan.</p>
-              <a href="rabat.html" class="btn-decouvrir">Découvrir <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="act-card-wrap" data-tags="aventure nature">
-          <div class="act-card" style="height:100%">
-            <div class="act-card-img">
-              <img src="https://images.unsplash.com/photo-1547234935-80c7145ec969?w=600&q=80"
-                   alt="Dunes Merzouga" loading="lazy" />
-              <div class="act-card-img-overlay"></div>
-              <div class="act-card-badges">
-                <span class="city-tag">Merzouga</span>
-                <span class="cat-tag">Aventure</span>
-              </div>
-            </div>
-            <div class="act-card-body">
-              <span class="act-location"><i class="bi bi-geo-alt-fill"></i> Merzouga</span>
-              <h3>Dunes de l'Erg Chebbi</h3>
-              <p class="act-desc">Caravane de dromadaires au crépuscule, nuit en bivouac berbère, lever de soleil sur les dunes dorées — l'expérience ultime du Sahara marocain.</p>
-              <a href="merzouga.html" class="btn-decouvrir">Découvrir <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- === SECTION : Carte interactive (sticky + tracé au scroll) === -->
+  <section class="map-section" id="mapSection">
+    <!-- Conteneur sticky qui reste collé pendant le scroll de la section -->
+    <div class="map-sticky">
+      <div class="container">
+        <div class="map-intro">
+          <h2 class="section-title">Explorez le Maroc</h2>
+          <p class="section-subtitle">Faites défiler pour tracer votre voyage</p>
+        </div>
+
+        <div class="row align-items-center g-4">
+          <!-- Carte SVG + tracé -->
+          <div class="col-lg-5">
+            <div class="map-wrapper" id="mapWrapper">
+              <svg class="map-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Contour réaliste du Maroc (côte méditerranéenne au
+                     nord, façade atlantique courbée, effilé vers le sud) -->
+                <path class="map-outline" d="M 193 21
+                  C 205 19, 250 38, 271 61
+                  C 290 54, 330 60, 346 70
+                  C 360 110, 379 215, 381 288
+                  C 360 330, 250 430, 190 458
+                  C 140 470, 95 470, 73 464
+                  C 50 445, 30 425, 27 415
+                  C 32 390, 42 372, 44 354
+                  C 41 320, 38 305, 40 288
+                  C 48 262, 56 250, 64 240
+                  C 72 215, 84 195, 93 182
+                  C 106 172, 118 168, 127 161
+                  C 138 145, 150 142, 158 135
+                  C 166 110, 178 85, 184 64
+                  C 186 50, 188 32, 193 21 Z" />
+                <!-- Chemin reliant les villes dans l'ordre du voyage -->
+                <path class="map-trace" id="mapTrace"
+                      d="M 198 28 L 215 41 L 219 65 L 229 135 L 128 162 L 113 280 L 43 287 L 50 354" />
+                <!-- Point voyageur qui se déplace le long du tracé -->
+                <circle id="mapTraveler" class="map-traveler" r="8" cx="198" cy="28" />
+              </svg>
+
+              <!-- Points des villes (positions en % du wrapper) -->
+              <div class="city-dot" data-city="Tanger" data-step="0" style="top: 5.6%; left: 49.5%;"></div>
+              <div class="city-dot" data-city="Tétouan" data-step="1" style="top: 8.2%; left: 53.75%;"></div>
+              <div class="city-dot" data-city="Chefchaouen" data-step="2" style="top: 13%; left: 54.75%;"></div>
+              <div class="city-dot" data-city="Fès" data-step="3" style="top: 27%; left: 57.25%;"></div>
+              <div class="city-dot" data-city="Casablanca" data-step="4" style="top: 32.4%; left: 32%;"></div>
+              <div class="city-dot" data-city="Marrakech" data-step="5" style="top: 56%; left: 28.25%;"></div>
+              <div class="city-dot" data-city="Essaouira" data-step="6" style="top: 57.4%; left: 10.75%;"></div>
+              <div class="city-dot" data-city="Agadir" data-step="7" style="top: 70.8%; left: 12.5%;"></div>
+
+              <!-- Labels qui apparaissent au-dessus du point courant -->
+              <div class="city-dot-label" data-city="Tanger" style="top: 5.6%; left: 49.5%;">Tanger</div>
+              <div class="city-dot-label" data-city="Tétouan" style="top: 8.2%; left: 53.75%;">Tétouan</div>
+              <div class="city-dot-label" data-city="Chefchaouen" style="top: 13%; left: 54.75%;">Chefchaouen</div>
+              <div class="city-dot-label" data-city="Fès" style="top: 27%; left: 57.25%;">Fès</div>
+              <div class="city-dot-label" data-city="Casablanca" style="top: 32.4%; left: 32%;">Casablanca</div>
+              <div class="city-dot-label" data-city="Marrakech" style="top: 56%; left: 28.25%;">Marrakech</div>
+              <div class="city-dot-label" data-city="Essaouira" style="top: 57.4%; left: 10.75%;">Essaouira</div>
+              <div class="city-dot-label" data-city="Agadir" style="top: 70.8%; left: 12.5%;">Agadir</div>
+
+              <!-- Barre de progression verticale à gauche de la carte -->
+              <div class="map-progress">
+                <div class="map-progress-bar">
+                  <div class="map-progress-fill" id="mapProgressFill"></div>
+                  <div class="map-progress-steps" id="mapProgressSteps">
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                    <span class="step-tick"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fiches villes (une seule visible à la fois) -->
+          <div class="col-lg-7">
+            <div class="city-info-stage" id="cityInfoStage">
+              <div class="city-info-item active" data-city="Tanger">
+                <div class="city-eyebrow">Nord — Côte méditerranéenne</div>
+                <h3>Tanger</h3>
+                <p>Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.</p>
+                <a href="tanger.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Tétouan">
+                <div class="city-eyebrow">Nord — Rif</div>
+                <h3>Tétouan</h3>
+                <p>La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.</p>
+                <a href="tetouan.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Chefchaouen">
+                <div class="city-eyebrow">Nord — Montagnes du Rif</div>
+                <h3>Chefchaouen</h3>
+                <p>La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.</p>
+                <a href="chefchaouen.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Fès">
+                <div class="city-eyebrow">Centre — Capitale spirituelle</div>
+                <h3>Fès</h3>
+                <p>Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.</p>
+                <a href="fes.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Casablanca">
+                <div class="city-eyebrow">Centre — Façade atlantique</div>
+                <h3>Casablanca</h3>
+                <p>Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.</p>
+                <a href="casablanca.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Marrakech">
+                <div class="city-eyebrow">Centre-Sud — Cité ocre</div>
+                <h3>Marrakech</h3>
+                <p>La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.</p>
+                <a href="marrakech.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Essaouira">
+                <div class="city-eyebrow">Côte atlantique</div>
+                <h3>Essaouira</h3>
+                <p>Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.</p>
+                <a href="essaouira.html">Voir la ville →</a>
+              </div>
+              <div class="city-info-item" data-city="Agadir">
+                <div class="city-eyebrow">Sud — Souss</div>
+                <h3>Agadir</h3>
+                <p>Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.</p>
+                <a href="agadir.html">Voir la ville →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Plats — Stack 3D piloté par le scroll === -->
+  <section class="dishes-teaser" id="dishesSection">
+    <div class="dishes-sticky">
+      <div class="dish-layout">
+        <div class="dish-stage">
+          <div class="dish-track">
+            <div class="dish-thumb" data-index="0">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-couscous.jpg');"></div>
+              <div class="dish-thumb-name">Couscous</div>
+            </div>
+            <div class="dish-thumb" data-index="1">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-harira.jpg');"></div>
+              <div class="dish-thumb-name">Harira</div>
+            </div>
+            <div class="dish-thumb" data-index="2">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-pastilla.jpg');"></div>
+              <div class="dish-thumb-name">Pastilla</div>
+            </div>
+            <div class="dish-thumb" data-index="3">
+              <div class="dish-thumb-inner" style="background-image: url('assets/dish-tanjia.webp'); background-position: center;"></div>
+              <div class="dish-thumb-name">Tanjia</div>
+            </div>
+          </div>
+        </div>
+        <div class="dish-side">
+          <div class="eyebrow">Gastronomie</div>
+          <h2>Explorez la Gastronomie Marocaine</h2>
+          <p>Des saveurs uniques qui racontent l'histoire d'un peuple.</p>
+          <a href="dishes.html" class="btn-maroc">
+            En savoir plus sur les plats marocains →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Teaser Expériences === -->
+  <section class="exp-teaser" id="experiencesSection">
+    <h2>Prêt pour les Meilleures Expériences ?</h2>
+    <p>
+      Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et
+      les cours de cuisine — le Maroc vous attend.
+    </p>
+    <a href="experiences.html" class="btn-outline-white">Découvrir les Expériences →</a>
+  </section>
+
+  <!-- === SECTION : Teaser Guide Pratique === -->
+  <section class="guide-teaser" id="guideSection">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <h2>Votre Guide de Voyage Complet</h2>
+          <p style="font-size: 1.05rem; line-height: 1.7;">
+            Quand partir, quels documents préparer, comment vous déplacer, combien prévoir —
+            toutes les informations essentielles pour un voyage serein au Maroc.
+          </p>
+          <a href="guide.html" class="btn-maroc">Consulter le Guide →</a>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-calendar3"></i>
+                <span>Quand partir</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Visas &amp; Formalités</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-bus-front"></i>
+                <span>Transport</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="guide-icon-card" data-parallax="0.08">
+                <i class="bi bi-currency-dollar"></i>
+                <span>Budget</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Teaser Vols === -->
+  <section class="flights-teaser" id="flightsSection">
+    <h2>Trouvez le Vol Parfait</h2>
+    <p>
+      Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc.
+      Comparez les compagnies et choisissez ce qui vous convient.
+    </p>
+    <a href="flights.html" class="btn-maroc btn-or">Voir les Vols →</a>
+  </section>
+
+  <!-- === SECTION : Footer === -->
   <footer class="footer-maroc">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
+  <!-- === Bootstrap Bundle JS === -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     /* ============================================================
-       MENU
-    ============================================================ */
-    (function () {
+       === JavaScript — index.html ===
+       ============================================================ */
+
+    /* === 1. Menu plein écran : ouverture/fermeture + sections dépliables === */
+    (function() {
       const toggle = document.getElementById('menuToggle');
-      const menu = document.getElementById('siteMenu');
+      const menu   = document.getElementById('siteMenu');
       if (!toggle || !menu) return;
       const groups = menu.querySelectorAll('.menu-group[data-group]');
       const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 
+      // Active une section (et désactive les autres)
       function activate(group) {
         groups.forEach(g => {
           const on = g === group;
           g.classList.toggle('open', on);
-          const head = g.querySelector('.menu-head');
-          if (head) head.setAttribute('aria-expanded', on ? 'true' : 'false');
+          g.querySelector('.menu-head')
+           .setAttribute('aria-expanded', on ? 'true' : 'false');
         });
       }
 
+      // Ouvre / ferme le menu plein écran
       function setMenu(open) {
         document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         document.body.style.overflow = open ? 'hidden' : '';
-        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) activate(groups[0]);
+        // Sur desktop : un onglet est toujours sélectionné (zone du bas
+        // jamais vide). Sur mobile : on garde l'accordéon repliable.
+        if (open && isDesktop() &&
+            !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
       }
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      // Clic dans la zone vide (gauche du panneau sur desktop) → ferme
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
 
-      toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-      menu.addEventListener('click', e => { if (e.target === menu) setMenu(false); });
-
+      // Clic sur un intitulé : desktop = onglet (toujours afficher),
+      // mobile = accordéon repliable (clic = ouvrir/fermer).
       groups.forEach(group => {
         const head = group.querySelector('.menu-head');
-        if (!head) return;
         head.addEventListener('click', () => {
-          if (isDesktop()) { activate(group); }
-          else { group.classList.contains('open') ? activate(null) : activate(group); }
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
         });
       });
 
+      // Liens d'ancre → défilement fluide vers la section + fermeture du menu
       menu.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', e => {
+        link.addEventListener('click', (e) => {
           const target = document.querySelector(link.getAttribute('href'));
-          if (target) { e.preventDefault(); setMenu(false); setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120); }
-          else { setMenu(false); }
+          if (target) {
+            e.preventDefault();
+            setMenu(false);
+            // Laisse le menu se fermer avant de défiler
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120);
+          } else {
+            setMenu(false);
+          }
         });
       });
     })();
 
-    /* ============================================================
-       INTERSECTION OBSERVER — Scroll reveals
-    ============================================================ */
-    (function () {
-      const reveals = document.querySelectorAll('.reveal, .reveal-clip');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+    /* === 2. Compteurs animés (IntersectionObserver) === */
+    const counters = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          const duration = 1500;
+          const startTime = performance.now();
+          function tick(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const value = Math.floor(progress * target);
+            el.textContent = value + (progress === 1 ? suffix : '');
+            if (progress < 1) requestAnimationFrame(tick);
           }
+          requestAnimationFrame(tick);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* === 3. Carte interactive : animation au scroll ===
+       Au fur et à mesure que l'utilisateur scrolle la section,
+       on calcule un progress 0→1 qui :
+         - trace progressivement le path SVG (stroke-dashoffset)
+         - déplace le "voyageur" (cercle doré) le long du path
+         - révèle les points des villes un par un
+         - affiche la fiche ville correspondante
+         - met à jour la barre de progression
+    */
+    const mapSection = document.getElementById('mapSection');
+    const mapTrace = document.getElementById('mapTrace');
+    const mapTraveler = document.getElementById('mapTraveler');
+    const cityDots = document.querySelectorAll('.city-dot');
+    const cityLabels = document.querySelectorAll('.city-dot-label');
+    const infoCards = document.querySelectorAll('.city-info-item');
+    const progressFill = document.getElementById('mapProgressFill');
+    const stepTicks = document.querySelectorAll('#mapProgressSteps .step-tick');
+
+    // Longueur totale du chemin SVG
+    const traceLength = mapTrace.getTotalLength();
+    mapTrace.style.strokeDasharray = traceLength;
+    mapTrace.style.strokeDashoffset = traceLength;
+
+    const totalSteps = cityDots.length; // 8 villes
+
+    function updateMapAnimation() {
+      // L'effet de défilement (tracé progressif + fiche ville unique)
+      // s'applique aussi bien sur desktop que sur mobile.
+      const rect = mapSection.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const total = rect.height - winH;
+      const scrolled = -rect.top;
+      let progress = total > 0 ? scrolled / total : 0;
+      progress = Math.max(0, Math.min(1, progress));
+
+      // 1. Tracé du chemin
+      mapTrace.style.strokeDashoffset = traceLength * (1 - progress);
+
+      // 2. Position du voyageur le long du chemin
+      const point = mapTrace.getPointAtLength(traceLength * progress);
+      mapTraveler.setAttribute('cx', point.x);
+      mapTraveler.setAttribute('cy', point.y);
+
+      // 3. Étape courante (0..totalSteps-1)
+      const stepFloat = progress * (totalSteps - 1);
+      const currentStep = Math.round(stepFloat);
+
+      // 4. Révéler les points + activer le courant
+      cityDots.forEach((dot, i) => {
+        dot.classList.toggle('visible', i <= currentStep);
+        dot.classList.toggle('current', i === currentStep);
+      });
+      cityLabels.forEach((lbl, i) => {
+        lbl.classList.toggle('visible', i === currentStep);
+      });
+
+      // 5. Afficher la fiche correspondante
+      infoCards.forEach((card, i) => {
+        card.classList.toggle('active', i === currentStep);
+      });
+
+      // 6. Barre de progression verticale + marqueurs d'étapes
+      progressFill.style.height = (progress * 100) + '%';
+      stepTicks.forEach((tick, i) => {
+        tick.classList.toggle('reached', i <= currentStep);
+        tick.classList.toggle('current', i === currentStep);
+      });
+    }
+
+    // rAF throttle pour fluidité
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateMapAnimation();
+          ticking = false;
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-      reveals.forEach(el => observer.observe(el));
+        ticking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateMapAnimation);
+    updateMapAnimation();
 
-      /* Stagger rows */
-      const staggerRows = document.querySelectorAll('.reveal-stagger');
-      const staggerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            staggerObserver.unobserve(entry.target);
-          }
+    /* === 4. Parallaxe globale === */
+    const parallaxEls = document.querySelectorAll('[data-parallax]');
+    function updateParallax() {
+      // Mouvement réduit : on fige tout (pas de parallaxe)
+      if (document.body.classList.contains('reduce-motion')) {
+        parallaxEls.forEach(el => {
+          if (el.hasAttribute('data-parallax-bg')) el.style.backgroundPositionY = '';
+          else el.style.transform = '';
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      staggerRows.forEach(el => staggerObserver.observe(el));
-    })();
+        return;
+      }
+      const scrollY = window.pageYOffset;
+      parallaxEls.forEach(el => {
+        const speed = parseFloat(el.dataset.parallax) || 0.3;
+        const rect = el.getBoundingClientRect();
+        const elTop = rect.top + scrollY;
+        const offset = (scrollY - elTop) * speed;
+        if (el.hasAttribute('data-parallax-bg')) {
+          el.style.backgroundPositionY = `calc(50% + ${offset}px)`;
+        } else {
+          el.style.transform = `translate3d(0, ${offset}px, 0)`;
+        }
+      });
+    }
+    let pTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!pTicking) {
+        requestAnimationFrame(() => { updateParallax(); pTicking = false; });
+        pTicking = true;
+      }
+    }, { passive: true });
+    updateParallax();
 
-    /* ============================================================
-       FILTER TABS
-    ============================================================ */
-    (function () {
-      const tabs = document.querySelectorAll('.filter-tab');
-      const countEl = document.getElementById('visibleCount');
+    /* === 5. Plats : stack 3D piloté par le scroll de la section === */
+    (function() {
+      const section = document.getElementById('dishesSection');
+      const thumbs = document.querySelectorAll('.dish-thumb');
+      if (!section || !thumbs.length) return;
+      const total = thumbs.length; // 4
 
-      function updateCount() {
-        const visible = document.querySelectorAll('[data-tags]:not([data-tags="hidden"])').length;
-        if (countEl) countEl.textContent = visible;
+      function render(currentIndex) {
+        thumbs.forEach((t, i) => {
+          t.classList.remove('pos-center', 'pos-left', 'pos-right', 'pos-back');
+          const diff = (i - currentIndex + total) % total;
+          // diff=0 → center, diff=1 → right, diff=total-1 → left, sinon → back
+          if (diff === 0) t.classList.add('pos-center');
+          else if (diff === 1) t.classList.add('pos-right');
+          else if (diff === total - 1) t.classList.add('pos-left');
+          else t.classList.add('pos-back');
+        });
       }
 
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          const filter = tab.dataset.filter;
-          let count = 0;
+      function update() {
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight;
+        const totalScroll = rect.height - winH;
+        const scrolled = -rect.top;
+        let progress = totalScroll > 0 ? scrolled / totalScroll : 0;
+        progress = Math.max(0, Math.min(1, progress));
+        const idx = Math.min(total - 1, Math.round(progress * (total - 1)));
+        render(idx);
+      }
 
-          /* Featured block */
-          const featured = document.querySelector('.reveal.reveal-clip[data-tags]');
-          if (featured) {
-            const tags = (featured.dataset.tags || '').split(' ');
-            const show = filter === 'all' || tags.includes(filter);
-            featured.style.display = show ? '' : 'none';
-            if (show) count++;
-          }
-
-          /* Card wraps */
-          document.querySelectorAll('.act-card-wrap[data-tags]').forEach(wrap => {
-            const tags = (wrap.dataset.tags || '').split(' ');
-            const show = filter === 'all' || tags.includes(filter);
-            wrap.style.opacity = show ? '' : '0';
-            wrap.style.transform = show ? '' : 'scale(0.92)';
-            wrap.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-            wrap.style.pointerEvents = show ? '' : 'none';
-            setTimeout(() => { wrap.style.display = show ? '' : 'none'; }, show ? 0 : 380);
-            if (show) count++;
-          });
-
-          /* Wide block */
-          const wide = document.querySelector('.reveal.from-left[data-tags]');
-          if (wide) {
-            const tags = (wide.dataset.tags || '').split(' ');
-            const show = filter === 'all' || tags.includes(filter);
-            wide.style.display = show ? '' : 'none';
-            if (show) count++;
-          }
-
-          if (countEl) countEl.textContent = count;
-        });
+      // Clic sur une vignette latérale → l'amener au centre
+      thumbs.forEach((t, i) => {
+        t.addEventListener('click', () => render(i));
       });
-    })();
 
-    /* ============================================================
-       3D TILT on standard cards (desktop)
-    ============================================================ */
-    (function () {
-      if (!window.matchMedia('(min-width: 992px)').matches) return;
-      document.querySelectorAll('.act-card, .act-featured, .act-wide').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          if (document.body.classList.contains('reduce-motion')) return;
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `perspective(900px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg) translateY(-6px)`;
-        });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-      });
-    })();
-
-    /* ============================================================
-       PARALLAX HERO
-    ============================================================ */
-    (function () {
-      const photo = document.querySelector('.hero-act-photo img');
-      if (!photo) return;
-      let ticking = false;
+      let dTicking = false;
       window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            if (!document.body.classList.contains('reduce-motion')) {
-              photo.style.transform = `scale(1.08) translateY(${window.pageYOffset * 0.12}px)`;
-            }
-            ticking = false;
-          });
-          ticking = true;
+        if (!dTicking) {
+          requestAnimationFrame(() => { update(); dTicking = false; });
+          dTicking = true;
         }
       }, { passive: true });
+      window.addEventListener('resize', update);
+      render(0);
+      update();
     })();
 
-    /* ============================================================
-       MOTION TOGGLE
-    ============================================================ */
-    (function () {
-      const btn = document.getElementById('motionToggle');
-      if (!btn) return;
-      function setMotion(on) {
-        document.body.classList.toggle('reduce-motion', !on);
-        btn.setAttribute('aria-checked', on ? 'true' : 'false');
-        try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
+    /* === 6. Langue (FR/EN/AR) + bascule Animations === */
+    (function() {
+      // Dictionnaire indexé sur le texte FR source (normalisé).
+      const DICT = {
+        en: {
+          "Bienvenue au Royaume du Maroc": "Welcome to the Kingdom of Morocco",
+          "Là où l'orient rencontre l'occident": "Where the East meets the West",
+          "Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques — découvrez un pays aux mille visages.": "From ancient medinas to the dunes of the Sahara, from the peaks of the Atlas to the Atlantic shores — discover a country of a thousand faces.",
+          "Villes à Découvrir": "Cities to Discover",
+          "Sites UNESCO": "UNESCO Sites",
+          "Plats Traditionnels": "Traditional Dishes",
+          "Expériences Uniques": "Unique Experiences",
+          "Explorez le Maroc": "Explore Morocco",
+          "Faites défiler pour tracer votre voyage": "Scroll to trace your journey",
+          "Nord — Côte méditerranéenne": "North — Mediterranean Coast",
+          "Nord — Rif": "North — Rif",
+          "Nord — Montagnes du Rif": "North — Rif Mountains",
+          "Centre — Capitale spirituelle": "Centre — Spiritual Capital",
+          "Centre — Façade atlantique": "Centre — Atlantic Coast",
+          "Centre-Sud — Cité ocre": "Centre-South — The Ochre City",
+          "Côte atlantique": "Atlantic Coast",
+          "Sud — Souss": "South — Souss",
+          "Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.": "Gateway to Africa, a cosmopolitan city between the Atlantic and the Mediterranean — a millennia-old crossroads of cultures and flavours.",
+          "La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.": "The “white dove” of the Rif; its white medina is a UNESCO World Heritage Site.",
+          "La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.": "The blue pearl of the mountains: alleys, stairways and façades painted in every shade of azure.",
+          "Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.": "A spiritual and intellectual capital; its medina holds the oldest still-operating university in the world.",
+          "Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.": "The kingdom’s modern economic heart, crowned by the majestic Hassan II Mosque at the ocean’s edge.",
+          "La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.": "The ochre city: Jemaa el-Fna square, the fragrant souks, and the Majorelle gardens.",
+          "Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.": "City of winds: a lively fishing port and Portuguese ramparts battered by the Atlantic.",
+          "Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.": "Golden Atlantic beaches; a seaside resort prized for its mild year-round climate.",
+          "Voir la ville →": "See the city →",
+          "Gastronomie": "Gastronomy",
+          "Explorez la Gastronomie Marocaine": "Explore Moroccan Cuisine",
+          "Des saveurs uniques qui racontent l'histoire d'un peuple.": "Unique flavours that tell the story of a people.",
+          "En savoir plus sur les plats marocains →": "Learn more about Moroccan dishes →",
+          "Prêt pour les Meilleures Expériences ?": "Ready for the Best Experiences?",
+          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — le Maroc vous attend.": "From traditional hammams to treks in the Atlas, through authentic riads and cooking classes — Morocco awaits you.",
+          "Découvrir les Expériences →": "Discover the Experiences →",
+          "Votre Guide de Voyage Complet": "Your Complete Travel Guide",
+          "Quand partir, quels documents préparer, comment vous déplacer, combien prévoir — toutes les informations essentielles pour un voyage serein au Maroc.": "When to go, what documents to prepare, how to get around, how much to budget — all the essentials for a smooth trip to Morocco.",
+          "Consulter le Guide →": "View the Guide →",
+          "Quand partir": "When to Go",
+          "Visas & Formalités": "Visas & Formalities",
+          "Transport": "Transport",
+          "Budget": "Budget",
+          "Trouvez le Vol Parfait": "Find the Perfect Flight",
+          "Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc. Comparez les compagnies et choisissez ce qui vous convient.": "Book your flight now to enjoy the best experience in Morocco. Compare airlines and choose what suits you.",
+          "Voir les Vols →": "See Flights →",
+          "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — Created for the Web Development module | Supervised by Mr. Reda Jourani | ENSA Tétouan 2026",
+          "Accueil": "Home",
+          "Villes": "Cities",
+          "Plats": "Dishes",
+          "Guide": "Guide",
+          "Trouver le vol parfait": "Find the perfect flight",
+          "Marrakech": "Marrakech", "Fès": "Fès", "Chefchaouen": "Chefchaouen",
+          "Tétouan": "Tétouan", "Casablanca": "Casablanca", "Agadir": "Agadir",
+          "Tanger": "Tangier", "Essaouira": "Essaouira",
+          "Réserver un Vol": "Book a Flight",
+          "Animations": "Animations"
+        },
+        ar: {
+          "Bienvenue au Royaume du Maroc": "مرحبًا بكم في المملكة المغربية",
+          "Là où l'orient rencontre l'occident": "حيث يلتقي الشرق بالغرب",
+          "Des médinas millénaires aux dunes du Sahara, des sommets de l'Atlas aux rivages atlantiques — découvrez un pays aux mille visages.": "من المدن العتيقة إلى كثبان الصحراء، ومن قمم الأطلس إلى السواحل الأطلسية — اكتشفوا بلدًا بألف وجه.",
+          "Villes à Découvrir": "مدن لاكتشافها",
+          "Sites UNESCO": "مواقع اليونسكو",
+          "Plats Traditionnels": "أطباق تقليدية",
+          "Expériences Uniques": "تجارب فريدة",
+          "Explorez le Maroc": "استكشف المغرب",
+          "Faites défiler pour tracer votre voyage": "مرّر لرسم رحلتك",
+          "Nord — Côte méditerranéenne": "الشمال — الساحل المتوسطي",
+          "Nord — Rif": "الشمال — الريف",
+          "Nord — Montagnes du Rif": "الشمال — جبال الريف",
+          "Centre — Capitale spirituelle": "الوسط — العاصمة الروحية",
+          "Centre — Façade atlantique": "الوسط — الواجهة الأطلسية",
+          "Centre-Sud — Cité ocre": "الوسط الجنوبي — المدينة الحمراء",
+          "Côte atlantique": "الساحل الأطلسي",
+          "Sud — Souss": "الجنوب — سوس",
+          "Porte de l'Afrique, ville cosmopolite entre Atlantique et Méditerranée — un carrefour millénaire de cultures et de saveurs.": "بوابة إفريقيا، مدينة كوزموبوليتية بين الأطلسي والمتوسط — ملتقى حضارات ونكهات منذ آلاف السنين.",
+          "La « colombe blanche » du Rif, sa médina blanche est classée au patrimoine mondial de l'UNESCO.": "«الحمامة البيضاء» للريف، مدينتها العتيقة البيضاء مُدرَجة ضمن التراث العالمي لليونسكو.",
+          "La perle bleue des montagnes : ruelles, escaliers et façades peints dans toutes les nuances d'azur.": "لؤلؤة الجبال الزرقاء: أزقّة ودرجات وواجهات مطليّة بكل درجات الأزرق.",
+          "Capitale spirituelle et intellectuelle, sa médina abrite la plus ancienne université du monde encore en activité.": "عاصمة روحية وفكرية، تضمّ مدينتها العتيقة أقدم جامعة لا تزال تعمل في العالم.",
+          "Cœur économique et moderne du royaume, dominée par la majestueuse mosquée Hassan II au bord de l'océan.": "القلب الاقتصادي الحديث للمملكة، يعلوها مسجد الحسن الثاني المهيب على حافة المحيط.",
+          "La cité ocre : la place Jemaa el-Fna, les souks parfumés, et les jardins de Majorelle.": "المدينة الحمراء: ساحة جامع الفنا، الأسواق العطرة، وحدائق ماجوريل.",
+          "Cité des vents, port de pêche animé et remparts portugais battus par l'océan Atlantique.": "مدينة الرياح، ميناء صيد نابض بالحياة وأسوار برتغالية تلاطمها أمواج الأطلسي.",
+          "Plages dorées de la côte atlantique, station balnéaire prisée pour son climat doux toute l'année.": "شواطئ ذهبية على الساحل الأطلسي، ومنتجع بحري مرغوب لمناخه المعتدل طوال العام.",
+          "Voir la ville →": "اكتشف المدينة →",
+          "Gastronomie": "فنّ الطهي",
+          "Explorez la Gastronomie Marocaine": "اكتشف المطبخ المغربي",
+          "Des saveurs uniques qui racontent l'histoire d'un peuple.": "نكهات فريدة تروي تاريخ شعب.",
+          "En savoir plus sur les plats marocains →": "اعرف المزيد عن الأطباق المغربية →",
+          "Prêt pour les Meilleures Expériences ?": "مستعدّ لأفضل التجارب؟",
+          "Du hammam traditionnel aux treks dans l'Atlas, en passant par les riads authentiques et les cours de cuisine — le Maroc vous attend.": "من الحمّام التقليدي إلى رحلات الأطلس، مرورًا بالرياضات الأصيلة ودروس الطبخ — المغرب في انتظاركم.",
+          "Découvrir les Expériences →": "اكتشف التجارب →",
+          "Votre Guide de Voyage Complet": "دليلك الكامل للسفر",
+          "Quand partir, quels documents préparer, comment vous déplacer, combien prévoir — toutes les informations essentielles pour un voyage serein au Maroc.": "متى تسافر، ما الوثائق اللازمة، كيف تتنقّل، وكم تُحضّر من ميزانية — كل ما يلزم لرحلة هانئة إلى المغرب.",
+          "Consulter le Guide →": "اطّلع على الدليل →",
+          "Quand partir": "متى تسافر",
+          "Visas & Formalités": "التأشيرات والإجراءات",
+          "Transport": "النقل",
+          "Budget": "الميزانية",
+          "Trouvez le Vol Parfait": "اعثر على الرحلة المثالية",
+          "Réservez votre vol dès maintenant pour vivre la meilleure expérience au Maroc. Comparez les compagnies et choisissez ce qui vous convient.": "احجز رحلتك الآن لتعيش أفضل تجربة في المغرب. قارن بين شركات الطيران واختر ما يناسبك.",
+          "Voir les Vols →": "عرض الرحلات →",
+          "© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026": "© 2026 — أُنجز في إطار وحدة تطوير الويب | تأطير الأستاذ رضا جوراني | المدرسة الوطنية للعلوم التطبيقية تطوان 2026",
+          "Accueil": "الرئيسية",
+          "Villes": "المدن",
+          "Plats": "الأطباق",
+          "Guide": "الدليل",
+          "Trouver le vol parfait": "اعثر على الرحلة المثالية",
+          "Marrakech": "مراكش", "Fès": "فاس", "Chefchaouen": "شفشاون",
+          "Tétouan": "تطوان", "Casablanca": "الدار البيضاء", "Agadir": "أكادير",
+          "Tanger": "طنجة", "Essaouira": "الصويرة",
+          "Réserver un Vol": "احجز رحلة",
+          "Animations": "الحركات"
+        }
+      };
+
+      const SEL = [
+        '.hero h1', '.hero .sous-titre', '.hero p.desc', '.stat-label',
+        '.map-intro h2', '.map-intro .section-subtitle',
+        '.city-info-item .city-eyebrow', '.city-info-item h3',
+        '.city-info-item p', '.city-info-item a',
+        '.dish-side .eyebrow', '.dish-side h2', '.dish-side p', '.dish-side .btn-maroc',
+        '.exp-teaser h2', '.exp-teaser p', '.exp-teaser .btn-outline-white',
+        '.guide-teaser h2', '.guide-teaser p', '.guide-teaser .btn-maroc',
+        '.guide-icon-card span',
+        '.flights-teaser h2', '.flights-teaser p', '.flights-teaser .btn-or',
+        '.footer-maroc',
+        '#siteMenu .menu-head', '#siteMenu .menu-sub-list a',
+        '.menu-cta', '.motion-label'
+      ].join(',');
+
+      // Premier nœud texte significatif (conserve les icônes <i>)
+      function labelNode(el) {
+        for (const n of el.childNodes) {
+          if (n.nodeType === 3 && n.nodeValue.trim()) return n;
+        }
+        return null;
       }
-      btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
-      let stored = null;
-      try { stored = localStorage.getItem('mdMotion'); } catch (e) {}
-      setMotion(stored ? stored === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    })();
+      const norm = s => s.replace(/\s+/g, ' ').trim();
 
-    console.log('✨ activites.html — Version éditoriale magazine. Animations chargées.');
+      const registry = [];
+      document.querySelectorAll(SEL).forEach(el => {
+        const node = labelNode(el);
+        if (!node) return;
+        registry.push({ node, fr: node.nodeValue, key: norm(node.nodeValue) });
+      });
+
+      function applyLang(lang) {
+        const table = DICT[lang];
+        registry.forEach(({ node, fr, key }) => {
+          if (lang === 'fr' || !table || !table[key]) { node.nodeValue = fr; return; }
+          const lead = (fr.match(/^\s*/) || [''])[0];
+          const trail = (fr.match(/\s*$/) || [''])[0];
+          node.nodeValue = lead + table[key] + trail;
+        });
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      }
+
+      const langBtns = document.querySelectorAll('.lang-btn');
+      function setLang(lang) {
+        if (!DICT[lang] && lang !== 'fr') lang = 'fr';
+        langBtns.forEach(b =>
+          b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'));
+        applyLang(lang);
+        try { localStorage.setItem('mdLang', lang); } catch (e) {}
+      }
+      langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+      // Bascule Animations (aria-checked=true → animations actives)
+      const motionToggle = document.getElementById('motionToggle');
+      function setMotion(animOn) {
+        document.body.classList.toggle('reduce-motion', !animOn);
+        motionToggle.setAttribute('aria-checked', animOn ? 'true' : 'false');
+        try { localStorage.setItem('mdMotion', animOn ? 'on' : 'off'); } catch (e) {}
+        if (typeof updateParallax === 'function') updateParallax();
+      }
+      motionToggle.addEventListener('click', () =>
+        setMotion(document.body.classList.contains('reduce-motion')));
+
+      // État initial (mémorisé, sinon préférence système pour le mouvement)
+      let storedLang = 'fr', storedMotion = null;
+      try {
+        storedLang = localStorage.getItem('mdLang') || 'fr';
+        storedMotion = localStorage.getItem('mdMotion');
+      } catch (e) {}
+      const prefersReduce =
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setMotion(storedMotion ? storedMotion === 'on' : !prefersReduce);
+      setLang(storedLang);
+    })();
   </script>
 
 </body>
