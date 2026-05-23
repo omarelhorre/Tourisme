@@ -7,6 +7,8 @@
 <title>Itinéraires Maroc — Composez votre voyage</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -32,6 +34,18 @@
   --gris-light:   #E8DFD0;
   --shadow-card:  0 4px 24px rgba(139,37,0,0.08);
   --shadow-hover: 0 12px 40px rgba(192,85,42,0.15);
+  /* Menu (aligné sur index.html) */
+  --terracotta: #C0552A;
+  --terracotta-dark: #9C4520;
+  --sable-fonce: #E9D6AE;
+  --vert-fonce: #1F2A1A;
+  --or-fonce: #B8961F;
+  --texte: #2A2A2A;
+  --texte-doux: #6B5640;
+  --encre: #1A1A1A;
+  --font-titre: 'Playfair Display', serif;
+  --font-corps: 'Lato', sans-serif;
+  --ease-doux: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,156 +68,446 @@ body {
   transform: scaleX(0);
 }
 
-/* ══════ NAVBAR FLOTTANTE ══════ */
-.nav-floating {
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-  z-index: 200;
-  display: flex; align-items: center; gap: 6px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(192,85,42,0.12);
-  border-radius: 50px;
-  padding: 8px 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  transition: all 0.4s ease;
-}
-.nav-floating.scrolled {
-  background: rgba(255,255,255,0.97);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
-}
-.nav-floating .nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  padding-right: 12px;
-  border-right: 1px solid rgba(192,85,42,0.15);
-}
-.nav-floating .nav-logo svg { width: 28px; height: 28px; }
-.nav-floating .nav-logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem; color: var(--terre);
-  letter-spacing: 0.02em;
-}
-.nav-floating .nav-icons { display: flex; gap: 4px; }
-.nav-floating .nav-icon-btn {
-  width: 36px; height: 36px;
-  border-radius: 50%;
+/* ══════ MENU (index.html) ══════ */
+.nav-fab {
+  position: fixed;
+  top: 1.75rem;
+  z-index: 1045;
+  width: 46px;
+  height: 46px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;          /* l'icône ne passe jamais à la ligne */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.85);
   border: none;
-  background: transparent;
-  color: var(--sable);
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s;
-  position: relative;
-}
-.nav-floating .nav-icon-btn:hover {
-  background: rgba(192,85,42,0.08);
-  color: var(--terre);
-}
-.nav-floating .nav-icon-btn svg {
-  width: 16px; height: 16px;
-  stroke: currentColor; fill: none;
-  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-}
-.nav-floating .nav-icon-btn .nav-tooltip {
-  position: absolute; bottom: -26px; left: 50%; transform: translateX(-50%);
-  background: var(--ivoire); color: var(--or-light);
-  padding: 3px 8px; border-radius: 3px;
-  font-size: 0.6rem; letter-spacing: 0.06em;
-  text-transform: uppercase; white-space: nowrap;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.2s;
-}
-.nav-floating .nav-icon-btn:hover .nav-tooltip { opacity: 1; }
-.nav-floating .nav-menu-btn {
-  width: 36px; height: 36px;
   border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, var(--terre), var(--safran));
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s;
-  margin-left: 4px;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
 }
-.nav-floating .nav-menu-btn:hover {
-  box-shadow: 0 0 16px rgba(192,85,42,0.3);
-  transform: scale(1.05);
+.nav-fab i {
+  display: block;
+  line-height: 1;
 }
-.nav-floating .nav-menu-btn svg {
-  width: 16px; height: 16px;
-  stroke: currentColor; fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+.nav-fab-burger span { flex: 0 0 auto; }
+.nav-fab:hover {
+  background: #fff;
+  transform: scale(1.06);
+}
+.nav-fab-logo { left: 2.5rem; }
+.nav-fab-burger { right: 2.5rem; }
+.nav-fab-logo i {
+  color: var(--terracotta);
+  font-size: 1.5rem;
+}
+/* Les 2 barres du burger */
+.nav-fab-burger span {
+  display: block;
+  width: 22px;
+  height: 2.5px;
+  background: var(--terracotta);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+/* Burger → croix quand le menu est ouvert */
+body.menu-open .nav-fab-burger span:nth-child(1) {
+  transform: translateY(8.5px) rotate(45deg);
+}
+body.menu-open .nav-fab-burger span:nth-child(2) {
+  transform: translateY(-8.5px) rotate(-45deg);
+}
+body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
+
+/* ============================================================
+   === Menu plein écran (palette Maroc, esprit GTA VI) ===
+   ============================================================ */
+.site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 1044;
+  /* Fond = couleur primaire du site (sable) */
+  background: var(--sable-light);
+  display: flex;
+  flex-direction: column;
+  padding: 6.5rem 2.5rem 3rem;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  transition: opacity 0.35s ease, transform 0.35s ease,
+              visibility 0s linear 0.35s;
+}
+body.menu-open .site-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+/* Motif zellige discret en fond du menu */
+.site-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-/* ══════ MENU PLEIN ÉCRAN ══════ */
-.fullscreen-menu {
-  position: fixed; inset: 0; z-index: 300;
-  background: linear-gradient(135deg, rgba(61,31,10,0.98) 0%, rgba(192,85,42,0.95) 100%);
-  backdrop-filter: blur(20px);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-.fullscreen-menu.open { opacity: 1; pointer-events: all; }
-.fullscreen-menu .menu-close {
-  position: absolute; top: 24px; right: 24px;
-  width: 44px; height: 44px;
-  border: 1px solid rgba(212,175,55,0.4);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--or);
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s;
-}
-.fullscreen-menu .menu-close:hover {
-  background: rgba(212,175,55,0.1);
-  transform: rotate(90deg);
-}
-.fullscreen-menu .menu-close svg {
-  width: 18px; height: 18px;
-  stroke: currentColor; fill: none; stroke-width: 2;
-}
-.fullscreen-menu .menu-items {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 20px;
-}
-.fullscreen-menu .menu-item {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  color: var(--sable-light);
-  text-decoration: none;
-  letter-spacing: 0.03em;
+.site-menu-inner {
   position: relative;
-  transition: color 0.3s;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
 }
-.fullscreen-menu .menu-item::after {
-  content: ''; position: absolute; bottom: -4px; left: 0;
-  width: 0; height: 2px;
-  background: var(--or);
-  transition: width 0.4s ease;
+
+/* Élément de menu : lien direct OU section dépliable */
+.menu-group {
+  border-bottom: 1px solid rgba(192, 85, 42, 0.22);
 }
-.fullscreen-menu .menu-item:hover { color: var(--or); }
-.fullscreen-menu .menu-item:hover::after { width: 100%; }
-.fullscreen-menu .menu-item-ar {
-  display: block;
-  font-family: 'Amiri', serif;
-  font-size: 0.45em;
-  color: var(--or);
-  opacity: 0.6;
-  margin-top: 2px;
-  text-align: center;
-}
-.fullscreen-menu .menu-footer {
-  position: absolute; bottom: 36px;
-  display: flex; gap: 20px;
-}
-.fullscreen-menu .menu-footer a {
-  color: var(--sable-light);
-  font-size: 0.8rem; letter-spacing: 0.1em;
-  text-transform: uppercase;
+.menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.15rem 0.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
   text-decoration: none;
-  opacity: 0.5;
-  transition: opacity 0.3s;
+  color: var(--texte);
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: color 0.2s ease, padding-left 0.2s ease;
 }
-.fullscreen-menu .menu-footer a:hover { opacity: 1; color: var(--or); }
+.menu-head:hover,
+.menu-head:focus-visible {
+  color: var(--terracotta);
+  padding-left: 0.9rem;
+  outline: none;
+}
+.menu-head .chev {
+  font-size: 1.1rem;
+  color: var(--terracotta);
+  transition: transform 0.35s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.menu-group.open .menu-head .chev {
+  transform: rotate(180deg);
+}
+.menu-group.open .menu-head {
+  color: var(--terracotta);
+}
+
+/* Sous-section dépliable (Accueil → sections, Villes → villes) */
+.menu-sub {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.menu-group.open .menu-sub {
+  max-height: 640px;
+  opacity: 1;
+}
+.menu-sub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0 1.2rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.menu-sub-list.cities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1rem 1.5rem;
+}
+.menu-sub-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.6rem;
+  color: var(--texte-doux);
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.menu-sub-list a::before {
+  content: "→";
+  color: var(--terracotta);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.menu-sub-list a:hover {
+  color: var(--terracotta);
+  background: rgba(255, 255, 255, 0.6);
+}
+.menu-sub-list a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* === Pied de menu : langue + animations === */
+.menu-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(192, 85, 42, 0.22);
+}
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--texte-doux);
+}
+.lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--texte-doux);
+  font-family: var(--font-corps);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease-doux), color 0.2s var(--ease-doux);
+}
+.lang-btn:hover { color: var(--terracotta); }
+.lang-btn[aria-pressed="true"] {
+  background: var(--terracotta);
+  color: #fff;
+}
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: none;
+  background: transparent;
+  color: var(--texte-doux);
+  font-family: var(--font-corps);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.motion-track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(192, 85, 42, 0.25);
+  transition: background 0.25s var(--ease-doux);
+  flex-shrink: 0;
+}
+.motion-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform 0.25s var(--ease-doux);
+}
+/* aria-checked=true → animations ACTIVÉES (mouvement réduit OFF) */
+.motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
+.motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
+
+/* === Mouvement réduit : on neutralise animations/transitions === */
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (max-width: 768px) {
+  .nav-fab { top: 1.1rem; }
+  .nav-fab-logo { left: 1.1rem; }
+  .nav-fab-burger { right: 1.1rem; }
+  .site-menu { padding: 5.5rem 1.25rem 2.5rem; }
+  .menu-sub-list.cities { grid-template-columns: 1fr; }
+}
+
+/* === Desktop : panneau coulissant à droite (esprit GTA VI) ===
+   Sur ≥992px le menu n'est plus plein écran : il glisse depuis
+   la droite sur ~la moitié de l'écran, la page reste visible à
+   gauche. La version mobile (plein écran) reste inchangée. */
+@media (min-width: 992px) {
+  .site-menu {
+    /* La couche devient un calque transparent qui découpe le
+       panneau coulissant (évite toute barre de défilement). */
+    background: transparent;
+    padding: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: none;
+    transition: none;
+  }
+  body.menu-open .site-menu {
+    pointer-events: auto;
+  }
+  .site-menu::before { display: none; }
+
+  .site-menu-inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(50vw, 760px);
+    max-width: none;
+    margin: 0;
+    padding: 7rem 4.5rem 3rem;
+    overflow-y: auto;
+    background: var(--sable-light);
+    border-left: 1px solid rgba(192, 85, 42, 0.18);
+    box-shadow: -30px 0 70px -25px rgba(60, 30, 10, 0.45);
+    transform: translateX(100%);
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  body.menu-open .site-menu-inner {
+    transform: translateX(0);
+  }
+  /* Motif zellige reporté sur le panneau lui-même */
+  .site-menu-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* ---- Disposition en onglets (rangée en haut + contenu en bas) ----
+     Rangée compacte d'onglets en haut ; le contenu de l'onglet
+     sélectionné occupe la zone du bas du panneau. */
+  .site-menu-inner {
+    padding: 5rem 4rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.5rem;
+  }
+  /* Chaque groupe = un onglet compact (son contenu est en absolu,
+     donc le groupe se réduit à la taille de son intitulé). */
+  .menu-group {
+    display: block;
+    flex: 0 0 auto;
+    border-bottom: none;
+    margin: 0;
+  }
+
+  /* Intitulé = onglet pastille dans la rangée */
+  .menu-head {
+    position: relative;
+    z-index: 1;
+    width: auto;
+    justify-content: center;
+    gap: 0;
+    border-bottom: none;
+    border-radius: 999px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;        /* l'intitulé ne se coupe jamais */
+    background: transparent;
+    transition: background 0.25s var(--ease-doux), color 0.25s var(--ease-doux);
+  }
+  .menu-head:hover,
+  .menu-head:focus-visible {
+    padding-left: 1.4rem;
+    background: rgba(192, 85, 42, 0.12);
+    color: var(--terracotta);
+  }
+  .menu-head .chev { display: none; }
+  /* Onglet actif = pastille pleine (esprit GTA VI) */
+  .menu-group.open .menu-head {
+    background: var(--terracotta);
+    color: #fff;
+  }
+
+  /* Zone du bas : contenu de l'onglet sélectionné */
+  .menu-sub {
+    position: absolute;
+    left: 4rem;
+    right: 4rem;
+    top: 9.5rem;
+    bottom: 11rem;
+    z-index: 1;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(192, 85, 42, 0.18);
+    max-height: none;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px);
+    transition: opacity 0.35s ease, transform 0.35s ease,
+                visibility 0s linear 0.35s;
+  }
+  .menu-group.open .menu-sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .menu-sub-list {
+    padding: 0;
+    gap: 0.1rem;
+  }
+  .menu-sub-list a {
+    font-size: clamp(1.3rem, 2.1vw, 2rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    padding: 0.45rem 0.7rem;
+  }
+  .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
+
+  /* Pied (langue/animations) ancré en bas du panneau */
+  .menu-foot {
+    position: absolute;
+    z-index: 2;
+    left: 4rem;
+    right: 4rem;
+    bottom: 1.6rem;
+    margin-top: 0;
+  }
+}
+
+/* ============================================================
 
 /* ══════ HERO ══════ */
 .hero {
@@ -328,7 +632,6 @@ body {
 .card-image-wrap::after {
   display: none;
 }
-.card-image-wrap .card-slide,
 .card-image-wrap img {
   position: absolute;
   inset: 0;
@@ -336,15 +639,11 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 1;
-  transition: opacity 0.8s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
   filter: none;
 }
-.card-image-wrap /* Opacité gérée dans la règle principale */
-.circuit-card:hover .card-image-wrap .card-slide.active,
-.circuit-card:hover .card-image-wrap img.active {
+.circuit-card:hover .card-image-wrap img {
   transform: scale(1.08);
-  filter: none;
 }
 .card-image-wrap .card-slide-indicator {
   position: absolute;
@@ -1105,47 +1404,6 @@ body {
   opacity: 0;
 }
 
-/* ══════ LOADING ══════ */
-#loading {
-  position: fixed; inset: 0; z-index: 1000;
-  background: var(--creme);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 20px;
-}
-.loading-star {
-  width: 56px; height: 56px;
-  animation: loadingStar 2s ease-in-out infinite;
-}
-@keyframes loadingStar {
-  0%,100% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
-  50%     { opacity: 1;   transform: scale(1.1) rotate(22.5deg); }
-}
-.loading-text {
-  font-family: 'Amiri', serif;
-  font-size: 1.1rem; color: var(--terre);
-  letter-spacing: 0.08em;
-}
-.loading-sub {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.72rem; color: var(--sable);
-  letter-spacing: 0.25em; text-transform: uppercase;
-  font-weight: 300;
-}
-.loading-bar {
-  width: 180px; height: 2px;
-  background: rgba(192,85,42,0.12);
-  border-radius: 1px;
-  position: relative; overflow: hidden;
-}
-.loading-bar::after {
-  content: '';
-  position: absolute; top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, var(--terre), transparent);
-  animation: loadBar 1.5s ease-in-out infinite;
-}
-@keyframes loadBar { to { left: 100%; } }
-
 /* ══════ RIPPLE ══════ */
 .ripple {
   position: absolute; border-radius: 50%;
@@ -1175,8 +1433,6 @@ body {
   .itineraries-section { padding: 0 28px 60px; }
   .generator-section { padding: 40px 28px; }
   .wizard-box { padding: 24px 20px; }
-  .nav-floating { padding: 6px 10px; }
-  .nav-floating .nav-logo-text { display: none; }
 }
 @media (max-width: 600px) {
   .choice-group { flex-direction: column; }
@@ -1233,21 +1489,6 @@ body {
 </head>
 <body>
 
-<!-- Loading Screen -->
-<div id="loading">
-  <div class="loading-star">
-    <svg viewBox="0 0 100 100" fill="none">
-      <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" stroke="#C0552A" stroke-width="1.5"/>
-      <polygon points="50,15 58,38 83,38 63,54 71,77 50,62 29,77 37,54 17,38 42,38" fill="rgba(192,85,42,0.15)" stroke="#8B3A1A" stroke-width="0.8"/>
-      <circle cx="50" cy="50" r="6" fill="#C0552A" opacity="0.5"/>
-    </svg>
-  </div>
-  <div class="loading-text">مرحبًا بكم في المغرب</div>
-  <div class="loading-sub">Portail Touristique du Maroc</div>
-  <div class="loading-bar"></div>
-</div>
-
-
 <!-- Progress Bar -->
 <div class="progress-bar" id="progressBar"></div>
 
@@ -1257,57 +1498,84 @@ body {
 <!-- Rating Toast -->
 <div class="rating-toast" id="ratingToast"></div>
 
-<!-- ══════ NAVBAR FLOTTANTE ══════ -->
-<nav class="nav-floating" id="navbar">
-  <div class="nav-logo">
-    <svg viewBox="0 0 60 60" fill="none">
-      <polygon points="30,3 37,22 58,22 42,34 48,54 30,42 12,54 18,34 2,22 23,22" stroke="#C0552A" stroke-width="1.5"/>
-      <polygon points="30,12 35,26 50,26 38,35 43,49 30,40 17,49 22,35 10,26 25,26" fill="rgba(192,85,42,0.12)" stroke="#8B3A1A" stroke-width="0.8"/>
-      <circle cx="30" cy="30" r="4" fill="#C0552A"/>
-    </svg>
-    <span class="nav-logo-text">Maroc</span>
-  </div>
-  <div class="nav-icons">
-    <a href="index.html" class="nav-icon-btn" aria-label="Accueil">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="nav-tooltip">Accueil</span>
-    </a>
-    <a href="#circuitsGrid" class="nav-icon-btn" aria-label="Circuits">
-      <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 21 18 21 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-      <span class="nav-tooltip">Circuits</span>
-    </a>
-    <a href="#generator" class="nav-icon-btn" aria-label="Générateur">
-      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      <span class="nav-tooltip">Générateur</span>
-    </a>
-    <button class="nav-icon-btn" aria-label="Langue" onclick="toggleLang()">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <span class="nav-tooltip">FR / EN / AR</span>
-    </button>
-  </div>
-  <button class="nav-menu-btn" aria-label="Menu" onclick="toggleMenu()">
-    <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-  </button>
-</nav>
+<!-- ══════ Icônes flottantes + menu (index.html) ══════ -->
+<a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+  <i class="bi bi-tree-fill"></i>
+</a>
+<button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+         aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+  <span></span>
+  <span></span>
+</button>
 
-<!-- ══════ MENU PLEIN ÉCRAN ══════ -->
-<div class="fullscreen-menu" id="fullscreenMenu">
-  <button class="menu-close" onclick="toggleMenu()" aria-label="Fermer">
-    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <div class="menu-items">
-    <a href="index.html" class="menu-item" onclick="toggleMenu()">Accueil<span class="menu-item-ar">الرئيسية</span></a>
-    <a href="#circuitsGrid" class="menu-item" onclick="toggleMenu()">Circuits<span class="menu-item-ar">الدارات</span></a>
-    <a href="#generator" class="menu-item" onclick="toggleMenu()">Planifier<span class="menu-item-ar">خطط رحلتك</span></a>
-    <a href="destinations.html" class="menu-item" onclick="toggleMenu()">Destinations<span class="menu-item-ar">المدن</span></a>
-    <a href="activites.html" class="menu-item" onclick="toggleMenu()">Activités<span class="menu-item-ar">الأنشطة</span></a>
-    <a href="itineraire.html" class="menu-item" onclick="toggleMenu()">Itinéraires<span class="menu-item-ar">الطريق</span></a>
-    <a href="#guideSection" class="menu-item" onclick="toggleMenu()">Guide<span class="menu-item-ar">دليل</span></a>
-  </div>
-  <div class="menu-footer">
-    <a href="#" onclick="toggleMenu()">Instagram</a>
-    <a href="#" onclick="toggleMenu()">Facebook</a>
-    <a href="#" onclick="toggleMenu()">Newsletter</a>
+<div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+  <div class="site-menu-inner">
+
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
+        Accueil
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list">
+          <li><a href="index.html">Page d'accueil</a></li>
+          <li><a href="#circuitsGrid">Circuits</a></li>
+          <li><a href="#generator">Planifier votre voyage</a></li>
+          <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+          <li><a href="index.html#dishesSection">Gastronomie</a></li>
+          <li><a href="index.html#experiencesSection">Expériences</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
+        Villes
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list cities">
+          <li><a href="marrakech.html">Marrakech</a></li>
+          <li><a href="fes.html">Fès</a></li>
+          <li><a href="chefchaouen.html">Chefchaouen</a></li>
+          <li><a href="tetouan.html">Tétouan</a></li>
+          <li><a href="casablanca.html">Casablanca</a></li>
+          <li><a href="agadir.html">Agadir</a></li>
+          <li><a href="tanger.html">Tanger</a></li>
+          <li><a href="essaouira.html">Essaouira</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="menu-group">
+      <a class="menu-head" href="dishes.html">Plats<i class="bi bi-arrow-right chev"></i></a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="activites.html">Activités<i class="bi bi-arrow-right chev"></i></a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="itineraire.html">Itinéraires<i class="bi bi-arrow-right chev"></i></a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="destinations.html">Destinations<i class="bi bi-arrow-right chev"></i></a>
+    </div>
+    <div class="menu-group">
+      <a class="menu-head" href="index.html#guideSection">Guide<i class="bi bi-arrow-right chev"></i></a>
+    </div>
+
+    <div class="menu-foot">
+      <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <i class="bi bi-globe2" aria-hidden="true"></i>
+        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+      </div>
+      <button type="button" class="motion-toggle" id="motionToggle"
+              role="switch" aria-checked="true" aria-label="Animations">
+        <span class="motion-track"><span class="motion-thumb"></span></span>
+        <span class="motion-label">Animations</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1954,31 +2222,105 @@ body {
 </button>
 
 <script>
+/* === Menu plein écran (index.html) === */
+(function() {
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('siteMenu');
+  if (!toggle || !menu) return;
+  const groups = menu.querySelectorAll('.menu-group[data-group]');
+  const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+  function activate(group) {
+    groups.forEach(g => {
+      const on = g === group;
+      g.classList.toggle('open', on);
+      g.querySelector('.menu-head')
+       .setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open && isDesktop() &&
+        !menu.querySelector('.menu-group[data-group].open')) {
+      activate(groups[0]);
+    }
+  }
+  toggle.addEventListener('click', () => {
+    setMenu(!document.body.classList.contains('menu-open'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false);
+  });
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu) setMenu(false);
+  });
+
+  groups.forEach(group => {
+    const head = group.querySelector('.menu-head');
+    head.addEventListener('click', () => {
+      if (isDesktop()) {
+        activate(group);
+      } else {
+        const willOpen = !group.classList.contains('open');
+        willOpen ? activate(group) : activate(null);
+      }
+    });
+  });
+
+  menu.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        setMenu(false);
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 120);
+      } else {
+        setMenu(false);
+      }
+    });
+  });
+})();
+
+(function() {
+  const motionToggle = document.getElementById('motionToggle');
+  if (!motionToggle) return;
+  function setMotion(animOn) {
+    document.body.classList.toggle('reduce-motion', !animOn);
+    motionToggle.setAttribute('aria-checked', animOn ? 'true' : 'false');
+    try { localStorage.setItem('mdMotion', animOn ? 'on' : 'off'); } catch (e) {}
+  }
+  motionToggle.addEventListener('click', () =>
+    setMotion(document.body.classList.contains('reduce-motion')));
+  let storedMotion = null;
+  try { storedMotion = localStorage.getItem('mdMotion'); } catch (e) {}
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  setMotion(storedMotion ? storedMotion === 'on' : !prefersReduce);
+})();
+
+(function() {
+  const langBtns = document.querySelectorAll('.lang-btn');
+  if (!langBtns.length) return;
+  function setLang(lang) {
+    langBtns.forEach(b =>
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false'));
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    try { localStorage.setItem('mdLang', lang); } catch (e) {}
+  }
+  langBtns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let storedLang = 'fr';
+  try { storedLang = localStorage.getItem('mdLang') || 'fr'; } catch (e) {}
+  setLang(storedLang);
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
-/* ══════ LOADING ══════ */
 window.addEventListener('load', () => {
-  gsap.to('#loading', {
-    opacity: 0, duration: 0.8, delay: 1.0,
-    onComplete: () => {
-      document.getElementById('loading').style.display = 'none';
-      initAnimations();
-      initCardCarousels();
-    }
-  });
+  initAnimations();
 });
-
-/* ══════ MENU ══════ */
-function toggleMenu() {
-  const menu = document.getElementById('fullscreenMenu');
-  menu.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-}
-
-/* ══════ LANG ══════ */
-function toggleLang() {
-  showToast('Langue : FR / EN / AR — bientôt disponible');
-}
 
 /* ══════ SCROLL ══════ */
 window.addEventListener('scroll', () => {
@@ -1987,7 +2329,6 @@ window.addEventListener('scroll', () => {
   const scrolled = maxScroll > 0 ? scrollY / maxScroll : 0;
 
   gsap.to('#progressBar', { scaleX: scrolled, duration: 0.1, ease: 'none' });
-  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
   document.getElementById('backToTop').classList.toggle('visible', scrollY > 500);
 
   if (scrollY < window.innerHeight) {
@@ -2022,48 +2363,6 @@ function initAnimations() {
     { opacity: 0, y: 40 },
     { opacity: 1, y: 0, duration: 0.9, scrollTrigger: { trigger: '.generator-section', start: 'top 75%' } }
   );
-}
-
-// Variable globale pour stocker les intervalles
-const carouselIntervals = new Map();
-
-function initCardCarousels() {
-  document.querySelectorAll('.circuit-card').forEach(card => {
-    let images = [];
-    try {
-      images = JSON.parse(card.dataset.cities || '[]').map(c => c.img);
-    } catch (e) { return; }
-    
-    if(images.length < 2) return;
-    
-    let currentIndex = 0;
-    const imgEl = card.querySelector('img');
-    if (!imgEl) return;
-    
-    let intervalId = null;
-
-    const startCarousel = () => {
-      if (intervalId) return;
-      intervalId = setInterval(() => {
-        imgEl.style.opacity = '0.5';
-        setTimeout(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          imgEl.src = images[currentIndex];
-          imgEl.style.opacity = '1';
-        }, 300);
-      }, 1500); // Change l'image toutes les 1.5 secondes au survol
-    };
-
-    const stopCarousel = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-
-    card.addEventListener('mouseenter', startCarousel);
-    card.addEventListener('mouseleave', stopCarousel);
-  });
 }
 
 /* ══════ 3D TILT ══════ */
@@ -2229,10 +2528,7 @@ function closeCityModal() {
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeCityModal();
-    if (document.getElementById('fullscreenMenu').classList.contains('open')) toggleMenu();
-  }
+  if (e.key === 'Escape') closeCityModal();
 });
 
 /* ══════ PARTICLES ══════ */
@@ -2252,5 +2548,6 @@ for (let i = 0; i < 18; i++) {
   });
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
