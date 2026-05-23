@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="city-page.css" />
   <style>
     :root {
       --terracotta: #C0552A;
@@ -33,28 +34,7 @@
     h1,h2,h3,h4 { font-family: 'Playfair Display', serif; color: var(--encre); }
     a { color: var(--terracotta); }
 
-    .top-bar {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(251,248,241,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      padding: 0.9rem 1.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .top-bar a.brand {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      color: var(--encre); text-decoration: none;
-      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem;
-    }
-    .top-bar a.brand i { color: var(--terracotta); font-size: 1.3rem; }
-    .top-bar .back-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      color: var(--texte); text-decoration: none; font-size: 0.92rem; font-weight: 700;
-      padding: 0.45rem 0.9rem; border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12); background: #fff;
-      transition: background .2s, border-color .2s, color .2s;
-    }
-    .top-bar .back-link:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+
 
     .dishes-hero {
       padding: 5rem 1.5rem 3rem; text-align: center;
@@ -332,7 +312,6 @@
     }
     @keyframes bg-drift { from { background-position:0 0; } to { background-position:160px 160px; } }
 
-    .top-bar { z-index:50; }
     .dishes-hero, .dishes-section { position:relative; z-index:2; }
 
     /* === Hero atmosphere === */
@@ -542,11 +521,14 @@
 
     .city-tag.marrakech    { --city-gradient: linear-gradient(90deg,#C0552A,#F2A23A,#E64C2A); --city-glow: rgba(230,76,42,0.55); }
     .city-tag.chefchaouen  { --city-gradient: linear-gradient(90deg,#1B6FA6,#4AA9E0,#6DC2FF); --city-glow: rgba(74,169,224,0.55); }
+    .city-tag.tanger       { --city-gradient: linear-gradient(90deg,#2F5D6E,#4FB8C4,#8FE0E6); --city-glow: rgba(79,184,196,0.55); }
     .city-tag.fes          { --city-gradient: linear-gradient(90deg,#8B5E2A,#D4AF37,#B8860B); --city-glow: rgba(212,175,55,0.55); }
-    .city-tag.casablanca   { --city-gradient: linear-gradient(90deg,#5E6B72,#C8D2D6,#34424A); --city-glow: rgba(184,194,198,0.5); }
+    .city-tag.rabat        { --city-gradient: linear-gradient(90deg,#7C2B2B,#C0392B,#E8A87C); --city-glow: rgba(192,57,43,0.5); }
+    .city-tag.ifrane       { --city-gradient: linear-gradient(90deg,#2D5016,#4A7C2F,#8FBF6E); --city-glow: rgba(74,124,47,0.55); }
+    .city-tag.merzouga     { --city-gradient: linear-gradient(90deg,#8B4513,#D4881E,#F2C56B); --city-glow: rgba(212,136,30,0.55); }
     .city-tag.essaouira    { --city-gradient: linear-gradient(90deg,#2D6A6F,#5BC0BE,#A9E5E5); --city-glow: rgba(91,192,190,0.55); }
+    .city-tag.agadir       { --city-gradient: linear-gradient(90deg,#C68A2E,#F2C56B,#FFE9A8); --city-glow: rgba(242,197,107,0.55); }
     .city-tag.safi         { --city-gradient: linear-gradient(90deg,#1A3A6B,#2E78B5,#84B6D6); --city-glow: rgba(46,120,181,0.55); }
-    .city-tag.tetouan      { --city-gradient: linear-gradient(90deg,#2E5A52,#6FB29A,#B8E1C9); --city-glow: rgba(111,178,154,0.55); }
 
     /* === Subtle magnetic buttons / cards === */
     .btn-ingredients {
@@ -592,10 +574,82 @@
 </head>
 <body>
 
-<nav class="top-bar">
-  <a href="index.html" class="brand"><i class="bi bi-tree-fill"></i> Royaume du Maroc</a>
-  <a href="index.html" class="back-link"><i class="bi bi-arrow-left"></i> Retour</a>
-</nav>
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="rabat.html">Rabat</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="ifrane.html">Ifrane</a></li>
+            <li><a href="merzouga.html">Merzouga</a></li>
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Plats
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="#dish-couscous">Couscous Royal</a></li>
+            <li><a href="#dish-harira">Harira</a></li>
+            <li><a href="#dish-pastilla">Pastilla au Poulet</a></li>
+            <li><a href="#dish-tanjia">Tanjia Marrakchia</a></li>
+            <li><a href="#dish-tajine">Tagine Poulet &amp; Citrons Confits</a></li>
+            <li><a href="#">Voir tous les plats ↑</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
 
 <section class="dishes-hero">
   <div class="amb-layer" aria-hidden="true">
@@ -884,7 +938,7 @@ const DISHES = [
     calories: '260 kcal',
     image: 'assets/dish-bisara.jpg',
     imagePosition: '50% 50%',
-    description: "Velouté épais de fèves cassées séchées, mixé à l'ail, au cumin et au paprika, puis nappé d'un généreux filet d'huile d'olive. Petit-déjeuner emblématique du nord marocain (Chefchaouen, Tétouan), servi brûlant dans un bol en terre avec du khobz frais — réconfortant et 100% végétal.",
+    description: "Velouté épais de fèves cassées séchées, mixé à l'ail, au cumin et au paprika, puis nappé d'un généreux filet d'huile d'olive. Petit-déjeuner emblématique du nord marocain (Chefchaouen, Tanger), servi brûlant dans un bol en terre avec du khobz frais — réconfortant et 100% végétal.",
     allergens: [],
     ingredients: [
       { name: 'Fèves cassées séchées',       qty: '150g' },
@@ -1060,13 +1114,16 @@ const CITIES = [
   ['Marrakech',   'marrakech',   'marrakech.html'],
   ['Marrakchia',  'marrakech',   'marrakech.html'],
   ['Chefchaouen', 'chefchaouen', 'chefchaouen.html'],
+  ['Tanger',      'tanger',      null],
+  ['Tangier',     'tanger',      null],
   ['Fès',         'fes',         null],
   ['Fez',         'fes',         null],
-  ['Casablanca',  'casablanca',  null],
+  ['Rabat',       'rabat',       'rabat.html'],
+  ['Ifrane',      'ifrane',      'ifrane.html'],
+  ['Merzouga',    'merzouga',    'merzouga.html'],
   ['Essaouira',   'essaouira',   'essaouira.html'],
   ['Safi',        'safi',        null],
-  ['Tétouan',     'tetouan',     null],
-  ['Tetouan',     'tetouan',     null],
+  ['Agadir',      'agadir',      'agadir.html'],
 ];
 const CITY_INFO = Object.fromEntries(CITIES.map(c => [c[0], { cls: c[1], href: c[2] }]));
 const CITY_RE = new RegExp(
@@ -1440,6 +1497,88 @@ document.addEventListener('pointermove', (e) => {
   btn.style.setProperty('--bx', ((e.clientX - r.left) / r.width * 100).toFixed(0) + '%');
   btn.style.setProperty('--by', ((e.clientY - r.top) / r.height * 100).toFixed(0) + '%');
 }, { passive: true });
+
+/* ── Navigation Menu ── */
+(function() {
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('siteMenu');
+  if (!toggle || !menu) return;
+  const groups = menu.querySelectorAll('.menu-group[data-group]');
+  const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+  function activate(group) {
+    groups.forEach(g => {
+      const on = g === group;
+      g.classList.toggle('open', on);
+      g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+      activate(groups[0]);
+    }
+  }
+
+  toggle.addEventListener('click', () => {
+    setMenu(!document.body.classList.contains('menu-open'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu) setMenu(false);
+  });
+
+  groups.forEach(group => {
+    const head = group.querySelector('.menu-head');
+    head.addEventListener('click', () => {
+      if (isDesktop()) {
+        activate(group);
+      } else {
+        const willOpen = !group.classList.contains('open');
+        willOpen ? activate(group) : activate(null);
+      }
+    });
+  });
+
+  /* ── Hash-based auto-open: dishes.html#dish-couscous → opens that dish ── */
+  function openDishFromHash(hash) {
+    if (!hash || !hash.startsWith('#dish-')) return;
+    const dishId = hash.slice(6); // strip '#dish-'
+    // Wait for grid to render
+    function tryOpen() {
+      const card = document.querySelector(`.dish-card[data-id="${dishId}"]`);
+      if (card) {
+        if (!card.classList.contains('hidden')) {
+          openDetail(card);
+          setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+        }
+      } else {
+        setTimeout(tryOpen, 100);
+      }
+    }
+    tryOpen();
+  }
+
+  // Run on page load
+  if (window.location.hash) {
+    openDishFromHash(window.location.hash);
+  }
+
+  // Also handle hash change (e.g. clicking menu links on the dishes page itself)
+  window.addEventListener('hashchange', () => {
+    openDishFromHash(window.location.hash);
+  });
+
+  // Handle internal menu links: click → close menu first
+  menu.querySelectorAll('a[href^="#dish-"]').forEach(link => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+})();
 </script>
 </body>
 </html>
