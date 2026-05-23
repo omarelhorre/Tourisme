@@ -59,14 +59,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ══════ PROGRESS BAR ══════ */
-.progress-bar {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 3px; z-index: 201;
-  background: linear-gradient(90deg, var(--terre), var(--or), var(--vert));
-  transform-origin: left;
-  transform: scaleX(0);
-}
 
 /* ══════ MENU (index.html) ══════ */
 .nav-fab {
@@ -518,7 +510,7 @@ body.reduce-motion *::after {
   overflow: hidden;
   background: 
     linear-gradient(180deg, rgba(26,18,8,0) 0%, rgba(26,18,8,0.4) 60%, rgba(26,18,8,0.85) 100%),
-    url('images/ouarzazate.png') center/cover no-repeat;
+    url('images/ait_benhaddou.png') center/cover no-repeat;
 }
 .hero-content {
   position: relative; z-index: 2;
@@ -574,7 +566,7 @@ body.reduce-motion *::after {
 }
 .circuits-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 
@@ -625,7 +617,7 @@ body.reduce-motion *::after {
 /* Image header */
 .card-image-wrap {
   position: relative;
-  height: 240px;
+  height: 200px;
   overflow: hidden;
 }
 /* Overlay supprimé pour des images claires */
@@ -720,7 +712,7 @@ body.reduce-motion *::after {
 
 /* Contenu carte */
 .card-body {
-  padding: 24px 28px 20px;
+  padding: 20px 22px 16px; 
 }
 .card-title {
   font-family: 'Playfair Display', serif;
@@ -746,36 +738,49 @@ body.reduce-motion *::after {
   color: var(--terre); font-weight: 700;
   margin: 0 4px;
 }
-
-/* Rating étoiles visible */
 .card-rating-display {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: flex;           /* Flexbox horizontal */
+  flex-direction: row;       /* Direction : ligne (horizontal) */
+  align-items: center;     /* Centrage vertical */
+  gap: 8px;                /* Espace entre étoiles et texte */
   margin-top: 12px;
+  width: 100%;
 }
 .card-rating-stars {
-  display: flex;
-  gap: 3px;
+  display: flex;           /* Flexbox horizontal pour les étoiles */
+  flex-direction: row;     /* Ligne horizontale */
+  align-items: center;     /* Centré verticalement */
+  gap: 3px;                /* Espace entre chaque étoile */
+  flex-shrink: 0;          /* Empêche le rétrécissement */
 }
 .card-rating-stars .star-display {
-  width: 16px; height: 16px;
+  display: block;          /* Chaque étoile est un bloc */
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;          /* Ne rétrécit pas */
 }
 .card-rating-stars .star-display svg {
-  width: 100%; height: 100%;
-  stroke: var(--or); fill: none; stroke-width: 1.5;
+  width: 100%;
+  height: 100%;
+  display: block;          /* Supprime l'espace inline par défaut */
+  stroke: var(--or);
+  fill: none;
+  stroke-width: 1.5;
   transition: fill 0.2s;
 }
 .card-rating-stars .star-display.filled svg {
-  fill: var(--or); stroke: var(--or);
+  fill: var(--or);
+  stroke: var(--or);
 }
 .card-rating-count {
   font-family: 'Lato', sans-serif;
   font-size: 0.72rem;
   color: var(--sable);
   letter-spacing: 0.04em;
+  white-space: nowrap;     /* Empêche le retour à la ligne */
+  flex-shrink: 0;          /* Ne rétrécit pas */
+  margin-left: 0;
 }
-
 /* Actions en bas */
 .card-actions {
   display: flex;
@@ -912,21 +917,35 @@ body.reduce-motion *::after {
 }
 .city-modal-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem; font-weight: 700; color: var(--ivoire);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ivoire);
 }
 .city-modal-sub {
   font-family: 'Lato', sans-serif;
   font-size: 0.85rem; color: var(--sable); margin-top: 4px;
 }
 .city-modal-close {
-  background: none; border: 1px solid var(--gris-light);
-  color: var(--sable); width: 36px; height: 36px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.2s;
+  background: none;
+  border: 1px solid var(--gris-light);
+  color: var(--sable);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 .city-modal-close:hover { border-color: var(--terre); color: var(--terre); }
-.city-modal-close svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+.city-modal-close svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
 
 .city-cards-grid {
   display: grid;
@@ -1016,359 +1035,15 @@ body.reduce-motion *::after {
   stroke: currentColor; fill: none;
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
-
-/* ══════ GÉNÉRATEUR — STYLE IMAGE 5 (2 colonnes) ══════ */
-.generator-section {
-  background: linear-gradient(180deg, var(--sable-light) 0%, var(--creme) 100%);
-  padding: 80px 60px;
-  position: relative; z-index: 2;
-}
-.generator-section::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='rgba(192,85,42,0.06)'/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-.generator-inner {
-  max-width: 1200px; margin: 0 auto;
-  position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-/* Colonne gauche — texte */
-.generator-left {
-  text-align: left;
-}
-.generator-eyebrow {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--terre);
-  margin-bottom: 16px;
-  font-weight: 400;
-}
-.generator-eyebrow::before {
-  content: '-- ';
-  letter-spacing: 0.1em;
-}
-.generator-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  color: var(--ivoire);
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.1;
-}
-.generator-title em {
-  font-style: italic;
-  color: var(--terre);
-  font-weight: 400;
-}
-.generator-desc {
-  font-family: 'Lato', sans-serif;
-  font-size: 1rem;
-  color: var(--sable);
-  margin-bottom: 32px;
-  font-weight: 300;
-  line-height: 1.6;
-  max-width: 420px;
-}
-.btn-explore-cities {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #2D7A7A, #1F5F5F);
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-family: 'Lato', sans-serif;
+/* ============================================================
+   === Footer ===
+   ============================================================ */
+.footer-maroc {
+  background-color: var(--encre);
+  color: #aaa;
+  text-align: center;
+  padding: 2rem 1rem;
   font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s;
-  border: none;
-  position: relative;
-  overflow: hidden;
-}
-.btn-explore-cities:hover {
-  box-shadow: 0 4px 20px rgba(45,122,122,0.35);
-  transform: translateY(-2px);
-}
-.btn-explore-cities svg {
-  width: 16px; height: 16px;
-  stroke: currentColor; fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* Colonne droite — wizard box */
-.generator-right {
-  display: flex;
-  justify-content: center;
-}
-.wizard-box {
-  background: var(--blanc);
-  border-radius: 20px;
-  padding: 40px 36px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.06);
-  width: 100%;
-  max-width: 520px;
-  position: relative;
-}
-/* Petit coin doré sur wizard box */
-.wizard-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 50px; height: 50px;
-  border-top: 2px solid var(--or);
-  border-left: 2px solid var(--or);
-  border-top-left-radius: 20px;
-  pointer-events: none;
-}
-.wizard-box::after {
-  content: '';
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 50px; height: 50px;
-  border-bottom: 2px solid var(--or);
-  border-right: 2px solid var(--or);
-  border-bottom-right-radius: 20px;
-  pointer-events: none;
-}
-
-/* Étape header */
-.wizard-step-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
-  color: var(--terre);
-  font-weight: 600;
-}
-.wizard-step-header svg {
-  width: 18px; height: 18px;
-  stroke: var(--terre); fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* Profil choix */
-.wizard-profiles {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 28px;
-}
-.profile-btn {
-  background: var(--blanc);
-  border: 1.5px solid var(--gris-light);
-  border-radius: 10px;
-  padding: 16px 8px;
-  text-align: center;
-  transition: all 0.3s;
-  position: relative;
-}
-.profile-btn:hover {
-  border-color: var(--terre);
-}
-.profile-btn.active {
-  background: rgba(192,85,42,0.06);
-  border-color: var(--terre);
-  box-shadow: 0 2px 12px rgba(192,85,42,0.1);
-}
-.profile-btn svg {
-  width: 24px; height: 24px;
-  stroke: var(--terre); fill: none;
-  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-  margin-bottom: 6px;
-}
-.profile-btn span {
-  display: block;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  color: var(--gris-text);
-  font-weight: 500;
-}
-.profile-btn.active span {
-  color: var(--terre);
-  font-weight: 600;
-}
-
-/* Centres d'intérêt */
-.wizard-interests-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.85rem;
-  color: var(--terre);
-  font-weight: 600;
-}
-.wizard-interests-title svg {
-  width: 16px; height: 16px;
-  stroke: var(--or); fill: none;
-  stroke-width: 2;
-}
-.interest-group {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.interest-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--blanc);
-  border: 1.5px solid var(--gris-light);
-  color: var(--gris-text);
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-.interest-btn:hover {
-  border-color: var(--terre);
-  color: var(--terre);
-}
-.interest-btn.active {
-  background: var(--terre);
-  border-color: var(--terre);
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(192,85,42,0.25);
-}
-.interest-btn svg {
-  width: 14px; height: 14px;
-  stroke: currentColor; fill: none;
-  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* Slider durée */
-.wizard-row { margin-bottom: 24px; }
-.wizard-row:last-of-type { margin-bottom: 0; }
-.wizard-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.85rem; color: var(--gris-text);
-  margin-bottom: 10px; display: block;
-  font-weight: 400;
-}
-.wizard-label span { color: var(--terre); font-weight: 700; }
-
-.duration-slider {
-  width: 100%; height: 6px;
-  border-radius: 3px;
-  background: var(--gris-light);
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-}
-.duration-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--terre);
-  border: 3px solid var(--blanc);
-  box-shadow: 0 2px 8px rgba(192,85,42,0.3);
-}
-.duration-slider::-moz-range-thumb {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--terre);
-  border: 3px solid var(--blanc);
-  box-shadow: 0 2px 8px rgba(192,85,42,0.3);
-}
-
-/* Budget */
-.choice-group {
-  display: flex; gap: 10px; flex-wrap: wrap;
-}
-.choice-btn {
-  flex: 1; min-width: 80px;
-  background: var(--blanc);
-  border: 1.5px solid var(--gris-light);
-  color: var(--gris-text);
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.85rem; font-weight: 500;
-  transition: all 0.3s;
-  text-align: center;
-}
-.choice-btn:hover {
-  border-color: var(--terre);
-  color: var(--terre);
-}
-.choice-btn.active {
-  background: var(--terre);
-  border-color: var(--terre);
-  color: #fff;
-  box-shadow: 0 2px 12px rgba(192,85,42,0.25);
-}
-
-/* Bouton générer */
-.btn-generate {
-  width: 100%;
-  background: linear-gradient(135deg, var(--ivoire), #3D2A1A);
-  border: none; color: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  font-family: 'Lato', sans-serif;
-  font-size: 1rem; font-weight: 600;
-  letter-spacing: 0.04em;
-  transition: all 0.3s;
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-}
-.btn-generate:hover {
-  box-shadow: 0 6px 24px rgba(26,18,8,0.3);
-  transform: translateY(-2px);
-}
-.btn-generate svg {
-  width: 16px; height: 16px;
-  stroke: currentColor; fill: none;
-  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* Aperçu */
-.wizard-preview-text {
-  text-align: center;
-  margin-top: 16px;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.78rem; color: var(--sable);
-}
-
-/* ══════ FOOTER ══════ */
-.footer-ornament {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid var(--gris-light);
-  background: var(--creme);
-}
-.footer-text {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.78rem; color: var(--sable);
-  letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 300;
-}
-.footer-ar {
-  font-family: 'Amiri', serif;
-  font-size: 0.9rem; color: var(--terre);
-  margin-top: 6px; opacity: 0.6;
 }
 
 /* ══════ BACK TO TOP ══════ */
@@ -1414,33 +1089,511 @@ body.reduce-motion *::after {
 }
 @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
-/* ══════ RESPONSIVE ══════ */
-@media (max-width: 1024px) {
-  .generator-inner {
+/* ═══════════════════════════════════════════════════
+   ITINERARY MODAL — Style carte/timeline
+═══════════════════════════════════════════════════ */
+
+.itinerary-modal {
+  max-width: 750px;
+  width: 95vw;
+  max-height: 80vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.itinerary-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 10px;
+  border-bottom: 1px solid var(--gris-light);
+}
+.itinerary-header-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--terre);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.itinerary-header-text { flex: 1; }
+.itinerary-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sable);
+  font-size: 0.78rem;
+  margin-top: 2px;
+}
+.itinerary-meta .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.itinerary-meta .meta-dot { opacity: 0.5; }
+
+/* Split pane */
+.itinerary-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Timeline (Left) */
+.itinerary-timeline {
+  padding: 16px 20px;
+  overflow-y: auto;
+  background: rgba(253, 248, 240, 0.5);
+  border-right: 1px solid var(--gris-light);
+  /* hide native scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.itinerary-timeline::-webkit-scrollbar { display: none; }
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 14px;
+}
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: var(--gris-light);
+}
+.timeline-badge {
+  width: 36px;
+  height: 36px;
+  background: var(--terre);
+  color: #fff;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.timeline-badge span {
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+.timeline-content {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--gris-light);
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: all 0.3s ease;
+}
+.timeline-content:hover {
+  border-color: rgba(192, 85, 42, 0.3);
+  box-shadow: var(--shadow-card);
+}
+.timeline-city-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.timeline-city-name {
+  font-family: var(--font-titre);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ivoire);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.timeline-city-name i {
+  color: var(--terre);
+  font-size: 0.78rem;
+}
+.timeline-nights {
+  background: rgba(192, 85, 42, 0.1);
+  color: var(--terre);
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+.timeline-tag {
+  font-size: 0.68rem;
+  color: var(--sable);
+  margin-bottom: 6px;
+}
+.timeline-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.68rem;
+  color: var(--gris-text);
+}
+.timeline-details span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.timeline-details i {
+  color: var(--safran);
+  font-size: 0.78rem;
+}
+.timeline-arrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gris-light);
+  font-size: 0.8rem;
+}
+
+/* Map (Right) */
+.itinerary-map-wrap {
+  position: relative;
+  background: #f0ebe3;
+  overflow: hidden;
+}
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6px;
+}
+.map-svg {
+  width: 82%;
+  height: 82%;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08));
+}
+.map-point {
+  fill: var(--terre);
+  stroke: #fff;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.map-point:hover {
+  r: 5;
+  fill: var(--safran);
+}
+.map-label {
+  font-family: var(--font-corps);
+  font-size: 8px;
+  fill: var(--ivoire);
+  font-weight: 700;
+  text-anchor: middle;
+}
+.map-route-line {
+  fill: none;
+  stroke: var(--terre);
+  stroke-width: 1.5;
+  stroke-dasharray: 5,3;
+  opacity: 0.7;
+}
+.map-route-dot {
+  fill: var(--or);
+  stroke: #fff;
+  stroke-width: 2;
+}
+.map-vehicle {
+  font-size: 20px;
+  fill: var(--terre);
+}
+.map-controls {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.map-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid var(--gris-light);
+  color: var(--sable);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+}
+.map-btn:hover {
+  background: var(--terre);
+  color: #fff;
+  border-color: var(--terre);
+}
+.map-compass {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+/* Metrics Bar */
+.itinerary-metrics {
+  display: flex;
+  align-items: stretch;
+  padding: 12px 24px;
+  border-top: 1px solid var(--gris-light);
+  background: #fff;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.itinerary-metrics::-webkit-scrollbar { display: none; }
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 16px;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+.metric:first-child { padding-left: 0; }
+.metric-sep {
+  width: 1px;
+  background: var(--gris-light);
+  margin: 4px 0;
+  flex-shrink: 0;
+}
+.metric-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(192, 85, 42, 0.1);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--terre);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.metric-label {
+  font-size: 0.65rem;
+  color: var(--sable);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+.metric-value {
+  font-family: var(--font-titre);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ivoire);
+  line-height: 1.2;
+}
+.metric-sublabel {
+  font-size: 0.68rem;
+  color: var(--sable);
+  margin-top: 2px;
+}
+
+/* Carousel dans métriques */
+.metric-carousel {
+  flex: 1;
+  min-width: 200px;
+  padding-right: 0;
+}
+.carousel-wrap {
+  position: relative;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.carousel-track {
+  display: flex;
+  gap: 8px;
+  transition: transform 0.4s ease;
+}
+.carousel-img {
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.carousel-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--gris-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.carousel-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--ivoire);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Footer CTA */
+.itinerary-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* centrer le lien */
+  padding: 16px 32px;
+  border-top: 1px solid var(--gris-light);
+  background: #fff;
+}
+/* SUPPRIMÉ / COMMENTÉ : styles footer obsolètes
+.footer-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.72rem;
+  color: var(--gris-text);
+}
+.footer-features span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-features i {
+  color: var(--terre);
+  font-size: 0.9rem;
+}
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.btn-reserver {
+  background: var(--terre);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-corps);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-reserver:hover {
+  background: var(--terre-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(192,85,42,0.3);
+}
+.btn-reserver svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+.btn-favori {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--gris-light);
+  background: #fff;
+  color: var(--sable);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+.btn-favori:hover, .btn-favori.active {
+  border-color: #e74c3c;
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+}
+*/
+
+/* Responsive modal */
+@media (max-width: 900px) {
+  .itinerary-split {
     grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-rows: auto 300px;
   }
-  .generator-left {
-    text-align: center;
+  .itinerary-timeline {
+    border-right: none;
+    border-bottom: 1px solid var(--gris-light);
+    max-height: 400px;
   }
-  .generator-desc {
-    max-width: 100%;
+  .itinerary-metrics {
+    flex-wrap: wrap;
+  }
+  .metric-sep { display: none; }
+  .metric {
+    min-width: calc(50% - 20px);
+    padding: 10px;
+    border: 1px solid var(--gris-light);
+    border-radius: 10px;
+  }
+  .itinerary-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .footer-actions {
+    justify-content: center;
   }
 }
-@media (max-width: 900px) {
+
+/* ══════ RESPONSIVE ══════ */
+@media (max-width: 1200px) {
+  .circuits-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
   .circuits-grid { grid-template-columns: 1fr; }
-  .hero-content { padding: 0 28px 40px; }
-  .itineraries-section { padding: 0 28px 60px; }
-  .generator-section { padding: 40px 28px; }
-  .wizard-box { padding: 24px 20px; }
 }
 @media (max-width: 600px) {
-  .choice-group { flex-direction: column; }
-  .choice-btn { width: 100%; }
   .card-actions { flex-direction: column; }
   .btn-rate { justify-content: center; }
-  .wizard-profiles { grid-template-columns: repeat(2, 1fr); }
-  .interest-group { justify-content: center; }
 }
 
 /* REDUCED MOTION */
@@ -1489,8 +1642,6 @@ body.reduce-motion *::after {
 </head>
 <body>
 
-<!-- Progress Bar -->
-<div class="progress-bar" id="progressBar"></div>
 
 <!-- Particles -->
 <div class="particles-container" id="particles"></div>
@@ -1520,7 +1671,6 @@ body.reduce-motion *::after {
         <ul class="menu-sub-list">
           <li><a href="index.html">Page d'accueil</a></li>
           <li><a href="#circuitsGrid">Circuits</a></li>
-          <li><a href="#generator">Planifier votre voyage</a></li>
           <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
           <li><a href="index.html#dishesSection">Gastronomie</a></li>
           <li><a href="index.html#experiencesSection">Expériences</a></li>
@@ -1631,9 +1781,9 @@ body.reduce-motion *::after {
     <!-- C1 — Grand Tour Sud -->
     <div class="circuit-card" data-tags="aventure culture nature"
       data-title="Grand Tour Sud" data-duration="7 – 8 jours" data-rating="5"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"images/imlil.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"}]'>
+      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_jemaa.png"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"images/atlas_randonnee.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga_sunset.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_tanneries.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/sahara_dunes.png" alt="Grand Tour Sud" loading="lazy">
+        <img src="images/sahara_camp.png" alt="Grand Tour Sud" loading="lazy">
         <div class="card-duration-badge">7 – 8 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Classique</span></div>
       </div>
@@ -1643,11 +1793,11 @@ body.reduce-motion *::after {
         <div class="card-route">Marrakech <span class="arrow">→</span> Atlas <span class="arrow">→</span> Merzouga <span class="arrow">→</span> Fès</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">5.0 (312 avis)</span>
         </div>
@@ -1672,9 +1822,9 @@ body.reduce-motion *::after {
     <!-- C2 — Route des Villes Impériales -->
     <div class="circuit-card" data-tags="culture"
       data-title="Route des Villes Impériales" data-duration="10 – 12 jours" data-rating="4"
-      data-cities='[{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"}]'>
+      data-cities='[{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_hassan.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes_bab_mansour.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_bou_inania.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_bahia.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/ouarzazate.png" alt="Route des Villes Impériales" loading="lazy">
+        <img src="images/fes_medina_vue.png" alt="Route des Villes Impériales" loading="lazy">
         <div class="card-duration-badge">10 – 12 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Culture</span></div>
       </div>
@@ -1684,11 +1834,11 @@ body.reduce-motion *::after {
         <div class="card-route">Rabat <span class="arrow">→</span> Meknès <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (156 avis)</span>
         </div>
@@ -1713,9 +1863,9 @@ body.reduce-motion *::after {
     <!-- C3 — Circuit Désert & Oasis -->
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Circuit Désert & Oasis" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Ouarzazate","tag":"Porte du Désert","img":"images/ouarzazate.png"},{"name":"Zagora","tag":"Ville du Désert","img":"images/merzouga.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga.png"}]'>
+      data-cities='[{"name":"Ouarzazate","tag":"Porte du Désert","img":"images/ouarzazate_studios.png"},{"name":"Zagora","tag":"Ville du Désert","img":"images/zagora_desert.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga_chameaux.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/sahara_dunes.png" alt="Circuit Désert & Oasis" loading="lazy">
+        <img src="images/sahara_oasis.png" alt="Circuit Désert & Oasis" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Aventure</span></div>
       </div>
@@ -1725,11 +1875,11 @@ body.reduce-motion *::after {
         <div class="card-route">Ouarzazate <span class="arrow">→</span> Zagora <span class="arrow">→</span> Merzouga</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (89 avis)</span>
         </div>
@@ -1754,9 +1904,9 @@ body.reduce-motion *::after {
     <!-- C4 — Tour des Plages Atlantiques -->
     <div class="circuit-card" data-tags="sport nature"
       data-title="Tour des Plages Atlantiques" data-duration="10 – 12 jours" data-rating="4"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca.png"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"},{"name":"Dakhla","tag":"Lagune Sauvage","img":"images/dakhla.png"}]'>
+      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca_hassan.png"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira_port.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_plage.png"},{"name":"Dakhla","tag":"Lagune Sauvage","img":"images/dakhla_lagune.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/dakhla2.png" alt="Tour des Plages Atlantiques" loading="lazy">
+        <img src="images/dakhla_atlantique.png" alt="Tour des Plages Atlantiques" loading="lazy">
         <div class="card-duration-badge">10 – 12 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Plages</span></div>
       </div>
@@ -1766,11 +1916,11 @@ body.reduce-motion *::after {
         <div class="card-route">Casablanca <span class="arrow">→</span> Essaouira <span class="arrow">→</span> Agadir <span class="arrow">→</span> Dakhla</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (203 avis)</span>
         </div>
@@ -1795,9 +1945,9 @@ body.reduce-motion *::after {
     <!-- C5 — Escapade Nord Bleu -->
     <div class="circuit-card" data-tags="nature culture"
       data-title="Escapade Nord Bleu" data-duration="5 jours" data-rating="5"
-      data-cities='[{"name":"Tanger","tag":"Porte de l'Afrique","img":"images/rabat2.png"},{"name":"Tétouan","tag":"Ville Blanche","img":"images/meknes2.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen.png"}]'>
+      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"images/tanger_port.png"},{"name":"Tétouan","tag":"Ville Blanche","img":"images/tetouan_medina.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen_place.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/chefchaouen.png" alt="Escapade Nord Bleu" loading="lazy">
+        <img src="images/chefchaouen_ruelles.png" alt="Escapade Nord Bleu" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Nord</span></div>
       </div>
@@ -1807,11 +1957,11 @@ body.reduce-motion *::after {
         <div class="card-route">Tanger <span class="arrow">→</span> Tétouan <span class="arrow">→</span> Chefchaouen</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">5.0 (178 avis)</span>
         </div>
@@ -1836,9 +1986,9 @@ body.reduce-motion *::after {
     <!-- C6 — Route Culture & Histoire -->
     <div class="circuit-card" data-tags="culture"
       data-title="Route Culture & Histoire" data-duration="7 jours" data-rating="4"
-      data-cities='[{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes.png"},{"name":"Volubilis","tag":"Site Antique","img":"images/volubilis.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"}]'>
+      data-cities='[{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_rue_medina.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes_mausolee.png"},{"name":"Volubilis","tag":"Site Antique","img":"images/volubilis_ruines.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_oudayas.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/volubilis.png" alt="Route Culture & Histoire" loading="lazy">
+        <img src="images/volubilis_panorama.png" alt="Route Culture & Histoire" loading="lazy">
         <div class="card-duration-badge">7 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Histoire</span></div>
       </div>
@@ -1848,11 +1998,11 @@ body.reduce-motion *::after {
         <div class="card-route">Fès <span class="arrow">→</span> Meknès <span class="arrow">→</span> Volubilis <span class="arrow">→</span> Rabat</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (134 avis)</span>
         </div>
@@ -1877,9 +2027,9 @@ body.reduce-motion *::after {
     <!-- C7 — Aventure Atlas -->
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Aventure Atlas" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Imlil","tag":"Village Berbère","img":"images/imlil.png"},{"name":"Oukaïmeden","tag":"Station de Ski","img":"images/imlil.png"}]'>
+      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_souks.png"},{"name":"Imlil","tag":"Village Berbère","img":"images/imlil_village.png"},{"name":"Oukaïmeden","tag":"Station de Ski","img":"images/ouakaimeden.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/imlil.png" alt="Aventure Atlas" loading="lazy">
+        <img src="images/imlil_village.png" alt="Aventure Atlas" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Montagne</span></div>
       </div>
@@ -1889,11 +2039,11 @@ body.reduce-motion *::after {
         <div class="card-route">Marrakech <span class="arrow">→</span> Imlil <span class="arrow">→</span> Oukaïmeden</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (112 avis)</span>
         </div>
@@ -1918,9 +2068,9 @@ body.reduce-motion *::after {
     <!-- C8 — Road Trip Méditerranée -->
     <div class="circuit-card" data-tags="nature"
       data-title="Road Trip Méditerranée" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Tanger","tag":"Porte de l'Afrique","img":"images/rabat2.png"},{"name":"Al Hoceïma","tag":"Perle Méditerranéenne","img":"images/al_hoceima.png"},{"name":"Nador","tag":"Lagune Marchica","img":"images/dakhla.png"}]'>
+      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"images/tanger_spartel.png"},{"name":"Al Hoceïma","tag":"Perle Méditerranéenne","img":"images/al_hoceima_medina.png"},{"name":"Nador","tag":"Lagune Marchica","img":"images/nador_marchica.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/al_hoceima.png" alt="Road Trip Méditerranée" loading="lazy">
+        <img src="images/al_hoceima_plages.png" alt="Road Trip Méditerranée" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Côte</span></div>
       </div>
@@ -1930,11 +2080,11 @@ body.reduce-motion *::after {
         <div class="card-route">Tanger <span class="arrow">→</span> Al Hoceïma <span class="arrow">→</span> Nador</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (76 avis)</span>
         </div>
@@ -1959,9 +2109,9 @@ body.reduce-motion *::after {
     <!-- C9 — Nature & Montagnes -->
     <div class="circuit-card" data-tags="nature"
       data-title="Nature & Montagnes" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Ifrane","tag":"Suisse du Maroc","img":"images/azrou.png"},{"name":"Azrou","tag":"Forêt de Cèdres","img":"images/azrou.png"},{"name":"Beni Mellal","tag":"Source d'Ain Asserdoun","img":"images/agadir.png"}]'>
+      data-cities='[{"name":"Ifrane","tag":"Suisse du Maroc","img":"images/ifrane.png"},{"name":"Azrou","tag":"Forêt de Cèdres","img":"images/azrou_montagne.png"},{"name":"Beni Mellal","tag":"Source d\u2019Ain Asserdoun","img":"images/beni_mellal_ain.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/azrou.png" alt="Nature & Montagnes" loading="lazy">
+        <img src="images/azrou_cedres.png" alt="Nature & Montagnes" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Nature</span></div>
       </div>
@@ -1971,11 +2121,11 @@ body.reduce-motion *::after {
         <div class="card-route">Ifrane <span class="arrow">→</span> Azrou <span class="arrow">→</span> Beni Mellal</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">4.0 (95 avis)</span>
         </div>
@@ -2000,9 +2150,9 @@ body.reduce-motion *::after {
     <!-- C10 — Circuit Surf Maroc -->
     <div class="circuit-card" data-tags="sport nature"
       data-title="Circuit Surf Maroc" data-duration="5 jours" data-rating="5"
-      data-cities='[{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"images/taghazout.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"},{"name":"Essaouira","tag":"Vent & Kitesurf","img":"images/essaouira.png"}]'>
+      data-cities='[{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"images/taghazout_village.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_port.png"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira_plage.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/taghazout2.png" alt="Circuit Surf Maroc" loading="lazy">
+        <img src="images/taghazout_surf.png" alt="Circuit Surf Maroc" loading="lazy">
         <div class="card-duration-badge">5 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Sport</span></div>
       </div>
@@ -2012,11 +2162,11 @@ body.reduce-motion *::after {
         <div class="card-route">Taghazout <span class="arrow">→</span> Agadir <span class="arrow">→</span> Essaouira</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">5.0 (267 avis)</span>
         </div>
@@ -2041,9 +2191,9 @@ body.reduce-motion *::after {
     <!-- C11 — Grand Tour Maroc -->
     <div class="circuit-card" data-tags="culture aventure nature"
       data-title="Grand Tour Maroc" data-duration="14 jours" data-rating="5"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"}]'>
+      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca_centre.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_parlement.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen_panorama.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_medina_vue.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_majorelle.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_aerial.png"}]'>
       <div class="card-image-wrap">
-        <img src="images/casablanca.png" alt="Grand Tour Maroc" loading="lazy">
+        <img src="images/casablanca_nuit.png" alt="Grand Tour Maroc" loading="lazy">
         <div class="card-duration-badge">14 JOURS</div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Complet</span></div>
       </div>
@@ -2053,11 +2203,11 @@ body.reduce-motion *::after {
         <div class="card-route">Casablanca <span class="arrow">→</span> Rabat <span class="arrow">→</span> Chefchaouen <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech <span class="arrow">→</span> Agadir</div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
-<span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
+            <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
           <span class="card-rating-count">5.0 (412 avis)</span>
         </div>
@@ -2082,140 +2232,136 @@ body.reduce-motion *::after {
 </div><!-- /circuits-grid -->
 </section>
 
-<!-- ══════ CITY MODAL ══════ -->
+<!-- ══════ ITINERARY MODAL (Nouvelle version) ══════ -->
 <div class="city-modal" id="cityModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="city-modal-backdrop" onclick="closeCityModal()"></div>
-  <div class="city-modal-box">
-    <div class="city-modal-header">
-      <div>
-        <div class="city-modal-title" id="modalTitle">Villes de l'itinéraire</div>
-        <div class="city-modal-sub" id="modalSub">Découvrez chaque étape</div>
+  
+  <div class="city-modal-box itinerary-modal">
+    <!-- Header -->
+    <div class="itinerary-header">
+      <div class="itinerary-header-icon">
+        <i class="bi bi-tree-fill"></i>
+      </div>
+      <div class="itinerary-header-text">
+        <h2 class="city-modal-title" id="modalTitle">Grand Tour Sud</h2>
+        <div class="itinerary-meta" id="modalSub">
+          <span class="meta-item"><i class="bi bi-geo-alt"></i> <span id="modalDuration">7 – 8 jours</span></span>
+          <span class="meta-dot">•</span>
+          <span class="meta-item"><span id="modalDestCount">4 destinations</span></span>
+        </div>
       </div>
       <button class="city-modal-close" onclick="closeCityModal()" aria-label="Fermer">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-    <div class="city-cards-grid" id="modalCities"></div>
-    <div class="modal-footer-cta">
-      <a href="destinations.html">
-        Explorer toutes les villes du Maroc
-        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  </div>
-</div>
 
-<!-- ══════ GÉNÉRATEUR — STYLE 2 COLONNES ══════ -->
-<section id="generator" class="generator-section">
-  <div class="generator-inner">
-    <!-- Colonne gauche — texte -->
-    <div class="generator-left">
-      <div class="generator-eyebrow">Sur mesure</div>
-      <h2 class="generator-title">Votre voyage <em>unique</em>, créé par notre IA</h2>
-      <p class="generator-desc">Notre générateur intelligent analyse vos préférences, votre budget et vos envies pour composer l'itinéraire marocain qui vous ressemble parfaitement.</p>
-      <a href="destinations.html" class="btn-explore-cities">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        Explorer toutes les villes
-      </a>
-    </div>
+    <!-- Split Content -->
+    <div class="itinerary-split">
+      <!-- Left: Timeline -->
+      <div class="itinerary-timeline" id="modalTimeline">
+        <!-- Généré par JS -->
+      </div>
 
-    <!-- Colonne droite — wizard -->
-    <div class="generator-right">
-      <div class="wizard-box">
-        <!-- Étape 1 : Profil -->
-        <div class="wizard-step-header">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Étape 1 — Votre profil
-        </div>
-        <div class="wizard-profiles">
-          <button class="profile-btn active" onclick="selectProfile(this)">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Solo</span>
-          </button>
-          <button class="profile-btn" onclick="selectProfile(this)">
-            <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><circle cx="17.5" cy="7" r="4"/></svg>
-            <span>Couple</span>
-          </button>
-          <button class="profile-btn" onclick="selectProfile(this)">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><circle cx="17.5" cy="7" r="4"/><path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
-            <span>Famille</span>
-          </button>
-          <button class="profile-btn" onclick="selectProfile(this)">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><circle cx="17.5" cy="7" r="4"/></svg>
-            <span>Groupe</span>
-          </button>
-        </div>
-
-        <!-- Centres d'intérêt -->
-        <div class="wizard-interests-title">
-          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-          Centres d'intérêt
-        </div>
-        <div class="interest-group">
-          <button class="interest-btn active" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M3 22V12l9-9 9 9v10"/><path d="M9 22V16h6v6"/><rect x="10" y="7" width="4" height="4"/></svg>
-            Culture
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg>
-            Aventure
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            Gastronomie
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M5 12C5 7 9 3 12 3s7 4 7 9H5z"/><path d="M5 12c0 5 3.5 8 7 8s7-3 7-8"/></svg>
-            Montagne
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Bien-être
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2c0 0-3 4-3 10s3 10 3 10"/><path d="M2 12h20"/></svg>
-            Surf
-          </button>
-          <button class="interest-btn" onclick="selectInterest(this)">
-            <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Photo
-          </button>
-        </div>
-
-        <!-- Durée -->
-        <div class="wizard-row">
-          <label class="wizard-label">Durée : <span id="durationValue">7 jours</span></label>
-          <input type="range" class="duration-slider" id="durationSlider" min="3" max="21" value="7" oninput="updateDuration(this.value)">
-        </div>
-
-        <!-- Budget -->
-        <div class="wizard-row">
-          <label class="wizard-label">Budget</label>
-          <div class="choice-group">
-            <button class="choice-btn" onclick="selectBudget(this)">Routard</button>
-            <button class="choice-btn active" onclick="selectBudget(this)">Confort</button>
-            <button class="choice-btn" onclick="selectBudget(this)">Luxe</button>
+      <!-- Right: Map -->
+      <div class="itinerary-map-wrap">
+        <div class="map-container" id="mapContainer">
+          <div class="map-placeholder">
+            <svg viewBox="0 0 400 500" class="map-svg">
+              <!-- Silhouette simplifiée du Maroc -->
+              <path d="M120,20 Q150,15 180,25 L200,30 L220,28 L250,35 L280,45 L300,60 L320,80 L340,100 L350,130 L345,160 L340,190 L335,220 L330,250 L325,280 L320,310 L315,340 L310,370 L305,400 L300,430 L295,460 L290,480 L280,490 L260,495 L240,490 L220,480 L200,470 L180,460 L160,450 L140,440 L120,430 L100,420 L80,410 L60,400 L50,380 L45,350 L40,320 L35,290 L30,260 L25,230 L20,200 L18,170 L20,140 L25,110 L30,80 L40,60 L55,45 L75,35 L95,28 Z" 
+                    fill="#F5E6C8" stroke="#D4AF37" stroke-width="1.5"/>
+              <!-- Points et trajet générés dynamiquement -->
+              <g id="mapRoute"></g>
+            </svg>
+            <div class="map-controls">
+              <button class="map-btn" onclick="zoomMap(1)"><i class="bi bi-plus-lg"></i></button>
+              <button class="map-btn" onclick="zoomMap(-1)"><i class="bi bi-dash-lg"></i></button>
+              <button class="map-btn" onclick="resetMap()"><i class="bi bi-geo-alt"></i></button>
+            </div>
+            <div class="map-compass">
+              <svg viewBox="0 0 24 24" width="100%" height="100%">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#C0552A" stroke-width="1"/>
+                <path d="M12,3 L14,12 L12,11 L10,12 Z" fill="#C0552A"/>
+                <circle cx="12" cy="12" r="1" fill="#C0552A"/>
+                <text x="12" y="8" text-anchor="middle" font-size="4" font-weight="700" fill="#C0552A">N</text>
+              </svg>
+            </div>
           </div>
         </div>
-
-        <!-- Bouton générer -->
-        <button class="btn-generate" onclick="generateItinerary()">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Générer mon itinéraire
-        </button>
-
-        <!-- Aperçu -->
-        <div class="wizard-preview-text" id="wizardPreview">Aperçu : 7 jours · confort · culture</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Footer -->
-<div class="footer-ornament">
-  <div class="footer-text">© 2025 Portail Touristique du Maroc — Tous droits réservés</div>
-  <div class="footer-ar">أرض الألوان والأحلام</div>
+    <!-- Metrics Bar -->
+    <div class="itinerary-metrics" id="modalMetrics">
+      <div class="metric">
+        <div class="metric-icon"><i class="bi bi-car-front"></i></div>
+        <div class="metric-label">Distance totale</div>
+        <div class="metric-value" id="metricDistance">1 240 km</div>
+        <div class="metric-sublabel">parcourus</div>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric">
+        <div class="metric-icon"><i class="bi bi-triangle-fill"></i></div>
+        <div class="metric-label">Niveau</div>
+        <div class="metric-value" id="metricLevel">Moyen</div>
+        <div class="metric-sublabel">Aventure modérée</div>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric">
+        <div class="metric-icon"><i class="bi bi-sun"></i></div>
+        <div class="metric-label">Meilleure période</div>
+        <div class="metric-value" id="metricPeriod">Mars – Mai</div>
+        <div class="metric-sublabel">Sept – Nov</div>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric">
+        <div class="metric-icon"><i class="bi bi-suitcase-lg"></i></div>
+        <div class="metric-label">Type de voyage</div>
+        <div class="metric-value" id="metricType">Aventure, Culture</div>
+        <div class="metric-sublabel">Nature, Désert</div>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric metric-carousel">
+        <div class="metric-label">Aperçu du voyage</div>
+        <div class="carousel-wrap">
+          <div class="carousel-track" id="modalCarousel"></div>
+          <button class="carousel-btn carousel-next" onclick="slideCarousel(1)">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+        <!-- Lien vers section villes -->
+    <div class="itinerary-footer" style="justify-content:center; padding:16px 32px;">
+      <a href="index.html#mapSection" class="btn-explorer-villes" style="
+        display:inline-flex;
+        align-items:center;
+        gap:10px;
+        background: var(--terre);
+        color: #fff;
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-family: var(--font-corps);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      ">
+        <i class="bi bi-geo-alt-fill"></i>
+        Découvrir les villes sur la carte
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 </div>
+<!-- === SECTION : Footer === -->
+<footer class="footer-maroc">
+  © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+</footer>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
@@ -2325,17 +2471,14 @@ window.addEventListener('load', () => {
 /* ══════ SCROLL ══════ */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  const maxScroll = document.body.scrollHeight - window.innerHeight;
-  const scrolled = maxScroll > 0 ? scrollY / maxScroll : 0;
 
-  gsap.to('#progressBar', { scaleX: scrolled, duration: 0.1, ease: 'none' });
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
   document.getElementById('backToTop').classList.toggle('visible', scrollY > 500);
 
   if (scrollY < window.innerHeight) {
     gsap.set('.hero', { backgroundPositionY: `${scrollY * 0.3}px` });
   }
 }, { passive: true });
-
 /* ══════ ANIMATIONS ══════ */
 function initAnimations() {
   gsap.timeline()
@@ -2358,11 +2501,6 @@ function initAnimations() {
       { opacity: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: h, start: 'top 85%' } }
     );
   });
-
-  gsap.fromTo('.generator-inner',
-    { opacity: 0, y: 40 },
-    { opacity: 1, y: 0, duration: 0.9, scrollTrigger: { trigger: '.generator-section', start: 'top 75%' } }
-  );
 }
 
 /* ══════ 3D TILT ══════ */
@@ -2391,7 +2529,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 });
 
 /* ══════ RIPPLE ══════ */
-document.querySelectorAll('.btn-explorer, .btn-generate, .choice-btn, .profile-btn, .interest-btn').forEach(btn => {
+document.querySelectorAll('.btn-explorer').forEach(btn => {
   btn.addEventListener('click', e => {
     const r = btn.getBoundingClientRect();
     const rip = document.createElement('div');
@@ -2414,48 +2552,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
   });
 });
-
-/* ══════ WIZARD LOGIC ══════ */
-let selectedBudget = 'Confort';
-let selectedInterest = 'Culture';
-let selectedProfile = 'Solo';
-
-function updateDuration(val) {
-  document.getElementById('durationValue').textContent = val + ' jours';
-  updatePreview();
-}
-function selectProfile(btn) {
-  btn.parentElement.querySelectorAll('.profile-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selectedProfile = btn.querySelector('span').textContent;
-  updatePreview();
-  gsap.fromTo(btn, { scale: 0.92 }, { scale: 1, duration: 0.25, ease: 'back.out(2.5)' });
-}
-function selectBudget(btn) {
-  btn.parentElement.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selectedBudget = btn.textContent;
-  updatePreview();
-  gsap.fromTo(btn, { scale: 0.92 }, { scale: 1, duration: 0.25, ease: 'back.out(2.5)' });
-}
-function selectInterest(btn) {
-  btn.parentElement.querySelectorAll('.interest-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  selectedInterest = btn.textContent.trim();
-  updatePreview();
-  gsap.fromTo(btn, { scale: 0.92 }, { scale: 1, duration: 0.25, ease: 'back.out(2.5)' });
-}
-function updatePreview() {
-  const d = document.getElementById('durationSlider').value;
-  const b = selectedBudget.toLowerCase();
-  const i = selectedInterest.toLowerCase();
-  const p = selectedProfile.toLowerCase();
-  document.getElementById('wizardPreview').textContent = `Aperçu : ${d} jours · ${p} · ${b} · ${i}`;
-}
-function generateItinerary() {
-  const d = document.getElementById('durationSlider').value;
-  showToast(`Itinéraire généré : ${d} jours · ${selectedProfile} · ${selectedBudget} · ${selectedInterest}`);
-}
 
 /* ══════ STAR RATING ══════ */
 let toastTimer = null;
@@ -2489,37 +2585,383 @@ document.querySelectorAll('.star-rating').forEach(widget => {
   });
 });
 
-/* ══════ CITY MODAL ══════ */
+/* ══════ ITINERARY MODAL ══════ */
+const itineraryData = {
+  "Grand Tour Sud": {
+    distance: "1 240 km",
+    level: "Moyen",
+    levelSub: "Aventure modérée",
+    period: "Mars – Mai",
+    periodSub: "Sept – Nov",
+    type: "Aventure, Culture",
+    typeSub: "Nature, Désert",
+    steps: [
+      { day: "1-2", city: "Marrakech", tag: "Médina Impériale", img: "images/marrakech_jemaa.png", nights: 2, temp: "31°C", transit: "4h vers Atlas", activity: "Street food & Médina" },
+      { day: "3-4", city: "Haut Atlas", tag: "Toit du Maroc", img: "images/atlas_randonnee.png", nights: 2, temp: "24°C", transit: "6h vers Merzouga", activity: "Randonnée & Nature" },
+      { day: "5-6", city: "Merzouga", tag: "Sahara & Dunes", img: "images/merzouga_sunset.png", nights: 2, temp: "29°C", transit: "5h vers Fès", activity: "Désert & Aventure" },
+      { day: "7", city: "Fès", tag: "Cité Millénaire", img: "images/fes_tanneries.png", nights: 1, temp: "26°C", transit: "—", activity: "Culture & Histoire" }
+    ],
+    mapCoords: [
+      { name: "Marrakech", x: 180, y: 380 },
+      { name: "Haut Atlas", x: 200, y: 340 },
+      { name: "Merzouga", x: 280, y: 320 },
+      { name: "Fès", x: 260, y: 220 }
+    ],
+    preview: ["images/marrakech_jemaa.png", "images/merzouga_sunset.png", "images/atlas_randonnee.png", "images/fes_tanneries.png", "images/sahara_camp.png"]
+  },
+
+  "Route des Villes Impériales": {
+    distance: "850 km",
+    level: "Facile",
+    levelSub: "Culture & Histoire",
+    period: "Toute l'année",
+    periodSub: "Éviter juillet-août",
+    type: "Culture, Histoire",
+    typeSub: "Patrimoine UNESCO",
+    steps: [
+      { day: "1-2", city: "Rabat", tag: "Capitale Royale", img: "images/rabat_hassan.png", nights: 2, temp: "25°C", transit: "2h vers Meknès", activity: "Monuments & Jardins" },
+      { day: "3-4", city: "Meknès", tag: "Ville Impériale", img: "images/meknes_bab_mansour.png", nights: 2, temp: "27°C", transit: "1h vers Fès", activity: "Médina & Mausolées" },
+      { day: "5-7", city: "Fès", tag: "Cité Millénaire", img: "images/fes_bou_inania.png", nights: 3, temp: "30°C", transit: "5h vers Marrakech", activity: "Artisanat & Culture" },
+      { day: "8-10", city: "Marrakech", tag: "Médina Impériale", img: "images/marrakech_bahia.png", nights: 3, temp: "32°C", transit: "—", activity: "Souks & Palais" }
+    ],
+    mapCoords: [
+      { name: "Rabat", x: 220, y: 180 },
+      { name: "Meknès", x: 240, y: 200 },
+      { name: "Fès", x: 260, y: 220 },
+      { name: "Marrakech", x: 180, y: 380 }
+    ],
+    preview: ["images/rabat_hassan.png", "images/meknes_bab_mansour.png", "images/fes_bou_inania.png", "images/marrakech_bahia.png"]
+  },
+
+  "Circuit Désert & Oasis": {
+    distance: "520 km",
+    level: "Facile",
+    levelSub: "Découverte & Détente",
+    period: "Sept – Mai",
+    periodSub: "Éviter canicule estivale",
+    type: "Désert, Nature",
+    typeSub: "Photographie & Aventure",
+    steps: [
+      { day: "1", city: "Ouarzazate", tag: "Porte du Désert", img: "images/ouarzazate_studios.png", nights: 1, temp: "28°C", transit: "3h vers Zagora", activity: "Découverte kasbahs" },
+      { day: "2-3", city: "Zagora", tag: "Ville du Désert", img: "images/zagora_desert.png", nights: 2, temp: "30°C", transit: "4h vers Merzouga", activity: "Dunes & Camp" },
+      { day: "4-5", city: "Merzouga", tag: "Sahara & Dunes", img: "images/merzouga_chameaux.png", nights: 2, temp: "29°C", transit: "—", activity: "Balade chamelière" }
+    ],
+    mapCoords: [
+      { name: "Ouarzazate", x: 220, y: 300 },
+      { name: "Zagora", x: 240, y: 340 },
+      { name: "Merzouga", x: 280, y: 320 }
+    ],
+    preview: ["images/ouarzazate_studios.png", "images/merzouga_chameaux.png", "images/zagora_desert.png"]
+  },
+
+  "Tour des Plages Atlantiques": {
+    distance: "1 800 km",
+    level: "Facile",
+    levelSub: "Côtière & Détente",
+    period: "Avril – Octobre",
+    periodSub: "Idéal pour baignade",
+    type: "Plage, Bien-être",
+    typeSub: "Surf & Farniente",
+    steps: [
+      { day: "1-2", city: "Casablanca", tag: "Ville Blanche", img: "images/casablanca_hassan.png", nights: 2, temp: "24°C", transit: "3h vers Essaouira", activity: "Port & Corniche" },
+      { day: "3-4", city: "Essaouira", tag: "Cité des Alizés", img: "images/essaouira_port.png", nights: 2, temp: "22°C", transit: "3h vers Agadir", activity: "Plage & Médina" },
+      { day: "5-8", city: "Agadir", tag: "Cité du Soleil", img: "images/agadir_plage.png", nights: 4, temp: "26°C", transit: "—", activity: "Plage & Surf" },
+      { day: "9-11", city: "Dakhla", tag: "Lagune Sauvage", img: "images/dakhla_lagune.png", nights: 3, temp: "28°C", transit: "—", activity: "Kitesurf & Nature" }
+    ],
+    mapCoords: [
+      { name: "Casablanca", x: 200, y: 260 },
+      { name: "Essaouira", x: 170, y: 320 },
+      { name: "Agadir", x: 150, y: 380 },
+      { name: "Dakhla", x: 80, y: 460 }
+    ],
+    preview: ["images/casablanca_hassan.png", "images/essaouira_port.png", "images/agadir_plage.png", "images/dakhla_lagune.png"]
+  },
+
+  "Escapade Nord Bleu": {
+    distance: "420 km",
+    level: "Facile",
+    levelSub: "Côte & Culture",
+    period: "Mars – Novembre",
+    periodSub: "Très agréable au printemps",
+    type: "Culture, Littoral",
+    typeSub: "Patrimoine & Paysages",
+    steps: [
+      { day: "1-2", city: "Tanger", tag: "Porte de l'Afrique", img: "images/tanger_port.png", nights: 2, temp: "22°C", transit: "1.5h vers Tétouan", activity: "Kasbah & Ports" },
+      { day: "3", city: "Tétouan", tag: "Ville Blanche", img: "images/tetouan_medina.png", nights: 1, temp: "23°C", transit: "1h vers Chefchaouen", activity: "Médina & Musées" },
+      { day: "4-5", city: "Chefchaouen", tag: "La Ville Bleue", img: "images/chefchaouen_place.png", nights: 2, temp: "21°C", transit: "—", activity: "Balades & Photos" }
+    ],
+    mapCoords: [
+      { name: "Tanger", x: 240, y: 120 },
+      { name: "Tétouan", x: 250, y: 140 },
+      { name: "Chefchaouen", x: 260, y: 160 }
+    ],
+    preview: ["images/tanger_port.png", "images/tetouan_medina.png", "images/chefchaouen_place.png"]
+  },
+
+  "Route Culture & Histoire": {
+    distance: "700 km",
+    level: "Facile",
+    levelSub: "Itinérance culturelle",
+    period: "Toute l'année",
+    periodSub: "Hors été pour confort",
+    type: "Culture, Histoire",
+    typeSub: "Monuments & Ruines",
+    steps: [
+      { day: "1-2", city: "Fès", tag: "Cité Millénaire", img: "images/fes_rue_medina.png", nights: 2, temp: "28°C", transit: "1h vers Meknès", activity: "Médina & Artisanat" },
+      { day: "3", city: "Meknès", tag: "Ville Impériale", img: "images/meknes_mausolee.png", nights: 1, temp: "27°C", transit: "1h vers Volubilis", activity: "Sites & Histoire" },
+      { day: "4", city: "Volubilis", tag: "Site Antique", img: "images/volubilis_ruines.png", nights: 1, temp: "26°C", transit: "1h vers Rabat", activity: "Ruines romaines" },
+      { day: "5-6", city: "Rabat", tag: "Capitale Royale", img: "images/rabat_oudayas.png", nights: 2, temp: "24°C", transit: "—", activity: "Monuments & Plages" }
+    ],
+    mapCoords: [
+      { name: "Fès", x: 260, y: 220 },
+      { name: "Meknès", x: 245, y: 205 },
+      { name: "Volubilis", x: 230, y: 210 },
+      { name: "Rabat", x: 220, y: 180 }
+    ],
+    preview: ["images/fes_rue_medina.png", "images/meknes_mausolee.png", "images/volubilis_ruines.png", "images/rabat_oudayas.png"]
+  },
+
+  "Aventure Atlas": {
+    distance: "320 km",
+    level: "Sportif",
+    levelSub: "Randonnée & altitude",
+    period: "Mai – Octobre",
+    periodSub: "Saisons de randonnée",
+    type: "Montagne, Trek",
+    typeSub: "Trekking & Villages",
+    steps: [
+      { day: "1", city: "Marrakech", tag: "Médina Impériale", img: "images/marrakech_souks.png", nights: 1, temp: "30°C", transit: "2h vers Imlil", activity: "Transfert & Préparation" },
+      { day: "2-3", city: "Imlil", tag: "Village Berbère", img: "images/imlil_village.png", nights: 2, temp: "18°C", transit: "—", activity: "Randonnées" },
+      { day: "4-5", city: "Oukaïmeden", tag: "Station de Ski", img: "images/ouakaimeden.png", nights: 1, temp: "12°C", transit: "—", activity: "Paysages d'altitude" }
+    ],
+    mapCoords: [
+      { name: "Marrakech", x: 180, y: 380 },
+      { name: "Imlil", x: 190, y: 350 },
+      { name: "Oukaïmeden", x: 200, y: 320 }
+    ],
+    preview: ["images/marrakech_souks.png", "images/imlil_village.png", "images/ouakaimeden.png"]
+  },
+
+  "Road Trip Méditerranée": {
+    distance: "600 km",
+    level: "Facile",
+    levelSub: "Côte & Villages",
+    period: "Avril – Septembre",
+    periodSub: "Meilleur en été tardif",
+    type: "Littoral, Détente",
+    typeSub: "Plages & Culture",
+    steps: [
+      { day: "1-2", city: "Tanger", tag: "Porte de l'Afrique", img: "images/tanger_spartel.png", nights: 2, temp: "23°C", transit: "2h vers Al Hoceïma", activity: "Ports & Grottes" },
+      { day: "3-4", city: "Al Hoceïma", tag: "Perle Méditerranéenne", img: "images/al_hoceima_medina.png", nights: 2, temp: "25°C", transit: "2h vers Nador", activity: "Plages & Randos" },
+      { day: "5", city: "Nador", tag: "Lagune Marchica", img: "images/nador_marchica.png", nights: 1, temp: "26°C", transit: "—", activity: "Lagune & Observations" }
+    ],
+    mapCoords: [
+      { name: "Tanger", x: 240, y: 120 },
+      { name: "Al Hoceïma", x: 260, y: 140 },
+      { name: "Nador", x: 270, y: 160 }
+    ],
+    preview: ["images/tanger_spartel.png", "images/al_hoceima_medina.png", "images/nador_marchica.png"]
+  },
+
+  "Nature & Montagnes": {
+    distance: "260 km",
+    level: "Facile",
+    levelSub: "Nature & Forêts",
+    period: "Mars – Octobre",
+    periodSub: "Printemps recommandé",
+    type: "Nature, Randonnée",
+    typeSub: "Forêts & Villages",
+    steps: [
+      { day: "1", city: "Ifrane", tag: "Suisse du Maroc", img: "images/ifrane.png", nights: 1, temp: "18°C", transit: "1h vers Azrou", activity: "Parcs & Promenades" },
+      { day: "2", city: "Azrou", tag: "Forêt de Cèdres", img: "images/azrou_montagne.png", nights: 1, temp: "16°C", transit: "1h vers Beni Mellal", activity: "Forêts & singes" },
+      { day: "3", city: "Beni Mellal", tag: "Source d'Ain Asserdoun", img: "images/beni_mellal_ain.png", nights: 1, temp: "24°C", transit: "—", activity: "Sources & Randos" }
+    ],
+    mapCoords: [
+      { name: "Ifrane", x: 220, y: 260 },
+      { name: "Azrou", x: 230, y: 280 },
+      { name: "Beni Mellal", x: 240, y: 320 }
+    ],
+    preview: ["images/ifrane.png", "images/azrou_montagne.png", "images/beni_mellal_ain.png"]
+  },
+
+  "Circuit Surf Maroc": {
+    distance: "220 km",
+    level: "Facile",
+    levelSub: "Surf & Détente",
+    period: "Sept – Avril",
+    periodSub: "Meilleur vent et houle",
+    type: "Surf, Plage",
+    typeSub: "Cours & Hébergements",
+    steps: [
+      { day: "1-2", city: "Taghazout", tag: "Paradis des Surfeurs", img: "images/taghazout_village.png", nights: 2, temp: "23°C", transit: "1h vers Agadir", activity: "Surf & Plage" },
+      { day: "3", city: "Agadir", tag: "Cité du Soleil", img: "images/agadir_port.png", nights: 1, temp: "25°C", transit: "1h vers Essaouira", activity: "Détente & Spa" },
+      { day: "4", city: "Essaouira", tag: "Cité des Alizés", img: "images/essaouira_plage.png", nights: 1, temp: "22°C", transit: "—", activity: "Kitesurf & Médina" }
+    ],
+    mapCoords: [
+      { name: "Taghazout", x: 150, y: 380 },
+      { name: "Agadir", x: 150, y: 400 },
+      { name: "Essaouira", x: 170, y: 320 }
+    ],
+    preview: ["images/taghazout_village.png", "images/agadir_port.png", "images/essaouira_plage.png"]
+  },
+
+  "Grand Tour Maroc": {
+    distance: "2 500 km",
+    level: "Complet",
+    levelSub: "Tour étendu",
+    period: "Septembre – Juin",
+    periodSub: "Saisons tempérées",
+    type: "Circuit complet",
+    typeSub: "Culture, Nature, Plage",
+    steps: [
+      { day: "1-2", city: "Casablanca", tag: "Ville Blanche", img: "images/casablanca_centre.png", nights: 2, temp: "24°C", transit: "2h vers Rabat", activity: "Corniche & Mosquées" },
+      { day: "3-4", city: "Rabat", tag: "Capitale Royale", img: "images/rabat_parlement.png", nights: 2, temp: "25°C", transit: "3h vers Chefchaouen", activity: "Musées & Jardins" },
+      { day: "5", city: "Chefchaouen", tag: "La Ville Bleue", img: "images/chefchaouen_panorama.png", nights: 1, temp: "22°C", transit: "3h vers Fès", activity: "Photos & Promenades" },
+      { day: "6-8", city: "Fès", tag: "Cité Millénaire", img: "images/fes_medina_vue.png", nights: 3, temp: "28°C", transit: "4h vers Marrakech", activity: "Médina & Artisanat" },
+      { day: "9-11", city: "Marrakech", tag: "Médina Impériale", img: "images/marrakech_majorelle.png", nights: 3, temp: "32°C", transit: "5h vers Agadir", activity: "Souks & Jardins" },
+      { day: "12-14", city: "Agadir", tag: "Cité du Soleil", img: "images/agadir_aerial.png", nights: 3, temp: "26°C", transit: "—", activity: "Plages & Détente" }
+    ],
+    mapCoords: [
+      { name: "Casablanca", x: 200, y: 260 },
+      { name: "Rabat", x: 220, y: 180 },
+      { name: "Chefchaouen", x: 260, y: 160 },
+      { name: "Fès", x: 260, y: 220 },
+      { name: "Marrakech", x: 180, y: 380 },
+      { name: "Agadir", x: 150, y: 400 }
+    ],
+    preview: ["images/casablanca_centre.png", "images/rabat_parlement.png", "images/chefchaouen_panorama.png", "images/fes_medina_vue.png", "images/marrakech_majorelle.png", "images/agadir_aerial.png"]
+  }
+};
+
+function generateDefaultData(card) {
+  let cities = [];
+  try { cities = JSON.parse(card.dataset.cities || '[]'); } catch (e) { cities = []; }
+  return {
+    distance: "—",
+    level: "—",
+    levelSub: "",
+    period: "—",
+    periodSub: "",
+    type: "—",
+    typeSub: "",
+    steps: cities.map((c, i) => ({
+      day: (i + 1).toString(),
+      city: c.name,
+      tag: c.tag,
+      img: c.img,
+      nights: 1,
+      temp: "—",
+      transit: i < cities.length - 1 ? "—" : "—",
+      activity: "—"
+    })),
+    mapCoords: cities.map((c, i) => ({ name: c.name, x: 100 + i * 60, y: 200 + (i % 2) * 80 })),
+    preview: cities.map(c => c.img)
+  };
+}
+
 function openCityModal(btn) {
   const card = btn.closest('.circuit-card');
   const title = card.dataset.title || card.querySelector('.card-title').textContent;
-  const dur = card.dataset.duration || '';
-  let cities = [];
-  try { cities = JSON.parse(card.dataset.cities || '[]'); } catch(e) {}
+  const data = itineraryData[title] || generateDefaultData(card);
 
+  // Header
   document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalSub').textContent = dur + (cities.length ? ' · ' + cities.length + ' destination' + (cities.length > 1 ? 's' : '') : '');
+  document.getElementById('modalDuration').textContent = card.dataset.duration || '—';
+  document.getElementById('modalDestCount').textContent = (data.steps ? data.steps.length : 0) + ' destination' + (data.steps && data.steps.length > 1 ? 's' : '');
 
-  const grid = document.getElementById('modalCities');
-  grid.innerHTML = '';
-  cities.forEach(c => {
-    const el = document.createElement('div');
-    el.className = 'city-card-item';
-    el.innerHTML = `<div class="city-img-wrap"><img src="${c.img}" alt="${c.name}" loading="lazy"></div><div class="city-card-name">${c.name}<span>${c.tag}</span></div>`;
-    grid.appendChild(el);
+  // Timeline
+  const timeline = document.getElementById('modalTimeline');
+  timeline.innerHTML = '';
+  if (data.steps) {
+    data.steps.forEach((step, i) => {
+      const el = document.createElement('div');
+      el.className = 'timeline-item';
+      el.innerHTML = `
+        <div class="timeline-badge">Jour<br><span>${step.day}</span></div>
+        <div class="timeline-content">
+          <div class="timeline-city-header">
+            <div class="timeline-city-name"><i class="bi bi-geo-alt-fill"></i> ${step.city}</div>
+            <span class="timeline-nights">${step.nights} nuit${step.nights > 1 ? 's' : ''}</span>
+          </div>
+          <div class="timeline-tag">${step.tag}</div>
+          <div class="timeline-details">
+            <span><i class="bi bi-sun"></i> ${step.temp}</span>
+            <span><i class="bi bi-clock"></i> ${step.transit}</span>
+            <span><i class="bi bi-activity"></i> ${step.activity}</span>
+          </div>
+        </div>
+      `;
+      timeline.appendChild(el);
+    });
+  }
+
+  // Map
+  const mapRoute = document.getElementById('mapRoute');
+  mapRoute.innerHTML = '';
+  if (data.mapCoords && data.mapCoords.length > 1) {
+    let pathD = `M${data.mapCoords[0].x},${data.mapCoords[0].y}`;
+    data.mapCoords.forEach((c, i) => { if (i > 0) pathD += ` L${c.x},${c.y}`; });
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathD);
+    path.setAttribute('class', 'map-route-line');
+    mapRoute.appendChild(path);
+
+    data.mapCoords.forEach((c, i) => {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', c.x);
+      circle.setAttribute('cy', c.y);
+      circle.setAttribute('r', i === 0 || i === data.mapCoords.length - 1 ? 6 : 4);
+      circle.setAttribute('class', 'map-point');
+      mapRoute.appendChild(circle);
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', c.x);
+      text.setAttribute('y', c.y - 12);
+      text.setAttribute('class', 'map-label');
+      text.textContent = c.name;
+      mapRoute.appendChild(text);
+    });
+  }
+
+  // Metrics
+  document.getElementById('metricDistance').textContent = data.distance || '—';
+  document.getElementById('metricLevel').textContent = data.level || '—';
+  document.querySelector('#metricLevel').nextElementSibling.textContent = data.levelSub || '';
+  document.getElementById('metricPeriod').textContent = data.period || '—';
+  document.getElementById('metricPeriod').nextElementSibling.textContent = data.periodSub || '';
+  document.getElementById('metricType').textContent = data.type || '—';
+  document.getElementById('metricType').nextElementSibling.textContent = data.typeSub || '';
+
+  // Carousel
+  const carousel = document.getElementById('modalCarousel');
+  carousel.innerHTML = '';
+  const previews = data.preview || [];
+  previews.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.className = 'carousel-img';
+    img.alt = 'Aperçu';
+    carousel.appendChild(img);
   });
 
+  // Show
   const modal = document.getElementById('cityModal');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  gsap.fromTo('.city-modal-box', { opacity: 0, y: 24, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'power3.out' });
-  gsap.fromTo('.city-card-item', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.06, delay: 0.15, ease: 'power2.out' });
+  gsap.fromTo('.city-modal-box', 
+    { opacity: 0, y: 30, scale: 0.96 }, 
+    { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: 'power3.out' }
+  );
+  gsap.fromTo('.timeline-item', 
+    { opacity: 0, x: -20 }, 
+    { opacity: 1, x: 0, duration: 0.4, stagger: 0.1, delay: 0.2, ease: 'power2.out' }
+  );
 }
 
 function closeCityModal() {
   gsap.to('.city-modal-box', {
-    opacity: 0, y: 16, scale: 0.97, duration: 0.2, ease: 'power2.in',
+    opacity: 0, y: 20, scale: 0.97, duration: 0.25, ease: 'power2.in',
     onComplete: () => {
       document.getElementById('cityModal').classList.remove('open');
       document.body.style.overflow = '';
@@ -2530,6 +2972,31 @@ function closeCityModal() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeCityModal();
 });
+
+// Carousel
+let carouselIndex = 0;
+function slideCarousel(dir) {
+  const track = document.getElementById('modalCarousel');
+  const imgs = track.querySelectorAll('.carousel-img');
+  if (!imgs.length) return;
+  carouselIndex = Math.max(0, Math.min(carouselIndex + dir, imgs.length - 3));
+  track.style.transform = `translateX(-${carouselIndex * 88}px)`;
+}
+
+// Map zoom
+let mapScale = 1;
+function zoomMap(delta) {
+  mapScale = Math.max(0.8, Math.min(mapScale + delta * 0.2, 2));
+  const svg = document.querySelector('.map-svg');
+  if (svg) svg.style.transform = `scale(${mapScale})`;
+}
+function resetMap() {
+  mapScale = 1;
+  const svg = document.querySelector('.map-svg');
+  if (svg) svg.style.transform = 'scale(1)';
+}
+
+/* Fonctions `toggleFavori` et `reserverCircuit` supprimées (réfactorisation) */
 
 /* ══════ PARTICLES ══════ */
 const pContainer = document.getElementById('particles');
