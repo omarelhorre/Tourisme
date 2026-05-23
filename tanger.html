@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanger — La Porte de l'Afrique | Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- === Shared Destination Styling === -->
+  <link href="city-page.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- === Floating navigation menu system === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION 1: HERO === -->
+  <section class="city-hero">
+    <img src="https://images.openai.com/static-rsc-4/3_D4GJ6I-0QgBgKpvCcxlVhr0cBJtdtz2HRhHIINhN2l_mVyP-wJHx457C8_xFpGtDrWq83EgEFNzo258wC-N9aZT8SB_wwQhR35M5Ja03wbb6pqjyY6vt6lKO91Z7EbR6nbAfNW4SabfAqVS363V7kGD4i69-hCrdxhLP1gk-c-Xslmx16_JqjIya9aRnDm?purpose=fullsize "alt="Tanger vue sur le détroit de Gibraltar" class="city-hero-img">
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <span class="city-eyebrow hero-animate-1">La Porte de l'Afrique</span>
+      <h1 class="hero-animate-2">Tanger</h1>
+      <p class="city-tagline hero-animate-3">Où l'Europe et l'Afrique se font face, entre deux mers et mille cultures</p>
+      <div class="city-breadcrumb hero-animate-3">
+        <a href="index.html">Accueil</a> → <a href="destinations.html">Destinations</a> → <span>Tanger</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Détroit de Gibraltar — Région Tanger-Tétouan-Al Hoceïma</span>
+          <h2>La ville du carrefour des civilisations</h2>
+          <p>Nichée à la pointe nord du Maroc, là où l'Atlantique et la Méditerranée fusionnent, Tanger est une ville au destin exceptionnel. Peuplée depuis l'Antiquité par les Berbères, les Phéniciens, les Romains, les Arabes, les Portugais et les Espagnols, elle porte en elle les empreintes de dizaines de civilisations qui ont façonné son identité cosmopolite et singulière.</p>
+          <p>De 1923 à 1956, Tanger jouissait d'un statut international unique : zone franche gouvernée par plusieurs puissances européennes. Cette période dorée attira une faune d'artistes, d'écrivains, d'espions et d'aventuriers. Paul Bowles, William S. Burroughs, Henri Matisse et de nombreux autres créateurs y trouvèrent une inspiration sans égale dans ce carrefour bouillonnant de la Beat Generation.</p>
+          <p>Aujourd'hui, Tanger connaît un essor fulgurant grâce à ses grands projets d'infrastructure comme le port Tanger Med — l'un des plus grands d'Afrique — et la ligne à grande vitesse Al Boraq qui la relie à Casablanca. Sa médina aux ruelles abruptes, sa Kasbah dominant les deux mers et sa corniche animée en font une destination à la fois authentique et résolument moderne.</p>
+        </div>
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>2 à 3 jours</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Avril-Juin et Septembre-Octobre</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Tanger-Tétouan-Al Hoceïma</p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-img-wrap">
+            <img src="https://images.openai.com/static-rsc-4/yUD_zID6ugpGUpS7BdoUEVnWq0Ot53uwpb7kmOrZiYJQRPI3M3Wmcy4YYijB_5UPEMK4CUejGxenN4qL0qgHBO30JZVRIVJti-fSvwjj51T6g3J1D_iGQc21A-3cIRpKioZwkP-oCPaoaqU6qQ3DmmaDGerZaklMjnhfgFLvwKTsLSTD55ylbxuaUIScwfjT?purpose=fullsize" alt="Médina de Tanger vue aérienne">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <section class="city-highlights">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DÉCOUVERTES</span>
+        <h2>À ne pas manquer à Tanger</h2>
+      </div>
+      <div class="row g-4">
+
+        <!-- Activité 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-shield"></i></div>
+              <img src="https://generationvoyage.fr/activites/_next/image/?url=https:%2F%2Fcdn.generationvoyage.fr%2F2025%2F04%2FLa-Kasbah-de-Tanger-Maroc.jpeg&w=1920&q=80" alt="Kasbah de Tanger">
+            </div>
+            <h3 class="city-card-title">La Kasbah</h3>
+            <p class="city-card-desc">Forteresse médiévale dominant la ville et le détroit, la Kasbah offre des panoramas à couper le souffle sur l'Atlantique, la Méditerranée et les côtes espagnoles.</p>
+          </div>
+        </div>
+
+        <!-- Activité 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-building-fill"></i></div>
+              <img src="https://www.atalayar.com/asset/thumbnail,1280,720,center,center/media/atalayar/images/2024/04/30/2024043017091691486.jpg" alt="Légation américaine Tanger">
+            </div>
+            <h3 class="city-card-title">Légation Américaine</h3>
+            <p class="city-card-desc">Premier bâtiment en dehors des États-Unis à avoir appartenu au gouvernement américain, ce musée retrace l'histoire diplomatique unique de Tanger et ses liens avec la Beat Generation.</p>
+          </div>
+        </div>
+
+        <!-- Activité 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-water"></i></div>
+              <img src="https://www.pinyourfootsteps.com/wp-content/uploads/2023/12/cape_spartel-2-1170x659.jpg" alt="Cap Spartel Tanger">
+            </div>
+            <h3 class="city-card-title">Cap Spartel</h3>
+            <p class="city-card-desc">Promontoire mythique où l'océan Atlantique rencontre la mer Méditerranée, surmonté d'un phare historique du XIXe siècle. Un site naturel grandiose, apprécié au coucher du soleil.</p>
+          </div>
+        </div>
+
+        <!-- Activité 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-map"></i></div>
+              <img src="https://cdn.getyourguide.com/img/location/5cf685fca566a.jpeg/88.jpg" alt="Grottes d'Hercule Tanger">
+            </div>
+            <h3 class="city-card-title">Grottes d'Hercule</h3>
+            <p class="city-card-desc">Cavernes naturelles taillées depuis l'Antiquité par la mer et les carriers berbères. Leur ouverture sur l'Atlantique, en forme de silhouette du continent africain, est l'une des vues les plus photographiées du Maroc.</p>
+          </div>
+        </div>
+
+        <!-- Activité 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-cup-hot"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/oN0zcWFJbj4Twgv1o_FFk5t5pF0LkBKDprzvmGfm7G4v6fsYnZc5Ov7y3Q3CXNIkXlq_c77U6EA5HJcte8TeMHIlvcpMEqFGrwtw_LWh_tF7TymGqYBl7CSuAFo_FkiA-p1TJwNvh6_UHRGu2uWFbCFsaicWtUeuOWioxoTPqZ5uH6bXcc0ZCk_M_EKoobMM?purpose=fullsize" alt="Grand Socco Place du 9 Avril Tanger">
+            </div>
+            <h3 class="city-card-title">Médina de Tanger</h3>
+            <p class="city-card-desc">Place animée au carrefour de la ville moderne et de la médina, le Grand Socco fut le salon des artistes et écrivains de la zone internationale. Ses cafés historiques respirent encore l'âme bohème de Tanger.</p>
+          </div>
+        </div>
+
+        <!-- Activité 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-columns-gap"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/y1rtwHELKALiXbVrFtgb7BWUVGpVZY_vdCP89GIk5qt-N5KOTInx_esHBpj8Gfvf-Iisxptc4pwoX7xeNEVSnqHNFK-qMvStXqqd1WsF5bqNwWkERw2LRoXTvK7Nk92_gVglHCoFVCgz-7-sHTwYKy4Z0pDkPDa6mteGeYEtNpEouSHghF5DBB02f4CPT7tZ?purpose=fullsize" alt="Musée de la Kasbah Tanger">
+            </div>
+            <h3 class="city-card-title">Musée de la Kasbah</h3>
+            <p class="city-card-desc">Ancien palais du sultan, ce musée archéologique abrite des mosaïques romaines de Volubilis, des poteries préhistoriques et des objets berbères témoignant de la richesse historique du nord du Maroc.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION: RESTAURANTS === -->
+  <section class="city-restaurants" style="background: var(--bg-cream); border-top: 1px solid #f0ebe3; border-bottom: 1px solid #f0ebe3;">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">ADRESSES</span>
+        <h2>Où manger à Tanger</h2>
+      </div>
+      <div class="row g-4">
+
+        <!-- Restaurant 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/76/75/e9/la-table-du-marche-tanger.jpg?w=1200&h=-1&s=1" alt="Restaurant El Morocco Club Tanger">
+            </div>
+            <h3 class="city-card-title">Restaurant Friends</h3>
+            <p class="city-card-desc"></p>
+          </div>
+        </div>
+
+        <!-- Restaurant 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/a1/c2/ad/in-keeping-with-our-own.jpg?w=1400&h=800&s=1" alt="Saveurs de Poisson Tanger">
+            </div>
+            <h3 class="city-card-title">L'olivier Restaurant</h3>
+            <p class="city-card-desc"></p>
+          </div>
+        </div>
+
+        <!-- Restaurant 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/O-65o_83GJjRWlt7gn_QwhIJaFoyiUQNTcwrZ-giXyr0frJUAcMrOlPAYcGGZ63PKnrJfTw9nppNSD5z3BvOCXqwvMJrJMZZwj1ztsHyGYmijDsAfzL7Cx7JkYGCIJ-3faAtjC4tAQwHeiXZ9xXbnhiFZ5LtotYbGiviS3auAXTNkj0w1SVlL8vMsu8Tavfq?purpose=fullsize" alt="Café Hafa Tanger">
+            </div>
+            <h3 class="city-card-title">Café Hafa</h3>
+            <p class="city-card-desc">.</p>
+          </div>
+        </div>
+
+        <!-- Restaurant 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://www.epaillote.com/project/resources/img/fullsize/10857322_871789776215137_8936727931663603072_o.jpg" alt="Restaurant Anna e Paolo Tanger">
+            </div>
+            <h3 class="city-card-title"> Restaurant L'Ocean</h3>
+            <p class="city-card-desc">.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <section class="city-hotels" style="background: #ffffff;">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SÉJOURS</span>
+        <h2>Hébergements d'exception</h2>
+      </div>
+      <div class="row g-4">
+
+        <!-- Hôtel 1 -->
+        <div class="col-md-4 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/_M7nGhfEyrK2Xx2XOVWYLe2zyaEDosfk8copegR6KnVLrDflPOVuBC5FxoLMI5nkn1TZs256OcMQrbj7vaNsmWWNDQPVspn9OFWiX26xEXpR4F-1xmzwQ0gguIvLFqSIevq-sosgMbdhb49yEgK8idYAsQVe6Gbes8llb1eD19xZSkbS1osZA3m4m97-r1V0?purpose=fullsize" alt="Hôtel El Minzah Tanger">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€€</span>
+            </div>
+            <h3 class="city-card-title">Hôtel El Minzah</h3>
+            <p class="city-card-desc">Palace historique ouvert en 1930, véritable légende tangéroise fréquentée par Churchill et De Gaulle. Son architecture hispano-mauresque et ses jardins centenaires en font un joyau intemporel.</p>
+          </div>
+        </div>
+
+        <!-- Hôtel 2 -->
+        <div class="col-md-4 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/M0FgsV5ml-btAqw3AZWvCPMaUfbvRpDnba04Z_yxiJRCiKFSgV9wMhQ3dLwpHmDcvswUjteVjzWM4LCB50_p4wd0N2w3E1MojeA6qsKRnX_PPF2w1817d9Hh9h0slWrKvB_nCFI54eqK3ExJVznILdz1goig3zSn7i3mGwlm7sfdVkOZ5Q5gWutsPRkUmLYT?purpose=fullsize" alt="Movenpick Hotel Tanger">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€€</span>
+            </div>
+            <h3 class="city-card-title">Mövenpick Hotel Tanger</h3>
+            <p class="city-card-desc">Hôtel contemporain de luxe avec vue panoramique sur le détroit de Gibraltar, offrant un spa de renom, des piscines à débordement et une gastronomie internationale raffinée.</p>
+          </div>
+        </div>
+
+        <!-- Hôtel 3 -->
+        <div class="col-md-4 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/41-nt6NacPcM2FBtcaYluGoK01oaGeQ_bVkxxF03CGjZExIaDGQlx2l04omgY1HOf-yNtLZW4fnk1efZAYcT434knSJSbq1hdyG2-UhlwRBIzm_vMQXMXPstcknEOOiLQQQ3rDUATH5Lo8CohqixAc1lPWL86HC-octj_wbDFkv_Cq30N6DiIqepIn2yS4a7?purpose=fullsize" alt="Dar Sultan Riad Tanger médina">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+            </div>
+            <h3 class="city-card-title">Dar Sultan</h3>
+            <p class="city-card-desc">Maison d'hôtes intimiste au cœur de la Kasbah, offrant des chambres décorées à l'ancienne avec un toit-terrasse offrant une vue imprenable sur les deux mers.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <section class="city-culture">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">CONSEILS</span>
+        <h2>Culture & Conseils de Voyage</h2>
+      </div>
+      <div class="row g-4">
+
+        <!-- Conseil 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-train-front"></i></div>
+            <h3 class="culture-card-title">Train à grande vitesse Al Boraq</h3>
+            <p class="culture-card-desc">Tanger est désormais reliée à Casablanca en seulement 2h10 via le TGV Al Boraq, le premier train à grande vitesse d'Afrique. Un moyen confortable et rapide pour explorer le pays.</p>
+          </div>
+        </div>
+
+        <!-- Conseil 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-cloud-drizzle"></i></div>
+            <h3 class="culture-card-title">Climat doux et venteux</h3>
+            <p class="culture-card-desc">Tanger bénéficie d'un climat méditerranéen tempéré, mais le vent du détroit (le Levante) peut être soutenu. Prévoyez une veste légère même en été pour les promenades en bord de mer.</p>
+          </div>
+        </div>
+
+        <!-- Conseil 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-translate"></i></div>
+            <h3 class="culture-card-title">Ville multilingue</h3>
+            <p class="culture-card-desc">L'héritage international de Tanger se ressent encore : l'arabe, le darija et le tamazight côtoient le français, l'espagnol et l'anglais, notamment dans le centre-ville et le quartier de la médina.</p>
+          </div>
+        </div>
+
+        <!-- Conseil 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-geo-alt"></i></div>
+            <h3 class="culture-card-title">Excursions depuis Tanger</h3>
+            <p class="culture-card-desc">Tanger est une excellente base pour explorer la région : Tétouan (1h), Chefchaouen (2h30), le site romain de Lixus et la côte atlantique sauvage sont facilement accessibles en journée.</p>
+          </div>
+        </div>
+
+        <!-- Conseil 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-camera"></i></div>
+            <h3 class="culture-card-title">Médina et Kasbah à pied</h3>
+            <p class="culture-card-desc">La médina de Tanger et sa Kasbah se visitent idéalement à pied. Ses ruelles escarpées, ses portes colorées et ses vues sur le détroit offrent des instants photographiques inoubliables à chaque coin de rue.</p>
+          </div>
+        </div>
+
+        <!-- Conseil 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-ship"></i></div>
+            <h3 class="culture-card-title">Traversée vers l'Espagne</h3>
+            <p class="culture-card-desc">De Tanger Med, des ferries relient régulièrement Tarifa et Algésiras en Espagne en moins de 35 minutes. Une excursion internationale unique à ne pas manquer pour les voyageurs aventureux.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 8: CTA FINAL === -->
+  <section class="city-cta">
+    <div class="city-cta-content container">
+      <h2>Prêt à découvrir la porte de l'Afrique ?</h2>
+      <p>Tanger vous attend avec sa Kasbah millénaire, ses falaises surplombant deux mers et son âme bohème héritée des artistes du monde entier. Planifiez dès maintenant votre séjour.</p>
+      <div class="city-cta-buttons">
+        <a href="flights.html" class="btn-maroc-primary"><i class="bi bi-airplane"></i>Planifier mon voyage</a>
+        <a href="destinations.html" class="btn-maroc-outline"><i class="bi bi-map"></i>Toutes les destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 9: FOOTER === -->
+  <footer class="footer-simple">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === Navigation Drawer & Scroll Reveal Logic ===
+       ============================================================ */
+
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+    })();
+
+    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>

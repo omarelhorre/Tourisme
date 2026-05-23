@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ifrane — Fraîcheur du Moyen Atlas | Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- === Shared Destination Styling === -->
+  <link href="city-page.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- === Floating navigation menu system === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION 1: HERO === -->
+  <section class="city-hero">
+    <img src="https://i.pinimg.com/1200x/09/47/1b/09471b827774a36d5b9c8b879fa50de0.jpg" alt="Ifrane sous la neige" class="city-hero-img">
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <span class="city-eyebrow hero-animate-1">Moyen Atlas</span>
+      <h1 class="hero-animate-2">Ifrane</h1>
+      <p class="city-tagline hero-animate-3">Chalets, parcs soignés et air de montagne.</p>
+      <div class="city-breadcrumb hero-animate-3">
+        <a href="index.html">Accueil</a> → <a href="destinations.html">Destinations</a> → <span>Ifrane</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Moyen Atlas — Région Fès-Meknès</span>
+          <h2>Une parenthèse alpine au cœur du Maroc</h2>
+          <p>Ifrane séduit par son atmosphère paisible, ses rues larges et propres, ainsi que ses toitures en tuiles rouges inspirées des villages alpins. Entourée de vastes parcs paysagers et d'espaces verts soignés, la ville offre un climat tempéré et frais qui contraste agréablement avec la chaleur des plaines environnantes.</p>
+          <p>Située en altitude au cœur du Moyen Atlas, elle sert de base idéale pour explorer la nature généreuse de la région. Selon la saison, les forêts de cèdres centenaires et les plans d'eau invitent à des promenades vivifiantes et à des sorties au grand air.</p>
+        </div>
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>1 à 2 jours</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Hiver (neige) et Printemps</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Fès-Meknès / Moyen Atlas</p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-img-wrap">
+            <img src="https://i.pinimg.com/1200x/09/47/1b/09471b827774a36d5b9c8b879fa50de0.jpg" alt="Ifrane Cèdres Forêt">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <section class="city-highlights">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DÉCOUVERTES</span>
+        <h2>À ne pas manquer à Ifrane</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Activité 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-suit-heart"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/xelDIjzm99M1YLNTRpTYg1m9nSR9wrLDseIA0BXISATv-L5mu8CQLiaQ5oPKzvkqi4cNC0Dob3s3q5pHeVbDoYxznuXdv_GsZVA7_v46DDDL4XLPZgUsQNdwLk2r-rPL4g9CnuYzs8_lefbYQEAV35U0YufEeopwo8wpSPZTlgRpLbKDaAzzWU8PNul3vPgI?purpose=fullsize" alt="Le Lion d'Ifrane">
+            </div>
+            <h3 class="city-card-title">Centre-ville & parcs</h3>
+            <p class="city-card-desc">Réputé pour sa propreté, le centre-ville abrite des parcs paysagers soignés propices aux balades à pied dans un calme ressourçant.</p>
+          </div>
+        </div>
+        <!-- Activité 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-snow2"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/YbB5BQ7f2t2Rk92rJqwfyrXqflOJj89bUgGcqFlDQx1cqGB0ZrNgdQJskIFK8ErHO5XZ8JOjlZvmr3MztabCf_wuhUV5ryKRBS-ArjSk2lCKmoBoNiUhyG4L16V84H5PNQoSEtGyB8-FipQoz7VxZPWPZLIJ9wp5AUQzCm6Y_0EE8jZ3kUG32Sjr1NwarfZv?purpose=fullsize" alt="Ski à Michlifen">
+            </div>
+            <h3 class="city-card-title">La Statue du Lion</h3>
+            <p class="city-card-desc">Sculptée dans la pierre, cette célèbre statue trône au cœur de la ville et constitue un point de repère incontournable pour une photo souvenir.</p>
+          </div>
+        </div>
+        <!-- Activité 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-tree"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/usBf3gdvUhi2K1--kI6yjiI1-5w6-msa0PnU1CcLOsJ8RqV-JbbSsLStQDwwyweYAHg5w1bL2FNt6CrpJ4jfa9vMP-1PlZ5I-_OrbuZBllbiBUzRn4gkEO8fsx92f8l9AFbesW-mhgo6ZPjPz14U1vEypSK9UCCHHgV58xEiluWH9fJ7pWpuQxJz4xOq-HIf?purpose=fullsize" alt="Forêt des Cèdres">
+            </div>
+            <h3 class="city-card-title">Forêts de cèdres</h3>
+            <p class="city-card-desc">La région d’Ifrane abrite de magnifiques forêts de cèdres où l'on vient respirer l'air frais des montagnes lors de randonnées paisibles.</p>
+          </div>
+        </div>
+        <!-- Activité 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-emoji-smile"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/O46WsFF7D6oIao7hs_aqG-NHgGqECEc22lezE6eeJgh2tQCSkknYW4dnGg8s0rxGPIx_9-UPs0dXdseYLB8iwRtCsgRGBXnQ0l7fkJl6VE-RhiiBs6EridPv40H0qeItLdX8q1FFTHk4EV0uIIEeZcXZNh2MgdU11RB588rTol182k-rYIYYYfL6g702l_1m?purpose=fullsize" alt="Macaques de Barbarie">
+            </div>
+            <h3 class="city-card-title">Lac Dayet Aoua</h3>
+            <p class="city-card-desc">Ce plan d'eau entouré d'arbres offre, selon la saison et la météo, de jolis paysages idéaux pour un pique-nique ou une pause contemplative.</p>
+          </div>
+        </div>
+        <!-- Activité 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-water"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/dp8okC35s1lgBcJH5RCfNuEWA5_TPTLv9Gy3GJU9MwnhmV2Le3DvUxMqP0f-454mrjNRdfjfUPm7qMSoor04mwcZRNX2l4jRsxEtgUDw1vJ99LaSZpdHQ8Bq9hCTmtHvSoAa-WkA-YjFfRF9YhN9sUVPVB4ZCUBkBliID6yBC2OHyuLfRRdhZTzLe6pHKUVz?purpose=fullsize" alt="Source Vittel">
+            </div>
+            <h3 class="city-card-title">Al Akhawayn (Extérieurs)</h3>
+            <p class="city-card-desc">L'architecture d'inspiration anglo-saxonne du campus s'intègre avec élégance dans les paysages montagnards du quartier environnant.</p>
+          </div>
+        </div>
+        <!-- Activité 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-mortarboard"></i></div>
+              <img src="https://industries.ma/wp-content/uploads/2020/07/al-akhawayn.jpg" alt="Al Akhawayn">
+            </div>
+            <h3 class="city-card-title">Points de vue de l'Atlas</h3>
+            <p class="city-card-desc">En empruntant les routes panoramiques de la région, on découvre de superbes panoramas sur les montagnes du Moyen Atlas.</p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+ 
+
+  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <section class="city-hotels">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SÉJOURS</span>
+        <h2>Hébergements à Ifrane</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Hôtel 1 -->
+        <div class="col-md-4 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/2VTwxlfw4Q4vXTueB-gFuq6Ygd6o_3tc1eOmDNVJhV7IowJZMEvejHtXGE110SkCU-XqfMfVBkZ69fHKvzUBBHbH5blJoBmQPQZuQcJMLH5Vf7a7UhW8DDZlIhJBd5ERZ0wjEon-NOIBNkrMlBh7rBl2TQZcH6kkbdqzW1S4ErsssxGhFuZayry9K4czU-6z?purpose=fullsize" alt="Michlifen Palace">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+            </div>
+            <h3 class="city-card-title">Hôtel en centre-ville</h3>
+            <p class="city-card-desc">De nombreux établissements situés en centre-ville vous permettent d'accéder facilement aux restaurants, parcs paysagers et commerces à pied.</p>
+          </div>
+        </div>
+        <!-- Hôtel 2 -->
+        <div class="col-md-4 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://rukmini-ct.flixcart.com/f_auto,q_auto/ct-hotel-images/places/hotels/cms/4015/4015578/images/2605c2d2_z.jpg" alt="Hôtel Chamonix">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€</span>
+            </div>
+            <h3 class="city-card-title">Zephir ifrane</h3>
+            <p class="city-card-desc">Établissement chaleureux de style savoyard situé en centre-ville, parfait pour savourer un thé au coin de la cheminée.</p>
+          </div>
+        </div>
+        <!-- Hôtel 3 -->
+        <div class="col-md-4 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/22v750nPXTt1Bvipv-ww5x1iLymggP6tbo42FbPTz_9-a5B9dgaSq8J6Rm6PSK42heqxQckCMKwHfpJOd09BpGkWq5mw825JCyTwcnktLEeWJk6mgBZQKcFLAJhZwvxNiLQX-q7mrHSuyqcmw9BHZcoKjQj1Zn9vtWsNI32eft1M5C7AoTBzcJsbhoFpufXF?purpose=fullsize" alt="Gîte d'Azrou">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€</span>
+            </div>
+            <h3 class="city-card-title">Maison d'hotes au calme</h3>
+            <p class="city-card-desc">Optez pour une maison d'hôtes traditionnelle ou un gîte rural en périphérie afin de bénéficier d'un accueil chaleureux et d'un séjour authentique.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <section class="city-culture">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">CONSEILS</span>
+        <h2>Culture & Conseils de Voyage</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Conseil 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-thermometer-half"></i></div>
+            <h3 class="culture-card-title">Météo changeante</h3>
+            <p class="culture-card-desc">En raison de l'altitude, les températures peuvent chuter rapidement. Pensez à toujours avoir un vêtement chaud à disposition.</p>
+          </div>
+        </div>
+        <!-- Conseil 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-recycle"></i></div>
+            <h3 class="culture-card-title">Respect de la nature</h3>
+            <p class="culture-card-desc">Les forêts et lacs de la région sont fragiles. Veillez à préserver la propreté des lieux et à respecter les consignes locales sur les feux.</p>
+          </div>
+        </div>
+        <!-- Conseil 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-exclamation-triangle"></i></div>
+            <h3 class="culture-card-title">Conduite en hiver</h3>
+            <p class="culture-card-desc">Les routes de l'Atlas peuvent s'avérer glissantes ou enneigées pendant les mois d'hiver. Renseignez-vous sur l'état du réseau routier.</p>
+          </div>
+        </div>
+        <!-- Conseil 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-geo-alt"></i></div>
+            <h3 class="culture-card-title">Se déplacer</h3>
+            <p class="culture-card-desc">Ifrane est une petite ville calme qui se prête merveilleusement bien à la marche. La plupart des centres d'intérêt sont faciles d'accès.</p>
+          </div>
+        </div>
+        <!-- Conseil 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-camera"></i></div>
+            <h3 class="culture-card-title">Respect et photos</h3>
+            <p class="culture-card-desc">Pensez toujours à demander poliment l'accord des personnes que vous souhaitez photographier dans leur quotidien ou sur les marchés.</p>
+          </div>
+        </div>
+        <!-- Conseil 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="culture-grid-card">
+            <div class="culture-icon-box"><i class="bi bi-calendar-event"></i></div>
+            <h3 class="culture-card-title">Affluence le week-end</h3>
+            <p class="culture-card-desc">La ville peut être plus fréquentée en fin de semaine. Il est prudent de réserver vos hébergements à l'avance pour plus de tranquillité.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 8: CTA FINAL === -->
+  <section class="city-cta">
+    <div class="city-cta-content container">
+      <h2>Prêt à respirer le grand air d'Ifrane ?</h2>
+      <p>Laissez-vous charmer par la fraîcheur des forêts de cèdres et l'atmosphère unique du Moyen Atlas. Planifiez votre séjour.</p>
+      <div class="city-cta-buttons">
+        <a href="flights.html" class="btn-maroc-primary"><i class="bi bi-airplane"></i>Planifier mon voyage</a>
+        <a href="destinations.html" class="btn-maroc-outline"><i class="bi bi-map"></i>Toutes les destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 9: FOOTER === -->
+  <footer class="footer-simple">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === Navigation Drawer & Scroll Reveal Logic ===
+       ============================================================ */
+
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+    })();
+
+    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>

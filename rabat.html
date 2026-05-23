@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rabat — Capitale Atlantique | Royaume du Maroc</title>
+
+  <!-- === Bootstrap 5 CSS === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- === Bootstrap Icons === -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- === Shared Destination Styling === -->
+  <link href="city-page.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- === Floating navigation menu system === -->
+  <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
+    <i class="bi bi-tree-fill"></i>
+  </a>
+  <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
+           aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="site-menu-inner">
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Accueil
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
+            <li><a href="index.html#dishesSection">Gastronomie</a></li>
+            <li><a href="index.html#experiencesSection">Expériences</a></li>
+            <li><a href="index.html#guideSection">Votre Guide de Voyage Complet</a></li>
+            <li><a href="index.html#flightsSection">Trouver le vol parfait</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          Villes
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list cities">
+            <li><a href="marrakech.html">Marrakech</a></li>
+            <li><a href="fes.html">Fès</a></li>
+            <li><a href="chefchaouen.html">Chefchaouen</a></li>
+            <li><a href="tetouan.html">Tétouan</a></li>
+            <li><a href="casablanca.html">Casablanca</a></li>
+            <li><a href="agadir.html">Agadir</a></li>
+            <li><a href="tanger.html">Tanger</a></li>
+            <li><a href="essaouira.html">Essaouira</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="menu-group">
+        <a class="menu-head" href="dishes.html">
+          Plats
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+      <div class="menu-group">
+        <a class="menu-head" href="guide.html">
+          Guide Pratique
+          <i class="bi bi-arrow-right chev"></i>
+        </a>
+      </div>
+
+      <a class="menu-cta" href="flights.html">
+        <i class="bi bi-airplane"></i>Réserver un Vol
+      </a>
+    </div>
+  </div>
+
+  <!-- === SECTION 1: HERO === -->
+  <section class="city-hero">
+    <img src="https://www.albomadventures.com/wp-content/uploads/2012/10/Morocco-Rabat-Hassan-Tower-Depositphotos_91034708_L-2.jpg" alt="Tour Hassan à Rabat" class="city-hero-img">
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <span class="city-eyebrow hero-animate-1">Capitale</span>
+      <h1 class="hero-animate-2">Rabat</h1>
+      <p class="city-tagline hero-animate-3">Entre océan, jardins royaux et patrimoine millénaire</p>
+      <div class="city-breadcrumb hero-animate-3">
+        <a href="index.html">Accueil</a> → <a href="destinations.html">Destinations</a> → <span>Rabat</span>
+      </div>
+    </div>
+  </section>
+  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <section class="city-intro">
+    <div class="container">
+      <div class="row g-lg-5 align-items-start">
+        <div class="col-lg-7 fade-up" data-delay="0">
+          <span class="intro-sub">Région Rabat-Salé-Kénitra</span>
+          <h2>La capitale verte sur l'Atlantique</h2>
+          <p>Rabat, capitale du Maroc, est une ville impériale moderne et historique située sur la côte atlantique, à l'embouchure du fleuve Bou Regreg. Classée au patrimoine mondial de l'UNESCO, elle allie avec élégance son passé prestigieux à un urbanisme contemporain verdoyant.</p>
+          <p>La Kasbah des Oudayas, forteresse médiévale aux ruelles bleues et blanches, offre une vue spectaculaire sur l'océan, tandis que la Tour Hassan et le Mausolée Mohammed V témoignent de la grandeur des dynasties passées et de la finesse de l'artisanat marocain.</p>
+          <p>Ville paisible et cultivée, Rabat est réputée pour ses nombreux parcs, ses jardins botaniques et sa corniche animée, offrant aux visiteurs un cadre de séjour particulièrement agréable et ressourçant.</p>
+        </div>
+        <div class="col-lg-5 fade-up" data-delay="150">
+          <div class="intro-meta-card">
+            <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <div class="intro-meta-item">
+              <i class="bi bi-clock-history"></i>
+              <div>
+                <h5>Durée conseillée</h5>
+                <p>2 à 3 jours</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Saison idéale</h5>
+                <p>Printemps et Automne</p>
+              </div>
+            </div>
+            <div class="intro-meta-item">
+              <i class="bi bi-compass"></i>
+              <div>
+                <h5>Région</h5>
+                <p>Rabat-Salé-Kénitra</p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-img-wrap">
+            <img src="https://elviajista.com/wp-content/uploads/2022/09/hassan.jpg" alt="Tour Hassan à Rabat">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <section class="city-highlights">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">DÉCOUVERTES</span>
+        <h2>À ne pas manquer à Rabat</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Activité 1 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-bank"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/b7Z3brJE__4cWL4VB0nGLt7EZwt-aBne0zMsMVksLbiF9oJAb6sf8zZ7VGBjyDBZLPOg-QSAnKguA2dzZ3l_YOCGmAj6NLGsxxEj_mMCNBuN7vnjyrmGHFNRxpEiFqlYT-VkBCv2P6rC-OMjkyRlBwvUI5pEA_PV6VDbUHUp0tsKQ8albRksHEOZmAplI_i1?purpose=fullsize" alt="Kasbah des Oudayas à Rabat">
+            </div>
+            <h3 class="city-card-title">Kasbah des Oudayas</h3>
+            <p class="city-card-desc">Forteresse andalouse du XIIe siècle dominant l'embouchure du Bou Regreg. Jardins, ruelles blanches et bleues.</p>
+          </div>
+        </div>
+        <!-- Activité 2 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-image"></i></div>
+              <img src="https://images.openai.com/static-rsc-4/HzR-4-5kjrjLmuzg-fzWBcXxYFDn3_Yx9TaiXvTQklvm7qhxgGwcelZVQa3JAgN5uUjifaNRXL054ezaTvOCq7FBhFdv1vDaR371Uj7tD8yblLynlz9Xdn75-ofJssWcNXJCmRKmNlnANISePVaxXsM-ahd0JEiSJ94MOjfZBNNpTrzl4_Rz01srpEsyuEeZ?purpose=fullsize" alt="Tour Hassan à Rabat">
+            </div>
+            <h3 class="city-card-title">Tour Hassan</h3>
+            <p class="city-card-desc">Minaret inachevé du XIIe siècle entouré de colonnes. L'un des monuments les plus emblématiques du Maroc.</p>
+          </div>
+        </div>
+        <!-- Activité 3 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-shield-check"></i></div>
+              <img src="https://th.bing.com/th/id/R.d17884920fc0e0e2de828e1408d99313?rik=Jn5RWyVIi7Jnng&riu=http%3a%2f%2f2.bp.blogspot.com%2f-_7niFyuxETQ%2fVSWrN3WoMfI%2fAAAAAAAAAB0%2fhOCapNb05ig%2fs1600%2f6029542806_f7f62e9906_b.jpg&ehk=qgKnIoG7BaTRvYpcfBPFGR6uaSrKM%2f%2fm0FzqYECsznU%3d&risl=&pid=ImgRaw&r=0" alt="Mausolée Mohammed V à Rabat">
+            </div>
+            <h3 class="city-card-title">Mausolée Mohammed V</h3>
+            <p class="city-card-desc">Mausolée royal en marbre blanc face à la Tour Hassan. Architecture hispano-mauresque d'une grande finesse.</p>
+          </div>
+        </div>
+        <!-- Activité 4 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-tree"></i></div>
+              <img src="https://www.chellah.site/wp-content/uploads/2023/10/chellah-visite-rabat-travel-guide-tourisme-morocco-maroc-vue-complete-scaled.jpg" alt="Site archéologique de Chellah à Rabat">
+            </div>
+            <h3 class="city-card-title">Site archéologique de Chellah</h3>
+            <p class="city-card-desc">Ancienne cité romaine et nécropole mérinide entourée de jardins sauvages. Réputé pour sa sérénité.</p>
+          </div>
+        </div>
+        <!-- Activité 5 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-shop"></i></div>
+              <img src="https://tse4.mm.bing.net/th/id/OIP.CGVBxN5UOZRg02_FEVQb5QHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Médina de Rabat souk">
+            </div>
+            <h3 class="city-card-title">Médina de Rabat souk</h3>
+            <p class="city-card-desc">Souks animés, artisanat local et architecture traditionnelle dans une médina moins fréquentée que d'autres.</p>
+          </div>
+        </div>
+        <!-- Activité 6 -->
+        <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <div class="city-card-icon-badge"><i class="bi bi-water"></i></div>
+              <img src="https://story-lecarrousel-rabat.com/wp-content/uploads/2025/06/bouregreg-corniche-rabat.webp" alt="Corniche de Rabat Atlantique">
+            </div>
+            <h3 class="city-card-title">Corniche de Rabat</h3>
+            <p class="city-card-desc">Promenade face à l'Atlantique, idéale en fin de journée pour observer la lumière sur l'océan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION: RESTAURANTS === -->
+  <section class="city-restaurants" style="background: var(--bg-cream); border-top: 1px solid #f0ebe3; border-bottom: 1px solid #f0ebe3;">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">ADRESSES</span>
+        <h2>Où manger à Rabat</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Restaurant 1 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/32/c4/50/5f/step-into-the-timeless.jpg?w=700&h=700&s=1" alt="Tajine marocain traditionnel">
+            </div>
+            <h3 class="city-card-title">Dinarjat </h3>
+            <p class="city-card-desc">
+              
+            </p>
+          </div>
+        </div>
+        <!-- Restaurant 2 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.openai.com/static-rsc-4/LiaLJjGpcOFypFWowxkB81o70L2a6qLpBBWWiC2sW22UcB43kuqXRzYxboeu6Qr4jDrqUh5vJJFWoO34ml-f8vxU8bykGtPxD_XORRWHZcWdNGlSBggTd07QQK2HgVfI6F9MGjVDK5BtOkedGcinLcZFzQa8cMg7G1ysSEiV6l7sWT-bkMgSMTpSoThJiZxe?purpose=fullsize" alt="Poisson grillé maroc">
+            </div>
+            <h3 class="city-card-title">Le Dhow</h3>
+            <p class="city-card-desc">
+              
+            </p>
+          </div>
+        </div>
+        <!-- Restaurant 3 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/5d/89/ae/img-20181012-wa0013-largejpg.jpg?w=1400&h=1000&s=1" alt="Pâtisseries marocaines et thé">
+            </div>
+            <h3 class="city-card-title">Dar Zaki</h3>
+            <p class="city-card-desc"></p>
+          </div>
+        </div>
+        <!-- Restaurant 4 -->
+        <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/92/3d/6c/restaurant.jpg?w=1400&h=800&s=1" alt="Restaurant moderne maroc">
+            </div>
+            <h3 class="city-card-title">Le Grill Robuchon</h3>
+            <p class="city-card-desc">
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <section class="city-hotels" style="background: #ffffff;">
+    <div class="container">
+      <div class="section-title-wrap fade-up" data-delay="0">
+        <span class="section-eyebrow">SÉJOURS</span>
+        <h2>Hébergements d'exception</h2>
+      </div>
+      <div class="row g-4">
+        <!-- Hôtel 1 -->
+        <div class="col-md-4 fade-up" data-delay="0">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://rate.picscache.com/images/15015/upload/97ce87ac78aedc1285e16495b4b15129.jpg" alt="Riad patio maroc">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€</span>
+            </div>
+            <h3 class="city-card-title">Riad en médina</h3>
+            <p class="city-card-desc">Demeures traditionnelles restaurées avec patio central, fontaine et terrasse sur les toits.</p>
+          </div>
+        </div>
+        <!-- Hôtel 2 -->
+        <div class="col-md-4 fade-up" data-delay="100">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://www.ahstatic.com/photos/a7z0_ho_00_p_1024x768.jpg" alt="Hôtel moderne lobby">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€€€</span>
+            </div>
+            <h3 class="city-card-title">Hôtel moderne (quartiers centraux)</h3>
+            <p class="city-card-desc">Établissements bien situés pour explorer la ville, alliant confort contemporain et services complets.</p>
+          </div>
+        </div>
+        <!-- Hôtel 3 -->
+        <div class="col-md-4 fade-up" data-delay="200">
+          <div class="city-card">
+            <div class="city-card-img-wrap">
+              <img src="https://images.boutiquehotel.guru/hotelimage.php?p_id=1665766&code=f9d68d3aca6c55cecbbb222486761406&webpage=all-boutique-hotels.com&link=https:%2F%2Fsubdomain.cloudimg.io%2Fcrop%2F1024x768%2Fq70.fcontrast10.fbright0.fsharp5%2Fhttps:%2F%2Fq-xx.bstatic.com%2Fxdata%2Fimages%2Fhotel%2Fmax1536%2F83848267.jpg%3Fk%3D060596405aaaae3007041f30d8f755f58d850fe125432158fcc6d32289dff852%26o%3D" alt="Maison hôtes maroc">
+            </div>
+            <div class="hotel-rating">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <span class="mx-2">•</span> <span class="hotel-price">€</span>
+            </div>
+            <h3 class="city-card-title">Maison d'hôtes boutique</h3>
+            <p class="city-card-desc">Petites structures intimes offrant une atmosphère familiale et un service personnalisé.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION 9: FOOTER === -->
+  <footer class="footer-simple">
+    © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
+  </footer>
+
+  <!-- === Bootstrap Bundle JS === -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ============================================================
+       === Navigation Drawer & Scroll Reveal Logic ===
+       ============================================================ */
+
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const menu   = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+      const groups = menu.querySelectorAll('.menu-group[data-group]');
+      const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
+
+      function activate(group) {
+        groups.forEach(g => {
+          const on = g === group;
+          g.classList.toggle('open', on);
+          g.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+        });
+      }
+
+      function setMenu(open) {
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
+          activate(groups[0]);
+        }
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(!document.body.classList.contains('menu-open'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) setMenu(false);
+      });
+
+      groups.forEach(group => {
+        const head = group.querySelector('.menu-head');
+        head.addEventListener('click', () => {
+          if (isDesktop()) {
+            activate(group);
+          } else {
+            const willOpen = !group.classList.contains('open');
+            willOpen ? activate(group) : activate(null);
+          }
+        });
+      });
+    })();
+
+    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, parseInt(delay));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
