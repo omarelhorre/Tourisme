@@ -759,7 +759,9 @@
       transform: scale(1.0);
       filter: brightness(1.0) saturate(1.1);
     }
-    /* Creamy fade from left — warm sable tone */
+    /* Creamy fade from the text side — warm sable tone.
+       In LTR text sits on the left → gradient fades right.
+       In RTL text sits on the right → gradient is mirrored (fades left). */
     .city-info-item .city-info-img::after {
       content: "";
       position: absolute;
@@ -772,6 +774,17 @@
           rgba(245,230,200,0.0)  68%);
       pointer-events: none;
     }
+    [dir="rtl"] .city-info-item .city-info-img::after {
+      background:
+        linear-gradient(270deg,
+          rgba(245,230,200,0.96) 0%,
+          rgba(245,230,200,0.82) 28%,
+          rgba(245,230,200,0.35) 52%,
+          rgba(245,230,200,0.0)  68%);
+    }
+    /* In RTL, the eyebrow's leading rule should also flip onto the right. */
+    [dir="rtl"] .city-info-item .city-eyebrow { flex-direction: row-reverse; }
+    [dir="rtl"] .city-info-item .city-info-text { text-align: right; }
     .city-info-item .city-info-img.placeholder {
       background: linear-gradient(135deg, #2a0e04, #1a1008);
     }
@@ -1365,21 +1378,50 @@
       color: var(--vert);
     }
     .guide-icon-card {
+      position: relative;
       text-align: center;
-      padding: 1.5rem 0.8rem;
-      background: #fff;
+      padding: 2.4rem 0.8rem;
+      background: #2a1a08;
+      background-size: cover;
+      background-position: center;
       border-radius: 10px;
       height: 100%;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
+      color: #fff;
+      transition: transform 0.45s var(--ease-doux), box-shadow 0.45s var(--ease-doux);
+    }
+    .guide-icon-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20,12,4,0.18) 0%, rgba(20,12,4,0.78) 100%);
+      z-index: -1;
+      transition: background 0.3s ease;
+    }
+    .guide-icon-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px -16px rgba(20,12,4,0.55);
+    }
+    .guide-icon-card:hover::before {
+      background: linear-gradient(180deg, rgba(20,12,4,0.10) 0%, rgba(20,12,4,0.65) 100%);
     }
     .guide-icon-card i {
-      font-size: 2.2rem;
-      color: var(--terracotta);
-      margin-bottom: 0.6rem;
+      font-size: 2rem;
+      color: var(--or);
+      margin-bottom: 0.5rem;
       display: block;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
     .guide-icon-card span {
       font-weight: 700;
       font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
 
     /* === Boutons généraux === */
@@ -1611,13 +1653,6 @@
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
-      <div class="menu-group">
-        <a class="menu-head" href="guide.html">
-          <span data-i18n="nav.guide">Guide</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-
       <!-- Pied de menu : sélecteur de langue + bascule animations -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
@@ -1976,7 +2011,7 @@
             Du hammam traditionnel aux treks dans l'Atlas, en passant par les
             riads authentiques et les cours de cuisine — vivez le Maroc autrement.
           </p>
-          <a href="experiences.html" class="exp-see-all">
+          <a href="activites.html" class="exp-see-all">
             Voir tout <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
           </a>
         </div>
@@ -2017,7 +2052,7 @@
             cités impériales et les sommets de l'Atlas — composez le voyage qui
             vous ressemble parmi nos itinéraires inspirants.
           </p>
-          <a href="itineraire .html" class="btn-maroc">Explorer les Itinéraires →</a>
+          <a href="itineraire.html" class="btn-maroc">Explorer les Itinéraires →</a>
         </div>
         <div class="col-lg-6">
           <div class="row g-3">

@@ -654,13 +654,6 @@
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
-      <div class="menu-group">
-        <a class="menu-head" href="guide.html">
-          <span data-i18n="nav.guide">Guide</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-
       <!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
@@ -693,7 +686,7 @@
     <p class="lead">Une cuisine millénaire au carrefour des saveurs berbères, arabes, andalouses et méditerranéennes. Explorez les plats emblématiques du royaume.</p>
     <div class="search-wrap">
       <i class="bi bi-search"></i>
-      <input type="text" id="searchInput" placeholder="Rechercher un plat, un ingrédient..." autocomplete="off" />
+      <input type="text" id="searchInput" placeholder="Rechercher un plat, un ingrédient..." aria-label="Rechercher un plat, un ingrédient..." autocomplete="off" />
       <button type="button" class="search-clear" id="searchClear" aria-label="Effacer"><i class="bi bi-x-circle-fill"></i></button>
       <div class="search-count" id="searchCount" aria-live="polite"></div>
     </div>
@@ -1383,7 +1376,21 @@ function applyFilter() {
     }
   } else if (existing) { existing.remove(); }
   searchClear.classList.toggle('visible', !!q);
-  searchCount.textContent = q ? `${visible} plat${visible>1?'s':''} trouvé${visible>1?'s':''}` : '';
+  // Localise the result count via the same dictionary as the rest of the
+  // page. We pick a pluralisation key per language and the i18n engine fills
+  // it in. Fallback stays French.
+  if (q) {
+    const lang = (window.MDI18N && window.MDI18N.getLang && window.MDI18N.getLang()) || 'fr';
+    const plural = visible > 1;
+    const tpl = ({
+      en: plural ? `${visible} dishes found` : `${visible} dish found`,
+      ar: plural ? `${visible} أطباق موجودة` : `${visible} طبق موجود`,
+      fr: plural ? `${visible} plats trouvés` : `${visible} plat trouvé`,
+    })[lang] || `${visible} plat${plural?'s':''} trouvé${plural?'s':''}`;
+    searchCount.textContent = tpl;
+  } else {
+    searchCount.textContent = '';
+  }
   if (openCard && openCard.classList.contains('hidden')) closeOpenDetail();
 }
 

@@ -151,11 +151,8 @@
     .hero-deco-line .label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.5s forwards; }
     .hero-eyebrow { font-family: var(--font-corps); font-weight: 900; font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--or-fonce); margin-bottom: 0.8rem; opacity: 0; animation: fadeUp 0.7s var(--ease-doux) 0.7s forwards; }
     .hero-act h1 { font-family: var(--font-titre); font-size: clamp(3.5rem, 6.5vw, 6.5rem); color: var(--encre); line-height: 0.9; margin: 0 0 1.5rem; letter-spacing: 0.02em; }
-    .hero-act .word { display: inline-block; clip-path: inset(0 100% 0 0); animation: wordReveal 0.85s var(--ease-doux) forwards; }
-    .hero-act .word:nth-child(1) { animation-delay: 0.8s; }
-    .hero-act .word:nth-child(2) { animation-delay: 1.0s; }
-    .hero-act .word:nth-child(3) { color: var(--terracotta); animation-delay: 1.2s; }
-    @keyframes wordReveal { to { clip-path: inset(0 0% 0 0); } }
+    .hero-act .word { display: inline-block; }
+    .hero-act .word-accent { color: var(--terracotta); }
     .hero-desc { font-size: 0.98rem; color: #6b5640; line-height: 1.75; max-width: 420px; margin-bottom: 2.2rem; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.7s forwards; }
     .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--terracotta); color: #fff; padding: 0.9rem 2rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, gap 0.3s, transform 0.3s var(--ease-spring); align-self: flex-start; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.9s forwards; }
     .hero-cta:hover { background: var(--terracotta-dark); color: #fff; gap: 1rem; transform: translateY(-2px); }
@@ -700,13 +697,6 @@
           <i class="bi bi-arrow-right chev"></i>
         </a>
       </div>
-      <div class="menu-group">
-        <a class="menu-head" href="guide.html">
-          <span data-i18n="nav.guide">Guide</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-
       <!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
@@ -732,7 +722,7 @@
     <div class="hero-left">
       <div class="hero-deco-line"><span class="line-seg"></span><span class="label">Maroc · 2026</span><span class="line-seg"></span></div>
       <p class="hero-eyebrow">Activités Incontournables</p>
-      <h1><span class="word">VIS&nbsp;</span><span class="word">LE&nbsp;</span><span class="word">MAROC</span></h1>
+      <h1><span class="word">VIS LE</span>&nbsp;<span class="word word-accent">MAROC</span></h1>
       <p class="hero-desc">Des ruelles azur de Chefchaouen aux dunes infinies de Merzouga — plongez au cœur d'aventures qui transforment chaque voyageur.</p>
       <a href="#activitesSection" class="hero-cta"><span>Explorer les activités</span><i class="bi bi-arrow-down"></i></a>
     </div>
@@ -1529,35 +1519,7 @@
     window.addEventListener('scroll', updateParallax, { passive: true });
   })();
 
-  /* ── 7. TEXT SCRAMBLE (hero h1) ── */
-  (function () {
-    const words = document.querySelectorAll('.hero-act .word');
-    if (!words.length) return;
-
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    words.forEach((word, idx) => {
-      const original = word.textContent;
-      const delay = 800 + idx * 200;
-
-      setTimeout(() => {
-        let iterations = 0;
-        const interval = setInterval(() => {
-          word.textContent = original.split('').map((char, i) => {
-            if (char === ' ' || char === '&') return char;
-            if (i < iterations) return original[i];
-            return chars[Math.floor(Math.random() * chars.length)];
-          }).join('');
-
-          iterations += 0.4;
-          if (iterations >= original.length) {
-            word.textContent = original;
-            clearInterval(interval);
-          }
-        }, 45);
-      }, delay);
-    });
-  })();
+  /* ── 7. (TEXT SCRAMBLE removed for cleaner reveal) ── */
 
   /* ── 8. SMOOTH SCROLL ANCHORS ── */
   (function () {
