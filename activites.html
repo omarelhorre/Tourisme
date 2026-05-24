@@ -67,12 +67,12 @@
     .nav-fab-burger { right: 2.5rem; }
     .nav-fab-logo i { color: var(--terracotta); font-size: 1.5rem; }
     .nav-fab-burger span {
-      display: block; width: 22px; height: 2.5px;
+      display: block; width: 22px; height: 3px;
       background: var(--terracotta); border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-    body.menu-open .nav-fab-burger span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
-    body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-8.5px) rotate(-45deg); }
+    body.menu-open .nav-fab-burger span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+    body.menu-open .nav-fab-burger span:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
     body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
     /* ── MENU ── */
@@ -86,7 +86,7 @@
       transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
     }
     body.menu-open .site-menu { opacity: 1; visibility: visible; transform: scale(1); transition: opacity 0.35s ease, transform 0.35s ease; }
-    .site-menu::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); opacity: 0.5; pointer-events: none; }
+    .site-menu::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; }
     .site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
     .menu-group { border-bottom: 1px solid rgba(192,85,42,0.22); }
     .menu-head { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.15rem 0.25rem; background: transparent; border: none; cursor: pointer; text-align: left; text-decoration: none; color: var(--texte); font-family: 'Lato', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase; transition: color 0.2s ease, padding-left 0.2s ease; }
@@ -98,6 +98,17 @@
     .menu-group.open .menu-sub { max-height: 640px; opacity: 1; }
     .menu-sub-list { list-style: none; margin: 0; padding: 0.3rem 0 1.2rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; }
     .menu-sub-list.cities { display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 1.5rem; }
+    .menu-sub-list.activities-pics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; padding: 0.6rem 0 1.2rem; }
+    .menu-sub-list.activities-pics li { list-style: none; }
+    .menu-sub-list.activities-pics a { position: relative; display: block; padding: 0; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; background: #2a1a08; text-decoration: none; text-transform: uppercase; transition: transform 0.3s, box-shadow 0.3s; }
+    .menu-sub-list.activities-pics a::before { display: none; }
+    .menu-sub-list.activities-pics img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.5s; }
+    .menu-sub-list.activities-pics a::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(20,12,4,0.05) 0%, rgba(20,12,4,0.78) 100%); transition: background 0.3s; }
+    .menu-sub-list.activities-pics span { position: absolute; bottom: 10px; left: 12px; right: 12px; z-index: 2; color: #fff; font-weight: 900; font-size: 0.88rem; letter-spacing: 0.05em; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+    .menu-sub-list.activities-pics a:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -10px rgba(0,0,0,0.45); }
+    .menu-sub-list.activities-pics a:hover img { transform: scale(1.08); }
+    .menu-sub-list.activities-pics a:hover::after { background: linear-gradient(180deg, rgba(192,85,42,0.18) 0%, rgba(20,12,4,0.85) 100%); }
+    @media (max-width: 600px) { .menu-sub-list.activities-pics { grid-template-columns: repeat(2, 1fr); } }
     .menu-sub-list a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.6rem; color: var(--texte-doux); text-decoration: none; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px; transition: color 0.2s, background 0.2s; }
     .menu-sub-list a::before { content: "→"; color: var(--terracotta); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; }
     .menu-sub-list a:hover { color: var(--terracotta); background: rgba(255,255,255,0.6); }
@@ -126,7 +137,7 @@
       .site-menu::before { display: none; }
       .site-menu-inner { position: absolute; top: 0; right: 0; height: 100%; width: min(50vw, 760px); max-width: none; margin: 0; padding: 5rem 4rem 3rem; overflow-y: auto; background: var(--sable); border-left: 1px solid rgba(192,85,42,0.18); box-shadow: -30px 0 70px -25px rgba(60,30,10,0.45); transform: translateX(100%); transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-wrap: wrap; align-content: flex-start; gap: 0.5rem; }
       body.menu-open .site-menu-inner { transform: translateX(0); }
-      .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); opacity: 0.5; pointer-events: none; z-index: 0; }
+      .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; z-index: 0; }
       .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
       .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: 0.08em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
       .menu-head:hover { padding-left: 1.4rem; background: rgba(192,85,42,0.12); }
@@ -144,7 +155,7 @@
     /* ── HERO ── */
     .hero-act { position: relative; min-height: 100vh; background: var(--sable); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
     .hero-left { position: relative; display: flex; flex-direction: column; justify-content: center; padding: 7rem 3.5rem 5rem 4rem; z-index: 2; }
-    .hero-left::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.1'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); pointer-events: none; }
+    .hero-left::before { content: ""; position: absolute; inset: 0; background-image: none; pointer-events: none; }
     .hero-deco-line { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.8rem; }
     .hero-deco-line .line-seg { height: 2px; background: var(--terracotta); width: 0; animation: lineGrow 1s var(--ease-doux) 0.3s forwards; }
     @keyframes lineGrow { to { width: 50px; } }
@@ -153,6 +164,9 @@
     .hero-act h1 { font-family: var(--font-titre); font-size: clamp(3.5rem, 6.5vw, 6.5rem); color: var(--encre); line-height: 0.9; margin: 0 0 1.5rem; letter-spacing: 0.02em; }
     .hero-act .word { display: inline-block; }
     .hero-act .word-accent { color: var(--terracotta); }
+    /* Arabic reads right-to-left; flip the h1 inline order so "عش المغرب" reads correctly */
+    html[lang="ar"] .hero-act h1 { direction: rtl; }
+    html[lang="ar"] .hero-act .word { display: inline-block; }
     .hero-desc { font-size: 0.98rem; color: #6b5640; line-height: 1.75; max-width: 420px; margin-bottom: 2.2rem; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.7s forwards; }
     .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--terracotta); color: #fff; padding: 0.9rem 2rem; border-radius: 4px; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.3s, gap 0.3s, transform 0.3s var(--ease-spring); align-self: flex-start; opacity: 0; animation: fadeUp 0.8s var(--ease-doux) 1.9s forwards; }
     .hero-cta:hover { background: var(--terracotta-dark); color: #fff; gap: 1rem; transform: translateY(-2px); }
@@ -160,7 +174,7 @@
     .hero-right img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.82) saturate(1.15); transform: scale(1.05); animation: imgDrift 20s ease-in-out infinite alternate; }
     @keyframes imgDrift { from { transform: scale(1.05) translateX(0); } to { transform: scale(1.1) translateX(-15px); } }
     .hero-right::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, var(--sable) 0%, rgba(245,230,200,0.3) 25%, transparent 55%); }
-    .hero-right::after { content: ""; position: absolute; inset: 0; z-index: 2; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='0.8' opacity='0.22'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>"); pointer-events: none; }
+    .hero-right::after { content: ""; position: absolute; inset: 0; z-index: 2; background-image: none; pointer-events: none; }
     50%{transform:translateY(-10px)} }
     .hero-photo-badge { position: absolute; bottom: 2.5rem; right: 2.5rem; z-index: 5; background: var(--terracotta); color: #fff; padding: 1rem 1.5rem; border-radius: 8px; text-align: center; box-shadow: 0 8px 24px -8px rgba(192,85,42,0.6); animation: badgeFloat 4s ease-in-out infinite; }
     @keyframes badgeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
@@ -268,7 +282,30 @@
     .act-location { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); display: flex; align-items: center; gap: 5px; margin-bottom: 0.45rem; }
     .act-card-body h3 { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.55rem; color: var(--encre); font-family: var(--font-titre); line-height: 1.25; transition: color 0.3s; }
     .act-card:hover .act-card-body h3 { color: var(--terracotta); }
-    .act-desc { color: #6B6B6B; font-size: 0.86rem; line-height: 1.65; flex: 1; margin-bottom: 1.2rem; }
+    .act-desc { color: #6B6B6B; font-size: 0.86rem; line-height: 1.65; flex: 1; margin-bottom: 1rem; }
+
+    /* Enriched info: duration, price, agencies */
+    .act-extras { margin: 0 0 1rem; padding: 0.9rem 0 0; border-top: 1px dashed rgba(192,85,42,0.18); display: flex; flex-direction: column; gap: 0.7rem; }
+    .act-meta-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .act-chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.65rem; border-radius: 999px; background: rgba(192,85,42,0.08); color: var(--terracotta); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+    .act-chip i { font-size: 0.78rem; }
+    .act-chip-price { background: rgba(212,175,55,0.14); color: #8a6b13; }
+    .act-chip-season { background: rgba(45,106,79,0.10); color: #1e4d36; }
+    .act-chip-level { background: rgba(31,78,95,0.10); color: #143844; }
+    .act-agencies { display: flex; flex-direction: column; gap: 0.35rem; }
+    .act-agency-label { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #8a7960; }
+    .act-agency-list { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .act-agency-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.28rem 0.65rem; border-radius: 6px; background: #FAF8F4; border: 1px solid #E8E0D2; color: #4a3a26; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s; }
+    .act-agency-badge::after { content: "\F3D9"; font-family: "bootstrap-icons"; font-size: 0.75rem; opacity: 0.5; transition: opacity 0.2s; }
+    .act-agency-badge:hover { background: #fff; border-color: var(--terracotta); color: var(--terracotta); transform: translateY(-1px); }
+    .act-agency-badge:hover::after { opacity: 1; }
+    .act-card:hover .act-agency-badge { border-color: rgba(192,85,42,0.35); }
+    .feat-body .act-extras { border-top-color: rgba(255,255,255,0.18); }
+    .feat-body .act-chip { background: rgba(255,255,255,0.12); color: #FFE8B8; }
+    .feat-body .act-chip-price { background: rgba(212,175,55,0.25); color: #FFE8B8; }
+    .feat-body .act-agency-label { color: rgba(255,255,255,0.7); }
+    .feat-body .act-agency-badge { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); color: #fff; }
+
     .btn-decouvrir { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; border: 1.5px solid var(--terracotta); color: var(--terracotta); padding: 0.55rem 1.2rem; border-radius: 40px; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; align-self: flex-start; transition: all 0.3s ease; }
     .btn-decouvrir:hover { background: var(--terracotta); color: #fff; gap: 0.9rem; }
     .btn-decouvrir i { transition: transform 0.3s var(--ease-spring); }
@@ -529,17 +566,13 @@
       transform-origin: left;
     }
 
-    /* ── 12. CURSOR FOLLOW GLOW ── */
-    .act-card {
-      transform-style: preserve-3d;
-      perspective: 1000px;
-    }
+    /* ── 12. CURSOR FOLLOW GLOW (flat hover, no 3D tilt) ── */
     .act-card::before {
       content: "";
       position: absolute;
       inset: 0;
       border-radius: 16px;
-      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
                     rgba(192,85,42,0.07), transparent 40%);
       opacity: 0;
       transition: opacity 0.3s;
@@ -550,7 +583,7 @@
       opacity: 1;
     }
     .act-card:hover {
-      transform: translateY(-8px) rotateX(1deg) rotateY(-0.5deg);
+      transform: translateY(-8px);
     }
 
     /* ── 13. ROTATING DECO ── */
@@ -685,19 +718,78 @@
       </div>
 
       <!-- Direct links -->
-      <div class="menu-group">
-        <a class="menu-head" href="activites.html" style="color:var(--terracotta)!important;">
-          <span data-i18n="nav.activities">Activités</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="itineraire.html">
-          <span data-i18n="nav.itineraries">Itinéraires</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <!-- Footer : language + motion -->
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.activities">Activités</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="activites.html#filter-all">
+                  <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_all">Toutes</span>
+                </a></li>
+                <li><a href="activites.html#filter-culture">
+                  <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_culture">Culture</span>
+                </a></li>
+                <li><a href="activites.html#filter-nature">
+                  <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_nature">Nature</span>
+                </a></li>
+                <li><a href="activites.html#filter-aventure">
+                  <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_adventure">Aventure</span>
+                </a></li>
+                <li><a href="activites.html#filter-sport">
+                  <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_sport">Sport</span>
+                </a></li>
+                <li><a href="activites.html#filter-detente">
+                  <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_relax">Détente</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.itineraries">Itinéraires</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="itineraire.html#filter-all">
+                  <img src="images/sahara_dunes.png" alt="" loading="lazy">
+                  <span>Tous</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-culture">
+                  <img src="images/fes.png" alt="" loading="lazy">
+                  <span>Culture</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-aventure">
+                  <img src="images/merzouga.png" alt="" loading="lazy">
+                  <span>Aventure</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-nature">
+                  <img src="images/azrou.png" alt="" loading="lazy">
+                  <span>Nature</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-sport">
+                  <img src="images/taghazout.png" alt="" loading="lazy">
+                  <span>Sport</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      
+
+          <div class="menu-group">
+                <a class="menu-head" href="equip.html">
+                  <span data-i18n="nav.team">Équipe</span>
+                  <i class="bi bi-arrow-right chev"></i>
+                </a>
+              </div><!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
           <i class="bi bi-globe2" aria-hidden="true"></i>
@@ -766,6 +858,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
               <h3>Quad dans le Désert</h3>
               <p class="act-desc">Conduisez un véhicule tout-terrain à travers les palmiers et les dunes aux portes de Marrakech. Pure adrénaline au cœur des paysages semi-désertiques.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>350-500 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Oct–Avr</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Marrakech+Quad+Aventure+Morocco" target="_blank" rel="noopener" title="Marrakech Quad Aventure — Google Maps">Marrakech Quad Aventure</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=D%C3%A9sert+%26+%C3%89motion+Morocco" target="_blank" rel="noopener" title="Désert & Émotion — Google Maps">Désert & Émotion</a></div>
+                </div>
+              </div>
               <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -784,6 +889,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
               <h3>Vol en Montgolfière</h3>
               <p class="act-desc">Envolez-vous à l'aube au-dessus des palmeraies et des kasbahs. Vue panoramique sur l'Atlas enneigé depuis une nacelle suspendue dans le silence du ciel.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>3h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>2200-2800 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Oct–Mai</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Ciel+d%E2%80%99Afrique+Morocco" target="_blank" rel="noopener" title="Ciel d’Afrique — Google Maps">Ciel d’Afrique</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Marrakech+Balloon+Morocco" target="_blank" rel="noopener" title="Marrakech Balloon — Google Maps">Marrakech Balloon</a></div>
+                </div>
+              </div>
               <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -801,6 +919,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
               <h3>Spa &amp; Hammam Traditionnel</h3>
               <p class="act-desc">Plongez dans le rituel ancestral du hammam marocain — vapeur, savon beldi, kessa et huile d'argan. Un moment de pur ressourcement dans un riad historique.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1h30</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>300-700 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Les+Bains+de+Marrakech+Morocco" target="_blank" rel="noopener" title="Les Bains de Marrakech — Google Maps">Les Bains de Marrakech</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Hammam+La+Mamounia+Morocco" target="_blank" rel="noopener" title="Hammam La Mamounia — Google Maps">Hammam La Mamounia</a></div>
+                </div>
+              </div>
               <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -818,6 +949,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MARRAKECH</span>
               <h3>Place Jemaa el-Fna</h3>
               <p class="act-desc">À la tombée du jour, la place mythique s'embrase : spectacles de rue, conteurs berbères, musiciens gnawa et étals de cuisine qui embaument les sens.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2-3h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>Gratuit</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Visite+libre+Morocco" target="_blank" rel="noopener" title="Visite libre — Google Maps">Visite libre</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Marrakech+Riad+Tours+Morocco" target="_blank" rel="noopener" title="Marrakech Riad Tours — Google Maps">Marrakech Riad Tours</a></div>
+                </div>
+              </div>
               <a href="marrakech.html" class="btn-decouvrir">Découvrir Marrakech <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -836,6 +980,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
               <h3>Surf Atlantique</h3>
               <p class="act-desc">Les plages d'Agadir offrent des vagues parfaites pour tous les niveaux. Débutants et experts profitent de cours encadrés ou de sessions libres sur des breaks de classe mondiale.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>300-450 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Sep–Mai</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Surf+Maroc+Morocco" target="_blank" rel="noopener" title="Surf Maroc — Google Maps">Surf Maroc</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Paradis+Plage+Morocco" target="_blank" rel="noopener" title="Paradis Plage — Google Maps">Paradis Plage</a></div>
+                </div>
+              </div>
               <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -853,6 +1010,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
               <h3>Jet Ski</h3>
               <p class="act-desc">Fendez les vagues de l'Atlantique à bord d'un jet ski. Adrénaline garantie sur les eaux turquoise d'Agadir, entre vitesse et paysages côtiers spectaculaires.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>30min</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>450-650 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mai–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Agadir+Jet+Sport+Morocco" target="_blank" rel="noopener" title="Agadir Jet Sport — Google Maps">Agadir Jet Sport</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Marina+Watersports+Morocco" target="_blank" rel="noopener" title="Marina Watersports — Google Maps">Marina Watersports</a></div>
+                </div>
+              </div>
               <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -870,6 +1040,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>AGADIR</span>
               <h3>Stand-up Paddle</h3>
               <p class="act-desc">Naviguez debout sur une planche avec une pagaie le long de la baie d'Agadir. Idéal pour explorer les eaux calmes près de la plage et renforcer l'équilibre.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>200-300 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Avr–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Agadir+SUP+Club+Morocco" target="_blank" rel="noopener" title="Agadir SUP Club — Google Maps">Agadir SUP Club</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Surf+Berb%C3%A8re+Morocco" target="_blank" rel="noopener" title="Surf Berbère — Google Maps">Surf Berbère</a></div>
+                </div>
+              </div>
               <a href="agadir.html" class="btn-decouvrir">Découvrir Agadir <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -887,6 +1070,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
               <h3>Kitesurf</h3>
               <p class="act-desc">La lagune de Dakhla est l'un des meilleurs spots de kitesurf au monde. Eaux peu profondes et vent constant toute l'année font de ce lieu un paradis pour les riders.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>600-900 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Avr–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Sportif</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Kite+Dakhla+Morocco" target="_blank" rel="noopener" title="Kite Dakhla — Google Maps">Kite Dakhla</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Dakhla+Attitude+Morocco" target="_blank" rel="noopener" title="Dakhla Attitude — Google Maps">Dakhla Attitude</a></div>
+                </div>
+              </div>
               <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -904,6 +1100,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
               <h3>Camping de Luxe</h3>
               <p class="act-desc">Dormez dans des tentes équipées face à la lagune, entre désert et océan. Coucher de soleil sur l'eau, dîner sous les étoiles dans un cadre préservé.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1 nuit</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>900-1500 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Sep–Mai</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Erg+Chebbi+Luxury+Camp+Morocco" target="_blank" rel="noopener" title="Erg Chebbi Luxury Camp — Google Maps">Erg Chebbi Luxury Camp</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Sahara+Magic+Camp+Morocco" target="_blank" rel="noopener" title="Sahara Magic Camp — Google Maps">Sahara Magic Camp</a></div>
+                </div>
+              </div>
               <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -921,6 +1130,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>DAKHLA</span>
               <h3>Kayak en Lagune</h3>
               <p class="act-desc">Pagayez à travers la lagune de Dakhla, en observant flamants roses et dauphins. Une aventure douce au milieu d'une nature encore sauvage.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>350-500 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mar–Nov</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Dakhla+Lagoon+Kayak+Morocco" target="_blank" rel="noopener" title="Dakhla Lagoon Kayak — Google Maps">Dakhla Lagoon Kayak</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Cap+Dr%C3%A2a+Adventure+Morocco" target="_blank" rel="noopener" title="Cap Drâa Adventure — Google Maps">Cap Drâa Adventure</a></div>
+                </div>
+              </div>
               <a href="dakhla.html" class="btn-decouvrir">Découvrir Dakhla <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -938,6 +1160,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
               <h3>Tubing à Akchour</h3>
               <p class="act-desc">Glissez sur les eaux cristallines d'Akchour en bouée, entre gorges sauvages et falaises vertigineuses. Une descente exaltante au cœur du Rif.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Demi-journée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>280-380 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mai–Sep</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Akchour+Excursions+Morocco" target="_blank" rel="noopener" title="Akchour Excursions — Google Maps">Akchour Excursions</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Chefchaouen+Outdoor+Morocco" target="_blank" rel="noopener" title="Chefchaouen Outdoor — Google Maps">Chefchaouen Outdoor</a></div>
+                </div>
+              </div>
               <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -955,6 +1190,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
               <h3>Randonnée dans le Rif</h3>
               <p class="act-desc">Sillonnez les sentiers escarpés du massif du Rif à travers forêts de pins et villages berbères. Vue panoramique sur la ville bleue depuis les crêtes.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>4-6h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>350-550 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mar–Nov</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Rif+Hiking+Morocco" target="_blank" rel="noopener" title="Rif Hiking — Google Maps">Rif Hiking</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Chefchaouen+Outdoor+Morocco" target="_blank" rel="noopener" title="Chefchaouen Outdoor — Google Maps">Chefchaouen Outdoor</a></div>
+                </div>
+              </div>
               <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -972,6 +1220,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
               <h3>Photographie Artistique</h3>
               <p class="act-desc">Chaque ruelle et chaque porte de Chefchaouen est un tableau. La ville bleue est un studio photo naturel unique, entre lumières dorées et bleus infinis.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Demi-journée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>450-700 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Photo+Tour+Maroc+Morocco" target="_blank" rel="noopener" title="Photo Tour Maroc — Google Maps">Photo Tour Maroc</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Atelier+Bleu+Morocco" target="_blank" rel="noopener" title="Atelier Bleu — Google Maps">Atelier Bleu</a></div>
+                </div>
+              </div>
               <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -989,6 +1250,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CHEFCHAOUEN</span>
               <h3>Escalade en Falaise</h3>
               <p class="act-desc">Les falaises calcaires du Rif offrent des voies d'escalade exceptionnelles avec vue sur la médina bleue. Instructeurs certifiés et équipement fourni.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Journée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>550-800 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mar–Nov</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Sportif</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Climbing+Morocco+Morocco" target="_blank" rel="noopener" title="Climbing Morocco — Google Maps">Climbing Morocco</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Vertical+Maroc+Morocco" target="_blank" rel="noopener" title="Vertical Maroc — Google Maps">Vertical Maroc</a></div>
+                </div>
+              </div>
               <a href="chefchaouen.html" class="btn-decouvrir">Découvrir Chefchaouen <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1006,6 +1280,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
               <h3>Kitesurf</h3>
               <p class="act-desc">La baie d'Essaouira est un spot de kitesurf mondialement reconnu. Vent alizé constant, eaux peu profondes, vagues parfaites pour tous niveaux.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>600-900 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Avr–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Sportif</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Kite+Dakhla+Morocco" target="_blank" rel="noopener" title="Kite Dakhla — Google Maps">Kite Dakhla</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Dakhla+Attitude+Morocco" target="_blank" rel="noopener" title="Dakhla Attitude — Google Maps">Dakhla Attitude</a></div>
+                </div>
+              </div>
               <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1023,6 +1310,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
               <h3>Windsurf</h3>
               <p class="act-desc">Hissez la voile et laissez les alizés vous porter. Essaouira figure parmi les spots de windsurf les plus réputés d'Afrique, conditions idéales de mai à octobre.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>400-600 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mai–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Sportif</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Essaouira+Wind+Sports+Morocco" target="_blank" rel="noopener" title="Essaouira Wind Sports — Google Maps">Essaouira Wind Sports</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Magic+Fun+Afrika+Morocco" target="_blank" rel="noopener" title="Magic Fun Afrika — Google Maps">Magic Fun Afrika</a></div>
+                </div>
+              </div>
               <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1040,6 +1340,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>ESSAOUIRA</span>
               <h3>Musique Live Gnawa</h3>
               <p class="act-desc">Essaouira, capitale mondiale du gnawa, vibre au rythme des crotales et des guembris. Performances envoûtantes dans les cafés de la médina et lors du festival annuel.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Soirée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>Gratuit-150 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Juin (festival)</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Maison+Gnawa+Morocco" target="_blank" rel="noopener" title="Maison Gnawa — Google Maps">Maison Gnawa</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Festival+Gnaoua+Morocco" target="_blank" rel="noopener" title="Festival Gnaoua — Google Maps">Festival Gnaoua</a></div>
+                </div>
+              </div>
               <a href="essaouira.html" class="btn-decouvrir">Découvrir Essaouira <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1057,6 +1370,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
               <h3>Vie Nocturne</h3>
               <p class="act-desc">La nuit à Casablanca ne dort jamais. Clubs branchés, bars à cocktails et restaurants animés jusqu'à l'aube composent une scène nocturne digne des grandes capitales.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Soirée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>200-500 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Buddha+Bar+Marrakech+Morocco" target="_blank" rel="noopener" title="Buddha Bar Marrakech — Google Maps">Buddha Bar Marrakech</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Comptoir+Darna+Morocco" target="_blank" rel="noopener" title="Comptoir Darna — Google Maps">Comptoir Darna</a></div>
+                </div>
+              </div>
               <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1074,6 +1400,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
               <h3>Rooftop avec Vue</h3>
               <p class="act-desc">Depuis les terrasses perchées de Casa, admirez la skyline et l'océan. Cocktails, musique lounge et couchers de soleil sur la Grande Mosquée Hassan II.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Soirée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>100-300 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Sky+Lounge+Marrakech+Morocco" target="_blank" rel="noopener" title="Sky Lounge Marrakech — Google Maps">Sky Lounge Marrakech</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Nomad+Rooftop+Morocco" target="_blank" rel="noopener" title="Nomad Rooftop — Google Maps">Nomad Rooftop</a></div>
+                </div>
+              </div>
               <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1091,6 +1430,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>CASABLANCA</span>
               <h3>Shopping &amp; Artisanat</h3>
               <p class="act-desc">Souks de l'ancienne médina aux boutiques de luxe d'Anfa : Casablanca conjugue artisanat marocain authentique — zellige, maroquinerie, caftan — et mode internationale.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2-4h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>Variable</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Coop%C3%A9rative+Artisans+F%C3%A8s+Morocco" target="_blank" rel="noopener" title="Coopérative Artisans Fès — Google Maps">Coopérative Artisans Fès</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Souk+Walk+Tours+Morocco" target="_blank" rel="noopener" title="Souk Walk Tours — Google Maps">Souk Walk Tours</a></div>
+                </div>
+              </div>
               <a href="casablanca.html" class="btn-decouvrir">Découvrir Casablanca <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1108,6 +1460,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
               <h3>Ski à Michlifen</h3>
               <p class="act-desc">La station de Michlifen accueille les amateurs de ski de décembre à mars. Pistes pour tous niveaux, remontées mécaniques et panorama sur l'Atlas Moyen enneigé.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Journée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>450-900 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Déc–Mar</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Michlifen+Ski+Resort+Morocco" target="_blank" rel="noopener" title="Michlifen Ski Resort — Google Maps">Michlifen Ski Resort</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Atlas+Ski+School+Morocco" target="_blank" rel="noopener" title="Atlas Ski School — Google Maps">Atlas Ski School</a></div>
+                </div>
+              </div>
               <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1125,6 +1490,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
               <h3>Camping en Forêt de Cèdres</h3>
               <p class="act-desc">Bivouaquez sous les cèdres millénaires de l'Atlas. Nuits étoilées, sentiers de randonnée et air pur de moyenne altitude aux côtés des singes magots.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1 nuit</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>350-600 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Avr–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=For%C3%AAt+Verte+Ifrane+Morocco" target="_blank" rel="noopener" title="Forêt Verte Ifrane — Google Maps">Forêt Verte Ifrane</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Cedar+Camp+Azrou+Morocco" target="_blank" rel="noopener" title="Cedar Camp Azrou — Google Maps">Cedar Camp Azrou</a></div>
+                </div>
+              </div>
               <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1142,6 +1520,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>IFRANE</span>
               <h3>Vélo de Montagne</h3>
               <p class="act-desc">Roulez à travers les sentiers forestiers et les lacs de l'Atlas Moyen. Paysages de carte postale entre forêts de cèdres et cascades cachées.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Demi-journée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>300-500 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Mar–Oct</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Sportif</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Bike+Atlas+Morocco" target="_blank" rel="noopener" title="Bike Atlas — Google Maps">Bike Atlas</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Ifrane+Mountain+Bike+Morocco" target="_blank" rel="noopener" title="Ifrane Mountain Bike — Google Maps">Ifrane Mountain Bike</a></div>
+                </div>
+              </div>
               <a href="ifrane.html" class="btn-decouvrir">Découvrir Ifrane <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1159,6 +1550,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>RABAT</span>
               <h3>Balade sur le Bouregreg</h3>
               <p class="act-desc">Naviguez sur les eaux calmes du Bouregreg à bord d'une embarcation traditionnelle entre Rabat et Salé. Vue unique sur la Kasbah et la Tour Hassan.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>120-250 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Toute l'année</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Rabat+Marina+Tours+Morocco" target="_blank" rel="noopener" title="Rabat Marina Tours — Google Maps">Rabat Marina Tours</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Bouregreg+Boat+Morocco" target="_blank" rel="noopener" title="Bouregreg Boat — Google Maps">Bouregreg Boat</a></div>
+                </div>
+              </div>
               <a href="rabat.html" class="btn-decouvrir">Découvrir Rabat <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1177,6 +1581,19 @@
               <p class="feat-city-label"><i class="bi bi-geo-alt-fill"></i> MERZOUGA, MAROC</p>
               <h3>Balade à dos de Chameau</h3>
               <p>Partez en caravane à travers les dunes de l'Erg Chebbi au crépuscule. Une heure de dromadaire jusqu'à votre bivouac berbère, sous un ciel étoilé sans fin — l'expérience saharienne par excellence.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>2h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>250-400 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Sep–Mai</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Chameaux+du+Sahara+Morocco" target="_blank" rel="noopener" title="Chameaux du Sahara — Google Maps">Chameaux du Sahara</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Merzouga+Camel+Trek+Morocco" target="_blank" rel="noopener" title="Merzouga Camel Trek — Google Maps">Merzouga Camel Trek</a></div>
+                </div>
+              </div>
               <a href="merzouga.html" class="feat-link">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1194,6 +1611,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MERZOUGA</span>
               <h3>Sandboard</h3>
               <p class="act-desc">Dévalez les dunes géantes de l'Erg Chebbi sur une planche de sandboard. Sensation de glisse unique sur un terrain naturel exceptionnel.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>1h</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>180-280 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Oct–Avr</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Modéré</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Erg+Chebbi+Adventures+Morocco" target="_blank" rel="noopener" title="Erg Chebbi Adventures — Google Maps">Erg Chebbi Adventures</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Sahara+Sandboard+Morocco" target="_blank" rel="noopener" title="Sahara Sandboard — Google Maps">Sahara Sandboard</a></div>
+                </div>
+              </div>
               <a href="merzouga.html" class="btn-decouvrir">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1215,6 +1645,19 @@
               <span class="act-location"><i class="bi bi-geo-alt-fill"></i>MERZOUGA</span>
               <h3>Observation des Étoiles</h3>
               <p class="act-desc">Loin de toute pollution lumineuse, le ciel du Sahara dévoile la Voie Lactée dans toute sa splendeur. Allongé sur les dunes de l'Erg Chebbi, des milliers d'étoiles vous entourent — un spectacle inoubliable.</p>
+              <div class="act-extras">
+                <div class="act-meta-row">
+                  <span class="act-chip"><i class="bi bi-clock"></i>Soirée</span>
+                  <span class="act-chip act-chip-price"><i class="bi bi-tag-fill"></i>200-400 MAD</span>
+                
+                  <span class="act-chip act-chip-season"><i class="bi bi-calendar-event"></i>Sep–Mai</span>
+                  <span class="act-chip act-chip-level"><i class="bi bi-speedometer2"></i>Facile</span>
+                </div>
+                <div class="act-agencies">
+                  <span class="act-agency-label" data-i18n="act.provided_by">Proposé par</span>
+                  <div class="act-agency-list"><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Sahara+Sky+Observatory+Morocco" target="_blank" rel="noopener" title="Sahara Sky Observatory — Google Maps">Sahara Sky Observatory</a><a class="act-agency-badge" href="https://www.google.com/maps/search/?api=1&query=Stargazing+Merzouga+Morocco" target="_blank" rel="noopener" title="Stargazing Merzouga — Google Maps">Stargazing Merzouga</a></div>
+                </div>
+              </div>
               <a href="merzouga.html" class="btn-decouvrir">Découvrir Merzouga <i class="bi bi-geo-alt"></i></a>
             </div>
           </div>
@@ -1320,6 +1763,21 @@
         applyFilter(tab.dataset.filter);
       });
     });
+
+    // Deep-link via URL hash (e.g. #filter-culture from the nav menu).
+    function applyHash() {
+      const m = (location.hash || '').match(/^#filter-([a-z-]+)$/);
+      if (!m) return;
+      const target = Array.from(tabs).find(t => t.dataset.filter === m[1]);
+      if (!target) return;
+      tabs.forEach(t => t.classList.remove('active'));
+      target.classList.add('active');
+      applyFilter(target.dataset.filter);
+      const grid = document.getElementById('filtered-grid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    window.addEventListener('hashchange', applyHash);
+    applyHash();
   })();
 
   /* ── LIGHTBOX ── */
@@ -1596,33 +2054,7 @@
     images.forEach(img => imgObserver.observe(img));
   })();
 
-  /* ── 11. 3D TILT CARDS ── */
-  (function () {
-    const cards = document.querySelectorAll('.act-card');
-    if (!cards.length) return;
-
-    const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    if (isTouch) return;
-
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 25;
-        const rotateY = (centerX - x) / 25;
-
-        card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  })();
+  /* 3D tilt removed — flat hover lift only */
 
 </script>
 

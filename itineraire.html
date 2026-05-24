@@ -70,9 +70,9 @@ body {
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: 
+  background:
     linear-gradient(180deg, rgba(26,18,8,0) 0%, rgba(26,18,8,0.4) 60%, rgba(26,18,8,0.85) 100%),
-    url('images/ouarzazate.png') center/cover no-repeat;
+    url('images/head_itineraire.png') center/cover no-repeat;
 }
 .hero-content {
   position: relative; z-index: 2;
@@ -684,20 +684,79 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     </div>
 
     <!-- Direct links -->
-    <div class="menu-group">
-      <a class="menu-head" href="activites.html">
-        <span data-i18n="nav.activities">Activités</span>
-        <i class="bi bi-arrow-right chev"></i>
-      </a>
-    </div>
-    <div class="menu-group">
-      <a class="menu-head" href="itineraire.html">
-        <span data-i18n="nav.itineraries">Itinéraires</span>
-        <i class="bi bi-arrow-right chev"></i>
-      </a>
-    </div>
+    <div class="menu-group" data-group>
+          <button type="button" class="menu-head" aria-expanded="false">
+            <span data-i18n="nav.activities">Activités</span>
+            <i class="bi bi-chevron-down chev"></i>
+          </button>
+          <div class="menu-sub">
+            <ul class="menu-sub-list activities-pics">
+              <li><a href="activites.html#filter-all">
+                <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
+                <span data-i18n="nav.act_all">Toutes</span>
+              </a></li>
+              <li><a href="activites.html#filter-culture">
+                <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
+                <span data-i18n="nav.act_culture">Culture</span>
+              </a></li>
+              <li><a href="activites.html#filter-nature">
+                <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
+                <span data-i18n="nav.act_nature">Nature</span>
+              </a></li>
+              <li><a href="activites.html#filter-aventure">
+                <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
+                <span data-i18n="nav.act_adventure">Aventure</span>
+              </a></li>
+              <li><a href="activites.html#filter-sport">
+                <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
+                <span data-i18n="nav.act_sport">Sport</span>
+              </a></li>
+              <li><a href="activites.html#filter-detente">
+                <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
+                <span data-i18n="nav.act_relax">Détente</span>
+              </a></li>
+            </ul>
+          </div>
+        </div>
+    <div class="menu-group" data-group>
+          <button type="button" class="menu-head" aria-expanded="false">
+            <span data-i18n="nav.itineraries">Itinéraires</span>
+            <i class="bi bi-chevron-down chev"></i>
+          </button>
+          <div class="menu-sub">
+            <ul class="menu-sub-list activities-pics">
+              <li><a href="itineraire.html#filter-all">
+                <img src="images/sahara_dunes.png" alt="" loading="lazy">
+                <span>Tous</span>
+              </a></li>
+              <li><a href="itineraire.html#filter-culture">
+                <img src="images/fes.png" alt="" loading="lazy">
+                <span>Culture</span>
+              </a></li>
+              <li><a href="itineraire.html#filter-aventure">
+                <img src="images/merzouga.png" alt="" loading="lazy">
+                <span>Aventure</span>
+              </a></li>
+              <li><a href="itineraire.html#filter-nature">
+                <img src="images/azrou.png" alt="" loading="lazy">
+                <span>Nature</span>
+              </a></li>
+              <li><a href="itineraire.html#filter-sport">
+                <img src="images/taghazout.png" alt="" loading="lazy">
+                <span>Sport</span>
+              </a></li>
+            </ul>
+          </div>
+        </div>
 
-    <!-- Footer : language + motion -->
+    
+
+        <div class="menu-group">
+              <a class="menu-head" href="equip.html">
+                <span data-i18n="nav.team">Équipe</span>
+                <i class="bi bi-arrow-right chev"></i>
+              </a>
+            </div><!-- Footer : language + motion -->
     <div class="menu-foot">
       <div class="lang-switch" role="group" aria-label="Langue / Language">
         <i class="bi bi-globe2" aria-hidden="true"></i>
@@ -766,16 +825,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C1 — Grand Tour Sud -->
     <div class="circuit-card" data-tags="aventure culture nature"
       data-title="Grand Tour Sud" data-duration="7 – 8 jours" data-rating="5"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"images/imlil.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"}]'>
+      data-cities='[{"name": "Marrakech", "tag": "Médina Impériale", "img": "https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg", "icon": "bi-building", "days": "1-2", "nights": 2, "temp": "31°C", "nextTime": "4h vers Atlas", "activity": "Street food &amp; Médina", "nightsLabel": "2 nuits"}, {"name": "Haut Atlas", "tag": "Toit du Maroc", "img": "images/imlil.png", "icon": "bi-triangle", "days": "3-4", "nights": 2, "temp": "24°C", "nextTime": "6h vers Merzouga", "activity": "Randonnée &amp; Nature", "nightsLabel": "2 nuits"}, {"name": "Merzouga", "tag": "Sahara &amp; Dunes", "img": "images/merzouga.png", "icon": "bi-activity", "days": "5-6", "nights": 2, "temp": "29°C", "nextTime": "5h vers Fès", "activity": "Désert &amp; Aventure", "nightsLabel": "2 nuits"}, {"name": "Fès", "tag": "Cité Millénaire", "img": "images/fes.png", "icon": "bi-bank", "days": "7", "nights": 1, "temp": "26°C", "nextTime": "", "activity": "Culture &amp; Histoire", "nightsLabel": "1 nuit"}]'>
       <div class="card-image-wrap">
         <img src="images/sahara_dunes.png" alt="Grand Tour Sud" loading="lazy">
-        <div class="card-duration-badge">7 – 8 JOURS</div>
+        <div class="card-duration-badge">7 – 8 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Classique</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Grand Tour Sud</div>
         <div class="card-public">Pour : Découverte classique du désert et des montagnes</div>
-        <div class="card-route">Marrakech <span class="arrow">→</span> Atlas <span class="arrow">→</span> Merzouga <span class="arrow">→</span> Fès</div>
+        <div class="card-route"><span>Marrakech</span> <span class="arrow">→</span>  <span>Atlas</span> <span class="arrow">→</span>  <span>Merzouga</span> <span class="arrow">→</span>  <span>Fès</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -784,7 +843,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (312 avis)</span>
+          <span class="card-rating-count">5.0 (312 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -798,16 +857,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C2 — Route des Villes Impériales -->
     <div class="circuit-card" data-tags="culture"
       data-title="Route des Villes Impériales" data-duration="10 – 12 jours" data-rating="4"
-      data-cities='[{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"}]'>
+      data-cities='[{"name": "Rabat", "tag": "Capitale Royale", "img": "images/rabat.png", "icon": "bi-building", "days": "1-2", "nights": 2, "temp": "22°C", "nextTime": "1h30 vers Meknès", "activity": "Tour Hassan &amp; Oudayas", "nightsLabel": "2 nuits"}, {"name": "Meknès", "tag": "Ville Impériale", "img": "images/meknes.png", "icon": "bi-bank", "days": "3-4", "nights": 2, "temp": "21°C", "nextTime": "1h vers Fès", "activity": "Bab Mansour &amp; Médina", "nightsLabel": "2 nuits"}, {"name": "Fès", "tag": "Cité Millénaire", "img": "images/fes.png", "icon": "bi-building", "days": "5-7", "nights": 3, "temp": "24°C", "nextTime": "5h vers Marrakech", "activity": "Tanneries &amp; Médersa", "nightsLabel": "3 nuits"}, {"name": "Marrakech", "tag": "Médina Impériale", "img": "https://kimi-web-img.moonshot.cn/img/bahia-palace.com/743313ded3f248b72089b1460906682b5c822a7b.jpeg", "icon": "bi-tree-fill", "days": "8-10", "nights": 3, "temp": "28°C", "nextTime": "", "activity": "Souks &amp; Jardins", "nightsLabel": "3 nuits"}]'>
       <div class="card-image-wrap">
-        <img src="images/ouarzazate.png" alt="Route des Villes Impériales" loading="lazy">
-        <div class="card-duration-badge">10 – 12 JOURS</div>
+        <img src="images/fes.png" alt="Route des Villes Impériales" loading="lazy">
+        <div class="card-duration-badge">10 – 12 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Culture</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Route des Villes Impériales</div>
         <div class="card-public">Pour : Culture, histoire et monuments royaux</div>
-        <div class="card-route">Rabat <span class="arrow">→</span> Meknès <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech</div>
+        <div class="card-route"><span>Rabat</span> <span class="arrow">→</span>  <span>Meknès</span> <span class="arrow">→</span>  <span>Fès</span> <span class="arrow">→</span>  <span>Marrakech</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -816,7 +875,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (156 avis)</span>
+          <span class="card-rating-count">4.0 (156 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -830,16 +889,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C3 — Circuit Désert & Oasis -->
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Circuit Désert & Oasis" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Ouarzazate","tag":"Porte du Désert","img":"images/ouarzazate.png"},{"name":"Zagora","tag":"Ville du Désert","img":"images/merzouga.png"},{"name":"Merzouga","tag":"Sahara & Dunes","img":"images/merzouga.png"}]'>
+      data-cities='[{"name": "Ouarzazate", "tag": "Porte du Désert", "img": "images/ouarzazate.png", "icon": "bi-camera-reels", "days": "1", "nights": 1, "temp": "27°C", "nextTime": "3h vers Zagora", "activity": "Studios &amp; Kasbah", "nightsLabel": "1 nuit"}, {"name": "Zagora", "tag": "Ville du Désert", "img": "images/sahara_dunes.png", "icon": "bi-sun", "days": "2-3", "nights": 2, "temp": "30°C", "nextTime": "4h vers Merzouga", "activity": "Bivouac &amp; Dunes", "nightsLabel": "2 nuits"}, {"name": "Merzouga", "tag": "Sahara &amp; Dunes", "img": "images/merzouga.png", "icon": "bi-activity", "days": "4-5", "nights": 2, "temp": "31°C", "nextTime": "", "activity": "Chameau &amp; Étoiles", "nightsLabel": "2 nuits"}]'>
       <div class="card-image-wrap">
-        <img src="images/sahara_dunes.png" alt="Circuit Désert & Oasis" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <img src="images/merzouga.png" alt="Circuit Désert & Oasis" loading="lazy">
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Aventure</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Circuit Désert & Oasis</div>
         <div class="card-public">Pour : Aventure saharienne et nuits dans le désert</div>
-        <div class="card-route">Ouarzazate <span class="arrow">→</span> Zagora <span class="arrow">→</span> Merzouga</div>
+        <div class="card-route"><span>Ouarzazate</span> <span class="arrow">→</span>  <span>Zagora</span> <span class="arrow">→</span>  <span>Merzouga</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -848,7 +907,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (89 avis)</span>
+          <span class="card-rating-count">4.0 (89 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -862,16 +921,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C4 — Tour des Plages Atlantiques -->
     <div class="circuit-card" data-tags="sport nature"
       data-title="Tour des Plages Atlantiques" data-duration="10 – 12 jours" data-rating="4"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca.png"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"},{"name":"Dakhla","tag":"Lagune Sauvage","img":"images/dakhla.png"}]'>
+      data-cities='[{"name": "Casablanca", "tag": "Ville Blanche", "img": "images/casablanca.png", "icon": "bi-building", "days": "1-2", "nights": 2, "temp": "23°C", "nextTime": "3h30 vers Essaouira", "activity": "Hassan II &amp; Corniche", "nightsLabel": "2 nuits"}, {"name": "Essaouira", "tag": "Cité des Alizés", "img": "images/essaouira.png", "icon": "bi-wind", "days": "3-5", "nights": 3, "temp": "21°C", "nextTime": "3h vers Agadir", "activity": "Port &amp; Remparts", "nightsLabel": "3 nuits"}, {"name": "Agadir", "tag": "Cité du Soleil", "img": "images/agadir.png", "icon": "bi-sun", "days": "6-9", "nights": 4, "temp": "26°C", "nextTime": "14h vers Dakhla", "activity": "Plage &amp; Surf", "nightsLabel": "4 nuits"}, {"name": "Dakhla", "tag": "Lagune Sauvage", "img": "images/dakhla.png", "icon": "bi-water", "days": "10-12", "nights": 3, "temp": "24°C", "nextTime": "", "activity": "Kitesurf &amp; Lagune", "nightsLabel": "3 nuits"}]'>
       <div class="card-image-wrap">
         <img src="images/dakhla2.png" alt="Tour des Plages Atlantiques" loading="lazy">
-        <div class="card-duration-badge">10 – 12 JOURS</div>
+        <div class="card-duration-badge">10 – 12 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Plages</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Tour des Plages Atlantiques</div>
         <div class="card-public">Pour : Détente, surf et plages marocaines</div>
-        <div class="card-route">Casablanca <span class="arrow">→</span> Essaouira <span class="arrow">→</span> Agadir <span class="arrow">→</span> Dakhla</div>
+        <div class="card-route"><span>Casablanca</span> <span class="arrow">→</span>  <span>Essaouira</span> <span class="arrow">→</span>  <span>Agadir</span> <span class="arrow">→</span>  <span>Dakhla</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -880,7 +939,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (203 avis)</span>
+          <span class="card-rating-count">4.0 (203 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -894,16 +953,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C5 — Escapade Nord Bleu -->
     <div class="circuit-card" data-tags="nature culture"
       data-title="Escapade Nord Bleu" data-duration="5 jours" data-rating="5"
-      data-cities='[{"name":"Tanger","tag":"Porte de l'Afrique","img":"images/rabat2.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen.png"}]'>
+      data-cities='[{"name": "Tanger", "tag": "Porte de l’Afrique", "img": "https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/af947a6edd2924b3d07e901623978d1167a34a62.jpg", "icon": "bi-geo-alt", "days": "1", "nights": 1, "temp": "20°C", "nextTime": "1h30 vers Tétouan", "activity": "Port &amp; Médina", "nightsLabel": "1 nuit"}, {"name": "Tétouan", "tag": "Ville Blanche", "img": "https://kimi-web-img.moonshot.cn/img/visaliv.s3.ap-south-1.amazonaws.com/51ca7c3f9073595e3f98f6389b46ba8908e5232b.jpg", "icon": "bi-building", "days": "2-3", "nights": 2, "temp": "22°C", "nextTime": "1h vers Chefchaouen", "activity": "Médina Andalouse", "nightsLabel": "2 nuits"}, {"name": "Chefchaouen", "tag": "La Ville Bleue", "img": "images/chefchaouen.png", "icon": "bi-droplet-half", "days": "4-5", "nights": 2, "temp": "19°C", "nextTime": "", "activity": "Ruelles bleues &amp; Rif", "nightsLabel": "2 nuits"}]'>
       <div class="card-image-wrap">
         <img src="images/chefchaouen.png" alt="Escapade Nord Bleu" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Nord</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Escapade Nord Bleu</div>
         <div class="card-public">Pour : Nature, calme et découverte du nord</div>
-        <div class="card-route">Tanger <span class="arrow">→</span> Chefchaouen</div>
+        <div class="card-route"><span>Tanger</span> <span class="arrow">→</span>  <span>Tétouan</span> <span class="arrow">→</span>  <span>Chefchaouen</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -912,7 +971,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (178 avis)</span>
+          <span class="card-rating-count">5.0 (178 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -926,16 +985,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C6 — Route Culture & Histoire -->
     <div class="circuit-card" data-tags="culture"
       data-title="Route Culture & Histoire" data-duration="7 jours" data-rating="4"
-      data-cities='[{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes.png"},{"name":"Volubilis","tag":"Site Antique","img":"images/volubilis.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"}]'>
+      data-cities='[{"name": "Fès", "tag": "Cité Millénaire", "img": "images/fes.png", "icon": "bi-building", "days": "1-3", "nights": 3, "temp": "24°C", "nextTime": "1h vers Meknès", "activity": "Médina &amp; Tanneries", "nightsLabel": "3 nuits"}, {"name": "Meknès", "tag": "Ville Impériale", "img": "images/meknes.png", "icon": "bi-bank", "days": "4", "nights": 1, "temp": "22°C", "nextTime": "30min vers Volubilis", "activity": "Mausolée Ismaïl", "nightsLabel": "1 nuit"}, {"name": "Volubilis", "tag": "Site Antique", "img": "images/volubilis.png", "icon": "bi-columns-gap", "days": "5", "nights": 1, "temp": "22°C", "nextTime": "1h vers Rabat", "activity": "Ruines Romaines", "nightsLabel": "1 nuit"}, {"name": "Rabat", "tag": "Capitale Royale", "img": "images/rabat.png", "icon": "bi-building", "days": "6-7", "nights": 2, "temp": "21°C", "nextTime": "", "activity": "Kasbah Oudayas", "nightsLabel": "2 nuits"}]'>
       <div class="card-image-wrap">
         <img src="images/volubilis.png" alt="Route Culture & Histoire" loading="lazy">
-        <div class="card-duration-badge">7 JOURS</div>
+        <div class="card-duration-badge">7 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Histoire</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Route Culture & Histoire</div>
         <div class="card-public">Pour : Patrimoine historique et sites antiques</div>
-        <div class="card-route">Fès <span class="arrow">→</span> Meknès <span class="arrow">→</span> Volubilis <span class="arrow">→</span> Rabat</div>
+        <div class="card-route"><span>Fès</span> <span class="arrow">→</span>  <span>Meknès</span> <span class="arrow">→</span>  <span>Volubilis</span> <span class="arrow">→</span>  <span>Rabat</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -944,7 +1003,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (134 avis)</span>
+          <span class="card-rating-count">4.0 (134 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -958,16 +1017,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C7 — Aventure Atlas -->
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Aventure Atlas" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Imlil","tag":"Village Berbère","img":"images/imlil.png"},{"name":"Oukaïmeden","tag":"Station de Ski","img":"images/imlil.png"}]'>
+      data-cities='[{"name": "Marrakech", "tag": "Médina Impériale", "img": "https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg", "icon": "bi-building", "days": "1", "nights": 1, "temp": "28°C", "nextTime": "2h vers Imlil", "activity": "Souks &amp; Djemaa", "nightsLabel": "1 nuit"}, {"name": "Imlil", "tag": "Village Berbère", "img": "images/imlil.png", "icon": "bi-tree", "days": "2-4", "nights": 3, "temp": "14°C", "nextTime": "1h vers Oukaïmeden", "activity": "Toubkal &amp; Trekking", "nightsLabel": "3 nuits"}, {"name": "Oukaïmeden", "tag": "Station de Ski", "img": "images/imlil.png", "icon": "bi-triangle", "days": "5", "nights": 1, "temp": "8°C", "nextTime": "", "activity": "Ski &amp; Panoramas", "nightsLabel": "1 nuit"}]'>
       <div class="card-image-wrap">
         <img src="images/imlil.png" alt="Aventure Atlas" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Montagne</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Aventure Atlas</div>
         <div class="card-public">Pour : Randonnée et activités de montagne</div>
-        <div class="card-route">Marrakech <span class="arrow">→</span> Imlil <span class="arrow">→</span> Oukaïmeden</div>
+        <div class="card-route"><span>Marrakech</span> <span class="arrow">→</span>  <span>Imlil</span> <span class="arrow">→</span>  <span>Oukaïmeden</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -976,7 +1035,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (112 avis)</span>
+          <span class="card-rating-count">4.0 (112 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -990,16 +1049,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C8 — Road Trip Méditerranée -->
     <div class="circuit-card" data-tags="nature"
       data-title="Road Trip Méditerranée" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Tanger","tag":"Porte de l'Afrique","img":"images/rabat2.png"},{"name":"Al Hoceïma","tag":"Perle Méditerranéenne","img":"images/al_hoceima.png"},{"name":"Nador","tag":"Lagune Marchica","img":"images/dakhla.png"}]'>
+      data-cities='[{"name": "Tanger", "tag": "Porte de l’Afrique", "img": "https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/af947a6edd2924b3d07e901623978d1167a34a62.jpg", "icon": "bi-geo-alt", "days": "1", "nights": 1, "temp": "20°C", "nextTime": "3h vers Al Hoceïma", "activity": "Cap Spartel &amp; Grottes", "nightsLabel": "1 nuit"}, {"name": "Al Hoceïma", "tag": "Perle Méditerranéenne", "img": "images/al_hoceima.png", "icon": "bi-water", "days": "2-4", "nights": 3, "temp": "24°C", "nextTime": "2h vers Nador", "activity": "Plages &amp; Parc National", "nightsLabel": "3 nuits"}, {"name": "Nador", "tag": "Lagune Marchica", "img": "https://kimi-web-img.moonshot.cn/img/cf.bstatic.com/a9c52905c8e2fd7ea6d40610c164dab0ea60a886.jpg", "icon": "bi-droplet", "days": "5", "nights": 1, "temp": "25°C", "nextTime": "", "activity": "Lagune Marchica", "nightsLabel": "1 nuit"}]'>
       <div class="card-image-wrap">
         <img src="images/al_hoceima.png" alt="Road Trip Méditerranée" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Côte</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Road Trip Méditerranée</div>
         <div class="card-public">Pour : Découverte des plages méditerranéennes</div>
-        <div class="card-route">Tanger <span class="arrow">→</span> Al Hoceïma <span class="arrow">→</span> Nador</div>
+        <div class="card-route"><span>Tanger</span> <span class="arrow">→</span>  <span>Al Hoceïma</span> <span class="arrow">→</span>  <span>Nador</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -1008,7 +1067,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (76 avis)</span>
+          <span class="card-rating-count">4.0 (76 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -1022,16 +1081,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C9 — Nature & Montagnes -->
     <div class="circuit-card" data-tags="nature"
       data-title="Nature & Montagnes" data-duration="5 jours" data-rating="4"
-      data-cities='[{"name":"Ifrane","tag":"Suisse du Maroc","img":"images/azrou.png"},{"name":"Azrou","tag":"Forêt de Cèdres","img":"images/azrou.png"},{"name":"Beni Mellal","tag":"Source d'Ain Asserdoun","img":"images/agadir.png"}]'>
+      data-cities='[{"name": "Ifrane", "tag": "Suisse du Maroc", "img": "https://kimi-web-img.moonshot.cn/img/visitmorocco30.com/cb606536134eb0f5735ddc3f1002ec16a97dc2f3.jpg", "icon": "bi-snow", "days": "1-2", "nights": 2, "temp": "12°C", "nextTime": "30min vers Azrou", "activity": "Lacs &amp; Parcs Nationaux", "nightsLabel": "2 nuits"}, {"name": "Azrou", "tag": "Forêt de Cèdres", "img": "images/azrou.png", "icon": "bi-tree", "days": "3-4", "nights": 2, "temp": "14°C", "nextTime": "1h30 vers Beni Mellal", "activity": "Cèdres &amp; Singes", "nightsLabel": "2 nuits"}, {"name": "Beni Mellal", "tag": "Source d’Ain Asserdoun", "img": "https://kimi-web-img.moonshot.cn/img/visitmorocco30.com/8ab53fb82c80764ae1e2c75ab71166e6aa5032a8.webp", "icon": "bi-droplet", "days": "5", "nights": 1, "temp": "22°C", "nextTime": "", "activity": "Cascades &amp; Sources", "nightsLabel": "1 nuit"}]'>
       <div class="card-image-wrap">
         <img src="images/azrou.png" alt="Nature & Montagnes" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Nature</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Nature & Montagnes</div>
         <div class="card-public">Pour : Forêts, lacs et air frais</div>
-        <div class="card-route">Ifrane <span class="arrow">→</span> Azrou <span class="arrow">→</span> Beni Mellal</div>
+        <div class="card-route"><span>Ifrane</span> <span class="arrow">→</span>  <span>Azrou</span> <span class="arrow">→</span>  <span>Beni Mellal</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="4">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -1040,7 +1099,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display "><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (95 avis)</span>
+          <span class="card-rating-count">4.0 (95 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -1054,16 +1113,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C10 — Circuit Surf Maroc -->
     <div class="circuit-card" data-tags="sport nature"
       data-title="Circuit Surf Maroc" data-duration="5 jours" data-rating="5"
-      data-cities='[{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"images/taghazout.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"},{"name":"Essaouira","tag":"Vent & Kitesurf","img":"images/essaouira.png"}]'>
+      data-cities='[{"name": "Taghazout", "tag": "Paradis des Surfeurs", "img": "images/taghazout.png", "icon": "bi-water", "days": "1-3", "nights": 3, "temp": "22°C", "nextTime": "30min vers Agadir", "activity": "Surf &amp; Spots célèbres", "nightsLabel": "3 nuits"}, {"name": "Agadir", "tag": "Cité du Soleil", "img": "images/agadir.png", "icon": "bi-sun", "days": "4", "nights": 1, "temp": "24°C", "nextTime": "2h30 vers Essaouira", "activity": "Plage &amp; Promenade", "nightsLabel": "1 nuit"}, {"name": "Essaouira", "tag": "Cité des Alizés", "img": "images/essaouira.png", "icon": "bi-wind", "days": "5", "nights": 1, "temp": "21°C", "nextTime": "", "activity": "Kitesurf &amp; Vents", "nightsLabel": "1 nuit"}]'>
       <div class="card-image-wrap">
         <img src="images/taghazout2.png" alt="Circuit Surf Maroc" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
+        <div class="card-duration-badge">5 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Sport</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Circuit Surf Maroc</div>
         <div class="card-public">Pour : Surf, kitesurf et sports nautiques</div>
-        <div class="card-route">Taghazout <span class="arrow">→</span> Agadir <span class="arrow">→</span> Essaouira</div>
+        <div class="card-route"><span>Taghazout</span> <span class="arrow">→</span>  <span>Agadir</span> <span class="arrow">→</span>  <span>Essaouira</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -1072,7 +1131,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (267 avis)</span>
+          <span class="card-rating-count">5.0 (267 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -1086,16 +1145,16 @@ document.querySelectorAll('.circuit-card').forEach(card => {
     <!-- C11 — Grand Tour Maroc -->
     <div class="circuit-card" data-tags="culture aventure nature"
       data-title="Grand Tour Maroc" data-duration="14 jours" data-rating="5"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca.png"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat.png"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen.png"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes.png"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/fes.png"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir.png"}]'>
+      data-cities='[{"name": "Casablanca", "tag": "Ville Blanche", "img": "images/casablanca.png", "icon": "bi-building", "days": "1-2", "nights": 2, "temp": "22°C", "nextTime": "1h vers Rabat", "activity": "Hassan II &amp; Corniche", "nightsLabel": "2 nuits"}, {"name": "Rabat", "tag": "Capitale Royale", "img": "images/rabat.png", "icon": "bi-bank", "days": "3-4", "nights": 2, "temp": "21°C", "nextTime": "2h vers Chefchaouen", "activity": "Oudayas &amp; Palais", "nightsLabel": "2 nuits"}, {"name": "Chefchaouen", "tag": "La Ville Bleue", "img": "images/chefchaouen.png", "icon": "bi-droplet-half", "days": "5-6", "nights": 2, "temp": "19°C", "nextTime": "2h vers Fès", "activity": "Ruelles bleues", "nightsLabel": "2 nuits"}, {"name": "Fès", "tag": "Cité Millénaire", "img": "images/fes.png", "icon": "bi-building", "days": "7-9", "nights": 3, "temp": "24°C", "nextTime": "7h vers Marrakech", "activity": "Médina &amp; Tanneries", "nightsLabel": "3 nuits"}, {"name": "Marrakech", "tag": "Médina Impériale", "img": "https://kimi-web-img.moonshot.cn/img/www.mosaicnorthafrica.com/40ba6b34795d27d238503a68fc4f9eac0d3cf370.jpg", "icon": "bi-tree-fill", "days": "10-12", "nights": 3, "temp": "30°C", "nextTime": "3h vers Agadir", "activity": "Majorelle &amp; Souks", "nightsLabel": "3 nuits"}, {"name": "Agadir", "tag": "Cité du Soleil", "img": "images/agadir.png", "icon": "bi-sun", "days": "13-14", "nights": 2, "temp": "26°C", "nextTime": "", "activity": "Plage &amp; Détente", "nightsLabel": "2 nuits"}]'>
       <div class="card-image-wrap">
         <img src="images/casablanca.png" alt="Grand Tour Maroc" loading="lazy">
-        <div class="card-duration-badge">14 JOURS</div>
+        <div class="card-duration-badge">14 <span>JOURS</span></div>
         <div class="card-tags-overlay"><span class="card-tag-overlay">Complet</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Grand Tour Maroc</div>
         <div class="card-public">Pour : Découverte complète du Maroc</div>
-        <div class="card-route">Casablanca <span class="arrow">→</span> Rabat <span class="arrow">→</span> Chefchaouen <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech <span class="arrow">→</span> Agadir</div>
+        <div class="card-route"><span>Casablanca</span> <span class="arrow">→</span>  <span>Rabat</span> <span class="arrow">→</span>  <span>Chefchaouen</span> <span class="arrow">→</span>  <span>Fès</span> <span class="arrow">→</span>  <span>Marrakech</span> <span class="arrow">→</span>  <span>Agadir</span></div>
         <div class="card-rating-display">
           <div class="card-rating-stars" data-rating="5">
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
@@ -1104,7 +1163,7 @@ document.querySelectorAll('.circuit-card').forEach(card => {
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
 <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (412 avis)</span>
+          <span class="card-rating-count">5.0 (412 <span>avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
@@ -1155,9 +1214,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ══════ INIT (no loading screen) ══════ */
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => { initAnimations(); initCardCarousels(); });
+  document.addEventListener('DOMContentLoaded', initAnimations);
 } else {
-  initAnimations(); initCardCarousels();
+  initAnimations();
 }
 
 /* ══════ MENU (handled by shared nav-fab + site-menu JS below) ══════ */
@@ -1201,48 +1260,6 @@ function initAnimations() {
   });
 }
 
-// Variable globale pour stocker les intervalles
-const carouselIntervals = new Map();
-
-function initCardCarousels() {
-  document.querySelectorAll('.circuit-card').forEach(card => {
-    let images = [];
-    try {
-      images = JSON.parse(card.dataset.cities || '[]').map(c => c.img);
-    } catch (e) { return; }
-    
-    if(images.length < 2) return;
-    
-    let currentIndex = 0;
-    const imgEl = card.querySelector('img');
-    if (!imgEl) return;
-    
-    let intervalId = null;
-
-    const startCarousel = () => {
-      if (intervalId) return;
-      intervalId = setInterval(() => {
-        imgEl.style.opacity = '0.5';
-        setTimeout(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          imgEl.src = images[currentIndex];
-          imgEl.style.opacity = '1';
-        }, 300);
-      }, 1500); // Change l'image toutes les 1.5 secondes au survol
-    };
-
-    const stopCarousel = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-
-    card.addEventListener('mouseenter', startCarousel);
-    card.addEventListener('mouseleave', stopCarousel);
-  });
-}
-
 /* ══════ WHOLE-CARD CLICK opens the city modal ══════ */
 document.querySelectorAll('.circuit-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -1273,17 +1290,30 @@ document.querySelectorAll('.btn-explorer, .btn-generate, .choice-btn, .profile-b
 });
 
 /* ══════ FILTER ══════ */
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.circuit-card').forEach(card => {
-      const match = filter === 'all' || (card.dataset.tags || '').includes(filter);
-      gsap.to(card, { opacity: match ? 1 : 0.18, scale: match ? 1 : 0.96, duration: 0.35, ease: 'power2.out' });
-    });
+function applyCircuitFilter(filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === filter);
   });
+  document.querySelectorAll('.circuit-card').forEach(card => {
+    const match = filter === 'all' || (card.dataset.tags || '').includes(filter);
+    gsap.to(card, { opacity: match ? 1 : 0.18, scale: match ? 1 : 0.96, duration: 0.35, ease: 'power2.out' });
+  });
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyCircuitFilter(btn.dataset.filter));
 });
+// Deep-link via URL hash (e.g. #filter-culture from the nav menu).
+function applyCircuitHash() {
+  const m = (location.hash || '').match(/^#filter-([a-z-]+)$/);
+  if (!m) return;
+  const btn = document.querySelector('.filter-btn[data-filter="' + m[1] + '"]');
+  if (!btn) return;
+  applyCircuitFilter(m[1]);
+  const grid = document.getElementById('circuitsGrid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+window.addEventListener('hashchange', applyCircuitHash);
+applyCircuitHash();
 
 /* ══════ CITY MODAL ══════ */
 // Cities that have their own dedicated HTML page. Anything else falls back

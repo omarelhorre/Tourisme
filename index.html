@@ -134,17 +134,17 @@
     .nav-fab-burger span {
       display: block;
       width: 22px;
-      height: 2.5px;
+      height: 3px;
       background: var(--terracotta);
       border-radius: 2px;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     /* Burger → croix quand le menu est ouvert */
     body.menu-open .nav-fab-burger span:nth-child(1) {
-      transform: translateY(8.5px) rotate(45deg);
+      transform: translateY(4.5px) rotate(45deg);
     }
     body.menu-open .nav-fab-burger span:nth-child(2) {
-      transform: translateY(-8.5px) rotate(-45deg);
+      transform: translateY(-4.5px) rotate(-45deg);
     }
     body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
@@ -178,7 +178,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      background-image: none;
       opacity: 0.5;
       pointer-events: none;
     }
@@ -258,6 +258,36 @@
       grid-template-columns: 1fr 1fr;
       gap: 0.1rem 1.5rem;
     }
+    .menu-sub-list.activities-pics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0.7rem; padding: 0.6rem 0 1.2rem;
+    }
+    .menu-sub-list.activities-pics li { list-style: none; }
+    .menu-sub-list.activities-pics a {
+      position: relative; display: block; padding: 0;
+      border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
+      background: #2a1a08; text-decoration: none; text-transform: uppercase;
+      transition: transform 0.3s var(--ease-doux), box-shadow 0.3s var(--ease-doux);
+    }
+    .menu-sub-list.activities-pics a::before { display: none; }
+    .menu-sub-list.activities-pics img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0; transition: transform 0.5s var(--ease-doux);
+    }
+    .menu-sub-list.activities-pics a::after {
+      content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(20,12,4,0.05) 0%, rgba(20,12,4,0.78) 100%);
+      transition: background 0.3s ease;
+    }
+    .menu-sub-list.activities-pics span {
+      position: absolute; bottom: 10px; left: 12px; right: 12px;
+      z-index: 2; color: #fff; font-family: var(--font-corps);
+      font-weight: 900; font-size: 0.88rem; letter-spacing: 0.05em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+    .menu-sub-list.activities-pics a:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -10px rgba(0,0,0,0.45); }
+    .menu-sub-list.activities-pics a:hover img { transform: scale(1.08); }
+    .menu-sub-list.activities-pics a:hover::after { background: linear-gradient(180deg, rgba(192,85,42,0.18) 0%, rgba(20,12,4,0.85) 100%); }
     .menu-sub-list a {
       display: flex;
       align-items: center;
@@ -428,7 +458,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='0.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+        background-image: none;
         opacity: 0.5;
         pointer-events: none;
         z-index: 0;
@@ -551,7 +581,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.25'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      background-image: none;
       opacity: 0.12;
       pointer-events: none;
     }
@@ -981,7 +1011,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23D4AF37' stroke-width='1' opacity='0.10'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      background-image: none;
       pointer-events: none;
     }
     .dish-layout {
@@ -1188,7 +1218,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23F5E6C8' stroke-width='1' opacity='0.10'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");
+      background-image: none;
       pointer-events: none;
     }
     .exp-layout {
@@ -1476,6 +1506,253 @@
     }
 
     /* ============================================================
+       === Cultural moments — sticky scroll trigger (map-style) ===
+       ============================================================ */
+    .culture-moments {
+      position: relative;
+      background: var(--bg-cream);
+      /* 1 viewport per step (6 steps + intro) */
+      min-height: 700vh;
+    }
+    .culture-sticky {
+      position: sticky; top: 0;
+      height: 100vh;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .culture-sticky .container { width: 100%; }
+    .culture-head { text-align: center; max-width: 640px; margin: 0 auto 2.4rem; padding: 0 1rem; }
+    .culture-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.9rem;
+    }
+    .culture-head h2 {
+      font-family: var(--font-titre);
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--encre);
+      margin-bottom: 0.9rem;
+      text-wrap: balance;
+    }
+    .culture-head h2 em {
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, var(--terracotta), #E67E22);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .culture-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
+    .culture-pic-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -25px rgba(0,0,0,0.35);
+    }
+    .culture-pic {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      transform: scale(1.06);
+      transition: opacity 0.7s var(--ease-doux), transform 1.2s var(--ease-doux);
+    }
+    .culture-pic.active { opacity: 1; transform: scale(1); }
+    .culture-text-stage { position: relative; min-height: 320px; }
+    .culture-text {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s var(--ease-doux), transform 0.55s var(--ease-doux);
+      pointer-events: none;
+    }
+    .culture-text.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .culture-text .cm-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 52px; height: 52px; border-radius: 16px;
+      background: rgba(192,85,42,0.10); color: var(--terracotta);
+      font-size: 1.45rem; margin-bottom: 1rem;
+    }
+    .culture-text h3 {
+      font-family: var(--font-titre);
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      line-height: 1.15;
+      color: var(--encre);
+      margin: 0 0 1rem;
+    }
+    .culture-text .cm-def {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--texte-doux);
+      margin: 0 0 0.9rem;
+    }
+    .culture-text .cm-reco {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--terracotta);
+      padding-left: 0.9rem;
+      border-left: 2px solid var(--terracotta);
+      margin: 0;
+    }
+    .culture-progress {
+      position: absolute;
+      left: 50%; bottom: 1.8rem; transform: translateX(-50%);
+      display: flex; gap: 0.55rem;
+      z-index: 3;
+    }
+    .culture-tick {
+      width: 22px; height: 3px; border-radius: 2px;
+      background: rgba(192,85,42,0.22);
+      transition: background 0.3s, width 0.3s;
+    }
+    .culture-tick.current { background: var(--terracotta); width: 32px; }
+    .culture-tick.reached { background: var(--terracotta); }
+
+    @media (max-width: 900px) {
+      .culture-moments { min-height: 600vh; }
+      .culture-stage { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
+      .culture-pic-frame { aspect-ratio: 16 / 11; max-height: 38vh; }
+      .culture-text-stage { min-height: 220px; }
+      .culture-head { margin-bottom: 1.2rem; }
+      .culture-text h3 { font-size: 1.4rem; }
+    }
+
+    /* ============================================================
+       === Team teaser (above footer) ===
+       ============================================================ */
+    .team-teaser {
+      position: relative;
+      padding: 6rem 0 7rem;
+      background:
+        radial-gradient(ellipse 80% 55% at 80% 50%, rgba(212,175,55,0.10), transparent 70%),
+        linear-gradient(180deg, var(--bg-cream) 0%, #FAF4E6 100%);
+      overflow: hidden;
+    }
+    .team-teaser-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.1rem;
+    }
+    .team-teaser h2 {
+      font-family: var(--font-titre);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      color: var(--encre);
+      margin-bottom: 1.4rem;
+      /* Avoid mid-word splits like "port-ail" and keep punctuation with its word */
+      hyphens: manual;
+      overflow-wrap: normal;
+      word-break: normal;
+      text-wrap: balance;
+    }
+    .team-teaser h2 em {
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, var(--terracotta), #E67E22);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .team-teaser-lead {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--texte-doux);
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
+    .team-teaser-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.95rem 1.8rem;
+      background: var(--terracotta);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: background 0.3s var(--ease-doux), gap 0.3s var(--ease-doux), transform 0.3s var(--ease-doux);
+    }
+    .team-teaser-cta:hover { background: #9C4520; gap: 1.1rem; transform: translateY(-2px); color: #fff; }
+    .team-teaser-cta i { transition: transform 0.3s var(--ease-doux); }
+    .team-teaser-cta:hover i { transform: translateX(3px); }
+
+    /* Profile stack */
+    .team-teaser-stack {
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-teaser-stack .team-thumb {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #fff;
+      box-shadow: 0 18px 40px -12px rgba(0,0,0,0.35);
+      transition: transform 0.55s var(--ease-doux), z-index 0s, box-shadow 0.4s ease;
+      /* The .translate CSS property is additive over .transform, so the
+         orbit nudges each circle without disturbing its base position. */
+      animation: tt-orbit 18s ease-in-out infinite;
+    }
+    .team-teaser-stack .team-thumb:hover { z-index: 10; box-shadow: 0 24px 50px -10px rgba(0,0,0,0.45); }
+
+    /* Base position per circle + per-thumb orbit timing (calm, staggered) */
+    .team-teaser-stack .tt-1 { transform: translate(-50%, -50%) scale(1); z-index: 5; animation-duration: 17s; animation-delay: 0s; }
+    .team-teaser-stack .tt-2 { transform: translate(-150%, -90%) scale(1); z-index: 3; animation-duration: 15s; animation-delay: -4s; }
+    .team-teaser-stack .tt-3 { transform: translate(50%, -90%) scale(1); z-index: 4; animation-duration: 19s; animation-delay: -7s; }
+    .team-teaser-stack .tt-4 { transform: translate(-130%, 20%) scale(1); z-index: 2; animation-duration: 16s; animation-delay: -11s; }
+    .team-teaser-stack .tt-5 { transform: translate(40%, 30%) scale(1); z-index: 1; animation-duration: 20s; animation-delay: -2s; }
+
+    .team-teaser-stack .tt-1:hover { transform: translate(-50%, -50%) scale(1.12); }
+    .team-teaser-stack .tt-2:hover { transform: translate(-150%, -90%) scale(1.12); }
+    .team-teaser-stack .tt-3:hover { transform: translate(50%, -90%) scale(1.12); }
+    .team-teaser-stack .tt-4:hover { transform: translate(-130%, 20%) scale(1.12); }
+    .team-teaser-stack .tt-5:hover { transform: translate(40%, 30%) scale(1.12); }
+
+    /* Gentle elliptical orbit — purely the offset, layered on top of transform */
+    @keyframes tt-orbit {
+      0%   { translate:   0px   0px; }
+      25%  { translate:   9px  -9px; }
+      50%  { translate:  12px   2px; }
+      75%  { translate:   4px  10px; }
+      100% { translate:   0px   0px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .team-teaser-stack .team-thumb { animation: none; }
+    }
+    body.reduce-motion .team-teaser-stack .team-thumb { animation: none; }
+
+    @media (max-width: 992px) {
+      .team-teaser { padding: 4.5rem 0 5.5rem; }
+      .team-teaser-stack { min-height: 280px; margin-top: 1.5rem; }
+      .team-teaser-stack .team-thumb { width: 110px; height: 110px; border-width: 4px; }
+    }
+    @media (max-width: 576px) {
+      .team-teaser-stack { min-height: 240px; }
+      .team-teaser-stack .team-thumb { width: 90px; height: 90px; }
+    }
+
+    /* ============================================================
        === Footer ===
        ============================================================ */
     .footer-maroc {
@@ -1641,19 +1918,78 @@
       </div>
 
       <!-- Liens directs -->
-      <div class="menu-group">
-        <a class="menu-head" href="activites.html">
-          <span data-i18n="nav.activities">Activités</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="itineraire.html">
-          <span data-i18n="nav.itineraries">Itinéraires</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <!-- Pied de menu : sélecteur de langue + bascule animations -->
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.activities">Activités</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="activites.html#filter-all">
+                  <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_all">Toutes</span>
+                </a></li>
+                <li><a href="activites.html#filter-culture">
+                  <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_culture">Culture</span>
+                </a></li>
+                <li><a href="activites.html#filter-nature">
+                  <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_nature">Nature</span>
+                </a></li>
+                <li><a href="activites.html#filter-aventure">
+                  <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_adventure">Aventure</span>
+                </a></li>
+                <li><a href="activites.html#filter-sport">
+                  <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_sport">Sport</span>
+                </a></li>
+                <li><a href="activites.html#filter-detente">
+                  <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_relax">Détente</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.itineraries">Itinéraires</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="itineraire.html#filter-all">
+                  <img src="images/sahara_dunes.png" alt="" loading="lazy">
+                  <span>Tous</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-culture">
+                  <img src="images/fes.png" alt="" loading="lazy">
+                  <span>Culture</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-aventure">
+                  <img src="images/merzouga.png" alt="" loading="lazy">
+                  <span>Aventure</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-nature">
+                  <img src="images/azrou.png" alt="" loading="lazy">
+                  <span>Nature</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-sport">
+                  <img src="images/taghazout.png" alt="" loading="lazy">
+                  <span>Sport</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      
+
+          <div class="menu-group">
+                <a class="menu-head" href="equip.html">
+                  <span data-i18n="nav.team">Équipe</span>
+                  <i class="bi bi-arrow-right chev"></i>
+                </a>
+              </div><!-- Pied de menu : sélecteur de langue + bascule animations -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
           <i class="bi bi-globe2" aria-hidden="true"></i>
@@ -2020,20 +2356,20 @@
         <div class="exp-stage">
           <div class="exp-track">
             <div class="exp-thumb" data-index="0">
-              <div class="exp-thumb-inner" style="background-image: url('assets/casablanca-hassan2.webp');"></div>
-              <div class="exp-thumb-name">Patrimoine</div>
+              <div class="exp-thumb-inner" style="background-image: url('https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg');"></div>
+              <div class="exp-thumb-name">Hammam</div>
             </div>
             <div class="exp-thumb" data-index="1">
-              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #D4AF37 0%, #8a6b13 100%);"></div>
-              <div class="exp-thumb-name">Désert</div>
+              <div class="exp-thumb-inner" style="background-image: url('https://kimi-web-img.moonshot.cn/img/kiteworldwide.com/e122637ef4920c7e0f818da119d2032e33779e99.jpg');"></div>
+              <div class="exp-thumb-name">Kitesurf</div>
             </div>
             <div class="exp-thumb" data-index="2">
-              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #2D5016 0%, #1F2A1A 100%);"></div>
-              <div class="exp-thumb-name">Atlas</div>
+              <div class="exp-thumb-inner" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&amp;q=80');"></div>
+              <div class="exp-thumb-name">Musique Gnawa</div>
             </div>
             <div class="exp-thumb" data-index="3">
-              <div class="exp-thumb-inner" style="background-image: linear-gradient(135deg, #C0552A 0%, #9C4520 100%);"></div>
-              <div class="exp-thumb-name">Riads</div>
+              <div class="exp-thumb-inner" style="background-image: url('https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg');"></div>
+              <div class="exp-thumb-name">Quad</div>
             </div>
           </div>
         </div>
@@ -2057,29 +2393,116 @@
         <div class="col-lg-6">
           <div class="row g-3">
             <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
+              <div class="guide-icon-card" data-parallax="0.08" style="background-image: url('images/merzouga.png');">
                 <i class="bi bi-sun-fill"></i>
                 <span>Désert</span>
               </div>
             </div>
             <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
+              <div class="guide-icon-card" data-parallax="0.08" style="background-image: url('images/fes.png');">
                 <i class="bi bi-buildings"></i>
                 <span>Villes impériales</span>
               </div>
             </div>
             <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
+              <div class="guide-icon-card" data-parallax="0.08" style="background-image: url('images/imlil.png');">
                 <i class="bi bi-tree-fill"></i>
                 <span>Atlas</span>
               </div>
             </div>
             <div class="col-6">
-              <div class="guide-icon-card" data-parallax="0.08">
+              <div class="guide-icon-card" data-parallax="0.08" style="background-image: url('images/essaouira.png');">
                 <i class="bi bi-water"></i>
                 <span>Côte Atlantique</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Cultural moments ("N'oubliez pas de…") === -->
+  <section class="culture-moments" id="cultureSection">
+    <div class="container">
+      <div class="culture-head">
+        <span class="culture-eyebrow">Esprit marocain</span>
+        <h2>Quand vous allez au Maroc,<br><em>n'oubliez pas de…</em></h2>
+        <p class="culture-lead">
+          Quelques rituels qui font battre le cœur du pays et qu'aucun guide ne devrait passer sous silence.
+        </p>
+      </div>
+      <div class="culture-grid">
+        <article class="culture-moment reveal-hidden" data-tone="terra">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-droplet-fill"></i></span>
+            <h3>Boire l'eau d'un gerrab</h3>
+            <p>Sur la place Jemaa el-Fna, le porteur d'eau berbère sonne sa clochette en cuivre. Une gorgée fraîche dans une coupe traditionnelle&nbsp;: un geste vieux de mille ans.</p>
+          </div>
+        </article>
+        <article class="culture-moment reveal-hidden" data-tone="gold">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-moon-stars-fill"></i></span>
+            <h3>Vivre l'ambiance du Ramadan</h3>
+            <p>Le ftour partagé à la tombée du jour, la harira fumante, les rues désertes puis vibrantes après l'iftar&nbsp;: un mois où le Maroc se révèle dans toute sa générosité.</p>
+          </div>
+        </article>
+        <article class="culture-moment reveal-hidden" data-tone="green">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-stars"></i></span>
+            <h3>Célébrer un Aïd en famille</h3>
+            <p>Aïd al-Fitr ou Aïd al-Adha&nbsp;: portes ouvertes, pâtisseries au miel, vêtements neufs et bénédictions échangées. Un moment d'unité où l'invité devient famille.</p>
+          </div>
+        </article>
+        <article class="culture-moment reveal-hidden" data-tone="indigo">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-cup-hot-fill"></i></span>
+            <h3>Partager un thé à la menthe</h3>
+            <p>Versé de haut, mousseux et brûlant&nbsp;: le « whisky berbère » se déguste lentement. Trois verres&nbsp;: amer comme la vie, doux comme l'amour, suave comme la mort.</p>
+          </div>
+        </article>
+        <article class="culture-moment reveal-hidden" data-tone="rose">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-flower2"></i></span>
+            <h3>Se faire dessiner au henné</h3>
+            <p>Sur la main, les motifs géométriques racontent la fête, le mariage, la chance. Une tradition féminine transmise de mère en fille depuis des siècles.</p>
+          </div>
+        </article>
+        <article class="culture-moment reveal-hidden" data-tone="sand">
+          <div class="cm-body">
+            <span class="cm-icon"><i class="bi bi-water"></i></span>
+            <h3>S'abandonner au hammam</h3>
+            <p>Vapeur, savon beldi, kessa, huile d'argan. Une heure dans un hammam de quartier ou de riad, et le voyageur ressort comme né une seconde fois.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SECTION : Team teaser === -->
+  <section class="team-teaser" id="teamSection">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="team-teaser-eyebrow">L'équipe</span>
+          <h2>Derrière ce portail,<br><em>cinq passionnés</em></h2>
+          <p class="team-teaser-lead">
+            Nous avons travaillé dur sur ce projet — non pas seulement parce que c'est un devoir,
+            mais parce que nous y avons vu une idée créative à défendre&nbsp;: faire vivre le Maroc
+            en ligne, avec ses couleurs, ses saveurs et ses paysages, à travers une expérience
+            qui nous ressemble.
+          </p>
+          <a href="equip.html" class="team-teaser-cta">
+            Faire connaissance <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="team-teaser-stack">
+            <img src="profiles/MARYAM_ANAHIR.png" alt="Maryam" class="team-thumb tt-1" loading="lazy">
+            <img src="profiles/LEILA_BOUALAM.jpeg" alt="Leila" class="team-thumb tt-2" loading="lazy">
+            <img src="profiles/OMAR_EL_HORRE.png" alt="Omar" class="team-thumb tt-3" loading="lazy">
+            <img src="profiles/NASSIMA_AFFOTIH.jpeg" alt="Nassima" class="team-thumb tt-4" loading="lazy">
+            <img src="profiles/SAMIRA_OUIMING.jpeg" alt="Samira" class="team-thumb tt-5" loading="lazy">
           </div>
         </div>
       </div>
@@ -2168,6 +2591,26 @@
           }
         });
       });
+    })();
+
+    /* === Reveal cultural moments on scroll === */
+    (function () {
+      const items = document.querySelectorAll('.culture-moment.reveal-hidden');
+      if (!items.length || !('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('reveal-visible'));
+        return;
+      }
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(items).indexOf(entry.target);
+            entry.target.style.transitionDelay = (idx % 3) * 80 + 'ms';
+            entry.target.classList.add('reveal-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      items.forEach(el => obs.observe(el));
     })();
 
     /* === 2. Compteurs animés (IntersectionObserver) === */

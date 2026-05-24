@@ -91,19 +91,78 @@
       </div>
 
       <!-- Direct links -->
-      <div class="menu-group">
-        <a class="menu-head" href="activites.html">
-          <span data-i18n="nav.activities">Activités</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <div class="menu-group">
-        <a class="menu-head" href="itineraire.html">
-          <span data-i18n="nav.itineraries">Itinéraires</span>
-          <i class="bi bi-arrow-right chev"></i>
-        </a>
-      </div>
-      <!-- Footer : language + motion -->
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.activities">Activités</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="activites.html#filter-all">
+                  <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_all">Toutes</span>
+                </a></li>
+                <li><a href="activites.html#filter-culture">
+                  <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_culture">Culture</span>
+                </a></li>
+                <li><a href="activites.html#filter-nature">
+                  <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_nature">Nature</span>
+                </a></li>
+                <li><a href="activites.html#filter-aventure">
+                  <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_adventure">Aventure</span>
+                </a></li>
+                <li><a href="activites.html#filter-sport">
+                  <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_sport">Sport</span>
+                </a></li>
+                <li><a href="activites.html#filter-detente">
+                  <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
+                  <span data-i18n="nav.act_relax">Détente</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      <div class="menu-group" data-group>
+            <button type="button" class="menu-head" aria-expanded="false">
+              <span data-i18n="nav.itineraries">Itinéraires</span>
+              <i class="bi bi-chevron-down chev"></i>
+            </button>
+            <div class="menu-sub">
+              <ul class="menu-sub-list activities-pics">
+                <li><a href="itineraire.html#filter-all">
+                  <img src="images/sahara_dunes.png" alt="" loading="lazy">
+                  <span>Tous</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-culture">
+                  <img src="images/fes.png" alt="" loading="lazy">
+                  <span>Culture</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-aventure">
+                  <img src="images/merzouga.png" alt="" loading="lazy">
+                  <span>Aventure</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-nature">
+                  <img src="images/azrou.png" alt="" loading="lazy">
+                  <span>Nature</span>
+                </a></li>
+                <li><a href="itineraire.html#filter-sport">
+                  <img src="images/taghazout.png" alt="" loading="lazy">
+                  <span>Sport</span>
+                </a></li>
+              </ul>
+            </div>
+          </div>
+      
+
+          <div class="menu-group">
+                <a class="menu-head" href="equip.html">
+                  <span data-i18n="nav.team">Équipe</span>
+                  <i class="bi bi-arrow-right chev"></i>
+                </a>
+              </div><!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch" role="group" aria-label="Langue / Language">
           <i class="bi bi-globe2" aria-hidden="true"></i>
