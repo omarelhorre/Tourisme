@@ -16,6 +16,10 @@
   // ============================================================
   const DICT = {
     en: {
+      "Notre": "Our",
+      "siteweb": "website",
+      "adoré": "loved",
+      "par plusieurs etudiants en classe": "by many students in class",
       /* === NAV === */
       "Accueil": "Home",
       "Villes": "Cities",
@@ -35,6 +39,7 @@
       "Tagine Poulet & Citrons Confits": "Chicken Tagine with Preserved Lemons",
       "Voir tous les plats →": "See all dishes →",
       "Voir tous les plats ↑": "See all dishes ↑",
+      "Voir toute l'équipe →": "See the whole team →",
       "Animations": "Animations",
       "Langue / Language": "Language",
 
@@ -956,6 +961,10 @@
 
 
     ar: {
+      "Notre": "موقعنا",
+      "siteweb": "",
+      "adoré": "المحبوب",
+      "par plusieurs etudiants en classe": "من قبل العديد من الطلاب في الفصل",
       /* === NAV === */
       "Accueil": "الرئيسية",
       "Villes": "المدن",
@@ -975,6 +984,7 @@
       "Tagine Poulet & Citrons Confits": "طاجين الدجاج بالليمون المصبّر",
       "Voir tous les plats →": "عرض جميع الأطباق →",
       "Voir tous les plats ↑": "عرض جميع الأطباق ↑",
+      "Voir toute l'équipe →": "رؤية الفريق بأكمله →",
       "Animations": "الحركات",
       "Langue / Language": "اللغة",
 

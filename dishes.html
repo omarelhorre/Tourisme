@@ -238,7 +238,7 @@
       display:inline-flex; align-items:center; gap:0.55rem;
       background:var(--encre); color:#fff; padding:0.82rem 1.4rem;
       border:none; border-radius:999px; font-family:'Lato',sans-serif; font-weight:700;
-      font-size:0.92rem; letter-spacing:0.03em; cursor:pointer;
+      font-size: 0.82rem; letter-spacing:0.03em; cursor:pointer;
       transition:background .3s,transform .3s,box-shadow .3s;
       box-shadow:0 6px 18px rgba(0,0,0,0.18);
     }
@@ -598,6 +598,7 @@
             <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
             <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
             <li><a href="index.html#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
+            <li><a href="index.html#cultureSection">n'oubliez pas de…</a></li>
           </ul>
         </div>
       </div>
@@ -708,12 +709,23 @@
           </div>
       
 
-          <div class="menu-group">
-                <a class="menu-head" href="equip.html">
-                  <span data-i18n="nav.team">Équipe</span>
-                  <i class="bi bi-arrow-right chev"></i>
-                </a>
-              </div><!-- Footer : language + motion -->
+          <!-- ÉQUIPE -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.team">Équipe</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="equip.html#member-leila">Leila Boualam</a></li>
+            <li><a href="equip.html#member-maryam">Maryam Anahir</a></li>
+            <li><a href="equip.html#member-nassima">Nassima Affotih</a></li>
+            <li><a href="equip.html#member-omar">Omar El Horre</a></li>
+            <li><a href="equip.html#member-samira">Samira Ouiming</a></li>
+                      <li><a href="equip.html" data-i18n="nav.all_team">Voir toute l'équipe →</a></li>
+          </ul>
+        </div>
+      </div><!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
         <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">

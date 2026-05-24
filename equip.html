@@ -122,7 +122,7 @@ body.menu-open .site-menu { opacity: 1; visibility: visible; transform: scale(1)
   transition: color 0.2s ease, background 0.2s ease;
 }
 .menu-sub-list a::before { content: "→"; color: var(--terracotta); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; }
-.menu-sub-list a:hover { color: var(--terracotta); background: rgba(255, 255, 255, 0.6); }
+.menu-sub-list a:hover { color: var(--or); background: rgba(255, 255, 255, 0.6); }
 .menu-sub-list a:hover::before { opacity: 1; transform: translateX(0); }
 
 .menu-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; flex-basis: 100%; margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(192,85,42,0.22); }
@@ -162,14 +162,17 @@ body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after 
   body.menu-open .site-menu-inner { transform: translateX(0); }
   .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; z-index: 0; }
   .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
-  .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; gap: 0; border-bottom: none; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: 0.08em; background: transparent; transition: background 0.25s, color 0.25s; white-space: nowrap; }
-  .menu-head:hover, .menu-head:focus-visible { padding: 0.6rem 1.4rem; background: rgba(192,85,42,0.12); color: var(--terracotta); }
+  .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; gap: 0; border-bottom: none; border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.82rem; letter-spacing: 0.08em; background: transparent; transition: background 0.25s, color 0.25s; white-space: nowrap; }
+  .menu-head:hover, .menu-head:focus-visible { padding: 0.5rem 1rem; background: rgba(192,85,42,0.12); color: var(--terracotta); }
   .menu-head .chev { display: none; }
   .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
   .menu-sub { position: absolute; left: 4rem; right: 4rem; top: 9.5rem; bottom: 11rem; z-index: 1; padding-top: 1.5rem; border-top: 1px solid rgba(192,85,42,0.18); max-height: none; overflow-y: auto; opacity: 0; visibility: hidden; transform: translateY(14px); transition: opacity 0.35s, transform 0.35s, visibility 0s linear 0.35s; }
   .menu-group.open .menu-sub { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.35s, transform 0.35s; }
   .menu-sub-list { padding: 0; gap: 0.1rem; }
-  .menu-sub-list a { font-size: clamp(1.3rem, 2.1vw, 2rem); font-weight: 900; letter-spacing: -0.01em; padding: 0.45rem 0.7rem; }
+  .menu-sub-list a { font-size: clamp(1.3rem, 2.1vw, 2rem); font-weight: 700;
+        font-family: 'Playfair Display', serif;
+        text-transform: capitalize;
+        color: var(--encre); letter-spacing: -0.01em; padding: 0.45rem 0.7rem; }
   .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
   .menu-foot { position: absolute; z-index: 2; left: 4rem; right: 4rem; bottom: 2.5rem; width: auto; flex-basis: auto; margin-top: 0; padding-top: 1.1rem; background: var(--sable); }
 }
@@ -239,7 +242,7 @@ html[lang="ar"] .team-hero h1 .title-ar { display: inline; }
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
-  padding: 0.6rem 1.4rem;
+  padding: 0.5rem 1rem;
   border: 1px solid rgba(192,85,42,0.25);
   border-radius: 999px;
   font-size: 0.78rem;
@@ -471,6 +474,7 @@ html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
           <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
           <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
           <li><a href="index.html#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
+            <li><a href="index.html#cultureSection">n'oubliez pas de…</a></li>
         </ul>
       </div>
     </div>
@@ -583,11 +587,21 @@ html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
     </div>
 
     <!-- ÉQUIPE -->
-    <div class="menu-group">
-      <a class="menu-head" href="equip.html">
+    <div class="menu-group" data-group>
+      <button type="button" class="menu-head" aria-expanded="false">
         <span data-i18n="nav.team">Équipe</span>
-        <i class="bi bi-arrow-right chev"></i>
-      </a>
+        <i class="bi bi-chevron-down chev"></i>
+      </button>
+      <div class="menu-sub">
+        <ul class="menu-sub-list">
+          <li><a href="equip.html#member-leila">Leila Boualam</a></li>
+          <li><a href="equip.html#member-maryam">Maryam Anahir</a></li>
+          <li><a href="equip.html#member-nassima">Nassima Affotih</a></li>
+          <li><a href="equip.html#member-omar">Omar El Horre</a></li>
+          <li><a href="equip.html#member-samira">Samira Ouiming</a></li>
+                    <li><a href="equip.html" data-i18n="nav.all_team">Voir toute l'équipe →</a></li>
+          </ul>
+      </div>
     </div>
 
     <!-- Footer : language + motion -->
@@ -741,6 +755,13 @@ html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
   </div>
 </section>
 
+
+<div class="team-footer" style="text-align: center; padding: 3rem 1rem; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--encre);">
+  <span style="color: var(--or);">Notre</span>
+  <span>siteweb</span>
+  <span style="color: var(--or);">adoré</span>
+  <span>par plusieurs etudiants en classe</span>
+</div>
 <!-- === Footer === -->
 <footer class="footer-simple">
   © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026

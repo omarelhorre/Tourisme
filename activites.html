@@ -111,7 +111,7 @@
     @media (max-width: 600px) { .menu-sub-list.activities-pics { grid-template-columns: repeat(2, 1fr); } }
     .menu-sub-list a { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.6rem; color: var(--texte-doux); text-decoration: none; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; border-radius: 8px; transition: color 0.2s, background 0.2s; }
     .menu-sub-list a::before { content: "→"; color: var(--terracotta); opacity: 0; transform: translateX(-6px); transition: opacity 0.2s, transform 0.2s; }
-    .menu-sub-list a:hover { color: var(--terracotta); background: rgba(255,255,255,0.6); }
+    .menu-sub-list a:hover { color: var(--or); background: rgba(255,255,255,0.6); }
     .menu-sub-list a:hover::before { opacity: 1; transform: translateX(0); }
     .menu-cta { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 2rem; padding: 0.95rem 2rem; background: var(--jaune-btn); color: var(--encre); font-weight: 900; font-size: 1.05rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; border-radius: 999px; transition: background 0.2s, transform 0.2s; }
     .menu-cta:hover { background: #f5cd00; color: #000; transform: translateY(-2px); }
@@ -147,14 +147,17 @@
       body.menu-open .site-menu-inner { transform: translateX(0); }
       .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; z-index: 0; }
       .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
-      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: -0.005em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
+      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.82rem; letter-spacing: -0.005em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
       .menu-head:hover { padding-left: 1.4rem; background: rgba(192,85,42,0.12); }
       .menu-head .chev { display: none; }
       .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
       .menu-sub { position: absolute; left: 4rem; right: 4rem; top: 9.5rem; bottom: 11rem; z-index: 1; padding-top: 1.5rem; border-top: 1px solid rgba(192,85,42,0.18); max-height: none; overflow-y: auto; opacity: 0; visibility: hidden; transform: translateY(14px); transition: opacity 0.35s, transform 0.35s, visibility 0s linear 0.35s; }
       .menu-group.open .menu-sub { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.35s, transform 0.35s; }
       .menu-sub-list { padding: 0; gap: 0.1rem; }
-      .menu-sub-list a { font-size: clamp(1.3rem, 2.1vw, 2rem); font-weight: 900; letter-spacing: -0.01em; padding: 0.45rem 0.7rem; }
+      .menu-sub-list a { font-size: clamp(1.3rem, 2.1vw, 2rem); font-weight: 700;
+        font-family: 'Playfair Display', serif;
+        text-transform: capitalize;
+        color: var(--encre); letter-spacing: -0.01em; padding: 0.45rem 0.7rem; }
       .menu-sub-list.cities { gap: 0.1rem 1.5rem; }
       .menu-cta { position: absolute; z-index: 2; left: 4rem; bottom: 6rem; margin-top: 0; }
       .menu-foot { position: absolute; z-index: 2; left: 4rem; right: 4rem; bottom: 1.6rem; margin-top: 0; }
@@ -682,6 +685,7 @@
             <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
             <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
             <li><a href="index.html#itinerairesSection" data-i18n="nav.discover_itineraries">Découvrir les Itinéraires</a></li>
+            <li><a href="index.html#cultureSection">n'oubliez pas de…</a></li>
           </ul>
         </div>
       </div>
@@ -792,12 +796,23 @@
           </div>
       
 
-          <div class="menu-group">
-                <a class="menu-head" href="equip.html">
-                  <span data-i18n="nav.team">Équipe</span>
-                  <i class="bi bi-arrow-right chev"></i>
-                </a>
-              </div><!-- Footer : language + motion -->
+          <!-- ÉQUIPE -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.team">Équipe</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list">
+            <li><a href="equip.html#member-leila">Leila Boualam</a></li>
+            <li><a href="equip.html#member-maryam">Maryam Anahir</a></li>
+            <li><a href="equip.html#member-nassima">Nassima Affotih</a></li>
+            <li><a href="equip.html#member-omar">Omar El Horre</a></li>
+            <li><a href="equip.html#member-samira">Samira Ouiming</a></li>
+                      <li><a href="equip.html" data-i18n="nav.all_team">Voir toute l'équipe →</a></li>
+          </ul>
+        </div>
+      </div><!-- Footer : language + motion -->
       <div class="menu-foot">
         <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
         <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
