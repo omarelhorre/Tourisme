@@ -5,36 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marrakech — La Ville Rouge | Royaume du Maroc</title>
 
-  <!-- === Bootstrap 5 CSS === -->
+  <!-- on charge Bootstrap 5 le cœur du système de grille et des composants -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- === Bootstrap Icons === -->
+  <!-- Bootstrap Icons pour avoir toutes ces jolies icônes (bi-tree, bi-snow…) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 
-  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <!-- on charge Google Fonts : Playfair Display pour les titres élégants, Lato pour le texte courant -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- === Shared Destination Styling === -->
+  <!-- Notre feuille de style personnalisée — c'est ici qu'on surcharge Bootstrap pour le look Maroc -->
   <link href="city-page.css" rel="stylesheet" />
+<base target="_blank">
 </head>
 <body>
 
-  <!-- === Floating navigation menu system === -->
+  <!-- Bouton retour accueil : une petit arbre ramène à la racine -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
+  <!-- Le bouton burger : 2 petites barres qui s'animent en croix quand on clique -->
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
            aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
 
+  <!-- Le menu coulissant (overlay) qui recouvre toute la page -->
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
 
-      <!-- ACCUEIL -->
+      <!-- Premier groupe du menu : les ancres vers la page d'accueil -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.home">Accueil</span>
@@ -51,7 +54,7 @@
         </div>
       </div>
 
-      <!-- VILLES -->
+      <!-- La liste des 9 villes stars du site -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.cities">Villes</span>
@@ -72,7 +75,7 @@
         </div>
       </div>
 
-      <!-- PLATS -->
+      <!-- Les spécialités culinaires avec ancres directes -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.dishes">Plats</span>
@@ -90,7 +93,7 @@
         </div>
       </div>
 
-      <!-- Direct links -->
+      <!-- Menu avec miniatures photos pour chaque catégorie des activites-->
       <div class="menu-group" data-group>
             <button type="button" class="menu-head" aria-expanded="false">
               <span data-i18n="nav.activities">Activités</span>
@@ -157,7 +160,7 @@
           </div>
       
 
-          <!-- ÉQUIPE -->
+          <!-- Les 5 membres du projet + lien vers la page complète -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.team">Équipe</span>
@@ -196,9 +199,11 @@
     </div>
   </div>
 
-  <!-- === SECTION 1: HERO === -->
+  <!--  SECTION 1 : HERO — La grande image de fond avec le titre "Marrakech" qui s'affiche en overlay -->
   <section class="city-hero">
+    <!-- L'image de fond : vue panoramique de Marrakech (c'est le cliché iconique) -->
     <img src="assets/photo-1597212618440-806262de4f6b_2648e87f.jpg" alt="Marrakech" class="city-hero-img">
+    <!-- Voile sombre pour que le texte blanc ressorte bien -->
     <div class="city-hero-overlay"></div>
     <div class="city-hero-content">
       <span class="city-eyebrow hero-animate-1">La Ville Rouge</span>
@@ -210,10 +215,11 @@
     </div>
   </section>
 
-  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <!--  SECTION 2 : INTRO — Présentation en 2 colonnes (texte à gauche, infos pratiques à droite) -->
   <section class="city-intro">
     <div class="container">
       <div class="row g-lg-5 align-items-start">
+        <!-- Colonne principale : le storytelling -->
         <div class="col-lg-7 fade-up" data-delay="0">
           <span class="intro-sub">Plaine d'Haouz — Région Marrakech-Safi</span>
           <h2>La perle ocre du sud marocain</h2>
@@ -221,9 +227,11 @@
           <p>La médina, classée au patrimoine mondial de l'UNESCO depuis 1985, est un labyrinthe envoûtant de ruelles où se mêlent palais somptueux, mosquées monumentales et souks bourdonnants. La place Jemaa el-Fna, centre névralgique de la ville, offre chaque soir un spectacle unique de musiciens, conteurs, acrobates et échoppes culinaires odorantes.</p>
           <p>À quelques encablures du tumulte de la vieille ville, le Jardin Majorelle — créé par le peintre français Jacques Majorelle en 1923 puis magnifiquement restauré par Yves Saint Laurent — offre une halte apaisante aux tons bleu cobalt et jaune vif. L'imposante chaîne de l'Atlas, visible par temps clair depuis les toits-terrasses de la ville, invite également à de magnifiques excursions.</p>
         </div>
+        <!-- Colonne latérale : la carte "infos rapides" -->
         <div class="col-lg-5 fade-up" data-delay="150">
           <div class="intro-meta-card">
             <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <!-- Durée conseillée -->
             <div class="intro-meta-item">
               <i class="bi bi-clock-history"></i>
               <div>
@@ -231,6 +239,7 @@
                 <p>3 à 4 jours</p>
               </div>
             </div>
+            <!-- Meilleure saison -->
             <div class="intro-meta-item">
               <i class="bi bi-calendar-check"></i>
               <div>
@@ -238,6 +247,7 @@
                 <p>Mars-Mai et Octobre-Novembre</p>
               </div>
             </div>
+            <!-- Localisation géo -->
             <div class="intro-meta-item">
               <i class="bi bi-compass"></i>
               <div>
@@ -246,6 +256,7 @@
               </div>
             </div>
           </div>
+          <!-- Petite photo d'ambiance à côté des infos -->
           <div class="intro-img-wrap">
             <img src="assets/marrakesh_morocco_90a103ac.jpg" alt="Architecture traditionnelle Marrakech">
           </div>
@@ -254,7 +265,7 @@
     </div>
   </section>
 
-  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <!--  SECTION 3 : À NE PAS MANQUER — Grille de 6 cartes d'activités (2 lignes de 3) -->
   <section class="city-highlights">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -262,7 +273,7 @@
         <h2>À ne pas manquer à Marrakech</h2>
       </div>
       <div class="row g-4">
-        <!-- Activité 6 -->
+        <!-- Carte 1 : Médersa Ben Youssef (joyau architectural) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -273,7 +284,7 @@
             <p class="city-card-desc">Joyau de l'architecture arabo-andalouse, cette ancienne école coranique éblouit par son grand patio orné de zelliges et de stucs finement ciselés.</p>
           </div>
         </div>
-        <!-- Activité 2 -->
+        <!-- Carte 2 : Place Jemaa el-Fna (le cœur battant) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -284,7 +295,7 @@
             <p class="city-card-desc">Le cœur vibrant de Marrakech, classé à l'UNESCO. Animée de jour comme de nuit, la place accueille conteurs, musiciens traditionnels et stands de cuisine locale savoureuse.</p>
           </div>
         </div>
-        <!-- Activité 3 -->
+        <!-- Carte 3 : Mosquée Koutoubia (emblème de la ville) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -295,7 +306,7 @@
             <p class="city-card-desc">Chef-d'œuvre de l'art almohade dominant la ville de son minaret de 77 m. L'intérieur est réservé aux musulmans, mais ses jardins fleuris extérieurs sont ouverts à tous.</p>
           </div>
         </div>
-        <!-- Activité 4 -->
+        <!-- Carte 4 : Palais de la Bahia (splendeur mauresque) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -306,7 +317,7 @@
             <p class="city-card-desc">Splendide palais du XIXe siècle, chef-d'œuvre de l'art mauresque orné de zelliges colorés, de plafonds en cèdre sculpté et de grands patios verdoyants.</p>
           </div>
         </div>
-        <!-- Activité 5 -->
+        <!-- Carte 5 : Tombeaux Saadiens (nécropole royale) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -317,7 +328,7 @@
             <p class="city-card-desc">Nécropole royale du XVIe siècle, célèbre pour la finesse de sa salle des Douze Colonnes sculptée dans le marbre de Carrare et le bois de thuya.</p>
           </div>
         </div>
-        <!-- Activité 1 -->
+        <!-- Carte 6 : Jardin Menara (havre de paix bleu) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -332,7 +343,7 @@
     </div>
   </section>
 
-  <!-- === SECTION: RESTAURANTS === -->
+  <!--  SECTION 4 : RESTAURANTS — 4 cartes de restos populaires (layout spécial 4 colonnes) -->
   <section class="city-restaurants" style="background: var(--bg-cream); border-top: 1px solid #f0ebe3; border-bottom: 1px solid #f0ebe3;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -340,7 +351,7 @@
         <h2>Où manger à Marrakech</h2>
       </div>
       <div class="row g-4">
-        <!-- Restaurant 1 -->
+        <!-- Restaurant 1 : Oban by riad d'ivoire -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -350,7 +361,7 @@
             <p class="city-card-desc"></p>
           </div>
         </div>
-        <!-- Restaurant 2 -->
+        <!-- Restaurant 2 : Nomad (tendance) -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -360,7 +371,7 @@
             <p class="city-card-desc"></p>
           </div>
         </div>
-        <!-- Restaurant 3 -->
+        <!-- Restaurant 3 : L'Mida (fusion) -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -370,7 +381,7 @@
             <p class="city-card-desc">.</p>
           </div>
         </div>
-        <!-- Restaurant 4 -->
+        <!-- Restaurant 4 : Dar Yacout (traditionnel) -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -384,7 +395,7 @@
     </div>
   </section>
 
-  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
+  <!--  SECTION 5 : HÉBERGEMENTS — 3 cartes d'hôtels de luxe et riads avec étoiles et prix -->
   <section class="city-hotels" style="background: #ffffff;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -392,7 +403,7 @@
         <h2>Hébergements d'exception</h2>
       </div>
       <div class="row g-4">
-        <!-- Hôtel 1 -->
+        <!-- Hôtel 1 : La Mamounia (palace légendaire 5★) -->
         <div class="col-md-4 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -406,7 +417,7 @@
             <p class="city-card-desc">Palace légendaire mariant avec brio l'art déco et l'architecture arabo-andalouse. Ses jardins centenaires offrent un havre de paix mythique.</p>
           </div>
         </div>
-        <!-- Hôtel 2 -->
+        <!-- Hôtel 2 : Royal Mansour (vitrine de l'artisanat 5★) -->
         <div class="col-md-4 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -420,7 +431,7 @@
             <p class="city-card-desc">Une véritable vitrine de l'artisanat marocain, composée de somptueux riads privés d'exception et d'un spa remarquable plébiscité mondialement.</p>
           </div>
         </div>
-        <!-- Hôtel 3 -->
+        <!-- Hôtel 3 : Riad de la médina (authentique 3★) -->
         <div class="col-md-4 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -438,7 +449,7 @@
     </div>
   </section>
 
-  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <!--  SECTION 6 : CULTURE & CONSEILS — 6 cartes de conseils pratiques pour le voyageur -->
   <section class="city-culture">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -446,7 +457,7 @@
         <h2>Culture & Conseils de Voyage</h2>
       </div>
       <div class="row g-4">
-        <!-- Conseil 1 -->
+        <!-- Conseil 1 : Marchander avec le sourire -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-cash-coin"></i></div>
@@ -454,7 +465,7 @@
             <p class="culture-card-desc">Dans les souks, la négociation fait partie intégrante du commerce local. Échangez toujours avec le sourire et beaucoup de courtoisie.</p>
           </div>
         </div>
-        <!-- Conseil 2 -->
+        <!-- Conseil 2 : Mosquées réservées aux musulmans -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-shield-x"></i></div>
@@ -462,7 +473,7 @@
             <p class="culture-card-desc">La majorité des mosquées en activité sont réservées aux fidèles musulmans. La Koutoubia s'admire ainsi principalement depuis ses superbes extérieurs.</p>
           </div>
         </div>
-        <!-- Conseil 3 -->
+        <!-- Conseil 3 : GPS en panne dans le labyrinthe -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-compass"></i></div>
@@ -470,7 +481,7 @@
             <p class="culture-card-desc">Le cœur historique est un vaste dédale où les applications GPS perdent parfois le signal. Sollicitez poliment les commerçants établis.</p>
           </div>
         </div>
-        <!-- Conseil 4 -->
+        <!-- Conseil 4 : Étés torrides, hivers frais -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-thermometer-half"></i></div>
@@ -478,7 +489,7 @@
             <p class="culture-card-desc">Les étés sont très secs et torrides. Les nuits d'hiver (décembre à février) se révèlent fraîches, nécessitant d'emporter des lainages légers.</p>
           </div>
         </div>
-        <!-- Conseil 5 -->
+        <!-- Conseil 5 : Chaussures plates obligatoires -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-shoe-heel"></i></div>
@@ -486,7 +497,7 @@
             <p class="culture-card-desc">Les ruelles pavées de la médina exigent le port de chaussures de marche confortables à semelles plates pour parer aux dénivelés et passages étroits.</p>
           </div>
         </div>
-        <!-- Conseil 6 -->
+        <!-- Conseil 6 : Demander avant de photographier -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-camera"></i></div>
@@ -498,7 +509,7 @@
     </div>
   </section>
 
-  <!-- === SECTION 8: CTA FINAL === -->
+  <!--  SECTION 7 : CTA FINAL — Appel à l'action "Allez, on réserve ?" -->
   <section class="city-cta">
     <div class="city-cta-content container">
       <h2>Prêt à plonger dans l'ocre et l'or ?</h2>
@@ -510,26 +521,28 @@
     </div>
   </section>
 
-  <!-- === SECTION 9: FOOTER === -->
+  <!--  SECTION 8 : FOOTER — Crédits du projet -->
   <footer class="footer-simple">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
-  <!-- === Bootstrap Bundle JS === -->
+  <!--  SCRIPTS : on charge Bootstrap JS puis nos scripts maison pour le menu et les animations -->
+  <!-- Bootstrap Bundle (inclut Popper) — indispensable pour les composants interactifs -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /* ============================================================
-       === Navigation Drawer & Scroll Reveal Logic ===
-       ============================================================ */
+    /*  NAVIGATION : Menu coulissant type "overlay drawer". Quand on clique sur le burger, le menu glisse depuis la droite
+       et recouvre toute la page. Sur desktop, le premier groupe s'ouvre automatiquement. Sur mobile, on ouvre/ferme un par un.*/
 
     (function() {
       const toggle = document.getElementById('menuToggle');
       const menu   = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
+      if (!toggle || !menu) return;  // Sécurité : si les éléments n'existent pas, on stoppe
+
       const groups = menu.querySelectorAll('.menu-group[data-group]');
       const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 
+      // Ouvre UN seul groupe et ferme les autres (comportement accordéon)
       function activate(group) {
         groups.forEach(g => {
           const on = g === group;
@@ -538,31 +551,41 @@
         });
       }
 
+      // Ouvre ou ferme tout le menu + bloque le scroll du body
       function setMenu(open) {
         document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        document.body.style.overflow = open ? 'hidden' : '';
+        document.body.style.overflow = open ? 'hidden' : '';  // Empêche de scroller derrière le menu
+        // Sur grand écran, on ouvre le premier groupe par défaut
         if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
           activate(groups[0]);
         }
       }
 
+      // Clic sur le burger = bascule ouvert/fermé
+
       toggle.addEventListener('click', () => {
         setMenu(!document.body.classList.contains('menu-open'));
       });
+
+      // Échap pour fermer (accessibilité clavier)
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setMenu(false);
       });
+      // Clic sur le fond sombre = fermer
       menu.addEventListener('click', (e) => {
         if (e.target === menu) setMenu(false);
       });
 
+      // Gestion des groupes : clic sur le titre = ouvrir/fermer
       groups.forEach(group => {
         const head = group.querySelector('.menu-head');
         head.addEventListener('click', () => {
           if (isDesktop()) {
+            // Desktop : on switche vers le groupe cliqué (un seul ouvert)
             activate(group);
           } else {
+            // Mobile : toggle simple (ouvre si fermé, ferme si ouvert)
             const willOpen = !group.classList.contains('open');
             willOpen ? activate(group) : activate(null);
           }
@@ -570,7 +593,8 @@
       });
     })();
 
-    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    /*SCROLL REVEAL : Les éléments apparaissent en montant Chaque élément avec la classe "fade-up" se déclenche quand il
+       entre dans le viewport (12% visible). On ajoute un délai progressif pour un effet "cascade" entre les cartes.*/
     (function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -579,18 +603,21 @@
             setTimeout(() => {
               entry.target.classList.add('visible');
             }, parseInt(delay));
-            observer.unobserve(entry.target);
+            observer.unobserve(entry.target);  // On arrête de surveiller une fois déclenché
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.12 });  // 12% de l'élément doit être visible
 
       document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     })();
   </script>
-<!-- city-maps-link -->
+<!-- GOOGLE MAPS : Les cartes d'hôtel sont cliquables Petit script sympa : quand on clique sur une carte d'hôtel ou
+       de restaurant, ça ouvre Google Maps avec la recherche pré-remplie.-->
 <style>
+    /* Curseur "main" sur les cartes cliquables */
   .city-restaurants .city-card,
   .city-hotels .city-card { cursor: pointer; }
+    /* Focus visible pour l'accessibilité clavier */
   .city-restaurants .city-card:focus-visible,
   .city-hotels .city-card:focus-visible {
     outline: 2px solid #C0552A;
@@ -599,26 +626,32 @@
   }
 </style>
 <script>
-(function () {
-  const title = document.title || "";
+  (function () {
+    // On récupère le nom de la ville depuis le <title> (partie avant le tiret)
+    const title = document.title || "";
   const city = (title.split(/[—|·-]/)[0] || "").trim() || "Morocco";
-  const cards = document.querySelectorAll(
-    ".city-restaurants .city-card, .city-hotels .city-card"
-  );
+    // On cible toutes les cartes d'hôtels et de restaurants
+    const cards = document.querySelectorAll(
+      ".city-restaurants .city-card, .city-hotels .city-card"
+    );
   cards.forEach(function (card) {
     const titleEl = card.querySelector(".city-card-title");
     if (!titleEl) return;
     const name = titleEl.textContent.trim();
     if (!name) return;
+    // Construction de l'URL Google Maps
     const url =
       "https://www.google.com/maps/search/?api=1&query=" +
       encodeURIComponent(name + " " + city + " Morocco");
+    // On rend la carte accessible au clavier (role="link" + tabindex)
     card.setAttribute("role", "link");
     card.setAttribute("tabindex", "0");
     card.setAttribute("aria-label", "Voir " + name + " sur Google Maps");
+    // Clic = ouverture dans un nouvel onglet
     card.addEventListener("click", function () {
       window.open(url, "_blank", "noopener");
     });
+    // Entrée ou Espace au clavier = même comportement
     card.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -629,10 +662,11 @@
 })();
 </script>
 
-<!-- Shared multilingual engine (FR / EN / AR) -->
+<!-- Moteur multilingue (FR / EN / AR) — géré par un fichier externe -->
 <script src="assets/i18n.js"></script>
 
-<!-- Motion toggle (animations on/off, persisted) -->
+<!-- MOTION TOGGLE : Bouton pour désactiver les animations Respecte le choix utilisateur (localStorage) 
+   ET la préférence système "prefers-reduced-motion". Très important pour l'a11y. -->
 <script>
 (function () {
   const btn = document.getElementById('motionToggle');

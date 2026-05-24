@@ -5,36 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fès — La Capitale Spirituelle | Royaume du Maroc</title>
 
-  <!-- === Bootstrap 5 CSS === -->
+  <!-- on charge Bootstrap 5 le cœur du système de grille et des composants -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- === Bootstrap Icons === -->
+  <!-- Bootstrap Icons pour avoir toutes ces jolies icônes (bi-tree, bi-mortarboard…) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 
-  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <!-- on charge Google Fonts : Playfair Display pour les titres élégants, Lato pour le texte courant -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- === Shared Destination Styling === -->
+  <!-- Notre feuille de style personnalisée — c'est ici qu'on surcharge Bootstrap pour le look Maroc -->
   <link href="city-page.css" rel="stylesheet" />
+<base target="_blank">
 </head>
 <body>
 
-  <!-- === Floating navigation menu system === -->
+  <!-- Bouton retour accueil : une petit arbre ramène à la racine -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
+  <!-- Le bouton burger : 2 petites barres qui s'animent en croix quand on clique -->
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
            aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
 
+  <!-- Le menu coulissant (overlay) qui recouvre toute la page -->
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
 
-      <!-- ACCUEIL -->
+      <!-- Premier groupe du menu : les ancres vers la page d'accueil -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.home">Accueil</span>
@@ -51,7 +54,7 @@
         </div>
       </div>
 
-      <!-- VILLES -->
+      <!-- La liste des 9 villes stars du site -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.cities">Villes</span>
@@ -72,7 +75,7 @@
         </div>
       </div>
 
-      <!-- PLATS -->
+      <!-- Les spécialités culinaires avec ancres directes -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.dishes">Plats</span>
@@ -90,7 +93,7 @@
         </div>
       </div>
 
-      <!-- Direct links -->
+      <!-- Menu avec miniatures photos pour chaque catégorie des activités-->
       <div class="menu-group" data-group>
             <button type="button" class="menu-head" aria-expanded="false">
               <span data-i18n="nav.activities">Activités</span>
@@ -155,9 +158,9 @@
               </ul>
             </div>
           </div>
-      
 
-          <!-- ÉQUIPE -->
+
+          <!-- Les 5 membres du projet + lien vers la page complète -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.team">Équipe</span>
@@ -196,9 +199,11 @@
     </div>
   </div>
 
-  <!-- === SECTION 1: HERO === -->
+  <!--  SECTION 1 : HERO — La grande image de fond avec le titre "Fès" qui s'affiche en overlay -->
   <section class="city-hero">
+    <!-- L'image de fond : vue panoramique sur la médina de Fès et ses toits ocre -->
     <img src="images/fes.png" alt="Vue panoramique de Fès" class="city-hero-img">
+    <!-- Voile sombre pour que le texte blanc ressorte bien -->
     <div class="city-hero-overlay"></div>
     <div class="city-hero-content">
       <span class="city-eyebrow hero-animate-1">La Capitale Spirituelle</span>
@@ -210,10 +215,12 @@
     </div>
   </section>
 
-  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <!--  SECTION 2 : INTRO — Présentation en 2 colonnes (texte à gauche, infos pratiques à droite) -->
   <section class="city-intro">
     <div class="container">
       <div class="row g-lg-5 align-items-start">
+
+        <!-- Colonne principale : le storytelling historique et culturel -->
         <div class="col-lg-7 fade-up" data-delay="0">
           <span class="intro-sub">Vallée du Saïs — Région Fès-Meknès</span>
           <h2>La cité millénaire des savoirs</h2>
@@ -221,9 +228,13 @@
           <p>Sa médina, Fès el-Bali, classée au patrimoine mondial de l'UNESCO depuis 1981, est l'une des plus grandes zones piétonnes urbaines du monde. Ses 9 000 ruelles labyrinthiques abritent l'université Al Quaraouiyine — fondée en 859 par Fatima al-Fihri, c'est la plus ancienne université encore en activité, attestée par le Guinness et l'UNESCO.</p>
           <p>Ville d'artisans par excellence, Fès vit encore au rythme des dinandiers, des teinturiers, des tanneurs et des céramistes. La célèbre tannerie Chouara, avec ses cuves colorées vues depuis les terrasses des marchands de cuir, reste l'image-emblème d'un savoir-faire transmis depuis le Moyen-Âge.</p>
         </div>
+
+        <!-- Colonne latérale : la carte "infos rapides" + photo d'ambiance -->
         <div class="col-lg-5 fade-up" data-delay="150">
           <div class="intro-meta-card">
             <h3 class="intro-meta-title">En un clin d'œil</h3>
+
+            <!-- Durée conseillée -->
             <div class="intro-meta-item">
               <i class="bi bi-clock-history"></i>
               <div>
@@ -231,6 +242,8 @@
                 <p>2 à 3 jours</p>
               </div>
             </div>
+
+            <!-- Meilleure saison -->
             <div class="intro-meta-item">
               <i class="bi bi-calendar-check"></i>
               <div>
@@ -238,6 +251,8 @@
                 <p>Mars-Mai et Septembre-Novembre</p>
               </div>
             </div>
+
+            <!-- Localisation géo -->
             <div class="intro-meta-item">
               <i class="bi bi-compass"></i>
               <div>
@@ -246,15 +261,18 @@
               </div>
             </div>
           </div>
+
+          <!-- Petite photo d'ambiance à côté des infos -->
           <div class="intro-img-wrap">
             <img src="assets\fes.jpg" alt="Médina de Fès">
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 3: À NE PAS MANQUER === -->
+  <!--  SECTION 3 : À NE PAS MANQUER — Grille de 6 cartes d'activités (2 lignes de 3) -->
   <section class="city-highlights">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -262,7 +280,8 @@
         <h2>À ne pas manquer à Fès</h2>
       </div>
       <div class="row g-4">
-        <!-- Highlight 1 -->
+
+        <!-- Carte 1 : La médina classée UNESCO, plus grande zone piétonne médiévale -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -273,7 +292,8 @@
             <p class="city-card-desc">Classée à l'UNESCO et fondée au IXe siècle, c'est la plus grande zone piétonne médiévale au monde. 9 000 ruelles, 350 mosquées et un labyrinthe vivant qui n'a pas changé depuis mille ans.</p>
           </div>
         </div>
-        <!-- Highlight 2 -->
+
+        <!-- Carte 2 : L'université Al Quaraouiyine, plus ancienne université du monde -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -284,7 +304,8 @@
             <p class="city-card-desc">Fondée en 859 par Fatima al-Fihri, c'est la plus ancienne université encore en activité au monde. Sa bibliothèque conserve plus de 4 000 manuscrits, dont certains datent du IXe siècle.</p>
           </div>
         </div>
-        <!-- Highlight 3 -->
+
+        <!-- Carte 3 : La tannerie Chouara, cuves colorées depuis le XIe siècle -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -295,7 +316,8 @@
             <p class="city-card-desc">Cuves colorées en activité depuis le XIe siècle où l'on teint encore le cuir selon les méthodes ancestrales. Observation depuis les terrasses des marchands — un brin de menthe sous le nez aide à supporter l'odeur.</p>
           </div>
         </div>
-        <!-- Highlight 4 -->
+
+        <!-- Carte 4 : La médersa Bou Inania, chef-d'œuvre mérinide du XIVe siècle -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -306,7 +328,8 @@
             <p class="city-card-desc">Chef-d'œuvre de l'architecture mérinide du XIVe siècle. Ses zelliges, ses stucs ciselés et son plafond en bois de cèdre sculpté en font l'une des plus belles médersas du Maroc.</p>
           </div>
         </div>
-        <!-- Highlight 5 -->
+
+        <!-- Carte 5 : Bab Boujloud, porte monumentale bleue et verte -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -317,7 +340,8 @@
             <p class="city-card-desc">Porte monumentale bleue et verte, principale entrée de la médina depuis 1913. Côté médina, elle est ornée de zelliges verts ; côté ville nouvelle, de zelliges bleus — le bleu de Fès.</p>
           </div>
         </div>
-        <!-- Highlight 6 -->
+
+        <!-- Carte 6 : Le Palais Royal et le Mellah, quartier juif historique -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -328,11 +352,12 @@
             <p class="city-card-desc">Les sept portes monumentales en bronze du Palais Royal ouvrent sur Fès Jdid. À côté, l'ancien quartier juif (Mellah) conserve ses balcons en bois ouvragé et son cimetière historique.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 4: RESTAURANTS === -->
+  <!--  SECTION 4 : RESTAURANTS — 4 cartes de restos gastronomiques (layout spécial 4 colonnes) -->
   <section class="city-restaurants" style="background: var(--bg-cream); border-top: 1px solid #f0ebe3; border-bottom: 1px solid #f0ebe3;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -340,6 +365,8 @@
         <h2>Où manger à Fès</h2>
       </div>
       <div class="row g-4">
+
+        <!-- Restaurant 1 : Dar Roumana, riad-restaurant raffiné dans la médina -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -349,6 +376,8 @@
             <p class="city-card-desc">Riad-restaurant raffiné dans la médina. Cuisine marocaine moderne par un chef formé en France, dans un cadre intime aux zelliges anciens.</p>
           </div>
         </div>
+
+        <!-- Restaurant 2 : Restaurant Numéro 7, table d'auteur en médina -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -358,6 +387,8 @@
             <p class="city-card-desc">Table d'auteur installée dans une maison de la médina. Menu unique du chef invité, renouvelé chaque saison, accord parfait avec les vins marocains.</p>
           </div>
         </div>
+
+        <!-- Restaurant 3 : Café Clock, institution culturelle et camel burger -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -367,6 +398,8 @@
             <p class="city-card-desc">Institution culturelle autant que restaurant. Le fameux camel burger, les soirées contes berbères et les cours de cuisine en font un passage obligé.</p>
           </div>
         </div>
+
+        <!-- Restaurant 4 : The Ruined Garden, tagines dans un jardin en ruines -->
         <div class="col-md-3 col-sm-6 fade-up" data-delay="300">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -376,11 +409,12 @@
             <p class="city-card-desc">Dans le jardin d'une demeure en ruines magnifiquement préservée, on déguste tagines lents et mezzés marocains, à l'ombre des bougainvilliers centenaires.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 5: HÔTELS === -->
+  <!--  SECTION 5 : HÉBERGEMENTS — 3 cartes d'hôtels/riads avec étoiles et prix -->
   <section class="city-hotels" style="background: #ffffff;">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -388,6 +422,8 @@
         <h2>Hébergements d'exception</h2>
       </div>
       <div class="row g-4">
+
+        <!-- Hôtel 1 : Riad Fès, Relais & Châteaux 5 étoiles en médina -->
         <div class="col-md-4 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -401,6 +437,8 @@
             <p class="city-card-desc">Relais & Châteaux installé dans plusieurs demeures andalouses fusionnées. Patios, piscine intérieure et spa hammam — le luxe au cœur de la médina.</p>
           </div>
         </div>
+
+        <!-- Hôtel 2 : Palais Faraj, palais du XIXe siècle perché sur la médina -->
         <div class="col-md-4 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -414,6 +452,8 @@
             <p class="city-card-desc">Palais du XIXe siècle restauré avec splendeur, perché en surplomb de la médina. Vue plongeante sur la cité depuis le toit-terrasse et son restaurant gastronomique.</p>
           </div>
         </div>
+
+        <!-- Hôtel 3 : Riad Le Calife, riad familial intimiste 4 étoiles -->
         <div class="col-md-4 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -427,11 +467,12 @@
             <p class="city-card-desc">Riad familial intimiste au cœur de Fès el-Bali. Petit-déjeuner traditionnel servi sous l'oranger du patio, accueil chaleureux et conseils précieux des hôtes.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 6: CULTURE & CONSEILS === -->
+  <!--  SECTION 6 : CULTURE & CONSEILS — 6 cartes de conseils pratiques pour le voyageur -->
   <section class="city-culture">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -439,6 +480,8 @@
         <h2>Culture & Conseils de Voyage</h2>
       </div>
       <div class="row g-4">
+
+        <!-- Conseil 1 : Se perdre dans la médina, c'est inévitable et magique -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-signpost-split"></i></div>
@@ -446,6 +489,8 @@
             <p class="culture-card-desc">Avec ses 9 000 ruelles, la médina de Fès défie tous les GPS. Un guide local est précieux pour la première journée — au-delà, accepter de se perdre fait partie de l'expérience.</p>
           </div>
         </div>
+
+        <!-- Conseil 2 : Le brin de menthe à la tannerie, indispensable -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-tree"></i></div>
@@ -453,6 +498,8 @@
             <p class="culture-card-desc">Acceptez le brin de menthe offert à l'entrée des terrasses de la tannerie Chouara : l'odeur du tannage à l'ancienne est intense, surtout en été.</p>
           </div>
         </div>
+
+        <!-- Conseil 3 : Mosquées réservées aux fidèles, médersas ouvertes à tous -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-shield-x"></i></div>
@@ -460,6 +507,8 @@
             <p class="culture-card-desc">Mosquées et zaouïas sont strictement réservées aux fidèles musulmans. On peut néanmoins admirer les portails ouvragés et les médersas, ouvertes à toutes et tous.</p>
           </div>
         </div>
+
+        <!-- Conseil 4 : Le marchandage, une tradition vivante dans les souks -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-cash-coin"></i></div>
@@ -467,6 +516,8 @@
             <p class="culture-card-desc">Dans les souks de Fès, la négociation est intense. Les premiers prix annoncés sont souvent 3 à 4 fois supérieurs à la valeur réelle. Restez courtois et souriant.</p>
           </div>
         </div>
+
+        <!-- Conseil 5 : La médina est 100% piétonne, attention aux ânes -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-person-walking"></i></div>
@@ -474,6 +525,8 @@
             <p class="culture-card-desc">La médina est une zone 100 % piétonne. Marchandises et bagages y sont transportés à dos d'âne ou de mulet — gardez l'œil et l'oreille attentive en marchant.</p>
           </div>
         </div>
+
+        <!-- Conseil 6 : Fès, capitale incontestée de la céramique bleue et du cuir -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-bag-heart"></i></div>
@@ -481,11 +534,12 @@
             <p class="culture-card-desc">Fès est la capitale incontestée de la céramique bleue, du cuir tanné à l'ancienne et de la dinanderie. Les ateliers du quartier As-Seffarine valent à eux seuls le détour.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- === SECTION 7: CTA FINAL === -->
+  <!--  SECTION 7 : CTA FINAL — L'appel à l'action pour planifier le voyage -->
   <section class="city-cta">
     <div class="city-cta-content container">
       <h2>Mille ans de savoir, à un battement d'ailes</h2>
@@ -497,25 +551,26 @@
     </div>
   </section>
 
-  <!-- === FOOTER === -->
+  <!--  SECTION 8 : FOOTER — Crédits du projet -->
   <footer class="footer-simple">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
-  <!-- === Bootstrap Bundle JS === -->
+  <!-- on charge Bootstrap JS (inclut Popper) — indispensable pour les composants interactifs -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /* ============================================================
-       === Navigation Drawer & Scroll Reveal Logic ===
-       ============================================================ */
+    /*  NAVIGATION : Menu coulissant type "overlay drawer". Quand on clique sur le burger, le menu glisse depuis la droite
+       et recouvre toute la page. Sur desktop, le premier groupe s'ouvre automatiquement. Sur mobile, on ouvre/ferme un par un.*/
     (function() {
       const toggle = document.getElementById('menuToggle');
       const menu   = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
+      if (!toggle || !menu) return;  // Sécurité : si les éléments n'existent pas, on stoppe
+
       const groups = menu.querySelectorAll('.menu-group[data-group]');
       const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 
+      // Ouvre UN seul groupe et ferme les autres (comportement accordéon)
       function activate(group) {
         groups.forEach(g => {
           const on = g === group;
@@ -524,116 +579,123 @@
         });
       }
 
+      // Ouvre ou ferme tout le menu + bloque le scroll du body
       function setMenu(open) {
         document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        document.body.style.overflow = open ? 'hidden' : '';
+        document.body.style.overflow = open ? 'hidden' : '';  // Empêche de scroller derrière le menu
+        // Sur grand écran, on ouvre le premier groupe par défaut
         if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
           activate(groups[0]);
         }
       }
 
-      toggle.addEventListener('click', () => {
-        setMenu(!document.body.classList.contains('menu-open'));
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setMenu(false);
-      });
-      menu.addEventListener('click', (e) => {
-        if (e.target === menu) setMenu(false);
-      });
+      // Clic sur le burger = bascule ouvert/fermé
+      toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+      // Clic sur le fond sombre = fermer
+      menu.addEventListener('click', (e) => { if (e.target === menu) setMenu(false); });
 
+      // Gestion des groupes : clic sur le titre = ouvrir/fermer
       groups.forEach(group => {
-        const head = group.querySelector('.menu-head');
-        head.addEventListener('click', () => {
+        group.querySelector('.menu-head').addEventListener('click', () => {
           if (isDesktop()) {
+            // Desktop : on switche vers le groupe cliqué (un seul ouvert)
             activate(group);
           } else {
-            const willOpen = !group.classList.contains('open');
-            willOpen ? activate(group) : activate(null);
+            // Mobile : toggle simple (ouvre si fermé, ferme si ouvert)
+            !group.classList.contains('open') ? activate(group) : activate(null);
           }
         });
       });
     })();
 
-    // Premium Scroll Reveal trigger
+    /*SCROLL REVEAL : Les éléments apparaissent en montant Chaque élément avec la classe "fade-up" se déclenche quand il
+       entre dans le viewport (12% visible). On ajoute un délai progressif pour un effet "cascade" entre les cartes.*/
     (function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const delay = entry.target.dataset.delay || 0;
-            setTimeout(() => {
-              entry.target.classList.add('visible');
-            }, parseInt(delay));
-            observer.unobserve(entry.target);
+            setTimeout(() => entry.target.classList.add('visible'), parseInt(delay));
+            observer.unobserve(entry.target);  // On arrête de surveiller une fois déclenché
           }
         });
-      }, { threshold: 0.12 });
-
+      }, { threshold: 0.12 });  // 12% de l'élément doit être visible
       document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     })();
   </script>
 
-  <!-- city-maps-link : open restaurants / hotels on Google Maps -->
-  <style>
-    .city-restaurants .city-card,
-    .city-hotels .city-card { cursor: pointer; }
-    .city-restaurants .city-card:focus-visible,
-    .city-hotels .city-card:focus-visible {
-      outline: 2px solid #C0552A;
-      outline-offset: 4px;
-      border-radius: 14px;
-    }
-  </style>
-  <script>
+<!-- GOOGLE MAPS : Les cartes d'hôtel sont cliquables Petit script sympa : quand on clique sur une carte d'hôtel ou
+       de restaurant, ça ouvre Google Maps avec la recherche pré-remplie.-->
+<style>
+    /* Curseur "main" sur les cartes cliquables */
+  .city-restaurants .city-card,
+  .city-hotels .city-card { cursor: pointer; }
+    /* Focus visible pour l'accessibilité clavier */
+  .city-restaurants .city-card:focus-visible,
+  .city-hotels .city-card:focus-visible {
+    outline: 2px solid #C0552A;
+    outline-offset: 4px;
+    border-radius: 14px;
+  }
+</style>
+<script>
   (function () {
+    // On récupère le nom de la ville depuis le <title> (partie avant le tiret)
     const title = document.title || "";
-    const city = (title.split(/[—|·-]/)[0] || "").trim() || "Morocco";
+  const city = (title.split(/[—|·-]/)[0] || "").trim() || "Morocco";
+    // On cible toutes les cartes d'hôtels et de restaurants
     const cards = document.querySelectorAll(
       ".city-restaurants .city-card, .city-hotels .city-card"
     );
-    cards.forEach(function (card) {
-      const titleEl = card.querySelector(".city-card-title");
-      if (!titleEl) return;
-      const name = titleEl.textContent.trim();
-      if (!name) return;
-      const url =
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent(name + " " + city + " Morocco");
-      card.setAttribute("role", "link");
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("aria-label", "Voir " + name + " sur Google Maps");
-      card.addEventListener("click", function () {
-        window.open(url, "_blank", "noopener");
-      });
-      card.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          window.open(url, "_blank", "noopener");
-        }
-      });
+  cards.forEach(function (card) {
+    const titleEl = card.querySelector(".city-card-title");
+    if (!titleEl) return;
+    const name = titleEl.textContent.trim();
+    if (!name) return;
+    // Construction de l'URL Google Maps
+    const url =
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(name + " " + city + " Morocco");
+    // On rend la carte accessible au clavier (role="link" + tabindex)
+    card.setAttribute("role", "link");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("aria-label", "Voir " + name + " sur Google Maps");
+    // Clic = ouverture dans un nouvel onglet
+    card.addEventListener("click", function () {
+      window.open(url, "_blank", "noopener");
     });
-  })();
-  </script>
+    // Entrée ou Espace au clavier = même comportement
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.open(url, "_blank", "noopener");
+      }
+    });
+  });
+})();
+</script>
 
-  <!-- Shared multilingual engine (FR / EN / AR) -->
-  <script src="assets/i18n.js"></script>
+<!-- Moteur multilingue (FR / EN / AR) — géré par un fichier externe -->
+<script src="assets/i18n.js"></script>
 
-  <!-- Motion toggle (animations on/off, persisted) -->
-  <script>
-  (function () {
-    const btn = document.getElementById('motionToggle');
-    if (!btn) return;
-    function setMotion(on) {
-      document.body.classList.toggle('reduce-motion', !on);
-      btn.setAttribute('aria-checked', on ? 'true' : 'false');
-      try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
-    }
-    btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
-    let s = null; try { s = localStorage.getItem('mdMotion'); } catch (e) {}
-    setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  })();
-  </script>
+<!-- MOTION TOGGLE : Bouton pour désactiver les animations Respecte le choix utilisateur (localStorage) 
+   ET la préférence système "prefers-reduced-motion". Très important pour l'a11y. -->
+<script>
+(function () {
+  const btn = document.getElementById('motionToggle');
+  if (!btn) return;
+  function setMotion(on) {
+    document.body.classList.toggle('reduce-motion', !on);
+    btn.setAttribute('aria-checked', on ? 'true' : 'false');
+    try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
+  }
+  btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+  let s = null; try { s = localStorage.getItem('mdMotion'); } catch (e) {}
+  setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+})();
+</script>
 
 </body>
 </html>
