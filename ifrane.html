@@ -5,36 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ifrane — Fraîcheur du Moyen Atlas | Royaume du Maroc</title>
 
-  <!-- === Bootstrap 5 CSS === -->
+  <!--on charge Bootstrap 5 le cœur du système de grille et des composants -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- === Bootstrap Icons === -->
+  <!-- Bootstrap Icons pour avoir toutes ces jolies icônes (bi-tree, bi-snow…) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
 
-  <!-- === Google Fonts : Playfair Display + Lato === -->
+  <!-- on charge Google Fonts : Playfair Display pour les titres élégants, Lato pour le texte courant -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- === Shared Destination Styling === -->
+  <!-- Notre feuille de style personnalisée — c'est ici qu'on surcharge Bootstrap pour le look Maroc -->
   <link href="city-page.css" rel="stylesheet" />
+<base target="_blank">
 </head>
 <body>
 
-  <!-- === Floating navigation menu system === -->
+  <!-- Bouton retour accueil : une petit arbre ramène à la racine -->
   <a href="index.html" class="nav-fab nav-fab-logo" aria-label="Accueil">
     <i class="bi bi-tree-fill"></i>
   </a>
+  <!-- Le bouton burger : 2 petites barres qui s'animent en croix quand on clique -->
   <button type="button" class="nav-fab nav-fab-burger" id="menuToggle"
            aria-label="Ouvrir le menu" aria-controls="siteMenu" aria-expanded="false">
     <span></span>
     <span></span>
   </button>
 
+  <!-- Le menu coulissant (overlay) qui recouvre toute la page -->
   <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <div class="site-menu-inner">
 
-      <!-- ACCUEIL -->
+      <!-- Premier groupe du menu : les ancres vers la page d'accueil -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.home">Accueil</span>
@@ -51,7 +54,7 @@
         </div>
       </div>
 
-      <!-- VILLES -->
+      <!-- La liste des 9 villes stars du site -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.cities">Villes</span>
@@ -72,7 +75,7 @@
         </div>
       </div>
 
-      <!-- PLATS -->
+      <!-- Les spécialités culinaires avec ancres directes -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.dishes">Plats</span>
@@ -90,74 +93,76 @@
         </div>
       </div>
 
-      <!-- Direct links -->
+      <!-- Menu avec miniatures photos pour chaque catégorie des activites-->
       <div class="menu-group" data-group>
-            <button type="button" class="menu-head" aria-expanded="false">
-              <span data-i18n="nav.activities">Activités</span>
-              <i class="bi bi-chevron-down chev"></i>
-            </button>
-            <div class="menu-sub">
-              <ul class="menu-sub-list activities-pics">
-                <li><a href="activites.html#filter-all">
-                  <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_all">Toutes</span>
-                </a></li>
-                <li><a href="activites.html#filter-culture">
-                  <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_culture">Culture</span>
-                </a></li>
-                <li><a href="activites.html#filter-nature">
-                  <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_nature">Nature</span>
-                </a></li>
-                <li><a href="activites.html#filter-aventure">
-                  <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_adventure">Aventure</span>
-                </a></li>
-                <li><a href="activites.html#filter-sport">
-                  <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_sport">Sport</span>
-                </a></li>
-                <li><a href="activites.html#filter-detente">
-                  <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
-                  <span data-i18n="nav.act_relax">Détente</span>
-                </a></li>
-              </ul>
-            </div>
-          </div>
-      <div class="menu-group" data-group>
-            <button type="button" class="menu-head" aria-expanded="false">
-              <span data-i18n="nav.itineraries">Itinéraires</span>
-              <i class="bi bi-chevron-down chev"></i>
-            </button>
-            <div class="menu-sub">
-              <ul class="menu-sub-list activities-pics">
-                <li><a href="itineraire.html#filter-all">
-                  <img src="images/sahara_dunes.png" alt="" loading="lazy">
-                  <span>Tous</span>
-                </a></li>
-                <li><a href="itineraire.html#filter-culture">
-                  <img src="images/fes.png" alt="" loading="lazy">
-                  <span>Culture</span>
-                </a></li>
-                <li><a href="itineraire.html#filter-aventure">
-                  <img src="images/merzouga.png" alt="" loading="lazy">
-                  <span>Aventure</span>
-                </a></li>
-                <li><a href="itineraire.html#filter-nature">
-                  <img src="images/azrou.png" alt="" loading="lazy">
-                  <span>Nature</span>
-                </a></li>
-                <li><a href="itineraire.html#filter-sport">
-                  <img src="images/taghazout.png" alt="" loading="lazy">
-                  <span>Sport</span>
-                </a></li>
-              </ul>
-            </div>
-          </div>
-      
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.activities">Activités</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list activities-pics">
+            <!-- Chaque lien a sa petite image illustrative -->
+            <li><a href="activites.html#filter-all">
+              <img src="https://kimi-web-img.moonshot.cn/img/res.klook.com/0c0cc7a1f09a4e97a87d0ae9692a7d84c8d74433.jpg" alt="" loading="lazy">
+              <span data-i18n="nav.act_all">Toutes</span>
+            </a></li>
+            <li><a href="activites.html#filter-culture">
+              <img src="https://kimi-web-img.moonshot.cn/img/madeincity-strapi-uploads.s3.eu-west-1.amazonaws.com/2ab4cfb7ee1f51f6889929ab62d3a94c5632c5e0.jpeg" alt="" loading="lazy">
+              <span data-i18n="nav.act_culture">Culture</span>
+            </a></li>
+            <li><a href="activites.html#filter-nature">
+              <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/a25db5bfe7487b7122654bc747cc8981563cbc7a.jpg" alt="" loading="lazy">
+              <span data-i18n="nav.act_nature">Nature</span>
+            </a></li>
+            <li><a href="activites.html#filter-aventure">
+              <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/61d651587a61f462aba5006f74206e02831c112e.jpg" alt="" loading="lazy">
+              <span data-i18n="nav.act_adventure">Aventure</span>
+            </a></li>
+            <li><a href="activites.html#filter-sport">
+              <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0f/34/0a/62.jpg" alt="" loading="lazy">
+              <span data-i18n="nav.act_sport">Sport</span>
+            </a></li>
+            <li><a href="activites.html#filter-detente">
+              <img src="https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg" alt="" loading="lazy">
+              <span data-i18n="nav.act_relax">Détente</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
 
-          <!-- ÉQUIPE -->
+      <!-- Même principe que les activités mais pour les parcours de voyage -->
+      <div class="menu-group" data-group>
+        <button type="button" class="menu-head" aria-expanded="false">
+          <span data-i18n="nav.itineraries">Itinéraires</span>
+          <i class="bi bi-chevron-down chev"></i>
+        </button>
+        <div class="menu-sub">
+          <ul class="menu-sub-list activities-pics">
+            <li><a href="itineraire.html#filter-all">
+              <img src="images/sahara_dunes.png" alt="" loading="lazy">
+              <span>Tous</span>
+            </a></li>
+            <li><a href="itineraire.html#filter-culture">
+              <img src="images/fes.png" alt="" loading="lazy">
+              <span>Culture</span>
+            </a></li>
+            <li><a href="itineraire.html#filter-aventure">
+              <img src="images/merzouga.png" alt="" loading="lazy">
+              <span>Aventure</span>
+            </a></li>
+            <li><a href="itineraire.html#filter-nature">
+              <img src="images/azrou.png" alt="" loading="lazy">
+              <span>Nature</span>
+            </a></li>
+            <li><a href="itineraire.html#filter-sport">
+              <img src="images/taghazout.png" alt="" loading="lazy">
+              <span>Sport</span>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Les 5 membres du projet + lien vers la page complète -->
       <div class="menu-group" data-group>
         <button type="button" class="menu-head" aria-expanded="false">
           <span data-i18n="nav.team">Équipe</span>
@@ -170,23 +175,28 @@
             <li><a href="equip.html#member-nassima">Nassima Affotih</a></li>
             <li><a href="equip.html#member-omar">Omar El Horre</a></li>
             <li><a href="equip.html#member-samira">Samira Ouiming</a></li>
-                      <li><a href="equip.html" data-i18n="nav.all_team">Voir toute l'équipe →</a></li>
+            <li><a href="equip.html" data-i18n="nav.all_team">Voir toute l'équipe →</a></li>
           </ul>
         </div>
-      </div><!-- Footer : language + motion -->
-      <div class="menu-foot">
-        <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
-        <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
-          <i class="bi bi-globe2" aria-hidden="true"></i>
-          <span data-lang-current>FR</span>
-          <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
-        </button>
-        <ul class="lang-menu" role="listbox">
-          <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
-          <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
-          <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
-        </ul>
       </div>
+
+      <!-- ── Pied du menu : langue + animations ──── -->
+      <div class="menu-foot">
+        <!-- Sélecteur de langue (dropup = s'ouvre vers le haut) -->
+        <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
+          <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
+            <i class="bi bi-globe2" aria-hidden="true"></i>
+            <span data-lang-current>FR</span>
+            <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
+          </button>
+          <ul class="lang-menu" role="listbox">
+            <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
+            <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
+            <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
+          </ul>
+        </div>
+
+        <!-- Interrupteur pour désactiver les animations (accessibilité) -->
         <button type="button" class="motion-toggle" id="motionToggle"
                 role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
@@ -196,9 +206,10 @@
     </div>
   </div>
 
-  <!-- === SECTION 1: HERO === -->
   <section class="city-hero">
+    <!-- L'image de fond : Ifrane sous la neige (c'est le cliché iconique) -->
     <img src="assets/09471b827774a36d5b9c8b879fa50de0_105fdc04.jpg" alt="Ifrane sous la neige" class="city-hero-img">
+    <!-- Voile sombre pour que le texte blanc ressorte bien -->
     <div class="city-hero-overlay"></div>
     <div class="city-hero-content">
       <span class="city-eyebrow hero-animate-1">Moyen Atlas</span>
@@ -210,19 +221,24 @@
     </div>
   </section>
 
-  <!-- === SECTION 2: INTRO 2 COLONNES === -->
+  <!--  SECTION 2 : INTRO — Présentation en 2 colonnes -->
+
   <section class="city-intro">
     <div class="container">
       <div class="row g-lg-5 align-items-start">
+        <!-- Colonne principale : le storytelling -->
         <div class="col-lg-7 fade-up" data-delay="0">
           <span class="intro-sub">Moyen Atlas — Région Fès-Meknès</span>
           <h2>Une parenthèse alpine au cœur du Maroc</h2>
           <p>Ifrane séduit par son atmosphère paisible, ses rues larges et propres, ainsi que ses toitures en tuiles rouges inspirées des villages alpins. Entourée de vastes parcs paysagers et d'espaces verts soignés, la ville offre un climat tempéré et frais qui contraste agréablement avec la chaleur des plaines environnantes.</p>
           <p>Située en altitude au cœur du Moyen Atlas, elle sert de base idéale pour explorer la nature généreuse de la région. Selon la saison, les forêts de cèdres centenaires et les plans d'eau invitent à des promenades vivifiantes et à des sorties au grand air.</p>
         </div>
+
+        <!-- Colonne latérale : la carte "infos rapides" -->
         <div class="col-lg-5 fade-up" data-delay="150">
           <div class="intro-meta-card">
             <h3 class="intro-meta-title">En un clin d'œil</h3>
+            <!-- Durée conseillée -->
             <div class="intro-meta-item">
               <i class="bi bi-clock-history"></i>
               <div>
@@ -230,6 +246,7 @@
                 <p>1 à 2 jours</p>
               </div>
             </div>
+            <!-- Meilleure saison -->
             <div class="intro-meta-item">
               <i class="bi bi-calendar-check"></i>
               <div>
@@ -237,6 +254,7 @@
                 <p>Hiver (neige) et Printemps</p>
               </div>
             </div>
+            <!-- Localisation géo -->
             <div class="intro-meta-item">
               <i class="bi bi-compass"></i>
               <div>
@@ -245,6 +263,7 @@
               </div>
             </div>
           </div>
+          <!-- Petite photo d'ambiance à côté des infos -->
           <div class="intro-img-wrap">
             <img src="assets/09471b827774a36d5b9c8b879fa50de0_105fdc04.jpg" alt="Ifrane Cèdres Forêt">
           </div>
@@ -253,7 +272,8 @@
     </div>
   </section>
 
-  <!-- === SECTION 3: À NE PAS MANQUER (ACTIVITÉS) === -->
+  <!--  SECTION 3 : À NE PAS MANQUER -->
+
   <section class="city-highlights">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -261,7 +281,8 @@
         <h2>À ne pas manquer à Ifrane</h2>
       </div>
       <div class="row g-4">
-        <!-- Activité 1 -->
+
+        <!-- Carte 1 : Centre-ville & parcs -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -272,7 +293,8 @@
             <p class="city-card-desc">Réputé pour sa propreté, le centre-ville abrite des parcs paysagers soignés propices aux balades à pied dans un calme ressourçant.</p>
           </div>
         </div>
-        <!-- Activité 2 -->
+
+        <!-- Carte 2 : La Statue du Lion (emblème de la ville) -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -283,7 +305,8 @@
             <p class="city-card-desc">Sculptée dans la pierre, cette célèbre statue trône au cœur de la ville et constitue un point de repère incontournable pour une photo souvenir.</p>
           </div>
         </div>
-        <!-- Activité 3 -->
+
+        <!-- Carte 3 : Forêts de cèdres -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -291,10 +314,11 @@
               <img src="assets/images_openai_com_3a104243a7.jpg" alt="Forêt des Cèdres">
             </div>
             <h3 class="city-card-title">Forêts de cèdres</h3>
-            <p class="city-card-desc">La région d’Ifrane abrite de magnifiques forêts de cèdres où l'on vient respirer l'air frais des montagnes lors de randonnées paisibles.</p>
+            <p class="city-card-desc">La région d'Ifrane abrite de magnifiques forêts de cèdres où l'on vient respirer l'air frais des montagnes lors de randonnées paisibles.</p>
           </div>
         </div>
-        <!-- Activité 4 -->
+
+        <!-- Carte 4 : Lac Dayet Aoua -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -305,7 +329,8 @@
             <p class="city-card-desc">Ce plan d'eau entouré d'arbres offre, selon la saison et la météo, de jolis paysages idéaux pour un pique-nique ou une pause contemplative.</p>
           </div>
         </div>
-        <!-- Activité 5 -->
+
+        <!-- Carte 5 : Université Al Akhawayn -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -316,7 +341,8 @@
             <p class="city-card-desc">L'architecture d'inspiration anglo-saxonne du campus s'intègre avec élégance dans les paysages montagnards du quartier environnant.</p>
           </div>
         </div>
-        <!-- Activité 6 -->
+
+        <!-- Carte 6 : Points de vue panoramiques -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -330,9 +356,8 @@
       </div>
   </section>
 
- 
+  <!--  SECTION 6 : HÉBERGEMENTS                      -->
 
-  <!-- === SECTION 6: OÙ DORMIR (HÉBERGEMENTS) === -->
   <section class="city-hotels">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -340,7 +365,8 @@
         <h2>Hébergements à Ifrane</h2>
       </div>
       <div class="row g-4">
-        <!-- Hôtel 1 -->
+
+        <!-- Hôtel 1 : Centre-ville, 4 étoiles, prix moyen -->
         <div class="col-md-4 fade-up" data-delay="0">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -354,7 +380,8 @@
             <p class="city-card-desc">De nombreux établissements situés en centre-ville vous permettent d'accéder facilement aux restaurants, parcs paysagers et commerces à pied.</p>
           </div>
         </div>
-        <!-- Hôtel 2 -->
+
+        <!-- Hôtel 2 : Zephir, 5 étoiles, prix haut de gamme -->
         <div class="col-md-4 fade-up" data-delay="100">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -368,7 +395,8 @@
             <p class="city-card-desc">Établissement chaleureux de style savoyard situé en centre-ville, parfait pour savourer un thé au coin de la cheminée.</p>
           </div>
         </div>
-        <!-- Hôtel 3 -->
+
+        <!-- Hôtel 3 : Maison d'hôtes, 3 étoiles, budget friendly -->
         <div class="col-md-4 fade-up" data-delay="200">
           <div class="city-card">
             <div class="city-card-img-wrap">
@@ -386,7 +414,8 @@
     </div>
   </section>
 
-  <!-- === SECTION 7: CULTURE & CONSEILS === -->
+  <!--  SECTION 7 : CULTURE & CONSEILS                 -->
+
   <section class="city-culture">
     <div class="container">
       <div class="section-title-wrap fade-up" data-delay="0">
@@ -394,7 +423,8 @@
         <h2>Culture & Conseils de Voyage</h2>
       </div>
       <div class="row g-4">
-        <!-- Conseil 1 -->
+
+        <!-- Conseil 1 : Il fait froid en altitude ! -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-thermometer-half"></i></div>
@@ -402,7 +432,8 @@
             <p class="culture-card-desc">En raison de l'altitude, les températures peuvent chuter rapidement. Pensez à toujours avoir un vêtement chaud à disposition.</p>
           </div>
         </div>
-        <!-- Conseil 2 -->
+
+        <!-- Conseil 2 : Préservons la nature -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-recycle"></i></div>
@@ -410,7 +441,8 @@
             <p class="culture-card-desc">Les forêts et lacs de la région sont fragiles. Veillez à préserver la propreté des lieux et à respecter les consignes locales sur les feux.</p>
           </div>
         </div>
-        <!-- Conseil 3 -->
+
+        <!-- Conseil 3 : Attention aux routes en hiver -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-exclamation-triangle"></i></div>
@@ -418,7 +450,8 @@
             <p class="culture-card-desc">Les routes de l'Atlas peuvent s'avérer glissantes ou enneigées pendant les mois d'hiver. Renseignez-vous sur l'état du réseau routier.</p>
           </div>
         </div>
-        <!-- Conseil 4 -->
+
+        <!-- Conseil 4 : Ifrane se visite à pied -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="0">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-geo-alt"></i></div>
@@ -426,7 +459,8 @@
             <p class="culture-card-desc">Ifrane est une petite ville calme qui se prête merveilleusement bien à la marche. La plupart des centres d'intérêt sont faciles d'accès.</p>
           </div>
         </div>
-        <!-- Conseil 5 -->
+
+        <!-- Conseil 5 : Demander avant de photographier -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="100">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-camera"></i></div>
@@ -434,7 +468,8 @@
             <p class="culture-card-desc">Pensez toujours à demander poliment l'accord des personnes que vous souhaitez photographier dans leur quotidien ou sur les marchés.</p>
           </div>
         </div>
-        <!-- Conseil 6 -->
+
+        <!-- Conseil 6 : Réserver le week-end -->
         <div class="col-md-4 col-sm-6 fade-up" data-delay="200">
           <div class="culture-grid-card">
             <div class="culture-icon-box"><i class="bi bi-calendar-event"></i></div>
@@ -446,7 +481,8 @@
     </div>
   </section>
 
-  <!-- === SECTION 8: CTA FINAL === -->
+  <!--  SECTION 8 : CTA FINAL — Appel à l'action       -->
+
   <section class="city-cta">
     <div class="city-cta-content container">
       <h2>Prêt à respirer le grand air d'Ifrane ?</h2>
@@ -458,26 +494,29 @@
     </div>
   </section>
 
-  <!-- === SECTION 9: FOOTER === -->
+  <!--  SECTION 9 : FOOTER — Crédits du projet        -->
+
   <footer class="footer-simple">
     © 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026
   </footer>
 
-  <!-- === Bootstrap Bundle JS === -->
+  <!--  SCRIPTS : on charge Bootstrap JS puis nos scripts maison pour le menu et les animations -->
+  <!-- Bootstrap Bundle (inclut Popper) — indispensable pour les composants interactifs -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    /* ============================================================
-       === Navigation Drawer & Scroll Reveal Logic ===
-       ============================================================ */
+    /*  NAVIGATION : Menu coulissant type "overlay drawer". Quand on clique sur le burger, le menu glisse depuis la droite
+       et recouvre toute la page. Sur desktop, le premier groupe s'ouvre  automatiquement. Sur mobile, on ouvre/ferme un par un.*/
 
     (function() {
       const toggle = document.getElementById('menuToggle');
       const menu   = document.getElementById('siteMenu');
-      if (!toggle || !menu) return;
+      if (!toggle || !menu) return;  // Sécurité : si les éléments n'existent pas, on stoppe
+
       const groups = menu.querySelectorAll('.menu-group[data-group]');
       const isDesktop = () => window.matchMedia('(min-width: 992px)').matches;
 
+      // Ouvre UN seul groupe et ferme les autres (comportement accordéon)
       function activate(group) {
         groups.forEach(g => {
           const on = g === group;
@@ -486,31 +525,41 @@
         });
       }
 
+      // Ouvre ou ferme tout le menu + bloque le scroll du body
       function setMenu(open) {
         document.body.classList.toggle('menu-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        document.body.style.overflow = open ? 'hidden' : '';
+        document.body.style.overflow = open ? 'hidden' : '';  // Empêche de scroller derrière le menu
+        // Sur grand écran, on ouvre le premier groupe par défaut
         if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) {
           activate(groups[0]);
         }
       }
 
+      // Clic sur le burger = bascule ouvert/fermé
       toggle.addEventListener('click', () => {
         setMenu(!document.body.classList.contains('menu-open'));
       });
+
+      // Échap pour fermer (accessibilité clavier)
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setMenu(false);
       });
+
+      // Clic sur le fond sombre = fermer
       menu.addEventListener('click', (e) => {
         if (e.target === menu) setMenu(false);
       });
 
+      // Gestion des groupes : clic sur le titre = ouvrir/fermer
       groups.forEach(group => {
         const head = group.querySelector('.menu-head');
         head.addEventListener('click', () => {
           if (isDesktop()) {
+            // Desktop : on switche vers le groupe cliqué (un seul ouvert)
             activate(group);
           } else {
+            // Mobile : toggle simple (ouvre si fermé, ferme si ouvert)
             const willOpen = !group.classList.contains('open');
             willOpen ? activate(group) : activate(null);
           }
@@ -518,7 +567,8 @@
       });
     })();
 
-    // Premium Scroll Reveal trigger (using IntersectionObserver)
+    /*SCROLL REVEAL : Les éléments apparaissent en montant Chaque élément avec la classe "fade-up" se déclenche quand il
+       entre dans le viewport (12% visible). On ajoute un délai progressif pour un effet "cascade" entre les cartes.*/
     (function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -527,73 +577,101 @@
             setTimeout(() => {
               entry.target.classList.add('visible');
             }, parseInt(delay));
-            observer.unobserve(entry.target);
+            observer.unobserve(entry.target);  // On arrête de surveiller une fois déclenché
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.12 });  // 12% de l'élément doit être visible
 
       document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     })();
   </script>
-<!-- city-maps-link -->
-<style>
-  .city-restaurants .city-card,
-  .city-hotels .city-card { cursor: pointer; }
-  .city-restaurants .city-card:focus-visible,
-  .city-hotels .city-card:focus-visible {
-    outline: 2px solid #C0552A;
-    outline-offset: 4px;
-    border-radius: 14px;
-  }
-</style>
-<script>
-(function () {
-  const title = document.title || "";
-  const city = (title.split(/[—|·-]/)[0] || "").trim() || "Morocco";
-  const cards = document.querySelectorAll(
-    ".city-restaurants .city-card, .city-hotels .city-card"
-  );
-  cards.forEach(function (card) {
-    const titleEl = card.querySelector(".city-card-title");
-    if (!titleEl) return;
-    const name = titleEl.textContent.trim();
-    if (!name) return;
-    const url =
-      "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent(name + " " + city + " Morocco");
-    card.setAttribute("role", "link");
-    card.setAttribute("tabindex", "0");
-    card.setAttribute("aria-label", "Voir " + name + " sur Google Maps");
-    card.addEventListener("click", function () {
-      window.open(url, "_blank", "noopener");
-    });
-    card.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
+
+  <!-- GOOGLE MAPS : Les cartes d'hôtel sont cliquables Petit script sympa : quand on clique sur une carte d'hôtel ou
+       de restaurant, ça ouvre Google Maps avec la recherche pré-remplie.-->
+
+  <style>
+    /* Curseur "main" sur les cartes cliquables */
+    .city-restaurants .city-card,
+    .city-hotels .city-card { cursor: pointer; }
+    /* Focus visible pour l'accessibilité clavier */
+    .city-restaurants .city-card:focus-visible,
+    .city-hotels .city-card:focus-visible {
+      outline: 2px solid #C0552A;
+      outline-offset: 4px;
+      border-radius: 14px;
+    }
+  </style>
+
+  <script>
+  (function () {
+    // On récupère le nom de la ville depuis le <title> (partie avant le tiret)
+    const title = document.title || "";
+    const city = (title.split(/[—|·-]/)[0] || "").trim() || "Morocco";
+
+    // On cible toutes les cartes d'hôtels et de restaurants
+    const cards = document.querySelectorAll(
+      ".city-restaurants .city-card, .city-hotels .city-card"
+    );
+
+    cards.forEach(function (card) {
+      const titleEl = card.querySelector(".city-card-title");
+      if (!titleEl) return;
+      const name = titleEl.textContent.trim();
+      if (!name) return;
+
+      // Construction de l'URL Google Maps
+      const url =
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(name + " " + city + " Morocco");
+
+      // On rend la carte accessible au clavier (role="link" + tabindex)
+      card.setAttribute("role", "link");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", "Voir " + name + " sur Google Maps");
+
+      // Clic = ouverture dans un nouvel onglet
+      card.addEventListener("click", function () {
         window.open(url, "_blank", "noopener");
-      }
+      });
+
+      // Entrée ou Espace au clavier = même comportement
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          window.open(url, "_blank", "noopener");
+        }
+      });
     });
-  });
-})();
-</script>
+  })();
+  </script>
 
-<!-- Shared multilingual engine (FR / EN / AR) -->
-<script src="assets/i18n.js"></script>
+  <!-- Moteur multilingue (FR / EN / AR) — géré par un fichier externe -->
+  <script src="assets/i18n.js"></script>
 
-<!-- Motion toggle (animations on/off, persisted) -->
-<script>
-(function () {
-  const btn = document.getElementById('motionToggle');
-  if (!btn) return;
-  function setMotion(on) {
-    document.body.classList.toggle('reduce-motion', !on);
-    btn.setAttribute('aria-checked', on ? 'true' : 'false');
-    try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
-  }
-  btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
-  let s = null; try { s = localStorage.getItem('mdMotion'); } catch (e) {}
-  setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-})();
-</script>
+  <!-- MOTION TOGGLE : Bouton pour désactiver les animations Respecte le choix utilisateur (localStorage) 
+   ET la préférence système "prefers-reduced-motion". Très important pour l'a11y. -->
+
+  <script>
+  (function () {
+    const btn = document.getElementById('motionToggle');
+    if (!btn) return;
+
+    function setMotion(on) {
+      // Classe "reduce-motion" sur body = CSS désactive les transitions
+      document.body.classList.toggle('reduce-motion', !on);
+      btn.setAttribute('aria-checked', on ? 'true' : 'false');
+      try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
+    }
+
+    // Clic = toggle
+    btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+
+    // Au chargement : on lit localStorage, sinon on respecte la préférence OS
+    let s = null;
+    try { s = localStorage.getItem('mdMotion'); } catch (e) {}
+    setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  })();
+  </script>
+
 </body>
 </html>
