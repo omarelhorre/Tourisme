@@ -16,6 +16,7 @@
   // ============================================================
   const DICT = {
     en: {
+      "ITINÉRAIRES":"ITINÉRAIRES",
       "Notre": "Our",
       "siteweb": "website",
       "adoré": "loved",
@@ -961,6 +962,7 @@
 
 
     ar: {
+      "ITINÉRAIRES":"المسارات",
       "Notre": "موقعنا",
       "siteweb": "",
       "adoré": "المحبوب",
