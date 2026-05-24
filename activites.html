@@ -89,7 +89,7 @@
     .site-menu::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; }
     .site-menu-inner { position: relative; width: 100%; max-width: 760px; margin: 0 auto; }
     .menu-group { border-bottom: 1px solid rgba(192,85,42,0.22); }
-    .menu-head { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.15rem 0.25rem; background: transparent; border: none; cursor: pointer; text-align: left; text-decoration: none; color: var(--texte); font-family: 'Lato', sans-serif; font-weight: 900; font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase; transition: color 0.2s ease, padding-left 0.2s ease; }
+    .menu-head { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.15rem 0.25rem; background: transparent; border: none; cursor: pointer; text-align: left; text-decoration: none; color: var(--texte); font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -0.005em; text-transform: none; transition: color 0.2s ease, padding-left 0.2s ease; }
     .menu-head:hover, .menu-head:focus-visible { color: var(--terracotta); padding-left: 0.9rem; outline: none; }
     .menu-head .chev { font-size: 1.1rem; color: var(--terracotta); transition: transform 0.35s; flex-shrink: 0; margin-left: 1rem; }
     .menu-group.open .menu-head .chev { transform: rotate(180deg); }
@@ -121,11 +121,19 @@
     .motion-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.25s; }
     .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta); }
     .motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
-    .lang-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--texte-doux); }
-    .lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
-    .lang-btn { border: none; background: transparent; color: var(--texte-doux); font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; padding: 0.4rem 0.75rem; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
-    .lang-btn:hover { color: var(--terracotta); }
-    .lang-btn[aria-pressed="true"] { background: var(--terracotta); color: #fff; }
+/* === Language dropup === */
+    .lang-switch { position: relative; display: inline-block; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem; border: 1px solid rgba(192,85,42,0.25); background: rgba(255,255,255,0.55); color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .lang-toggle i.bi-globe2 { font-size: 1.05rem; color: var(--terracotta, #C0552A); }
+    .lang-toggle .caret { font-size: 0.7rem; opacity: 0.6; transition: transform 0.25s ease; }
+    .lang-switch.open .lang-toggle .caret { transform: rotate(180deg); }
+    .lang-toggle:hover, .lang-toggle:focus-visible { background: #fff; color: var(--terracotta, #C0552A); border-color: var(--terracotta, #C0552A); outline: none; }
+    .lang-menu { position: absolute; bottom: calc(100% + 0.5rem); left: 0; margin: 0; padding: 0.35rem; list-style: none; min-width: 11rem; background: #fff; border: 1px solid rgba(192,85,42,0.18); border-radius: 12px; box-shadow: 0 14px 32px -10px rgba(0,0,0,0.22); opacity: 0; transform: translateY(8px) scale(0.97); transform-origin: bottom left; pointer-events: none; transition: opacity 0.22s, transform 0.22s; z-index: 50; }
+    .lang-switch.open .lang-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .lang-menu li { list-style: none; }
+    .lang-btn { display: block; width: 100%; text-align: left; border: none; background: transparent; color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.02em; padding: 0.55rem 0.85rem; border-radius: 8px; cursor: pointer; transition: background 0.18s, color 0.18s; }
+    .lang-btn:hover { background: rgba(192,85,42,0.08); color: var(--terracotta, #C0552A); }
+    .lang-btn[aria-pressed="true"] { background: var(--terracotta, #C0552A); color: #fff; }
     body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
     html[dir="rtl"] body { direction: rtl; text-align: right; }
     html[dir="rtl"] .nav-fab-logo { right: 2.5rem; left: auto; }
@@ -139,7 +147,7 @@
       body.menu-open .site-menu-inner { transform: translateX(0); }
       .site-menu-inner::before { content: ""; position: absolute; inset: 0; background-image: none; opacity: 0.5; pointer-events: none; z-index: 0; }
       .menu-group { display: block; flex: 0 0 auto; border-bottom: none; margin: 0; }
-      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: 0.08em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
+      .menu-head { position: relative; z-index: 1; width: auto; justify-content: center; border-radius: 999px; padding: 0.6rem 1.4rem; font-size: 0.92rem; letter-spacing: -0.005em; white-space: nowrap; background: transparent; transition: background 0.25s, color 0.25s; }
       .menu-head:hover { padding-left: 1.4rem; background: rgba(192,85,42,0.12); }
       .menu-head .chev { display: none; }
       .menu-group.open .menu-head { background: var(--terracotta); color: #fff; }
@@ -791,12 +799,18 @@
                 </a>
               </div><!-- Footer : language + motion -->
       <div class="menu-foot">
-        <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
+        <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
           <i class="bi bi-globe2" aria-hidden="true"></i>
-          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
-          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
-          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
-        </div>
+          <span data-lang-current>FR</span>
+          <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
+          <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
+          <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
+        </ul>
+      </div>
         <button type="button" class="motion-toggle" id="motionToggle" role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
           <span class="motion-label" data-i18n="nav.animations">Animations</span>

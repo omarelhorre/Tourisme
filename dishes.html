@@ -715,12 +715,18 @@
                 </a>
               </div><!-- Footer : language + motion -->
       <div class="menu-foot">
-        <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
+        <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
           <i class="bi bi-globe2" aria-hidden="true"></i>
-          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
-          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
-          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
-        </div>
+          <span data-lang-current>FR</span>
+          <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
+          <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
+          <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
+        </ul>
+      </div>
         <button type="button" class="motion-toggle" id="motionToggle"
                 role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>

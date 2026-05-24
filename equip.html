@@ -90,9 +90,9 @@ body.menu-open .site-menu { opacity: 1; visibility: visible; transform: scale(1)
   width: 100%; padding: 1.15rem 0.25rem;
   background: transparent; border: none; cursor: pointer;
   text-align: left; text-decoration: none; color: var(--ivoire);
-  font-family: var(--font-corps); font-weight: 900;
+  font-family: var(--font-titre); font-weight: 700;
   font-size: clamp(1.8rem, 4.5vw, 3rem);
-  line-height: 1.1; letter-spacing: -0.01em; text-transform: uppercase;
+  line-height: 1.1; letter-spacing: -0.005em; text-transform: none;
   transition: color 0.2s ease, padding-left 0.2s ease;
 }
 .menu-head:hover, .menu-head:focus-visible { color: var(--terracotta); padding-left: 0.9rem; outline: none; }
@@ -126,11 +126,19 @@ body.menu-open .site-menu { opacity: 1; visibility: visible; transform: scale(1)
 .menu-sub-list a:hover::before { opacity: 1; transform: translateX(0); }
 
 .menu-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; flex-basis: 100%; margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(192,85,42,0.22); }
-.lang-switch { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--texte-doux); }
-.lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
-.lang-btn { border: none; background: transparent; color: var(--texte-doux); font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; padding: 0.4rem 0.75rem; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
-.lang-btn:hover { color: var(--terracotta); }
-.lang-btn[aria-pressed="true"] { background: var(--terracotta); color: #fff; }
+/* === Language dropup === */
+    .lang-switch { position: relative; display: inline-block; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem; border: 1px solid rgba(192,85,42,0.25); background: rgba(255,255,255,0.55); color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .lang-toggle i.bi-globe2 { font-size: 1.05rem; color: var(--terracotta, #C0552A); }
+    .lang-toggle .caret { font-size: 0.7rem; opacity: 0.6; transition: transform 0.25s ease; }
+    .lang-switch.open .lang-toggle .caret { transform: rotate(180deg); }
+    .lang-toggle:hover, .lang-toggle:focus-visible { background: #fff; color: var(--terracotta, #C0552A); border-color: var(--terracotta, #C0552A); outline: none; }
+    .lang-menu { position: absolute; bottom: calc(100% + 0.5rem); left: 0; margin: 0; padding: 0.35rem; list-style: none; min-width: 11rem; background: #fff; border: 1px solid rgba(192,85,42,0.18); border-radius: 12px; box-shadow: 0 14px 32px -10px rgba(0,0,0,0.22); opacity: 0; transform: translateY(8px) scale(0.97); transform-origin: bottom left; pointer-events: none; transition: opacity 0.22s, transform 0.22s; z-index: 50; }
+    .lang-switch.open .lang-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .lang-menu li { list-style: none; }
+    .lang-btn { display: block; width: 100%; text-align: left; border: none; background: transparent; color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.02em; padding: 0.55rem 0.85rem; border-radius: 8px; cursor: pointer; transition: background 0.18s, color 0.18s; }
+    .lang-btn:hover { background: rgba(192,85,42,0.08); color: var(--terracotta, #C0552A); }
+    .lang-btn[aria-pressed="true"] { background: var(--terracotta, #C0552A); color: #fff; }
 .motion-toggle { display: inline-flex; align-items: center; gap: 0.6rem; border: none; background: transparent; color: var(--texte-doux); font-family: var(--font-corps); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; padding: 0.25rem; }
 .motion-track { position: relative; width: 42px; height: 22px; border-radius: 999px; background: rgba(192,85,42,0.25); transition: background 0.25s; flex-shrink: 0; }
 .motion-thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: transform 0.25s; }
@@ -584,11 +592,17 @@ html[dir="rtl"] .nav-fab-burger { left: 2.5rem; right: auto; }
 
     <!-- Footer : language + motion -->
     <div class="menu-foot">
-      <div class="lang-switch" role="group" aria-label="Langue / Language">
-        <i class="bi bi-globe2" aria-hidden="true"></i>
-        <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
-        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
+      <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
+        <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
+          <i class="bi bi-globe2" aria-hidden="true"></i>
+          <span data-lang-current>FR</span>
+          <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
+          <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
+          <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
+        </ul>
       </div>
       <button type="button" class="motion-toggle" id="motionToggle"
               role="switch" aria-checked="true" aria-label="Animations">

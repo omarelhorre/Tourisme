@@ -2172,6 +2172,50 @@
   function syncButtonState(lang) {
     document.querySelectorAll('.lang-btn').forEach(btn =>
       btn.setAttribute('aria-pressed', btn.dataset.lang === lang ? 'true' : 'false'));
+    // Update the dropup button label (and the toggle's own lang attr).
+    document.querySelectorAll('[data-lang-current]').forEach(el => {
+      el.textContent = (lang || 'fr').toUpperCase();
+    });
+    document.querySelectorAll('[data-lang-toggle]').forEach(t => {
+      t.setAttribute('lang', lang);
+    });
+  }
+
+  // Vanilla dropdown toggle (no Bootstrap needed) for the language switch.
+  function wireDropup() {
+    document.querySelectorAll('[data-lang-toggle]').forEach(toggle => {
+      const wrap = toggle.closest('.lang-switch');
+      if (!wrap) return;
+      toggle.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = wrap.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      wrap.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          wrap.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+    document.addEventListener('click', e => {
+      document.querySelectorAll('.lang-switch.open').forEach(w => {
+        if (!w.contains(e.target)) {
+          w.classList.remove('open');
+          const t = w.querySelector('[data-lang-toggle]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.lang-switch.open').forEach(w => {
+          w.classList.remove('open');
+          const t = w.querySelector('[data-lang-toggle]');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
   }
 
   function init() {
@@ -2189,6 +2233,7 @@
     }
 
     wireButtons(setLang);
+    wireDropup();
     setLang(stored);
 
     // Observe the document for newly-added subtrees (modals, dish detail

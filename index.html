@@ -206,12 +206,12 @@
       text-align: left;
       text-decoration: none;
       color: var(--texte);
-      font-family: 'Lato', sans-serif;
-      font-weight: 900;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
       font-size: clamp(1.8rem, 4.5vw, 3rem);
       line-height: 1.1;
-      letter-spacing: -0.01em;
-      text-transform: uppercase;
+      letter-spacing: -0.005em;
+      text-transform: none;
       transition: color 0.2s ease, padding-left 0.2s ease;
     }
     .menu-head:hover,
@@ -330,31 +330,19 @@
       padding-top: 1.25rem;
       border-top: 1px solid rgba(192, 85, 42, 0.22);
     }
-    .lang-switch {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: var(--texte-doux);
-    }
-    .lang-switch > i { font-size: 1.05rem; margin-right: 0.25rem; }
-    .lang-btn {
-      border: none;
-      background: transparent;
-      color: var(--texte-doux);
-      font-family: var(--font-corps);
-      font-weight: 800;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
-      padding: 0.4rem 0.75rem;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background 0.2s var(--ease-doux), color 0.2s var(--ease-doux);
-    }
-    .lang-btn:hover { color: var(--terracotta); }
-    .lang-btn[aria-pressed="true"] {
-      background: var(--terracotta);
-      color: #fff;
-    }
+/* === Language dropup === */
+    .lang-switch { position: relative; display: inline-block; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.9rem; border: 1px solid rgba(192,85,42,0.25); background: rgba(255,255,255,0.55); color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .lang-toggle i.bi-globe2 { font-size: 1.05rem; color: var(--terracotta, #C0552A); }
+    .lang-toggle .caret { font-size: 0.7rem; opacity: 0.6; transition: transform 0.25s ease; }
+    .lang-switch.open .lang-toggle .caret { transform: rotate(180deg); }
+    .lang-toggle:hover, .lang-toggle:focus-visible { background: #fff; color: var(--terracotta, #C0552A); border-color: var(--terracotta, #C0552A); outline: none; }
+    .lang-menu { position: absolute; bottom: calc(100% + 0.5rem); left: 0; margin: 0; padding: 0.35rem; list-style: none; min-width: 11rem; background: #fff; border: 1px solid rgba(192,85,42,0.18); border-radius: 12px; box-shadow: 0 14px 32px -10px rgba(0,0,0,0.22); opacity: 0; transform: translateY(8px) scale(0.97); transform-origin: bottom left; pointer-events: none; transition: opacity 0.22s, transform 0.22s; z-index: 50; }
+    .lang-switch.open .lang-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .lang-menu li { list-style: none; }
+    .lang-btn { display: block; width: 100%; text-align: left; border: none; background: transparent; color: var(--texte-doux, #6B5640); font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.88rem; letter-spacing: 0.02em; padding: 0.55rem 0.85rem; border-radius: 8px; cursor: pointer; transition: background 0.18s, color 0.18s; }
+    .lang-btn:hover { background: rgba(192,85,42,0.08); color: var(--terracotta, #C0552A); }
+    .lang-btn[aria-pressed="true"] { background: var(--terracotta, #C0552A); color: #fff; }
     .motion-toggle {
       display: inline-flex;
       align-items: center;
@@ -493,7 +481,7 @@
         border-radius: 999px;
         padding: 0.5rem 1rem;
         font-size: 0.82rem;
-        letter-spacing: 0.06em;
+        letter-spacing: -0.005em;
         white-space: nowrap;        /* l'intitulé ne se coupe jamais */
         background: transparent;
         transition: background 0.25s var(--ease-doux), color 0.25s var(--ease-doux);
@@ -1506,126 +1494,137 @@
     }
 
     /* ============================================================
-       === Cultural moments — sticky scroll trigger (map-style) ===
+       === Cultural moments — full-bleed sticky scroll trigger ===
        ============================================================ */
     .culture-moments {
       position: relative;
-      background: var(--bg-cream);
-      /* 1 viewport per step (6 steps + intro) */
+      background: #1a1008;
       min-height: 700vh;
     }
     .culture-sticky {
       position: sticky; top: 0;
       height: 100vh;
-      display: flex; align-items: center;
       overflow: hidden;
+      color: #fff;
     }
-    .culture-sticky .container { width: 100%; }
-    .culture-head { text-align: center; max-width: 640px; margin: 0 auto 2.4rem; padding: 0 1rem; }
-    .culture-eyebrow {
-      display: inline-block;
-      font-size: 0.78rem; font-weight: 800;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 0.9rem;
-    }
-    .culture-head h2 {
-      font-family: var(--font-titre);
-      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-      line-height: 1.2;
-      color: var(--encre);
-      margin-bottom: 0.9rem;
-      text-wrap: balance;
-    }
-    .culture-head h2 em {
-      font-style: italic; font-weight: 400;
-      background: linear-gradient(135deg, var(--terracotta), #E67E22);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .culture-stage {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: center;
-      padding: 0 1.5rem;
-    }
-    .culture-pic-frame {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 30px 60px -25px rgba(0,0,0,0.35);
+    /* Full-bleed cross-fading background images */
+    .culture-bg {
+      position: absolute; inset: 0; z-index: 0;
+      pointer-events: none;
     }
     .culture-pic {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
       opacity: 0;
-      transform: scale(1.06);
-      transition: opacity 0.7s var(--ease-doux), transform 1.2s var(--ease-doux);
+      transform: scale(1.04);
+      transition: opacity 1s var(--ease-doux), transform 1.6s var(--ease-doux);
     }
     .culture-pic.active { opacity: 1; transform: scale(1); }
-    .culture-text-stage { position: relative; min-height: 320px; }
+    /* Feather: soft vignette + bottom-up gradient for legibility */
+    .culture-bg::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 45%, transparent 30%, rgba(15,8,4,0.55) 75%, rgba(15,8,4,0.95) 100%),
+        linear-gradient(180deg, rgba(15,8,4,0.55) 0%, rgba(15,8,4,0.20) 35%, rgba(15,8,4,0.65) 75%, rgba(15,8,4,0.95) 100%);
+      pointer-events: none;
+    }
+
+    .culture-sticky .container {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding-top: 5rem; padding-bottom: 6rem;
+    }
+    .culture-head { text-align: center; max-width: 700px; margin: 0 auto 3rem; padding: 0 1rem; }
+    .culture-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1rem;
+    }
+    .culture-head h2 {
+      font-family: var(--font-titre);
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      line-height: 1.2;
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0,0,0,0.55);
+      text-wrap: balance;
+    }
+    .culture-head h2 em {
+      font-style: italic; font-weight: 400;
+      background: linear-gradient(135deg, #FFD479, #E67E22);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .culture-text-stage {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      /* Grid stack: all panels share the same cell so they overlay perfectly */
+      display: grid;
+      grid-template-areas: "stack";
+    }
     .culture-text {
-      position: absolute; inset: 0;
+      grid-area: stack;
+      width: 100%;
       opacity: 0;
       transform: translateY(18px);
-      transition: opacity 0.55s var(--ease-doux), transform 0.55s var(--ease-doux);
+      transition: opacity 0.6s var(--ease-doux), transform 0.6s var(--ease-doux);
       pointer-events: none;
     }
     .culture-text.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .culture-text .cm-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 52px; height: 52px; border-radius: 16px;
-      background: rgba(192,85,42,0.10); color: var(--terracotta);
-      font-size: 1.45rem; margin-bottom: 1rem;
-    }
     .culture-text h3 {
       font-family: var(--font-titre);
-      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      font-weight: 700;
       line-height: 1.15;
-      color: var(--encre);
+      color: #fff;
+      text-shadow: 0 2px 22px rgba(0,0,0,0.6);
       margin: 0 0 1rem;
     }
     .culture-text .cm-def {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--texte-doux);
-      margin: 0 0 0.9rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.88);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.55);
+      margin: 0 0 1rem;
     }
     .culture-text .cm-reco {
       font-family: var(--font-titre);
       font-style: italic;
-      font-size: 1rem;
-      line-height: 1.65;
-      color: var(--terracotta);
-      padding-left: 0.9rem;
-      border-left: 2px solid var(--terracotta);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #FFD479;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.6);
       margin: 0;
     }
+
     .culture-progress {
       position: absolute;
-      left: 50%; bottom: 1.8rem; transform: translateX(-50%);
+      left: 50%; bottom: 2rem; transform: translateX(-50%);
       display: flex; gap: 0.55rem;
       z-index: 3;
     }
     .culture-tick {
       width: 22px; height: 3px; border-radius: 2px;
-      background: rgba(192,85,42,0.22);
+      background: rgba(255,255,255,0.30);
       transition: background 0.3s, width 0.3s;
     }
-    .culture-tick.current { background: var(--terracotta); width: 32px; }
-    .culture-tick.reached { background: var(--terracotta); }
+    .culture-tick.current { background: var(--or); width: 34px; }
+    .culture-tick.reached { background: rgba(255,212,121,0.7); }
 
     @media (max-width: 900px) {
       .culture-moments { min-height: 600vh; }
-      .culture-stage { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
-      .culture-pic-frame { aspect-ratio: 16 / 11; max-height: 38vh; }
-      .culture-text-stage { min-height: 220px; }
-      .culture-head { margin-bottom: 1.2rem; }
-      .culture-text h3 { font-size: 1.4rem; }
+      .culture-sticky .container { padding-top: 4rem; padding-bottom: 5rem; }
+      .culture-text-stage { min-height: 260px; }
+      .culture-text h3 { font-size: 1.6rem; }
+      .culture-text .cm-def { font-size: 0.92rem; }
     }
 
     /* ============================================================
@@ -1991,12 +1990,18 @@
                 </a>
               </div><!-- Pied de menu : sélecteur de langue + bascule animations -->
       <div class="menu-foot">
-        <div class="lang-switch" role="group" aria-label="Langue / Language">
+        <div class="lang-switch dropup" role="group" aria-label="Langue / Language">
+        <button type="button" class="lang-toggle" data-lang-toggle aria-haspopup="listbox" aria-expanded="false" lang="fr">
           <i class="bi bi-globe2" aria-hidden="true"></i>
-          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
-          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
-          <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR</button>
-        </div>
+          <span data-lang-current>FR</span>
+          <i class="bi bi-caret-up-fill caret" aria-hidden="true"></i>
+        </button>
+        <ul class="lang-menu" role="listbox">
+          <li><button type="button" class="lang-btn" data-lang="fr" aria-pressed="true" lang="fr">FR · Français</button></li>
+          <li><button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN · English</button></li>
+          <li><button type="button" class="lang-btn" data-lang="ar" aria-pressed="false" lang="ar">AR · العربية</button></li>
+        </ul>
+      </div>
         <button type="button" class="motion-toggle" id="motionToggle"
                 role="switch" aria-checked="true" aria-label="Animations">
           <span class="motion-track"><span class="motion-thumb"></span></span>
@@ -2425,67 +2430,60 @@
   <!-- === SECTION : Cultural moments — sticky scroll trigger === -->
   <section class="culture-moments" id="cultureSection">
     <div class="culture-sticky">
+      <!-- Full-bleed background images (cross-fade) -->
+      <div class="culture-bg" aria-hidden="true">
+        <div class="culture-pic active" data-step="0" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/GUERAB_-_The_water_seller.jpg?width=1280');"></div>
+        <div class="culture-pic" data-step="1" style="background-image: url('assets/IMG_8292-thumb-lg.webp');"></div>
+        <div class="culture-pic" data-step="2" style="background-image: url('assets/people.webp');"></div>
+        <div class="culture-pic" data-step="3" style="background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=1600&amp;q=80');"></div>
+        <div class="culture-pic" data-step="4" style="background-image: url('assets/Mailanchi_Kai_IMG_7857.jpg');"></div>
+        <div class="culture-pic" data-step="5" style="background-image: url('https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg');"></div>
+      </div>
       <div class="container">
         <div class="culture-head">
           <span class="culture-eyebrow">Esprit marocain</span>
           <h2>Quand vous allez au Maroc,<br><em>n'oubliez pas de…</em></h2>
         </div>
-        <div class="culture-stage">
-          <div class="culture-pic-frame">
-            <div class="culture-pic active" data-step="0" style="background-image: url('https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=900&amp;q=80');"></div>
-            <div class="culture-pic" data-step="1" style="background-image: url('https://images.unsplash.com/photo-1610501980039-93b35d7301db?w=900&amp;q=80');"></div>
-            <div class="culture-pic" data-step="2" style="background-image: url('https://images.unsplash.com/photo-1623161773815-6f72f72e9d51?w=900&amp;q=80');"></div>
-            <div class="culture-pic" data-step="3" style="background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=900&amp;q=80');"></div>
-            <div class="culture-pic" data-step="4" style="background-image: url('https://images.unsplash.com/photo-1610385995106-3b9f8b3a8f06?w=900&amp;q=80');"></div>
-            <div class="culture-pic" data-step="5" style="background-image: url('https://guide-spa-maroc.com/wp-content/uploads/2022/04/109071143.jpg');"></div>
-          </div>
-          <div class="culture-text-stage">
-            <article class="culture-text active" data-step="0">
-              <span class="cm-icon"><i class="bi bi-droplet-fill"></i></span>
-              <h3>Boire l'eau d'un guerrab</h3>
-              <p class="cm-def">Le guerrab est le porteur d'eau traditionnel marocain — costume rouge éclatant, ceinture de pompons multicolores, gourde en peau de chèvre et clochette en cuivre qui annonce son passage.</p>
-              <p class="cm-reco">Sur la place Jemaa el-Fna, allez à sa rencontre : une gorgée d'eau, une photo, un petit pourboire — et un sourire qui vaut tous les souvenirs.</p>
-            </article>
-            <article class="culture-text" data-step="1">
-              <span class="cm-icon"><i class="bi bi-moon-stars-fill"></i></span>
-              <h3>Vivre l'ambiance du Ramadan</h3>
-              <p class="cm-def">Le mois sacré du jeûne du lever au coucher du soleil. Les rues se vident l'après-midi, puis explosent de vie après l'appel à la prière du Maghrib.</p>
-              <p class="cm-reco">Si vous y êtes, acceptez l'invitation au ftour : harira fumante, dattes, chebakias — vous découvrirez l'âme hospitalière du pays.</p>
-            </article>
-            <article class="culture-text" data-step="2">
-              <span class="cm-icon"><i class="bi bi-stars"></i></span>
-              <h3>Célébrer un Aïd</h3>
-              <p class="cm-def">Deux grandes fêtes religieuses : Aïd al-Fitr clôt le Ramadan, Aïd al-Adha commémore le sacrifice. Tout le pays s'arrête et se réunit.</p>
-              <p class="cm-reco">Si une famille marocaine vous ouvre sa porte, n'hésitez jamais : un « Eid Mubarak » sincère, et vous voilà adopté pour la journée.</p>
-            </article>
-            <article class="culture-text" data-step="3">
-              <span class="cm-icon"><i class="bi bi-cup-hot-fill"></i></span>
-              <h3>Partager un thé à la menthe</h3>
-              <p class="cm-def">L'« atay » : thé vert infusé avec de la menthe nanah et beaucoup de sucre, versé de haut pour former une mousse caractéristique.</p>
-              <p class="cm-reco">Acceptez toujours les trois verres traditionnels — refuser le premier est poli, refuser le troisième serait presque vexant.</p>
-            </article>
-            <article class="culture-text" data-step="4">
-              <span class="cm-icon"><i class="bi bi-flower2"></i></span>
-              <h3>Se faire dessiner au henné</h3>
-              <p class="cm-def">Pâte végétale qui teinte la peau de motifs géométriques — symbole de fête, de beauté et de protection, transmis de mère en fille depuis des siècles.</p>
-              <p class="cm-reco">Dans les souks ou lors d'un mariage, laissez une nakacha vous décorer la main : la teinte tiendra deux à trois semaines en souvenir.</p>
-            </article>
-            <article class="culture-text" data-step="5">
-              <span class="cm-icon"><i class="bi bi-water"></i></span>
-              <h3>S'abandonner au hammam</h3>
-              <p class="cm-def">Bain de vapeur public ou de riad, rituel hebdomadaire séculaire de purification du corps et de l'esprit.</p>
-              <p class="cm-reco">Réservez 1h30 dans un hammam de riad : vapeur, savon noir beldi, gommage au kessa, huile d'argan — et vous ressortez né une seconde fois.</p>
-            </article>
-          </div>
+        <div class="culture-text-stage">
+          <article class="culture-text active" data-step="0">
+            <h3>Boire l'eau d'un guerrab</h3>
+            <p class="cm-def">Le guerrab est le porteur d'eau traditionnel marocain — costume rouge éclatant, ceinture de pompons multicolores, gourde en peau de chèvre et clochette en cuivre qui annonce son passage.</p>
+            <p class="cm-reco">Sur la place Jemaa el-Fna, allez à sa rencontre : une gorgée d'eau, une photo, un petit pourboire — et un sourire qui vaut tous les souvenirs.</p>
+          </article>
+          <article class="culture-text" data-step="1">
+            <h3>Vivre l'ambiance du Ramadan</h3>
+            <p class="cm-def">Le mois sacré du jeûne du lever au coucher du soleil. Les rues se vident l'après-midi, puis explosent de vie après l'appel à la prière du Maghrib.</p>
+            <p class="cm-reco">Si vous y êtes, acceptez l'invitation au ftour : harira fumante, dattes, chebakias — vous découvrirez l'âme hospitalière du pays.</p>
+          </article>
+          <article class="culture-text" data-step="2">
+            <h3>Célébrer un Aïd</h3>
+            <p class="cm-def">Deux grandes fêtes religieuses : Aïd al-Fitr clôt le Ramadan, Aïd al-Adha commémore le sacrifice. Tout le pays s'arrête et se réunit.</p>
+            <p class="cm-reco">Si une famille marocaine vous ouvre sa porte, n'hésitez jamais : un « Eid Mubarak » sincère, et vous voilà adopté pour la journée.</p>
+          </article>
+          <article class="culture-text" data-step="3">
+            <h3>Partager un thé à la menthe</h3>
+            <p class="cm-def">L'« atay » : thé vert infusé avec de la menthe nanah et beaucoup de sucre, versé de haut pour former une mousse caractéristique.</p>
+            <p class="cm-reco">Acceptez toujours les trois verres traditionnels — refuser le premier est poli, refuser le troisième serait presque vexant.</p>
+          </article>
+          <article class="culture-text" data-step="4">
+            <h3>Se faire dessiner au henné</h3>
+            <p class="cm-def">Pâte végétale qui teinte la peau de motifs géométriques — symbole de fête, de beauté et de protection, transmis de mère en fille depuis des siècles.</p>
+            <p class="cm-reco">Dans les souks ou lors d'un mariage, laissez une nakacha vous décorer la main : la teinte tiendra deux à trois semaines en souvenir.</p>
+          </article>
+          <article class="culture-text" data-step="5">
+            <h3>S'abandonner au hammam</h3>
+            <p class="cm-def">Bain de vapeur public ou de riad, rituel hebdomadaire séculaire de purification du corps et de l'esprit.</p>
+            <p class="cm-reco">Réservez 1h30 dans un hammam de riad : vapeur, savon noir beldi, gommage au kessa, huile d'argan — et vous ressortez né une seconde fois.</p>
+          </article>
         </div>
-        <div class="culture-progress" aria-hidden="true">
-          <span class="culture-tick current"></span>
-          <span class="culture-tick"></span>
-          <span class="culture-tick"></span>
-          <span class="culture-tick"></span>
-          <span class="culture-tick"></span>
-          <span class="culture-tick"></span>
-        </div>
+      </div>
+      <div class="culture-progress" aria-hidden="true">
+        <span class="culture-tick current"></span>
+        <span class="culture-tick"></span>
+        <span class="culture-tick"></span>
+        <span class="culture-tick"></span>
+        <span class="culture-tick"></span>
+        <span class="culture-tick"></span>
       </div>
     </div>
   </section>
