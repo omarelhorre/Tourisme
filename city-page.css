@@ -1,8 +1,3 @@
-/* ============================================================
-   city-page.css — Styles communs pour les pages destinations
-   Auteur : Antigravity (Advanced Agentic Coding @ Google DeepMind)
-   ============================================================ */
-
 /* === Variables de couleurs === */
 :root {
   --terracotta: #C0552A;
@@ -32,9 +27,7 @@ h1, h2, h3, h4, h5, .font-title {
   color: var(--texte);
 }
 
-/* ============================================================
-   === Icônes flottantes (palmier + burger) — menu de l'accueil ===
-   ============================================================ */
+/* Icônes flottantes (palmier + burger) — menu de l'accueil */
 .nav-fab {
   position: fixed;
   top: 1.75rem;
@@ -73,6 +66,7 @@ h1, h2, h3, h4, h5, .font-title {
   border-radius: 3px;
   transition: transform 0.3s ease, width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
 }
+/* Quand le menu est ouvert, le burger se transforme en croix */
 body.menu-open .nav-fab-burger {
   background: #fff;
   box-shadow: 0 8px 22px -6px rgba(192,85,42,0.45);
@@ -87,11 +81,10 @@ body.menu-open .nav-fab-burger span:nth-child(1) {
 body.menu-open .nav-fab-burger span:nth-child(2) {
   transform: translateY(-4.5px) rotate(-45deg);
 }
+/* Le logo disparaît quand le menu est ouvert pour laisser la place */
 body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
 
-/* ============================================================
-   === Menu plein écran / Panel de navigation ===
-   ============================================================ */
+/* Menu plein écran / Panel de navigation  */
 .site-menu {
   position: fixed;
   inset: 0;
@@ -107,6 +100,7 @@ body.menu-open .nav-fab-logo { opacity: 0; pointer-events: none; }
   transition: opacity 0.35s ease, transform 0.35s ease,
               visibility 0s linear 0.35s;
 }
+/* Quand le menu est ouvert, il apparaît avec une animation fluide */
 body.menu-open .site-menu {
   opacity: 1;
   visibility: visible;
@@ -129,9 +123,11 @@ body.menu-open .site-menu {
   margin: 0 auto;
 }
 
+/* Chaque groupe de menu (Accueil, Villes, Plats…) */
 .menu-group {
   border-bottom: 1px solid rgba(192, 85, 42, 0.22);
 }
+/* Le bouton-titre de chaque groupe, style gros titre élégant */
 .menu-head {
   display: flex;
   align-items: center;
@@ -158,6 +154,7 @@ body.menu-open .site-menu {
   padding-left: 0.9rem;
   outline: none;
 }
+/* La petite flèche qui tourne quand on ouvre un groupe */
 .menu-head .chev {
   font-size: 1.1rem;
   color: var(--terracotta);
@@ -172,6 +169,7 @@ body.menu-open .site-menu {
   color: var(--terracotta);
 }
 
+/* Le sous-menu qui s'ouvre en accordéon */
 .menu-sub {
   max-height: 0;
   overflow: hidden;
@@ -190,13 +188,14 @@ body.menu-open .site-menu {
   flex-direction: column;
   gap: 0.1rem;
 }
+/* Grille spéciale pour la liste des villes (2 colonnes) */
 .menu-sub-list.cities {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.1rem 1.5rem;
 }
 
-/* Picture-card grid for the Activités dropdown */
+/* Grille photo-card pour le dropdown Activités : 3 colonnes de miniatures */
 .menu-sub-list.activities-pics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -226,6 +225,7 @@ body.menu-open .site-menu {
   z-index: 0;
   transition: transform 0.5s ease;
 }
+/* Dégradé sombre en bas pour que le texte blanc ressorte */
 .menu-sub-list.activities-pics a::after {
   content: "";
   position: absolute;
@@ -247,13 +247,17 @@ body.menu-open .site-menu {
   letter-spacing: 0.05em;
   text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
+/* Effet hover : zoom sur l'image + léger décalage vers le haut */
 .menu-sub-list.activities-pics a:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -10px rgba(0,0,0,0.45); }
 .menu-sub-list.activities-pics a:hover img { transform: scale(1.08); }
 .menu-sub-list.activities-pics a:hover::after { background: linear-gradient(180deg, rgba(192,85,42,0.15) 0%, rgba(20,12,4,0.85) 100%); }
 
+/* Sur mobile, on passe à 2 colonnes pour les miniatures */
 @media (max-width: 600px) {
   .menu-sub-list.activities-pics { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Style des liens dans les sous-menus : flèche qui apparaît au hover */
 .menu-sub-list a {
   display: flex;
   align-items: center;
@@ -285,6 +289,7 @@ body.menu-open .site-menu {
   transform: translateX(0);
 }
 
+/* Bouton CTA dans le menu (ex: "Planifier mon voyage") */
 .menu-cta {
   display: inline-flex;
   align-items: center;
@@ -307,6 +312,7 @@ body.menu-open .site-menu {
   transform: translateY(-2px);
 }
 
+/*  Responsive : ajustements mobile pour le menu  */
 @media (max-width: 768px) {
   .nav-fab { top: 1.1rem; }
   .nav-fab-logo { left: 1.1rem; }
@@ -315,6 +321,7 @@ body.menu-open .site-menu {
   .menu-sub-list.cities { grid-template-columns: 1fr; }
 }
 
+/* Desktop : le menu devient un panel latéral élégant  */
 @media (min-width: 992px) {
   .site-menu {
     background: transparent;
@@ -331,6 +338,7 @@ body.menu-open .site-menu {
   }
   .site-menu::before { display: none; }
 
+  /* Le panel glisse depuis la droite avec une ombre portée élégante */
   .site-menu-inner {
     position: absolute;
     top: 0;
@@ -366,6 +374,7 @@ body.menu-open .site-menu {
     align-content: flex-start;
     gap: 0.5rem;
   }
+  /* Les groupes deviennent des "pills" horizontales en haut du panel */
   .menu-group {
     display: block;
     flex: 0 0 auto;
@@ -398,6 +407,7 @@ body.menu-open .site-menu {
     background: var(--terracotta);
     color: #fff;
   }
+  /* Le sous-menu s'affiche en dessous des pills, occupant tout l'espace */
   .menu-sub {
     position: absolute;
     left: 4rem;
@@ -444,9 +454,7 @@ body.menu-open .site-menu {
   }
 }
 
-/* ============================================================
-   === Section 1: Hero (`.city-hero`) ===
-   ============================================================ */
+/* Section 1: Hero (`.city-hero`)  La grande bannière image avec le titre de la ville  */
 .city-hero {
   position: relative;
   height: 75vh;
@@ -459,6 +467,7 @@ body.menu-open .site-menu {
   object-fit: cover;
   display: block;
 }
+/* Dégradé sombre en diagonal pour le contraste du texte blanc */
 .city-hero-overlay {
   position: absolute;
   inset: 0;
@@ -477,6 +486,7 @@ body.menu-open .site-menu {
   color: #fff;
   max-width: 720px;
 }
+/* Sous-titre en petites lettres dorées au-dessus du titre */
 .city-eyebrow {
   font-family: 'Lato', sans-serif;
   font-size: 0.76rem;
@@ -521,6 +531,7 @@ body.menu-open .site-menu {
   color: var(--or);
 }
 
+/* Ajustements mobile pour le hero */
 @media (max-width: 768px) {
   .city-hero-content {
     bottom: 2rem;
@@ -529,9 +540,7 @@ body.menu-open .site-menu {
   }
 }
 
-/* ============================================================
-   === Section 2: Intro 2 Colonnes (`.city-intro`) ===
-   ============================================================ */
+/*  Section 2: Intro 2 Colonnes (`.city-intro`),Présentation de la ville + carte infos pratiques */
 .city-intro {
   padding: 80px 0;
   background: var(--bg-cream);
@@ -560,7 +569,7 @@ body.menu-open .site-menu {
   margin-bottom: 0;
 }
 
-/* Fiche synthèse "En un clin d'œil" */
+/* Fiche synthèse "En un clin d'œil" : durée, saison, région */
 .intro-meta-card {
   background: #FFFFFF;
   border-radius: 20px;
@@ -607,6 +616,7 @@ body.menu-open .site-menu {
   line-height: 1.4;
   font-weight: 700;
 }
+/* Photo d'ambiance à côté de la carte infos */
 .intro-img-wrap {
   border-radius: 16px;
   overflow: hidden;
@@ -619,9 +629,7 @@ body.menu-open .site-menu {
   display: block;
 }
 
-/* ============================================================
-   === Section 3: À ne pas manquer (`.city-highlights`) ===
-   ============================================================ */
+/* Section 3: À ne pas manquer (`.city-highlights`) Grille de cartes avec image, icône et description */
 .city-highlights {
   padding: 80px 0;
   background: #FFFFFF;
@@ -633,6 +641,7 @@ body.menu-open .site-menu {
   background: #FFFFFF;
   border-bottom: 1px solid #f0ebe3;
 }
+/* Titre de section centré avec sous-titre terracotta */
 .section-title-wrap {
   text-align: center;
   max-width: 650px;
@@ -654,7 +663,7 @@ body.menu-open .site-menu {
   margin: 0;
 }
 
-/* Cartes communes */
+/* === Cartes communes (highlights, restaurants, hôtels) === */
 .city-card {
   text-decoration: none;
   color: inherit;
@@ -662,6 +671,7 @@ body.menu-open .site-menu {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   margin-bottom: 2rem;
 }
+/* Effet hover : la carte monte légèrement */
 .city-card:hover {
   transform: translateY(-8px);
 }
@@ -678,11 +688,12 @@ body.menu-open .site-menu {
   display: block;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* Zoom subtil sur l'image au hover */
 .city-card:hover .city-card-img-wrap img {
   transform: scale(1.06);
 }
 
-/* Activité Icon Badge floating */
+/* Badge icône rond en haut à droite de l'image (ex: bi-houses, bi-mortarboard) */
 .city-card-icon-badge {
   position: absolute;
   top: 1.1rem;
@@ -708,6 +719,7 @@ body.menu-open .site-menu {
   line-height: 1.25;
   transition: color 0.3s ease;
 }
+/* Le titre passe en terracotta au hover */
 .city-card:hover .city-card-title {
   color: var(--terracotta);
 }
@@ -718,13 +730,12 @@ body.menu-open .site-menu {
   margin: 0;
 }
 
-/* ============================================================
-   === Section 4: Gastronomie (`.city-food`) ===
-   ============================================================ */
+/*  Section 4: Gastronomie (`.city-food`)  */
 .city-food {
   padding: 80px 0;
   background: var(--bg-cream);
 }
+/* Badge "Incontournable" ou "Tradition" en haut à gauche de l'image */
 .food-badge {
   position: absolute;
   top: 1.1rem;
@@ -745,15 +756,14 @@ body.menu-open .site-menu {
   color: #1a1a1a;
 }
 
-/* ============================================================
-   === Section 5: Habillement (`.city-dress`) ===
-   ============================================================ */
+/*Section 5: Habillement (`.city-dress`) */
 .city-dress {
   padding: 80px 0;
   background: #FFFFFF;
   border-top: 1px solid #f0ebe3;
   border-bottom: 1px solid #f0ebe3;
 }
+/* Petit tag avec icône au-dessus du titre (ex: "Tenue conseillée") */
 .dress-icon-tag {
   display: inline-flex;
   align-items: center;
@@ -770,21 +780,18 @@ body.menu-open .site-menu {
   font-size: 0.9rem;
 }
 
-/* ============================================================
-   === Section Restaurants ===
-   ============================================================ */
+/*Section Restaurants Même style de cartes que les highlights  */
 .city-restaurants {
   padding: 80px 0;
   background: #fff;
 }
 
-/* ============================================================
-   === Section 6: Hébergements (Inclus dans HTML) ===
-   ============================================================ */
+/*Section 6: Hébergements (`.city-hotels`) Cartes avec étoiles et indication de prix  */
 .city-hotels {
   padding: 80px 0;
   background: var(--bg-cream);
 }
+/* Ligne d'étoiles dorées + prix (€ à €€€€) */
 .hotel-rating {
   color: var(--or);
   font-size: 0.82rem;
@@ -797,9 +804,7 @@ body.menu-open .site-menu {
   font-size: 1.05rem;
 }
 
-/* ============================================================
-   === Section 7: Culture & Conseils (`.city-culture`) ===
-   ============================================================ */
+/* Section 7: Culture & Conseils Grille de cartes avec icône, titre et conseil pratique */
 .city-culture {
   padding: 80px 0;
   background: #FFFFFF;
@@ -815,6 +820,7 @@ body.menu-open .site-menu {
 .culture-grid-card:hover {
   transform: translateY(-4px);
 }
+/* Boîte d'icône terracotta clair, arrondie */
 .culture-icon-box {
   width: 48px;
   height: 48px;
@@ -841,9 +847,7 @@ body.menu-open .site-menu {
   margin: 0;
 }
 
-/* ============================================================
-   === Section 8: CTA Final (`.city-cta`) ===
-   ============================================================ */
+/* Section 8: CTA Final L'appel à l'action : fond vert avec boutons  */
 .city-cta {
   padding: 100px 0;
   position: relative;
@@ -885,6 +889,7 @@ body.menu-open .site-menu {
   justify-content: center;
   flex-wrap: wrap;
 }
+/* Bouton principal terracotta avec icône */
 .btn-maroc-primary {
   background: var(--terracotta);
   color: #fff;
@@ -906,6 +911,7 @@ body.menu-open .site-menu {
   background: #a84720;
   color: #fff;
 }
+/* Bouton secondaire transparent avec bordure blanche */
 .btn-maroc-outline {
   background: transparent;
   color: #fff;
@@ -929,9 +935,7 @@ body.menu-open .site-menu {
   color: #fff;
 }
 
-/* ============================================================
-   === Section 9: Footer ===
-   ============================================================ */
+/* Section 9: Footer Crédits du projet, simple et sobre  */
 .footer-simple {
   background-color: #161a15;
   color: #8c9689;
@@ -942,11 +946,9 @@ body.menu-open .site-menu {
   letter-spacing: 0.02em;
 }
 
-/* ============================================================
-   === Animations ===
-   ============================================================ */
+/* Animations */
 
-/* Hero load animations */
+/* Hero load animations : les éléments apparaissent en cascade au chargement */
 .hero-animate-1,
 .hero-animate-2,
 .hero-animate-3 {
@@ -984,9 +986,7 @@ body.menu-open .site-menu {
   filter: blur(0);
 }
 
-/* ============================================================
-   === Menu footer : language + motion toggle (shared) ===
-   ============================================================ */
+/*  Menu footer : language + motion toggle (shared)*/
 .menu-foot {
   display: flex;
   flex-wrap: wrap;
@@ -1014,7 +1014,8 @@ body.menu-open .site-menu {
     background: var(--sable);
   }
 }
-/* === Language dropup === */
+
+/* === Language dropup : sélecteur FR / EN / AR === */
 .lang-switch { position: relative; display: inline-block; }
 .lang-toggle {
   display: inline-flex; align-items: center; gap: 0.45rem;
@@ -1034,6 +1035,7 @@ body.menu-open .site-menu {
   background: #fff; color: var(--terracotta, #C0552A);
   border-color: var(--terracotta, #C0552A); outline: none;
 }
+/* Le menu qui s'ouvre au-dessus du bouton (dropup) */
 .lang-menu {
   position: absolute; bottom: calc(100% + 0.5rem); left: 0;
   margin: 0; padding: 0.35rem; list-style: none;
@@ -1060,7 +1062,10 @@ body.menu-open .site-menu {
   transition: background 0.18s ease, color 0.18s ease;
 }
 .lang-btn:hover { background: rgba(192,85,42,0.08); color: var(--terracotta, #C0552A); }
+/* La langue active est mise en évidence avec fond terracotta */
 .lang-btn[aria-pressed="true"] { background: var(--terracotta, #C0552A); color: #fff; }
+
+/* === Motion toggle : interrupteur pour activer/désactiver les animations === */
 .motion-toggle {
   display: inline-flex;
   align-items: center;
@@ -1076,6 +1081,7 @@ body.menu-open .site-menu {
   cursor: pointer;
   padding: 0.25rem;
 }
+/* La piste de l'interrupteur */
 .motion-track {
   position: relative;
   width: 42px;
@@ -1085,6 +1091,7 @@ body.menu-open .site-menu {
   transition: background 0.25s ease;
   flex-shrink: 0;
 }
+/* Le curseur qui glisse */
 .motion-thumb {
   position: absolute;
   top: 3px;
@@ -1096,9 +1103,11 @@ body.menu-open .site-menu {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   transition: transform 0.25s ease;
 }
+/* État activé : piste terracotta + curseur à droite */
 .motion-toggle[aria-checked="true"] .motion-track { background: var(--terracotta, #C0552A); }
 .motion-toggle[aria-checked="true"] .motion-thumb { transform: translateX(20px); }
 
+/* Quand l'utilisateur désactive les animations, tout devient instantané */
 body.reduce-motion *,
 body.reduce-motion *::before,
 body.reduce-motion *::after {
@@ -1108,7 +1117,7 @@ body.reduce-motion *::after {
   scroll-behavior: auto !important;
 }
 
-/* RTL support for Arabic */
+/*  Support RTL pour l'arabe */
 html[dir="rtl"] body {
   direction: rtl;
   text-align: right;
