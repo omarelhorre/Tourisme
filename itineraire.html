@@ -92,7 +92,7 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 @media(min-width:992px){.site-menu{background:transparent;padding:0;overflow:hidden;opacity:1;visibility:visible;transform:none;pointer-events:none;transition:none}.site-menu::before{display:none}body.menu-open .site-menu{pointer-events:auto}.site-menu-inner{position:absolute;top:0;right:0;height:100%;width:min(50vw,760px);max-width:none;margin:0;padding:5rem 4rem 3rem;overflow-y:auto;background:var(--sable-light);border-left:1px solid rgba(192,85,42,.18);box-shadow:-30px 0 70px -25px rgba(60,30,10,.45);transform:translateX(100%);transition:transform .55s cubic-bezier(.16,1,.3,1);display:flex;flex-wrap:wrap;align-content:flex-start;gap:.5rem}body.menu-open .site-menu-inner{transform:translateX(0)}.site-menu-inner::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><g fill='none' stroke='%23C0552A' stroke-width='1' opacity='.18'><polygon points='40,10 50,30 70,40 50,50 40,70 30,50 10,40 30,30'/></g></svg>");opacity:.5;pointer-events:none;z-index:0}.menu-group{display:block;flex:0 0 auto;border-bottom:none}.menu-head{position:relative;z-index:1;width:auto;justify-content:center;gap:0;border-radius:999px;padding:.6rem 1.4rem;font-size:.92rem;letter-spacing:.08em;white-space:nowrap;background:transparent;transition:background .25s,color .25s}.menu-head:hover,.menu-head:focus-visible{padding-left:1.4rem;background:rgba(192,85,42,.12);color:var(--terracotta)}.menu-head .chev{display:none}.menu-group.open .menu-head{background:var(--terracotta);color:#fff}.menu-sub{position:absolute;left:4rem;right:4rem;top:9.5rem;bottom:11rem;z-index:1;padding-top:1.5rem;border-top:1px solid rgba(192,85,42,.18);max-height:none;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .35s,transform .35s,visibility 0s linear .35s}.menu-group.open .menu-sub{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .35s,transform .35s}.menu-sub-list{padding:0;gap:.1rem}.menu-sub-list a{font-size:clamp(1.3rem,2.1vw,2rem);font-weight:900;letter-spacing:-.01em;padding:.45rem .7rem}.menu-foot{position:absolute;z-index:2;left:4rem;right:4rem;bottom:1.6rem;margin-top:0}}
 
 /* ══ HERO ══ */
-.hero { position:relative; height:70vh; min-height:520px; display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(180deg,rgba(26,18,8,0) 0%,rgba(26,18,8,.4) 60%,rgba(26,18,8,.85) 100%),url('images/ait_benhaddou.png') center/cover no-repeat; }
+.hero { position:relative; height:70vh; min-height:520px; display:flex; align-items:flex-end; overflow:hidden; background:linear-gradient(180deg,rgba(26,18,8,0) 0%,rgba(26,18,8,.4) 60%,rgba(26,18,8,.85) 100%),url('head_itineraire.png') center/cover no-repeat; }
 .hero-content { position:relative; z-index:2; padding:0 60px 60px; max-width:1400px; width:100%; margin:0 auto; }
 .hero-badge { font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; color:var(--or-light); margin-bottom:16px; font-weight:400; opacity:0; }
 .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,5vw,4.5rem); font-weight:700; color:#fff; line-height:1.05; max-width:600px; opacity:0; }
@@ -166,7 +166,7 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 .particle { position:absolute; width:3px; height:3px; background:var(--or); border-radius:50%; opacity:0; }
 
 /* ══════════════════════════════════════
-   CITY DETAIL MODAL — style image
+   CITY DETAIL MODAL
 ══════════════════════════════════════ */
 .detail-modal-backdrop {
   position: fixed; inset: 0; z-index: 1060;
@@ -251,15 +251,24 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
   margin-bottom: 12px;
   align-items: flex-start;
   position: relative;
+  padding-bottom: 8px;
 }
+
+/* ✅ FIXED: timeline pointillée correctement positionnée */
 .dm-stop:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: 40px;
-  top: 72px;
-  bottom: -12px;
+  left: 27px; /* Centre du badge (54px / 2) */
+  top: 50px;  /* Juste sous le badge */
+  bottom: 0;
   width: 2px;
-  background: repeating-linear-gradient(to bottom, var(--or) 0, var(--or) 5px, transparent 5px, transparent 10px);
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--or) 0px,
+    var(--or) 6px,
+    transparent 6px,
+    transparent 14px
+  );
   z-index: 0;
 }
 
@@ -277,9 +286,11 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
   text-transform: uppercase;
   line-height: 1.3;
   z-index: 1;
+  position: relative;
 }
 .dm-day-badge span { display: block; font-size: .9rem; letter-spacing: 0; font-weight: 900; }
 
+/* ✅ Image cliquable */
 .dm-stop-img {
   flex-shrink: 0;
   width: 76px; height: 72px;
@@ -288,8 +299,25 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
   background: #DDD;
   position: relative;
   z-index: 1;
+  transition: transform .25s, box-shadow .25s;
 }
-.dm-stop-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.dm-stop-img img { width:100%; height:100%; object-fit:cover; display:block; transition: filter .25s; }
+
+.dm-stop-img.dm-clickable { cursor: pointer; }
+.dm-stop-img.dm-clickable:hover { transform: scale(1.06); box-shadow: 0 4px 16px rgba(192,85,42,.25); }
+.dm-stop-img.dm-clickable:hover img { filter: brightness(0.78); }
+
+/* Overlay icône sur image */
+.dm-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(192,85,42,.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .25s;
+  border-radius: 12px;
+}
+.dm-stop-img.dm-clickable:hover .dm-img-overlay { opacity: 1; }
+.dm-img-overlay i { color:#fff; font-size:1.2rem; }
 
 .dm-stop-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
 .dm-stop-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
@@ -297,8 +325,14 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
   font-family: 'Playfair Display', serif;
   font-size: 1.05rem; font-weight: 700; color: var(--ivoire);
   display: flex; align-items: center; gap: 6px;
+  transition: color .2s;
 }
 .dm-stop-name i { font-size: .78rem; color: var(--terracotta); }
+.dm-stop-name.dm-clickable { cursor: pointer; }
+.dm-stop-name.dm-clickable:hover { color: var(--terracotta); text-decoration: underline; text-underline-offset: 3px; }
+.dm-link-icon { font-size: .65rem !important; color: var(--terracotta); margin-left: 2px; opacity: 0; transition: opacity .2s; }
+.dm-stop-name.dm-clickable:hover .dm-link-icon { opacity: 1; }
+
 .dm-nights-badge {
   background: #F5EDDF; color: var(--terracotta);
   padding: 3px 10px; border-radius: 20px;
@@ -325,13 +359,115 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 }
 .dm-stop-chevron i { font-size: .75rem; }
 
+/* ══ CITY TOOLTIP ══ */
+.dm-city-tooltip {
+  position: absolute;
+  background: var(--terracotta);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: .72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .22s, transform .22s;
+  box-shadow: 0 4px 12px rgba(192,85,42,.35);
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 0;
+}
+.dm-city-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--terracotta);
+}
+.dm-city-tooltip.visible { opacity: 1; transform: translateY(0); }
+
 /* ── RIGHT: Map ── */
 .dm-map-panel {
-  background: #F0EBE0;
+  background: #E8E0D0;
   position: relative;
   overflow: hidden;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
-.dm-map-svg { width:100%; height:100%; display:block; }
+
+/* ══ ZOOM CONTROLS ══ */
+.dm-map-controls {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.dm-map-btn {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  border: 1px solid #DDD4C4;
+  background: rgba(255,255,255,.92);
+  color: var(--terracotta);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all .2s;
+  backdrop-filter: blur(4px);
+  font-size: .95rem;
+}
+.dm-map-btn:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); transform: scale(1.08); }
+.dm-map-btn:active { transform: scale(.94); }
+
+.dm-map-wrapper {
+  flex: 1;
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+}
+.dm-map-wrapper.panning { cursor: grabbing; }
+
+.dm-map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* ── Route lines ── */
+.route-line-bg {
+  fill: none;
+  stroke: rgba(255,255,255,.65);
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+.route-line {
+  fill: none;
+  stroke: var(--terracotta);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 9 7;
+  filter: drop-shadow(0 1px 3px rgba(192,85,42,.5));
+  animation: dashFlow 1.6s linear infinite;
+}
+@keyframes dashFlow { to { stroke-dashoffset: -16; } }
+
+/* ── Map pins ── */
+.map-pin-group { cursor: pointer; }
+.map-pin-outer { transition: r .2s; }
+.map-pin-group:hover .map-pin-outer { r: 15; }
+.map-pin-inner { transition: r .2s; }
+.map-pin-group:hover .map-pin-inner { r: 8; }
+.map-callout { filter: drop-shadow(0 3px 10px rgba(0,0,0,.18)); }
 
 /* ── Stats row ── */
 .dm-stats {
@@ -374,68 +510,25 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
   flex-shrink: 0; cursor: pointer;
 }
 
-/* ── Footer actions ── */
-.dm-footer {
-  border-top: 1px solid #EDE5D6;
-  padding: 14px 24px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  background: #FFFDF9;
-  flex-wrap: wrap;
-}
-.dm-services {
-  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-}
-.dm-service {
-  display: flex; align-items: center; gap: 6px;
-  font-size: .72rem; color: var(--texte-doux); font-weight: 600;
-}
-.dm-service i { color: var(--terracotta); font-size: .85rem; }
-.dm-footer-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-.btn-reserve {
-  background: var(--terracotta);
-  color: #fff; border: none;
-  padding: 11px 22px; border-radius: 10px;
-  font-size: .82rem; font-weight: 700; letter-spacing: .04em;
-  display: flex; align-items: center; gap: 8px;
-  cursor: pointer; transition: all .25s;
-  white-space: nowrap;
-}
-.btn-reserve:hover { background: var(--terracotta-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(192,85,42,.35); }
-.btn-reserve i { font-size: .85rem; }
-.btn-wishlist {
-  width: 40px; height: 40px; border-radius: 10px;
-  border: 1px solid #DDD4C4; background: transparent;
-  color: var(--sable); display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all .2s; flex-shrink: 0;
-}
-.btn-wishlist:hover { border-color: var(--terracotta); color: var(--terracotta); }
-
-/* ── Map pin labels ── */
-.map-pin-group { cursor: pointer; }
-.map-pin-circle { transition: r .2s; }
-.map-pin-group:hover .map-pin-circle { r: 10; }
-.map-callout { filter: drop-shadow(0 4px 12px rgba(0,0,0,.18)); }
-
 /* Responsive */
 @media(max-width: 900px) {
   .dm-body { grid-template-columns: 1fr; }
-  .dm-map-panel { height: 220px; }
+  .dm-map-panel { height: 240px; }
   .dm-stats { grid-template-columns: 1fr 1fr; }
   .dm-stop:not(:last-child)::after { display: none; }
 }
 @media(max-width: 600px) {
   .dm-stats { grid-template-columns: 1fr 1fr; }
-  .dm-footer { flex-direction: column; align-items: stretch; }
-  .dm-footer-actions { justify-content: space-between; }
   .dm-services { gap: 10px; }
   .card-actions { flex-direction: column; }
   .itineraries-section { padding: 0 16px 60px; }
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* RTL support */
+html[dir="rtl"] .dm-stop:not(:last-child)::after { left: auto; right: 27px; }
+html[dir="rtl"] .dm-stop { flex-direction: row-reverse; }
+html[dir="rtl"] .menu-sub-list a::before { content: "←"; }
 
 .footer-maroc { background:var(--encre); color:#aaa; text-align:center; padding:2rem 1rem; font-size:.85rem; }
 .ripple { position:absolute; border-radius:50%; background:rgba(255,255,255,.25); pointer-events:none; transform:scale(0); animation:rippleAnim .6s ease-out forwards; }
@@ -458,17 +551,17 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 <div class="site-menu" id="siteMenu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
   <div class="site-menu-inner">
     <div class="menu-group" data-group>
-      <button type="button" class="menu-head" aria-expanded="false">Accueil<i class="bi bi-chevron-down chev"></i></button>
+      <button type="button" class="menu-head" aria-expanded="false" data-i18n="nav.home"><span data-i18n="nav.home">Accueil</span><i class="bi bi-chevron-down chev"></i></button>
       <div class="menu-sub"><ul class="menu-sub-list">
-        <li><a href="index.html">Page d'accueil</a></li>
-        <li><a href="#circuitsGrid">Circuits</a></li>
-        <li><a href="index.html#mapSection">Explorez le Maroc</a></li>
-        <li><a href="index.html#dishesSection">Gastronomie</a></li>
-        <li><a href="index.html#experiencesSection">Expériences</a></li>
+        <li><a href="index.html" data-i18n="nav.homepage">Page d'accueil</a></li>
+        <li><a href="#circuitsGrid" data-i18n="nav.circuits">Circuits</a></li>
+        <li><a href="index.html#mapSection" data-i18n="nav.explore">Explorez le Maroc</a></li>
+        <li><a href="index.html#dishesSection" data-i18n="nav.gastronomy">Gastronomie</a></li>
+        <li><a href="index.html#experiencesSection" data-i18n="nav.experiences">Expériences</a></li>
       </ul></div>
     </div>
     <div class="menu-group" data-group>
-      <button type="button" class="menu-head" aria-expanded="false">Villes<i class="bi bi-chevron-down chev"></i></button>
+      <button type="button" class="menu-head" aria-expanded="false"><span data-i18n="nav.cities">Villes</span><i class="bi bi-chevron-down chev"></i></button>
       <div class="menu-sub"><ul class="menu-sub-list cities">
         <li><a href="marrakech.html">Marrakech</a></li><li><a href="fes.html">Fès</a></li>
         <li><a href="chefchaouen.html">Chefchaouen</a></li><li><a href="tetouan.html">Tétouan</a></li>
@@ -476,11 +569,11 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
         <li><a href="tanger.html">Tanger</a></li><li><a href="essaouira.html">Essaouira</a></li>
       </ul></div>
     </div>
-    <div class="menu-group"><a class="menu-head" href="dishes.html">Plats<i class="bi bi-arrow-right chev"></i></a></div>
-    <div class="menu-group"><a class="menu-head" href="activites.html">Activités<i class="bi bi-arrow-right chev"></i></a></div>
-    <div class="menu-group"><a class="menu-head" href="itineraire.html">Itinéraires<i class="bi bi-arrow-right chev"></i></a></div>
-    <div class="menu-group"><a class="menu-head" href="destinations.html">Destinations<i class="bi bi-arrow-right chev"></i></a></div>
-    <div class="menu-group"><a class="menu-head" href="index.html#guideSection">Guide<i class="bi bi-arrow-right chev"></i></a></div>
+    <div class="menu-group"><a class="menu-head" href="dishes.html" data-i18n="nav.dishes">Plats<i class="bi bi-arrow-right chev"></i></a></div>
+    <div class="menu-group"><a class="menu-head" href="activites.html" data-i18n="nav.activities">Activités<i class="bi bi-arrow-right chev"></i></a></div>
+    <div class="menu-group"><a class="menu-head" href="itineraire.html" data-i18n="nav.itineraries">Itinéraires<i class="bi bi-arrow-right chev"></i></a></div>
+    <div class="menu-group"><a class="menu-head" href="destinations.html" data-i18n="nav.destinations">Destinations<i class="bi bi-arrow-right chev"></i></a></div>
+    <div class="menu-group"><a class="menu-head" href="index.html#guideSection" data-i18n="nav.guide">Guide<i class="bi bi-arrow-right chev"></i></a></div>
     <div class="menu-foot">
       <div class="lang-switch" role="group" aria-label="Langue">
         <i class="bi bi-globe2"></i>
@@ -490,7 +583,7 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
       </div>
       <button class="motion-toggle" id="motionToggle" role="switch" aria-checked="true" aria-label="Animations">
         <span class="motion-track"><span class="motion-thumb"></span></span>
-        <span class="motion-label">Animations</span>
+        <span class="motion-label" data-i18n="ui.animations">Animations</span>
       </button>
     </div>
   </div>
@@ -499,28 +592,28 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-badge" id="heroBadge">ITINÉRAIRES</div>
-    <h1 class="hero-title" id="heroTitle">Composez votre <em>voyage.</em></h1>
-    <p class="hero-subtitle" id="heroSubtitle">Inspirations clés en main ou itinéraire 100% sur mesure.</p>
+    <div class="hero-badge" id="heroBadge" data-i18n="hero.badge">ITINÉRAIRES</div>
+    <h1 class="hero-title" id="heroTitle"><span data-i18n="hero.title.part1">Composez votre</span> <em data-i18n="hero.title.part2">voyage.</em></h1>
+    <p class="hero-subtitle" id="heroSubtitle" data-i18n="hero.subtitle">Inspirations clés en main ou itinéraire 100% sur mesure.</p>
   </div>
 </section>
 
 <!-- FILTERS -->
 <div class="filter-bar">
-  <button class="filter-btn active" data-filter="all"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>Tous</button>
-  <button class="filter-btn" data-filter="culture"><svg viewBox="0 0 24 24"><path d="M3 22V12l9-9 9 9v10"/><path d="M9 22V16h6v6"/><rect x="10" y="7" width="4" height="4"/></svg>Culture</button>
-  <button class="filter-btn" data-filter="aventure"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg>Aventure</button>
-  <button class="filter-btn" data-filter="nature"><svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M5 12C5 7 9 3 12 3s7 4 7 9H5z"/><path d="M5 12c0 5 3.5 8 7 8s7-3 7-8"/></svg>Nature</button>
-  <button class="filter-btn" data-filter="luxe"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>Luxe</button>
-  <button class="filter-btn" data-filter="famille"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="2"/><circle cx="17" cy="6" r="2"/><path d="M5 22v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3"/><circle cx="13" cy="13" r="2"/></svg>Famille</button>
-  <button class="filter-btn" data-filter="sport"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2c0 0-3 4-3 10s3 10 3 10"/><path d="M2 12h20"/></svg>Sport</button>
+  <button class="filter-btn active" data-filter="all"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><span data-i18n="filter.all">Tous</span></button>
+  <button class="filter-btn" data-filter="culture"><svg viewBox="0 0 24 24"><path d="M3 22V12l9-9 9 9v10"/><path d="M9 22V16h6v6"/><rect x="10" y="7" width="4" height="4"/></svg><span data-i18n="filter.culture">Culture</span></button>
+  <button class="filter-btn" data-filter="aventure"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-7 4 5"/><path d="M2 21h20"/></svg><span data-i18n="filter.adventure">Aventure</span></button>
+  <button class="filter-btn" data-filter="nature"><svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M5 12C5 7 9 3 12 3s7 4 7 9H5z"/><path d="M5 12c0 5 3.5 8 7 8s7-3 7-8"/></svg><span data-i18n="filter.nature">Nature</span></button>
+  <button class="filter-btn" data-filter="luxe"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><span data-i18n="filter.luxury">Luxe</span></button>
+  <button class="filter-btn" data-filter="famille"><svg viewBox="0 0 24 24"><circle cx="9" cy="6" r="2"/><circle cx="17" cy="6" r="2"/><path d="M5 22v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3"/><circle cx="13" cy="13" r="2"/></svg><span data-i18n="filter.family">Famille</span></button>
+  <button class="filter-btn" data-filter="sport"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2c0 0-3 4-3 10s3 10 3 10"/><path d="M2 12h20"/></svg><span data-i18n="filter.sport">Sport</span></button>
 </div>
 
 <!-- CIRCUITS -->
 <section class="itineraries-section">
   <div class="text-center pb-4">
-    <div class="section-eyebrow">Inspirations</div>
-    <h2 class="section-title">Itinéraires inspirants</h2>
+    <div class="section-eyebrow" data-i18n="section.eyebrow">Inspirations</div>
+    <h2 class="section-title" data-i18n="section.title">Itinéraires inspirants</h2>
   </div>
   <div class="circuits-grid" id="circuitsGrid">
 
@@ -528,15 +621,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="aventure culture nature"
       data-title="Grand Tour Sud" data-duration="7 – 8 jours" data-rating="5"
       data-distance="1240 km" data-level="Moyen" data-period="Mars – Mai · Sept – Nov" data-type="Aventure, Culture, Désert"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_jemaa.png","icon":"bi-building","days":"1-2","nights":2,"temp":"31°C","nextTime":"4h vers Atlas","activity":"Street food &amp; Médina","nightsLabel":"2 nuits"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"images/atlas_randonnee.png","icon":"bi-triangle","days":"3-4","nights":2,"temp":"24°C","nextTime":"6h vers Merzouga","activity":"Randonnée &amp; Nature","nightsLabel":"2 nuits"},{"name":"Merzouga","tag":"Sahara &amp; Dunes","img":"images/merzouga_sunset.png","icon":"bi-activity","days":"5-6","nights":2,"temp":"29°C","nextTime":"5h vers Fès","activity":"Désert &amp; Aventure","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_tanneries.png","icon":"bi-bank","days":"7","nights":1,"temp":"26°C","nextTime":"","activity":"Culture &amp; Histoire","nightsLabel":"1 nuit"}]'>
+      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg","icon":"bi-building","days":"1-2","nights":2,"temp":"31°C","nextTime":"4h vers Atlas","activity":"Street food &amp; Médina","nightsLabel":"2 nuits"},{"name":"Haut Atlas","tag":"Toit du Maroc","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/dfe8329362d0c1cc03e2fec5eea255f17b73170a.jpg","icon":"bi-triangle","days":"3-4","nights":2,"temp":"24°C","nextTime":"6h vers Merzouga","activity":"Randonnée &amp; Nature","nightsLabel":"2 nuits"},{"name":"Merzouga","tag":"Sahara &amp; Dunes","img":"https://kimi-web-img.moonshot.cn/img/cdn.kimkim.com/96979c16de289c510b8b3f518a337d5f1ca6ebd1.jpg","icon":"bi-activity","days":"5-6","nights":2,"temp":"29°C","nextTime":"5h vers Fès","activity":"Désert &amp; Aventure","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"https://kimi-web-img.moonshot.cn/img/www.eva-darling.com/b76b22ae8c8332c306347036cece1f9084eadba0.jpg","icon":"bi-bank","days":"7","nights":1,"temp":"26°C","nextTime":"","activity":"Culture &amp; Histoire","nightsLabel":"1 nuit"}]' data-title-key="c1.title" data-public-key="c1.public">
       <div class="card-image-wrap">
-        <img src="images/sahara_camp.png" alt="Grand Tour Sud" loading="lazy">
-        <div class="card-duration-badge">7 – 8 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Classique</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/cdn.kimkim.com/96979c16de289c510b8b3f518a337d5f1ca6ebd1.jpg" alt="Grand Tour Sud" loading="lazy">
+        <div class="card-duration-badge">7 – 8 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.classic">Classique</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Grand Tour Sud</div>
-        <div class="card-public">Pour : Découverte classique du désert et des montagnes</div>
+        <div class="card-public" data-i18n="c1.public">Pour : Découverte classique du désert et des montagnes</div>
         <div class="card-route">Marrakech <span class="arrow">→</span> Atlas <span class="arrow">→</span> Merzouga <span class="arrow">→</span> Fès</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -546,13 +639,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (312 avis)</span>
+          <span class="card-rating-count">5.0 (312 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate">
@@ -571,15 +664,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="culture"
       data-title="Route des Villes Impériales" data-duration="10 – 12 jours" data-rating="4"
       data-distance="820 km" data-level="Facile" data-period="Oct – Avr" data-type="Culture, Histoire, Monuments"
-      data-cities='[{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_hassan.png","icon":"bi-building","days":"1-2","nights":2,"temp":"22°C","nextTime":"1h30 vers Meknès","activity":"Tour Hassan &amp; Oudayas","nightsLabel":"2 nuits"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes_bab_mansour.png","icon":"bi-bank","days":"3-4","nights":2,"temp":"21°C","nextTime":"1h vers Fès","activity":"Bab Mansour &amp; Médina","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_bou_inania.png","icon":"bi-building","days":"5-7","nights":3,"temp":"24°C","nextTime":"5h vers Marrakech","activity":"Tanneries &amp; Médersa","nightsLabel":"3 nuits"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_bahia.png","icon":"bi-tree-fill","days":"8-10","nights":3,"temp":"28°C","nextTime":"","activity":"Souks &amp; Jardins","nightsLabel":"3 nuits"}]'>
+      data-cities='[{"name":"Rabat","tag":"Capitale Royale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/234bf639612cd756de681b93386b003332278f24.jpg","icon":"bi-building","days":"1-2","nights":2,"temp":"22°C","nextTime":"1h30 vers Meknès","activity":"Tour Hassan &amp; Oudayas","nightsLabel":"2 nuits"},{"name":"Meknès","tag":"Ville Impériale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/bc77e57443bc11055d50e3dcf5bb84c4bbaf3d7a.jpg","icon":"bi-bank","days":"3-4","nights":2,"temp":"21°C","nextTime":"1h vers Fès","activity":"Bab Mansour &amp; Médina","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg","icon":"bi-building","days":"5-7","nights":3,"temp":"24°C","nextTime":"5h vers Marrakech","activity":"Tanneries &amp; Médersa","nightsLabel":"3 nuits"},{"name":"Marrakech","tag":"Médina Impériale","img":"https://kimi-web-img.moonshot.cn/img/bahia-palace.com/743313ded3f248b72089b1460906682b5c822a7b.jpeg","icon":"bi-tree-fill","days":"8-10","nights":3,"temp":"28°C","nextTime":"","activity":"Souks &amp; Jardins","nightsLabel":"3 nuits"}]' data-title-key="c2.title" data-public-key="c2.public">
       <div class="card-image-wrap">
-        <img src="images/fes_medina_vue.png" alt="Route des Villes Impériales" loading="lazy">
-        <div class="card-duration-badge">10 – 12 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Culture</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg" alt="Route des Villes Impériales" loading="lazy">
+        <div class="card-duration-badge">10 – 12 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="filter.culture">Culture</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Route des Villes Impériales</div>
-        <div class="card-public">Pour : Culture, histoire et monuments royaux</div>
+        <div class="card-public" data-i18n="c2.public">Pour : Culture, histoire et monuments royaux</div>
         <div class="card-route">Rabat <span class="arrow">→</span> Meknès <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -589,13 +682,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (156 avis)</span>
+          <span class="card-rating-count">4.0 (156 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -612,15 +705,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Circuit Désert &amp; Oasis" data-duration="5 jours" data-rating="4"
       data-distance="680 km" data-level="Moyen" data-period="Oct – Avr" data-type="Aventure, Désert, Oasis"
-      data-cities='[{"name":"Ouarzazate","tag":"Porte du Désert","img":"images/ouarzazate_studios.png","icon":"bi-camera-reels","days":"1","nights":1,"temp":"27°C","nextTime":"3h vers Zagora","activity":"Studios &amp; Kasbah","nightsLabel":"1 nuit"},{"name":"Zagora","tag":"Ville du Désert","img":"images/zagora_desert.png","icon":"bi-sun","days":"2-3","nights":2,"temp":"30°C","nextTime":"4h vers Merzouga","activity":"Bivouac &amp; Dunes","nightsLabel":"2 nuits"},{"name":"Merzouga","tag":"Sahara &amp; Dunes","img":"images/merzouga_chameaux.png","icon":"bi-activity","days":"4-5","nights":2,"temp":"31°C","nextTime":"","activity":"Chameau &amp; Étoiles","nightsLabel":"2 nuits"}]'>
+      data-cities='[{"name":"Ouarzazate","tag":"Porte du Désert","img":"https://kimi-web-img.moonshot.cn/img/www.laurewanders.com/06fbdf6b47f335567902bb6231432fb5406f0a3c.jpg","icon":"bi-camera-reels","days":"1","nights":1,"temp":"27°C","nextTime":"3h vers Zagora","activity":"Studios &amp; Kasbah","nightsLabel":"1 nuit"},{"name":"Zagora","tag":"Ville du Désert","img":"https://kimi-web-img.moonshot.cn/img/cdn.prod.website-files.com/82f3c8957a2f2050c76ee13eacbec7fe0fd28ed1.jpg","icon":"bi-sun","days":"2-3","nights":2,"temp":"30°C","nextTime":"4h vers Merzouga","activity":"Bivouac &amp; Dunes","nightsLabel":"2 nuits"},{"name":"Merzouga","tag":"Sahara &amp; Dunes","img":"https://kimi-web-img.moonshot.cn/img/as2.ftcdn.net/66c04935a27cff31aee8bddf1d95d76829e88c64.jpg","icon":"bi-activity","days":"4-5","nights":2,"temp":"31°C","nextTime":"","activity":"Chameau &amp; Étoiles","nightsLabel":"2 nuits"}]' data-title-key="c3.title" data-public-key="c3.public">
       <div class="card-image-wrap">
-        <img src="images/sahara_oasis.png" alt="Circuit Désert & Oasis" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Aventure</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/utwadmin.b-cdn.net/5474092aade57940d01ddbcb3f74e68782736793.jpg" alt="Circuit Désert & Oasis" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="filter.adventure">Aventure</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Circuit Désert &amp; Oasis</div>
-        <div class="card-public">Pour : Aventure saharienne et nuits dans le désert</div>
+        <div class="card-public" data-i18n="c3.public">Pour : Aventure saharienne et nuits dans le désert</div>
         <div class="card-route">Ouarzazate <span class="arrow">→</span> Zagora <span class="arrow">→</span> Merzouga</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -630,13 +723,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (89 avis)</span>
+          <span class="card-rating-count">4.0 (89 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -653,15 +746,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="sport nature"
       data-title="Tour des Plages Atlantiques" data-duration="10 – 12 jours" data-rating="4"
       data-distance="1100 km" data-level="Facile" data-period="Avr – Oct" data-type="Plages, Surf, Détente"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca_hassan.png","icon":"bi-building","days":"1-2","nights":2,"temp":"23°C","nextTime":"3h30 vers Essaouira","activity":"Hassan II &amp; Corniche","nightsLabel":"2 nuits"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira_port.png","icon":"bi-wind","days":"3-5","nights":3,"temp":"21°C","nextTime":"3h vers Agadir","activity":"Port &amp; Remparts","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_plage.png","icon":"bi-sun","days":"6-9","nights":4,"temp":"26°C","nextTime":"14h vers Dakhla","activity":"Plage &amp; Surf","nightsLabel":"4 nuits"},{"name":"Dakhla","tag":"Lagune Sauvage","img":"images/dakhla_lagune.png","icon":"bi-water","days":"10-12","nights":3,"temp":"24°C","nextTime":"","activity":"Kitesurf &amp; Lagune","nightsLabel":"3 nuits"}]'>
+      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"https://kimi-web-img.moonshot.cn/img/c8.alamy.com/558bb7d62b79b87e687e9189d9cfc601a0d85257.jpg","icon":"bi-building","days":"1-2","nights":2,"temp":"23°C","nextTime":"3h30 vers Essaouira","activity":"Hassan II &amp; Corniche","nightsLabel":"2 nuits"},{"name":"Essaouira","tag":"Cité des Alizés","img":"https://kimi-web-img.moonshot.cn/img/i0.wp.com/d92695909cf8bd5670b4dc328cd9b8b0847d68e7.jpg","icon":"bi-wind","days":"3-5","nights":3,"temp":"21°C","nextTime":"3h vers Agadir","activity":"Port &amp; Remparts","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/ebafcc5a1d258deb617e4c3d8095c09910f1bcca.jpg","icon":"bi-sun","days":"6-9","nights":4,"temp":"26°C","nextTime":"14h vers Dakhla","activity":"Plage &amp; Surf","nightsLabel":"4 nuits"},{"name":"Dakhla","tag":"Lagune Sauvage","img":"https://kimi-web-img.moonshot.cn/img/oceanadventure.surf/8579d443ed7a3fa989d318cfac92d0d4cd978b95.jpg","icon":"bi-water","days":"10-12","nights":3,"temp":"24°C","nextTime":"","activity":"Kitesurf &amp; Lagune","nightsLabel":"3 nuits"}]' data-title-key="c4.title" data-public-key="c4.public">
       <div class="card-image-wrap">
-        <img src="images/dakhla_atlantique.png" alt="Tour des Plages Atlantiques" loading="lazy">
-        <div class="card-duration-badge">10 – 12 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Plages</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/ae63f0840ed4dff07d9402151fcd1d37618e418a.jpg" alt="Tour des Plages Atlantiques" loading="lazy">
+        <div class="card-duration-badge">10 – 12 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.plages">Plages</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Tour des Plages Atlantiques</div>
-        <div class="card-public">Pour : Détente, surf et plages marocaines</div>
+        <div class="card-public" data-i18n="c4.public">Pour : Détente, surf et plages marocaines</div>
         <div class="card-route">Casablanca <span class="arrow">→</span> Essaouira <span class="arrow">→</span> Agadir <span class="arrow">→</span> Dakhla</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -671,13 +764,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (203 avis)</span>
+          <span class="card-rating-count">4.0 (203 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -694,15 +787,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="nature culture"
       data-title="Escapade Nord Bleu" data-duration="5 jours" data-rating="5"
       data-distance="350 km" data-level="Facile" data-period="Avr – Jun · Sept – Nov" data-type="Nature, Calme, Découverte"
-      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"images/tanger_port.png","icon":"bi-geo-alt","days":"1","nights":1,"temp":"20°C","nextTime":"1h30 vers Tétouan","activity":"Port &amp; Médina","nightsLabel":"1 nuit"},{"name":"Tétouan","tag":"Ville Blanche","img":"images/tetouan_medina.png","icon":"bi-building","days":"2-3","nights":2,"temp":"22°C","nextTime":"1h vers Chefchaouen","activity":"Médina Andalouse","nightsLabel":"2 nuits"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen_place.png","icon":"bi-droplet-half","days":"4-5","nights":2,"temp":"19°C","nextTime":"","activity":"Ruelles bleues &amp; Rif","nightsLabel":"2 nuits"}]'>
+      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/af947a6edd2924b3d07e901623978d1167a34a62.jpg","icon":"bi-geo-alt","days":"1","nights":1,"temp":"20°C","nextTime":"1h30 vers Tétouan","activity":"Port &amp; Médina","nightsLabel":"1 nuit"},{"name":"Tétouan","tag":"Ville Blanche","img":"https://kimi-web-img.moonshot.cn/img/visaliv.s3.ap-south-1.amazonaws.com/51ca7c3f9073595e3f98f6389b46ba8908e5232b.jpg","icon":"bi-building","days":"2-3","nights":2,"temp":"22°C","nextTime":"1h vers Chefchaouen","activity":"Médina Andalouse","nightsLabel":"2 nuits"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"https://kimi-web-img.moonshot.cn/img/traveladdicts.net/29cb0b578e59396ce175821594a44ebc517a77a4.jpg","icon":"bi-droplet-half","days":"4-5","nights":2,"temp":"19°C","nextTime":"","activity":"Ruelles bleues &amp; Rif","nightsLabel":"2 nuits"}]' data-title-key="c5.title" data-public-key="c5.public">
       <div class="card-image-wrap">
-        <img src="images/chefchaouen_ruelles.png" alt="Escapade Nord Bleu" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Nord</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/visaliv.s3.ap-south-1.amazonaws.com/51ca7c3f9073595e3f98f6389b46ba8908e5232b.jpg" alt="Escapade Nord Bleu" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.nord">Nord</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Escapade Nord Bleu</div>
-        <div class="card-public">Pour : Nature, calme et découverte du nord</div>
+        <div class="card-public" data-i18n="c5.public">Pour : Nature, calme et découverte du nord</div>
         <div class="card-route">Tanger <span class="arrow">→</span> Tétouan <span class="arrow">→</span> Chefchaouen</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -712,13 +805,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (178 avis)</span>
+          <span class="card-rating-count">5.0 (178 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -735,15 +828,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="culture"
       data-title="Route Culture &amp; Histoire" data-duration="7 jours" data-rating="4"
       data-distance="560 km" data-level="Facile" data-period="Toute l'année" data-type="Histoire, Patrimoine, Antique"
-      data-cities='[{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_rue_medina.png","icon":"bi-building","days":"1-3","nights":3,"temp":"24°C","nextTime":"1h vers Meknès","activity":"Médina &amp; Tanneries","nightsLabel":"3 nuits"},{"name":"Meknès","tag":"Ville Impériale","img":"images/meknes_mausolee.png","icon":"bi-bank","days":"4","nights":1,"temp":"22°C","nextTime":"30min vers Volubilis","activity":"Mausolée Ismaïl","nightsLabel":"1 nuit"},{"name":"Volubilis","tag":"Site Antique","img":"images/volubilis_ruines.png","icon":"bi-columns-gap","days":"5","nights":1,"temp":"22°C","nextTime":"1h vers Rabat","activity":"Ruines Romaines","nightsLabel":"1 nuit"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_oudayas.png","icon":"bi-building","days":"6-7","nights":2,"temp":"21°C","nextTime":"","activity":"Kasbah Oudayas","nightsLabel":"2 nuits"}]'>
+      data-cities='[{"name":"Fès","tag":"Cité Millénaire","img":"https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg","icon":"bi-building","days":"1-3","nights":3,"temp":"24°C","nextTime":"1h vers Meknès","activity":"Médina &amp; Tanneries","nightsLabel":"3 nuits"},{"name":"Meknès","tag":"Ville Impériale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/bc77e57443bc11055d50e3dcf5bb84c4bbaf3d7a.jpg","icon":"bi-bank","days":"4","nights":1,"temp":"22°C","nextTime":"30min vers Volubilis","activity":"Mausolée Ismaïl","nightsLabel":"1 nuit"},{"name":"Volubilis","tag":"Site Antique","img":"https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg","icon":"bi-columns-gap","days":"5","nights":1,"temp":"22°C","nextTime":"1h vers Rabat","activity":"Ruines Romaines","nightsLabel":"1 nuit"},{"name":"Rabat","tag":"Capitale Royale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/234bf639612cd756de681b93386b003332278f24.jpg","icon":"bi-building","days":"6-7","nights":2,"temp":"21°C","nextTime":"","activity":"Kasbah Oudayas","nightsLabel":"2 nuits"}]' data-title-key="c6.title" data-public-key="c6.public">
       <div class="card-image-wrap">
-        <img src="images/volubilis_panorama.png" alt="Route Culture & Histoire" loading="lazy">
-        <div class="card-duration-badge">7 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Histoire</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg" alt="Route Culture & Histoire" loading="lazy">
+        <div class="card-duration-badge">7 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.histoire">Histoire</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Route Culture &amp; Histoire</div>
-        <div class="card-public">Pour : Patrimoine historique et sites antiques</div>
+        <div class="card-public" data-i18n="c6.public">Pour : Patrimoine historique et sites antiques</div>
         <div class="card-route">Fès <span class="arrow">→</span> Meknès <span class="arrow">→</span> Volubilis <span class="arrow">→</span> Rabat</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -753,13 +846,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (134 avis)</span>
+          <span class="card-rating-count">4.0 (134 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -776,15 +869,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="aventure nature"
       data-title="Aventure Atlas" data-duration="5 jours" data-rating="4"
       data-distance="280 km" data-level="Difficile" data-period="Mar – Mai · Sept – Nov" data-type="Randonnée, Montagne, Berbère"
-      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_souks.png","icon":"bi-building","days":"1","nights":1,"temp":"28°C","nextTime":"2h vers Imlil","activity":"Souks &amp; Djemaa","nightsLabel":"1 nuit"},{"name":"Imlil","tag":"Village Berbère","img":"images/imlil_village.png","icon":"bi-tree","days":"2-4","nights":3,"temp":"14°C","nextTime":"1h vers Oukaïmeden","activity":"Toubkal &amp; Trekking","nightsLabel":"3 nuits"},{"name":"Oukaïmeden","tag":"Station de Ski","img":"images/ouakaimeden.png","icon":"bi-triangle","days":"5","nights":1,"temp":"8°C","nextTime":"","activity":"Ski &amp; Panoramas","nightsLabel":"1 nuit"}]'>
+      data-cities='[{"name":"Marrakech","tag":"Médina Impériale","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg","icon":"bi-building","days":"1","nights":1,"temp":"28°C","nextTime":"2h vers Imlil","activity":"Souks &amp; Djemaa","nightsLabel":"1 nuit"},{"name":"Imlil","tag":"Village Berbère","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg","icon":"bi-tree","days":"2-4","nights":3,"temp":"14°C","nextTime":"1h vers Oukaïmeden","activity":"Toubkal &amp; Trekking","nightsLabel":"3 nuits"},{"name":"Oukaïmeden","tag":"Station de Ski","img":"https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg","icon":"bi-triangle","days":"5","nights":1,"temp":"8°C","nextTime":"","activity":"Ski &amp; Panoramas","nightsLabel":"1 nuit"}]' data-title-key="c7.title" data-public-key="c7.public">
       <div class="card-image-wrap">
-        <img src="images/imlil_village.png" alt="Aventure Atlas" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Montagne</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/dynamic-media-cdn.tripadvisor.com/75025d9ae52d9488b7389220fcac927ed118addf.jpg" alt="Aventure Atlas" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.montagne">Montagne</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Aventure Atlas</div>
-        <div class="card-public">Pour : Randonnée et activités de montagne</div>
+        <div class="card-public" data-i18n="c7.public">Pour : Randonnée et activités de montagne</div>
         <div class="card-route">Marrakech <span class="arrow">→</span> Imlil <span class="arrow">→</span> Oukaïmeden</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -794,13 +887,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (112 avis)</span>
+          <span class="card-rating-count">4.0 (112 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -817,15 +910,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="nature"
       data-title="Road Trip Méditerranée" data-duration="5 jours" data-rating="4"
       data-distance="430 km" data-level="Facile" data-period="Mai – Oct" data-type="Côte, Mer, Détente"
-      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"images/tanger_spartel.png","icon":"bi-geo-alt","days":"1","nights":1,"temp":"20°C","nextTime":"3h vers Al Hoceïma","activity":"Cap Spartel &amp; Grottes","nightsLabel":"1 nuit"},{"name":"Al Hoceïma","tag":"Perle Méditerranéenne","img":"images/al_hoceima_medina.png","icon":"bi-water","days":"2-4","nights":3,"temp":"24°C","nextTime":"2h vers Nador","activity":"Plages &amp; Parc National","nightsLabel":"3 nuits"},{"name":"Nador","tag":"Lagune Marchica","img":"images/nador_marchica.png","icon":"bi-droplet","days":"5","nights":1,"temp":"25°C","nextTime":"","activity":"Lagune Marchica","nightsLabel":"1 nuit"}]'>
+      data-cities='[{"name":"Tanger","tag":"Porte de l\u2019Afrique","img":"https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/af947a6edd2924b3d07e901623978d1167a34a62.jpg","icon":"bi-geo-alt","days":"1","nights":1,"temp":"20°C","nextTime":"3h vers Al Hoceïma","activity":"Cap Spartel &amp; Grottes","nightsLabel":"1 nuit"},{"name":"Al Hoceïma","tag":"Perle Méditerranéenne","img":"https://kimi-web-img.moonshot.cn/img/gomoroccotoday.com/b5260302114eed1e4ab748daca6382dd0a91a3c0.webp","icon":"bi-water","days":"2-4","nights":3,"temp":"24°C","nextTime":"2h vers Nador","activity":"Plages &amp; Parc National","nightsLabel":"3 nuits"},{"name":"Nador","tag":"Lagune Marchica","img":"https://kimi-web-img.moonshot.cn/img/cf.bstatic.com/a9c52905c8e2fd7ea6d40610c164dab0ea60a886.jpg","icon":"bi-droplet","days":"5","nights":1,"temp":"25°C","nextTime":"","activity":"Lagune Marchica","nightsLabel":"1 nuit"}]' data-title-key="c8.title" data-public-key="c8.public">
       <div class="card-image-wrap">
-        <img src="images/al_hoceima_plages.png" alt="Road Trip Méditerranée" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Côte</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/af947a6edd2924b3d07e901623978d1167a34a62.jpg" alt="Road Trip Méditerranée" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.cote">Côte</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Road Trip Méditerranée</div>
-        <div class="card-public">Pour : Découverte des plages méditerranéennes</div>
+        <div class="card-public" data-i18n="c8.public">Pour : Découverte des plages méditerranéennes</div>
         <div class="card-route">Tanger <span class="arrow">→</span> Al Hoceïma <span class="arrow">→</span> Nador</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -835,13 +928,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (76 avis)</span>
+          <span class="card-rating-count">4.0 (76 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -858,15 +951,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="nature"
       data-title="Nature &amp; Montagnes" data-duration="5 jours" data-rating="4"
       data-distance="310 km" data-level="Facile" data-period="Avr – Jun · Sept – Nov" data-type="Forêts, Lacs, Fraîcheur"
-      data-cities='[{"name":"Ifrane","tag":"Suisse du Maroc","img":"images/ifrane.png","icon":"bi-snow","days":"1-2","nights":2,"temp":"12°C","nextTime":"30min vers Azrou","activity":"Lacs &amp; Parcs Nationaux","nightsLabel":"2 nuits"},{"name":"Azrou","tag":"Forêt de Cèdres","img":"images/azrou_montagne.png","icon":"bi-tree","days":"3-4","nights":2,"temp":"14°C","nextTime":"1h30 vers Beni Mellal","activity":"Cèdres &amp; Singes","nightsLabel":"2 nuits"},{"name":"Beni Mellal","tag":"Source d\u2019Ain Asserdoun","img":"images/beni_mellal_ain.png","icon":"bi-droplet","days":"5","nights":1,"temp":"22°C","nextTime":"","activity":"Cascades &amp; Sources","nightsLabel":"1 nuit"}]'>
+      data-cities='[{"name":"Ifrane","tag":"Suisse du Maroc","img":"https://kimi-web-img.moonshot.cn/img/visitmorocco30.com/cb606536134eb0f5735ddc3f1002ec16a97dc2f3.jpg","icon":"bi-snow","days":"1-2","nights":2,"temp":"12°C","nextTime":"30min vers Azrou","activity":"Lacs &amp; Parcs Nationaux","nightsLabel":"2 nuits"},{"name":"Azrou","tag":"Forêt de Cèdres","img":"https://kimi-web-img.moonshot.cn/img/discoversaharatours.com/17b0a0c34a4f021ffc0e2ef97ab986617d3f61bb.jpg","icon":"bi-tree","days":"3-4","nights":2,"temp":"14°C","nextTime":"1h30 vers Beni Mellal","activity":"Cèdres &amp; Singes","nightsLabel":"2 nuits"},{"name":"Beni Mellal","tag":"Source d\u2019Ain Asserdoun","img":"https://kimi-web-img.moonshot.cn/img/visitmorocco30.com/8ab53fb82c80764ae1e2c75ab71166e6aa5032a8.webp","icon":"bi-droplet","days":"5","nights":1,"temp":"22°C","nextTime":"","activity":"Cascades &amp; Sources","nightsLabel":"1 nuit"}]' data-title-key="c9.title" data-public-key="c9.public">
       <div class="card-image-wrap">
-        <img src="images/azrou_cedres.png" alt="Nature & Montagnes" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Nature</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/humbo.s3.eu-north-1.amazonaws.com/a5d2b8a3bd9e83e7b6ddc7fd783e4687b22b2743.jpeg" alt="Nature & Montagnes" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.nature2">Nature</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Nature &amp; Montagnes</div>
-        <div class="card-public">Pour : Forêts, lacs et air frais</div>
+        <div class="card-public" data-i18n="c9.public">Pour : Forêts, lacs et air frais</div>
         <div class="card-route">Ifrane <span class="arrow">→</span> Azrou <span class="arrow">→</span> Beni Mellal</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -876,13 +969,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">4.0 (95 avis)</span>
+          <span class="card-rating-count">4.0 (95 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -899,15 +992,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="sport nature"
       data-title="Circuit Surf Maroc" data-duration="5 jours" data-rating="5"
       data-distance="290 km" data-level="Moyen" data-period="Sept – Avr" data-type="Surf, Kitesurf, Sports Nautiques"
-      data-cities='[{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"images/taghazout_village.png","icon":"bi-water","days":"1-3","nights":3,"temp":"22°C","nextTime":"30min vers Agadir","activity":"Surf &amp; Spots célèbres","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_port.png","icon":"bi-sun","days":"4","nights":1,"temp":"24°C","nextTime":"2h30 vers Essaouira","activity":"Plage &amp; Promenade","nightsLabel":"1 nuit"},{"name":"Essaouira","tag":"Cité des Alizés","img":"images/essaouira_plage.png","icon":"bi-wind","days":"5","nights":1,"temp":"21°C","nextTime":"","activity":"Kitesurf &amp; Vents","nightsLabel":"1 nuit"}]'>
+      data-cities='[{"name":"Taghazout","tag":"Paradis des Surfeurs","img":"https://kimi-web-img.moonshot.cn/img/i.natgeofe.com/02917c30b45efc21380f6335cb54a0e0ed897ace.jpg","icon":"bi-water","days":"1-3","nights":3,"temp":"22°C","nextTime":"30min vers Agadir","activity":"Surf &amp; Spots célèbres","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"https://kimi-web-img.moonshot.cn/img/images.contentstack.io/bae390519d093b2687a7146d090bea07eac03e00.jpg","icon":"bi-sun","days":"4","nights":1,"temp":"24°C","nextTime":"2h30 vers Essaouira","activity":"Plage &amp; Promenade","nightsLabel":"1 nuit"},{"name":"Essaouira","tag":"Cité des Alizés","img":"https://kimi-web-img.moonshot.cn/img/kiteworldwide.com/e122637ef4920c7e0f818da119d2032e33779e99.jpg","icon":"bi-wind","days":"5","nights":1,"temp":"21°C","nextTime":"","activity":"Kitesurf &amp; Vents","nightsLabel":"1 nuit"}]' data-title-key="c10.title" data-public-key="c10.public">
       <div class="card-image-wrap">
-        <img src="images/taghazout_surf.png" alt="Circuit Surf Maroc" loading="lazy">
-        <div class="card-duration-badge">5 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Sport</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/surfparadisemorocco.net/f52c83ce2c17ed18c5d99d1eff7b47ccc163f62f.jpg" alt="Circuit Surf Maroc" loading="lazy">
+        <div class="card-duration-badge">5 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.sport2">Sport</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Circuit Surf Maroc</div>
-        <div class="card-public">Pour : Surf, kitesurf et sports nautiques</div>
+        <div class="card-public" data-i18n="c10.public">Pour : Surf, kitesurf et sports nautiques</div>
         <div class="card-route">Taghazout <span class="arrow">→</span> Agadir <span class="arrow">→</span> Essaouira</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -917,13 +1010,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (267 avis)</span>
+          <span class="card-rating-count">5.0 (267 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -940,15 +1033,15 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <div class="circuit-card" data-tags="culture aventure nature"
       data-title="Grand Tour Maroc" data-duration="14 jours" data-rating="5"
       data-distance="2200 km" data-level="Moyen" data-period="Mars – Mai · Sept – Nov" data-type="Complet, Culture, Nature, Aventure"
-      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"images/casablanca_centre.png","icon":"bi-building","days":"1-2","nights":2,"temp":"22°C","nextTime":"1h vers Rabat","activity":"Hassan II &amp; Corniche","nightsLabel":"2 nuits"},{"name":"Rabat","tag":"Capitale Royale","img":"images/rabat_parlement.png","icon":"bi-bank","days":"3-4","nights":2,"temp":"21°C","nextTime":"2h vers Chefchaouen","activity":"Oudayas &amp; Palais","nightsLabel":"2 nuits"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"images/chefchaouen_panorama.png","icon":"bi-droplet-half","days":"5-6","nights":2,"temp":"19°C","nextTime":"2h vers Fès","activity":"Ruelles bleues","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"images/fes_medina_vue.png","icon":"bi-building","days":"7-9","nights":3,"temp":"24°C","nextTime":"7h vers Marrakech","activity":"Médina &amp; Tanneries","nightsLabel":"3 nuits"},{"name":"Marrakech","tag":"Médina Impériale","img":"images/marrakech_majorelle.png","icon":"bi-tree-fill","days":"10-12","nights":3,"temp":"30°C","nextTime":"3h vers Agadir","activity":"Majorelle &amp; Souks","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"images/agadir_aerial.png","icon":"bi-sun","days":"13-14","nights":2,"temp":"26°C","nextTime":"","activity":"Plage &amp; Détente","nightsLabel":"2 nuits"}]'>
+      data-cities='[{"name":"Casablanca","tag":"Ville Blanche","img":"https://kimi-web-img.moonshot.cn/img/c8.alamy.com/558bb7d62b79b87e687e9189d9cfc601a0d85257.jpg","icon":"bi-building","days":"1-2","nights":2,"temp":"22°C","nextTime":"1h vers Rabat","activity":"Hassan II &amp; Corniche","nightsLabel":"2 nuits"},{"name":"Rabat","tag":"Capitale Royale","img":"https://kimi-web-img.moonshot.cn/img/media-cdn.tripadvisor.com/e7c6cea0f7932c25e7b2cf0e17aa88565aa92964.jpg","icon":"bi-bank","days":"3-4","nights":2,"temp":"21°C","nextTime":"2h vers Chefchaouen","activity":"Oudayas &amp; Palais","nightsLabel":"2 nuits"},{"name":"Chefchaouen","tag":"La Ville Bleue","img":"https://kimi-web-img.moonshot.cn/img/www.muchbetteradventures.com/4819a18d7d033189c3290f721b5c49fe063b120e","icon":"bi-droplet-half","days":"5-6","nights":2,"temp":"19°C","nextTime":"2h vers Fès","activity":"Ruelles bleues","nightsLabel":"2 nuits"},{"name":"Fès","tag":"Cité Millénaire","img":"https://kimi-web-img.moonshot.cn/img/www.barcelo.com/e536db981f1ffaa8ec9d75ea8d618cd2f32b6a87.jpg","icon":"bi-building","days":"7-9","nights":3,"temp":"24°C","nextTime":"7h vers Marrakech","activity":"Médina &amp; Tanneries","nightsLabel":"3 nuits"},{"name":"Marrakech","tag":"Médina Impériale","img":"https://kimi-web-img.moonshot.cn/img/www.mosaicnorthafrica.com/40ba6b34795d27d238503a68fc4f9eac0d3cf370.jpg","icon":"bi-tree-fill","days":"10-12","nights":3,"temp":"30°C","nextTime":"3h vers Agadir","activity":"Majorelle &amp; Souks","nightsLabel":"3 nuits"},{"name":"Agadir","tag":"Cité du Soleil","img":"https://kimi-web-img.moonshot.cn/img/media.istockphoto.com/ebf175867132422dffa32c4f10f31831da25f4f2.jpg","icon":"bi-sun","days":"13-14","nights":2,"temp":"26°C","nextTime":"","activity":"Plage &amp; Détente","nightsLabel":"2 nuits"}]' data-title-key="c11.title" data-public-key="c11.public">
       <div class="card-image-wrap">
-        <img src="images/casablanca_nuit.png" alt="Grand Tour Maroc" loading="lazy">
-        <div class="card-duration-badge">14 JOURS</div>
-        <div class="card-tags-overlay"><span class="card-tag-overlay">Complet</span></div>
+        <img src="https://kimi-web-img.moonshot.cn/img/media.istockphoto.com/dc965e68e83a1fd77f282962ed4b22fccbb5687d.jpg" alt="Grand Tour Maroc" loading="lazy">
+        <div class="card-duration-badge">14 <span data-i18n="card.days">JOURS</span></div>
+        <div class="card-tags-overlay"><span class="card-tag-overlay" data-i18n="tag.complet">Complet</span></div>
       </div>
       <div class="card-body">
         <div class="card-title">Grand Tour Maroc</div>
-        <div class="card-public">Pour : Découverte complète du Maroc</div>
+        <div class="card-public" data-i18n="c11.public">Pour : Découverte complète du Maroc</div>
         <div class="card-route">Casablanca <span class="arrow">→</span> Rabat <span class="arrow">→</span> Chefchaouen <span class="arrow">→</span> Fès <span class="arrow">→</span> Marrakech <span class="arrow">→</span> Agadir</div>
         <div class="card-rating-display">
           <div class="card-rating-stars">
@@ -958,13 +1051,13 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
             <span class="star-display filled"><svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></span>
           </div>
-          <span class="card-rating-count">5.0 (412 avis)</span>
+          <span class="card-rating-count">5.0 (412 <span data-i18n="card.reviews">avis</span>)</span>
         </div>
       </div>
       <div class="card-actions">
         <button class="btn-explorer" onclick="openDetailModal(this)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Explorer les villes
+          <span data-i18n="btn.explore">Explorer les villes</span>
           <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div class="btn-rate"><div class="star-rating">
@@ -981,7 +1074,7 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
 </section>
 
 <!-- ══════════════════════════════════════
-     DETAIL MODAL
+     DETAIL MODAL — footer supprimé
 ══════════════════════════════════════ -->
 <div class="detail-modal-backdrop" id="detailModalBackdrop">
   <div class="detail-modal" id="detailModal">
@@ -1004,59 +1097,116 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
     <!-- Body: left itinerary + right map -->
     <div class="dm-body">
       <!-- Left -->
-      <div class="dm-itinerary" id="dmItinerary">
-        <!-- populated by JS -->
-      </div>
-      <!-- Right: SVG map -->
+      <div class="dm-itinerary" id="dmItinerary"></div>
+
+      <!-- Right: Improved Map with zoom/pan -->
       <div class="dm-map-panel" id="dmMapPanel">
-        <svg id="dmMapSvg" class="dm-map-svg" viewBox="0 0 500 460" xmlns="http://www.w3.org/2000/svg">
-          <!-- Morocco outline (simplified) -->
-          <defs>
-            <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.18)"/>
-            </filter>
-          </defs>
-          <!-- Background ocean -->
-          <rect width="500" height="460" fill="#D8E8F0" rx="0"/>
-          <!-- Morocco shape (simplified polygon) -->
-          <path id="moroccoShape"
-            d="M 95,30 L 185,18 L 230,22 L 260,38 L 285,34 L 310,45 L 318,68 L 305,95 L 308,118 L 295,138 L 298,158 L 282,175 L 268,192 L 255,215 L 248,238 L 240,262 L 232,288 L 224,318 L 216,348 L 210,375 L 205,400 L 185,415 L 168,418 L 150,410 L 130,402 L 115,388 L 108,368 L 115,345 L 110,320 L 102,295 L 95,268 L 88,242 L 82,218 L 75,195 L 70,172 L 65,148 L 60,122 L 58,98 L 62,72 L 75,52 Z"
-            fill="#E8DFC8" stroke="#C8B89A" stroke-width="1.5" filter="url(#mapShadow)"/>
-          <!-- Sahara / south gradient -->
-          <path d="M 88,242 L 82,218 L 75,195 L 70,172 L 65,148 L 60,122 L 115,345 L 110,320 L 102,295 L 95,268 Z" fill="#D4C4A0" opacity="0.5"/>
-          <!-- Atlas mountains hint -->
-          <path d="M 130,155 L 180,130 L 230,145 L 260,138 L 275,152 L 240,168 L 195,162 L 148,172 Z" fill="#C8B49A" opacity="0.4"/>
-          <!-- Compass rose -->
-          <g transform="translate(430,40)">
-            <circle cx="0" cy="0" r="20" fill="rgba(255,255,255,0.7)" stroke="#D4AF37" stroke-width="1"/>
-            <text x="0" y="-9" text-anchor="middle" font-size="9" font-weight="bold" fill="#8B7355">N</text>
-            <polygon points="0,-6 3,4 0,2 -3,4" fill="#C0552A"/>
-            <polygon points="0,6 3,-4 0,-2 -3,-4" fill="#8B7355"/>
-          </g>
-          <!-- MAROC label -->
-          <text x="175" y="230" text-anchor="middle" font-size="16" font-weight="900" fill="#C8B49A" letter-spacing="4" opacity="0.6">MAROC</text>
-          <!-- Route lines (drawn by JS) -->
-          <g id="routeLines"></g>
-          <!-- City pins (drawn by JS) -->
-          <g id="cityPins"></g>
-        </svg>
+        <!-- Zoom controls -->
+        <div class="dm-map-controls">
+          <button class="dm-map-btn" onclick="zoomMap(1.25)" title="Zoom +" aria-label="Zoom avant"><i class="bi bi-plus-lg"></i></button>
+          <button class="dm-map-btn" onclick="zoomMap(0.8)" title="Zoom -" aria-label="Zoom arrière"><i class="bi bi-dash-lg"></i></button>
+          <button class="dm-map-btn" onclick="resetMapZoom()" title="Réinitialiser" aria-label="Réinitialiser"><i class="bi bi-fullscreen-exit"></i></button>
+        </div>
+
+        <div class="dm-map-wrapper" id="dmMapWrapper">
+          <svg id="dmMapSvg" class="dm-map-svg" viewBox="0 0 500 460" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="mapShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="5" stdDeviation="8" flood-color="rgba(0,0,0,0.22)"/>
+              </filter>
+              <filter id="pinGlow">
+                <feGaussianBlur stdDeviation="2" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <!-- Arrow marker for routes -->
+              <marker id="arrowEnd" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#C0552A" opacity=".9"/>
+              </marker>
+              <!-- Start circle marker -->
+              <marker id="startDot" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                <circle cx="5" cy="5" r="4" fill="#2D5016" stroke="#fff" stroke-width="1.5"/>
+              </marker>
+            </defs>
+
+            <!-- Ocean background -->
+            <rect width="500" height="460" fill="#C8DCE8" rx="0"/>
+            <!-- Subtle ocean texture -->
+            <rect width="500" height="460" fill="url(#oceanPattern)" opacity=".3"/>
+
+            <!-- Morocco shape -->
+            <path id="moroccoShape"
+              d="M 95,30 L 185,18 L 230,22 L 260,38 L 285,34 L 310,45 L 318,68 L 305,95 L 308,118 L 295,138 L 298,158 L 282,175 L 268,192 L 255,215 L 248,238 L 240,262 L 232,288 L 224,318 L 216,348 L 210,375 L 205,400 L 185,415 L 168,418 L 150,410 L 130,402 L 115,388 L 108,368 L 115,345 L 110,320 L 102,295 L 95,268 L 88,242 L 82,218 L 75,195 L 70,172 L 65,148 L 60,122 L 58,98 L 62,72 L 75,52 Z"
+              fill="#EAE0CA" stroke="#B8A880" stroke-width="1.8" filter="url(#mapShadow)"/>
+
+            <!-- Atlas Mountains hint -->
+            <path d="M 130,155 L 180,130 L 230,145 L 260,138 L 275,152 L 240,168 L 195,162 L 148,172 Z" fill="#D4C4A0" opacity=".45"/>
+            <!-- Saharan zone -->
+            <path d="M 90,260 L 102,295 L 110,320 L 115,345 L 108,368 L 115,388 L 88,370 L 78,340 L 82,300 Z" fill="#D8C8A0" opacity=".35"/>
+
+            <!-- Mediterranean coast line -->
+            <path d="M 95,30 L 185,18 L 230,22 L 260,38 L 285,34" fill="none" stroke="#6AADCF" stroke-width="2.5" opacity=".6"/>
+            <!-- Atlantic coast line -->
+            <path d="M 75,52 L 62,72 L 58,98 L 60,122 L 65,148 L 70,172 L 75,195 L 82,218 L 88,242 L 95,268 L 102,295 L 110,320 L 115,345 L 108,368 L 115,388 L 130,402 L 150,410" fill="none" stroke="#6AADCF" stroke-width="2.5" opacity=".6"/>
+
+            <!-- Reference cities (faint) -->
+            <g opacity=".28" font-family="Lato, sans-serif" font-size="9" fill="#5A4030" font-weight="600">
+              <circle cx="102" cy="128" r="2.5" fill="#8B7050"/>
+              <text x="108" y="131">Casablanca</text>
+              <circle cx="310" cy="45" r="2.5" fill="#8B7050"/>
+              <text x="316" y="48">Oujda</text>
+              <circle cx="108" cy="368" r="2.5" fill="#8B7050"/>
+              <text x="114" y="371">Laâyoune</text>
+            </g>
+
+            <!-- Country label -->
+            <text x="185" y="240" text-anchor="middle" font-size="18" font-weight="900" fill="#C8B090" letter-spacing="5" opacity=".5" font-family="Playfair Display, serif">MAROC</text>
+
+            <!-- Compass rose -->
+            <g transform="translate(452,36)">
+              <circle cx="0" cy="0" r="22" fill="rgba(255,255,255,0.82)" stroke="#D4AF37" stroke-width="1.2"/>
+              <text x="0" y="-10" text-anchor="middle" font-size="10" font-weight="900" fill="#8B7355" font-family="Lato">N</text>
+              <polygon points="0,-7 3.5,5 0,3 -3.5,5" fill="#C0552A"/>
+              <polygon points="0,7 3.5,-5 0,-3 -3.5,-5" fill="#8B9AAA"/>
+              <text x="0" y="18" text-anchor="middle" font-size="8" fill="#8B7355" font-family="Lato">S</text>
+              <text x="-16" y="4" text-anchor="middle" font-size="8" fill="#8B7355" font-family="Lato">O</text>
+              <text x="16" y="4" text-anchor="middle" font-size="8" fill="#8B7355" font-family="Lato">E</text>
+            </g>
+
+            <!-- Legend -->
+            <g transform="translate(14,14)">
+              <rect x="0" y="0" width="148" height="56" rx="8" fill="rgba(255,253,249,0.92)" stroke="#EDE5D6" stroke-width="1"/>
+              <!-- route sample -->
+              <line x1="10" y1="18" x2="44" y2="18" stroke="#C0552A" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#arrowEnd)"/>
+              <text x="52" y="22" font-size="10" fill="#5A4030" font-family="Lato" font-weight="600">Itinéraire</text>
+              <!-- pin sample -->
+              <circle cx="26" cy="41" r="7" fill="rgba(192,85,42,.15)" stroke="#C0552A" stroke-width="1.2"/>
+              <circle cx="26" cy="41" r="4" fill="#C0552A"/>
+              <text x="52" y="45" font-size="10" fill="#5A4030" font-family="Lato" font-weight="600">Étapes</text>
+            </g>
+
+            <!-- Route lines (drawn by JS) -->
+            <g id="routeLines"></g>
+            <!-- City pins (drawn by JS) -->
+            <g id="cityPins"></g>
+          </svg>
+        </div>
       </div>
     </div>
 
-    <!-- Stats row -->
+    <!-- Stats row (footer supprimé, stats reste) -->
     <div class="dm-stats" id="dmStats">
       <div class="dm-stat">
         <div class="dm-stat-icon"><i class="bi bi-car-front"></i></div>
         <div>
-          <div class="dm-stat-label">Distance totale</div>
+          <div class="dm-stat-label" data-i18n="stat.distance">Distance totale</div>
           <div class="dm-stat-value" id="statDistance">—</div>
-          <div class="dm-stat-sub">parcourus</div>
+          <div class="dm-stat-sub" data-i18n="stat.traveled">parcourus</div>
         </div>
       </div>
       <div class="dm-stat">
         <div class="dm-stat-icon"><i class="bi bi-bar-chart-steps"></i></div>
         <div>
-          <div class="dm-stat-label">Niveau</div>
+          <div class="dm-stat-label" data-i18n="stat.level">Niveau</div>
           <div class="dm-stat-value" id="statLevel">—</div>
           <div class="dm-stat-sub" id="statLevelSub">—</div>
         </div>
@@ -1064,49 +1214,830 @@ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { 
       <div class="dm-stat">
         <div class="dm-stat-icon"><i class="bi bi-brightness-high"></i></div>
         <div>
-          <div class="dm-stat-label">Meilleure période</div>
+          <div class="dm-stat-label" data-i18n="stat.period">Meilleure période</div>
           <div class="dm-stat-value" id="statPeriod" style="font-size:.8rem">—</div>
         </div>
       </div>
       <div class="dm-stat">
         <div class="dm-stat-icon"><i class="bi bi-briefcase"></i></div>
         <div>
-          <div class="dm-stat-label">Type de voyage</div>
+          <div class="dm-stat-label" data-i18n="stat.type">Type de voyage</div>
           <div class="dm-stat-value" id="statType" style="font-size:.75rem;line-height:1.3">—</div>
         </div>
       </div>
       <div>
-        <div class="dm-photos-strip-label">Aperçu du voyage</div>
+        <div class="dm-photos-strip-label" data-i18n="stat.preview">Aperçu du voyage</div>
         <div class="dm-photos-strip" id="dmPhotosStrip"></div>
       </div>
     </div>
-
-    <!-- Footer -->
-    <div class="dm-footer">
-      <div class="dm-services">
-        <div class="dm-service"><i class="bi bi-house-heart"></i> Hôtels &amp; Riads sélectionnés</div>
-        <div class="dm-service"><i class="bi bi-star"></i> Expériences authentiques</div>
-        <div class="dm-service"><i class="bi bi-person-circle"></i> Guides locaux experts</div>
-        <div class="dm-service"><i class="bi bi-headset"></i> Assistance 24/7</div>
-      </div>
-      <div class="dm-footer-actions">
-        <button class="btn-reserve"><span id="btnReserveLabel">Réserver ce circuit</span> <i class="bi bi-arrow-right"></i></button>
-        <button class="btn-wishlist" title="Ajouter aux favoris"><i class="bi bi-heart"></i></button>
-      </div>
-    </div>
+    <!-- ✅ Footer supprimé -->
 
   </div>
 </div>
 
 <!-- Back to top + Footer -->
-<footer class="footer-maroc mt-0">© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026</footer>
+<footer class="footer-maroc mt-0" data-i18n="footer.text">© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026</footer>
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+/* ══════════════════════════════════════
+   PROTECTION: Vérifier GSAP avant utilisation
+══════════════════════════════════════ */
+if (typeof gsap !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+/* ══════════════════════════════════════
+   INTERNATIONALISATION (i18n)
+══════════════════════════════════════ */
+const TRANSLATIONS = {
+  // ... (votre objet TRANSLATIONS reste identique)
+};
+
+let currentLang = 'fr';
+
+function t(key) {
+  return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS['fr'][key] || key;
+}
+
+function applyTranslations(lang) {
+  currentLang = lang;
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.textContent = val;
+  });
+  
+  document.querySelectorAll('.circuit-card').forEach((card, index) => {
+    const titleEl = card.querySelector('.card-title');
+    const publicEl = card.querySelector('.card-public');
+    const tagOverlay = card.querySelector('.card-tag-overlay');
+    
+    if (titleEl) {
+      const titleKey = card.dataset.titleKey || `c${index + 1}.title`;
+      titleEl.textContent = t(titleKey);
+    }
+    if (publicEl) {
+      const publicKey = card.dataset.publicKey || `c${index + 1}.public`;
+      publicEl.textContent = t(publicKey);
+    }
+    if (tagOverlay && !tagOverlay.hasAttribute('data-i18n')) {
+      const tagText = tagOverlay.textContent.trim();
+      const tagMap = {
+        'Plages': 'tag.plages', 'Histoire': 'tag.histoire', 'Nord': 'tag.nord',
+        'Côte': 'tag.cote', 'Nature': 'tag.nature2', 'Complet': 'tag.complet',
+        'Montagne': 'tag.montagne', 'Sport': 'tag.sport2', 'Classique': 'tag.classic'
+      };
+      if (tagMap[tagText]) {
+        tagOverlay.textContent = t(tagMap[tagText]);
+      }
+    }
+  });
+  
+  const footer = document.querySelector('.footer-maroc');
+  if (footer) footer.textContent = t('footer.text');
+  
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  
+  if (lang === 'ar') {
+    document.body.style.fontFamily = "'Amiri', 'Lato', sans-serif";
+  } else {
+    document.body.style.fontFamily = "";
+  }
+  
+  updateModalTranslations();
+
+  document.querySelectorAll('.card-route').forEach(routeEl => {
+    const originalRoute = routeEl.dataset.originalRoute || routeEl.innerHTML;
+    if (!routeEl.dataset.originalRoute) routeEl.dataset.originalRoute = originalRoute;
+    
+    let translatedRoute = originalRoute;
+    const cityMap = {
+      'Marrakech': 'city.marrakech', 'Fès': 'city.fes', 'Fes': 'city.fes',
+      'Rabat': 'city.rabat', 'Meknès': 'city.meknes', 'Meknes': 'city.meknes',
+      'Casablanca': 'city.casablanca', 'Essaouira': 'city.essaouira',
+      'Agadir': 'city.agadir', 'Tanger': 'city.tanger', 'Tétouan': 'city.tetouan',
+      'Tetouan': 'city.tetouan', 'Chefchaouen': 'city.chefchaouen',
+      'Merzouga': 'city.merzouga', 'Atlas': 'city.atlas', 'Haut Atlas': 'city.atlas',
+      'Ouarzazate': 'city.ouarzazate', 'Zagora': 'city.zagora',
+      'Dakhla': 'city.dakhla', 'Imlil': 'city.imlil', 'Oukaïmeden': 'city.oukaïmeden',
+      'Volubilis': 'city.volubilis', 'Ifrane': 'city.ifrane', 'Azrou': 'city.azrou',
+      'Beni Mellal': 'city.benimellal', 'Al Hoceïma': 'city.alhoceima',
+      'Nador': 'city.nador', 'Taghazout': 'city.taghazout'
+    };
+    
+    Object.keys(cityMap).forEach(city => {
+      const key = cityMap[city];
+      const translated = t(key);
+      if (translated && translated !== city) {
+        translatedRoute = translatedRoute.replace(new RegExp(city, 'g'), translated);
+      }
+    });
+    
+    routeEl.innerHTML = translatedRoute;
+  });
+}
+
+function updateModalTranslations() {
+  const backdrop = document.getElementById('detailModalBackdrop');
+  if (!backdrop || !backdrop.classList.contains('open')) return;
+  
+  const dmTitle = document.getElementById('dmTitle');
+  const dmSubtitle = document.getElementById('dmSubtitle');
+  if (dmTitle && dmTitle.dataset.titleKey) {
+    dmTitle.textContent = t(dmTitle.dataset.titleKey);
+  }
+  
+  const statLevelSub = document.getElementById('statLevelSub');
+  if (statLevelSub) {
+    const levelMap = {
+      'Facile': t('level.easy'), 'Easy': t('level.easy'),
+      'Moyen': t('level.medium'), 'Medium': t('level.medium'),
+      'Difficile': t('level.hard'), 'Difficult': t('level.hard')
+    };
+    const currentLevel = statLevelSub.dataset.originalLevel || '';
+    statLevelSub.textContent = levelMap[currentLevel] || '';
+  }
+}
+
+/* ══ MENU (sans IIFE, avec protection) ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('siteMenu');
+  if (!toggle || !menu) return;
+  
+  const groups = menu.querySelectorAll('.menu-group[data-group]');
+  const isDesktop = () => window.matchMedia('(min-width:992px)').matches;
+  
+  function activate(g) {
+    groups.forEach(x => {
+      const on = x === g;
+      x.classList.toggle('open', on);
+      x.querySelector('.menu-head').setAttribute('aria-expanded', on ? 'true' : 'false');
+    });
+  }
+  
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open && isDesktop() && !menu.querySelector('.menu-group[data-group].open')) activate(groups[0]);
+  }
+  
+  toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  
+  groups.forEach(g => {
+    g.querySelector('.menu-head').addEventListener('click', () => {
+      if (isDesktop()) activate(g);
+      else {
+        const w = !g.classList.contains('open');
+        w ? activate(g) : activate(null);
+      }
+    });
+  });
+});
+
+/* ══ LANG (sans IIFE) ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  const btns = document.querySelectorAll('.lang-btn');
+  function setLang(l) {
+    btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l ? 'true' : 'false'));
+    applyTranslations(l);
+    try { localStorage.setItem('mdLang', l); } catch (e) {}
+  }
+  btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let s = 'fr';
+  try { s = localStorage.getItem('mdLang') || 'fr'; } catch (e) {}
+  setLang(s);
+});
+
+/* ══ MOTION (sans IIFE) ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('motionToggle');
+  if (!btn) return;
+  function setMotion(on) {
+    document.body.classList.toggle('reduce-motion', !on);
+    btn.setAttribute('aria-checked', on ? 'true' : 'false');
+    try { localStorage.setItem('mdMotion', on ? 'on' : 'off'); } catch (e) {}
+  }
+  btn.addEventListener('click', () => setMotion(document.body.classList.contains('reduce-motion')));
+  let s = null;
+  try { s = localStorage.getItem('mdMotion'); } catch (e) {}
+  setMotion(s ? s === 'on' : !window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+});
+
+/* ══ SCROLL ══ */
+window.addEventListener('scroll', () => {
+  const btt = document.getElementById('backToTop');
+  if (btt) btt.classList.toggle('visible', window.scrollY > 500);
+}, { passive: true });
+
+/* ══ ANIMATIONS (avec protection GSAP) ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof gsap === 'undefined') return;
+  
+  gsap.timeline()
+    .to('#heroBadge', { opacity: 1, y: 0, duration: .7, ease: 'power3.out' })
+    .to('#heroTitle', { opacity: 1, y: 0, duration: .9, ease: 'power3.out' }, '-=0.4')
+    .to('#heroSubtitle', { opacity: 1, y: 0, duration: .7, ease: 'power2.out' }, '-=0.5');
+  
+  gsap.utils.toArray('.circuit-card').forEach((c, i) => {
+    gsap.fromTo(c, { opacity: 0, y: 50 }, {
+      opacity: 1, y: 0, duration: .7, ease: 'power3.out',
+      scrollTrigger: { trigger: c, start: 'top 88%', toggleActions: 'play none none none' },
+      delay: (i % 2) * .12
+    });
+  });
+});
+
+/* ══ 3D TILT ══ */
+document.querySelectorAll('.circuit-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width / 2;
+    const y = e.clientY - r.top - r.height / 2;
+    card.style.transform = `perspective(1000px) rotateX(${(y / r.height) * -12}deg) rotateY(${(x / r.width) * 12}deg) scale(1.02)`;
+    card.style.boxShadow = `${(x / r.width) * -15}px ${(y / r.height) * -15}px 28px rgba(0,0,0,.25)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    card.style.boxShadow = '';
+  });
+});
+
+/* ══ RIPPLE ══ */
+document.querySelectorAll('.btn-explorer').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const r = btn.getBoundingClientRect();
+    const rip = document.createElement('div');
+    rip.className = 'ripple';
+    rip.style.cssText = `left:${e.clientX - r.left}px;top:${e.clientY - r.top}px;width:24px;height:24px;margin:-12px;`;
+    btn.appendChild(rip);
+    setTimeout(() => rip.remove(), 700);
+  });
+});
+
+/* ══ FILTER ══ */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.circuit-card').forEach(c => {
+      const match = f === 'all' || (c.dataset.tags || '').includes(f);
+      if (typeof gsap !== 'undefined') {
+        gsap.to(c, { opacity: match ? 1 : .18, scale: match ? 1 : .96, duration: .35, ease: 'power2.out' });
+      } else {
+        c.style.opacity = match ? 1 : .18;
+        c.style.transform = match ? 'scale(1)' : 'scale(0.96)';
+      }
+    });
+  });
+});
+
+/* ══ STAR RATING ══ */
+let toastTimer = null;
+function showToast(msg, dur = 2400) {
+  const t = document.getElementById('ratingToast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), dur);
+}
+
+document.querySelectorAll('.star-rating').forEach(w => {
+  const stars = w.querySelectorAll('.star');
+  let saved = 0;
+  stars.forEach(s => {
+    const v = +s.dataset.v;
+    s.addEventListener('mouseenter', () => stars.forEach(x => x.classList.toggle('hover', +x.dataset.v <= v)));
+    s.addEventListener('mouseleave', () => stars.forEach(x => x.classList.remove('hover')));
+    s.addEventListener('click', e => {
+      e.stopPropagation();
+      saved = v;
+      stars.forEach(x => x.classList.toggle('filled', +x.dataset.v <= v));
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(s, { scale: .6 }, { scale: 1, duration: .3, ease: 'back.out(4)' });
+      }
+      const labels = t('rating.labels');
+      showToast((Array.isArray(labels) ? labels[v] : '') + ' — ' + v + ' étoile' + (v > 1 ? 's' : ''));
+    });
+  });
+});
+
+/* ══ PARTICLES ══ */
+document.addEventListener('DOMContentLoaded', function() {
+  const pc = document.getElementById('particles');
+  if (!pc || typeof gsap === 'undefined') return;
+  
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    pc.appendChild(p);
+    gsap.to(p, {
+      opacity: Math.random() * .4 + .05,
+      y: -(Math.random() * 160 + 60),
+      x: (Math.random() - .5) * 80,
+      duration: Math.random() * 7 + 5,
+      repeat: -1,
+      delay: Math.random() * 4,
+      ease: 'none'
+    });
+  }
+});
+
 gsap.registerPlugin(ScrollTrigger);
+
+/* ══════════════════════════════════════
+   INTERNATIONALISATION (i18n)
+══════════════════════════════════════ */
+const TRANSLATIONS = {
+  fr: {
+    // Nav
+    'nav.home': 'Accueil', 'nav.homepage': "Page d'accueil", 'nav.circuits': 'Circuits',
+    'nav.explore': 'Explorez le Maroc', 'nav.gastronomy': 'Gastronomie',
+    'nav.experiences': 'Expériences', 'nav.cities': 'Villes', 'nav.dishes': 'Plats',
+    'nav.activities': 'Activités', 'nav.itineraries': 'Itinéraires',
+    'nav.destinations': 'Destinations', 'nav.guide': 'Guide',
+    
+    // Hero
+    'hero.badge': 'ITINÉRAIRES', 'hero.title.part1': 'Composez votre', 'hero.title.part2': 'voyage.',
+    'hero.subtitle': 'Inspirations clés en main ou itinéraire 100% sur mesure.',
+    
+    // Filters
+    'filter.all': 'Tous', 'filter.culture': 'Culture', 'filter.adventure': 'Aventure',
+    'filter.nature': 'Nature', 'filter.luxury': 'Luxe', 'filter.family': 'Famille', 'filter.sport': 'Sport',
+    
+    // Section
+    'section.eyebrow': 'Inspirations', 'section.title': 'Itinéraires inspirants',
+    
+    // Buttons & Cards
+    'btn.explore': 'Explorer les villes', 'card.days': 'JOURS', 'card.reviews': 'avis',
+    'tag.classic': 'Classique',
+    
+    // Stats
+    'stat.distance': 'Distance totale', 'stat.traveled': 'parcourus', 'stat.level': 'Niveau',
+    'stat.period': 'Meilleure période', 'stat.type': 'Type de voyage', 'stat.preview': 'Aperçu du voyage',
+    
+    // UI
+    'ui.animations': 'Animations',
+    'tooltip.more': "Voir plus d'infos sur",
+    'toast.city': "Plus d'informations sur",
+    'toast.city2': 'seront bientôt disponibles',
+    'rating.labels': ['', 'Passable', 'Bien', 'Très bien', 'Excellent', 'Parfait !'],
+    'level.easy': 'Aventure légère', 'level.medium': 'Aventure modérée', 'level.hard': 'Aventure sportive',
+    
+    // Circuit titles
+    'c1.title': 'Grand Tour Sud',
+    'c2.title': 'Route des Villes Impériales',
+    'c3.title': 'Circuit Désert & Oasis',
+    'c4.title': 'Tour des Plages Atlantiques',
+    'c5.title': 'Escapade Nord Bleu',
+    'c6.title': 'Route Culture & Histoire',
+    'c7.title': 'Aventure Atlas',
+    'c8.title': 'Road Trip Méditerranée',
+    'c9.title': 'Nature & Montagnes',
+    'c10.title': 'Circuit Surf Maroc',
+    'c11.title': 'Grand Tour Maroc',
+    
+    // Circuit descriptions
+    'c1.public': 'Pour : Découverte classique du désert et des montagnes',
+    'c2.public': 'Pour : Culture, histoire et monuments royaux',
+    'c3.public': 'Pour : Aventure saharienne et nuits dans le désert',
+    'c4.public': 'Pour : Détente, surf et plages marocaines',
+    'c5.public': 'Pour : Nature, calme et découverte du nord',
+    'c6.public': 'Pour : Patrimoine historique et sites antiques',
+    'c7.public': 'Pour : Randonnée et activités de montagne',
+    'c8.public': 'Pour : Découverte des plages méditerranéennes',
+    'c9.public': 'Pour : Forêts, lacs et air frais',
+    'c10.public': 'Pour : Surf, kitesurf et sports nautiques',
+    'c11.public': 'Pour : Découverte complète du Maroc',
+    
+    // Tags overlay
+    'tag.plages': 'Plages', 'tag.histoire': 'Histoire', 'tag.nord': 'Nord',
+    'tag.cote': 'Côte', 'tag.nature2': 'Nature', 'tag.complet': 'Complet',
+    'tag.montagne': 'Montagne', 'tag.sport2': 'Sport',
+    
+    // City tags
+    'tag.medina': 'Médina Impériale', 'tag.toit': 'Toit du Maroc',
+    'tag.sahara': 'Sahara & Dunes', 'tag.cite': 'Cité Millénaire',
+    'tag.capitale': 'Capitale Royale', 'tag.villeimp': 'Ville Impériale',
+    'tag.porte': 'Porte du Désert', 'tag.villedesert': 'Ville du Désert',
+    'tag.villeblanche': 'Ville Blanche', 'tag.alizes': 'Cité des Alizés',
+    'tag.soleil': 'Cité du Soleil', 'tag.lagune': 'Lagune Sauvage',
+    'tag.porteafrique': 'Porte de l\\'Afrique', 'tag.villebleue': 'La Ville Bleue',
+    'tag.siteantique': 'Site Antique', 'tag.berbere': 'Village Berbère',
+    'tag.stationski': 'Station de Ski', 'tag.perle': 'Perle Méditerranéenne',
+    'tag.lagunemarchica': 'Lagune Marchica', 'tag.suisse': 'Suisse du Maroc',
+    'tag.foret': 'Forêt de Cèdres', 'tag.source': 'Source d\\'Ain Asserdoun',
+    'tag.paradis': 'Paradis des Surfeurs',
+    
+    // Activities
+    'act.streetfood': 'Street food & Médina', 'act.randonnee': 'Randonnée & Nature',
+    'act.desert': 'Désert & Aventure', 'act.culture': 'Culture & Histoire',
+    'act.tourhassan': 'Tour Hassan & Oudayas', 'act.babmansour': 'Bab Mansour & Médina',
+    'act.tanneries': 'Tanneries & Médersa', 'act.souks': 'Souks & Jardins',
+    'act.studios': 'Studios & Kasbah', 'act.bivouac': 'Bivouac & Dunes',
+    'act.chameau': 'Chameau & Étoiles', 'act.hassan2': 'Hassan II & Corniche',
+    'act.port': 'Port & Remparts', 'act.plagesurf': 'Plage & Surf',
+    'act.kitesurf': 'Kitesurf & Lagune', 'act.portmedina': 'Port & Médina',
+    'act.andalouse': 'Médina Andalouse', 'act.ruelles': 'Ruelles bleues & Rif',
+    'act.medina': 'Médina & Tanneries', 'act.mausolee': 'Mausolée Ismaïl',
+    'act.ruines': 'Ruines Romaines', 'act.kasbah': 'Kasbah Oudayas',
+    'act.djemaa': 'Souks & Djemaa', 'act.toubkal': 'Toubkal & Trekking',
+    'act.ski': 'Ski & Panoramas', 'act.capspartel': 'Cap Spartel & Grottes',
+    'act.plagesparc': 'Plages & Parc National', 'act.lagunemarchica': 'Lagune Marchica',
+    'act.lacs': 'Lacs & Parcs Nationaux', 'act.cedres': 'Cèdres & Singes',
+    'act.cascades': 'Cascades & Sources', 'act.spots': 'Surf & Spots célèbres',
+    'act.promenade': 'Plage & Promenade', 'act.kitesurf2': 'Kitesurf & Vents',
+    'act.oudayas': 'Oudayas & Palais', 'act.ruelles2': 'Ruelles bleues',
+    'act.majorelle': 'Majorelle & Souks', 'act.detente': 'Plage & Détente',
+    
+    // Misc
+    'jour': 'JOUR', 'jours': 'JOURS', 'nuit': 'nuit', 'nuits': 'nuits',
+    'vers': 'vers', 'nuitsLabel': 'nuits',
+    
+    // Footer
+    'footer.text': '© 2026 — Réalisé dans le cadre du module Développement Web | Encadré par Monsieur Reda Jourani | ENSA Tétouan 2026',
+
+    // Villes
+    'city.marrakech': 'Marrakech', 'city.fes': 'Fès', 'city.rabat': 'Rabat',
+    'city.meknes': 'Meknès', 'city.casablanca': 'Casablanca', 'city.essaouira': 'Essaouira',
+    'city.agadir': 'Agadir', 'city.tanger': 'Tanger', 'city.tetouan': 'Tétouan',
+    'city.chefchaouen': 'Chefchaouen', 'city.merzouga': 'Merzouga', 'city.atlas': 'Atlas',
+    'city.ouarzazate': 'Ouarzazate', 'city.zagora': 'Zagora', 'city.dakhla': 'Dakhla',
+    'city.imlil': 'Imlil', 'city.oukaïmeden': 'Oukaïmeden', 'city.volubilis': 'Volubilis',
+    'city.ifrane': 'Ifrane', 'city.azrou': 'Azrou', 'city.benimellal': 'Beni Mellal',
+    'city.alhoceima': 'Al Hoceïma', 'city.nador': 'Nador', 'city.taghazout': 'Taghazout'
+  },
+  
+  en: {
+    // Nav
+    'nav.home': 'Home', 'nav.homepage': 'Homepage', 'nav.circuits': 'Circuits',
+    'nav.explore': 'Explore Morocco', 'nav.gastronomy': 'Gastronomy',
+    'nav.experiences': 'Experiences', 'nav.cities': 'Cities', 'nav.dishes': 'Dishes',
+    'nav.activities': 'Activities', 'nav.itineraries': 'Itineraries',
+    'nav.destinations': 'Destinations', 'nav.guide': 'Guide',
+    
+    // Hero
+    'hero.badge': 'ITINERARIES', 'hero.title.part1': 'Plan your', 'hero.title.part2': 'journey.',
+    'hero.subtitle': 'Ready-made inspirations or 100% tailor-made itinerary.',
+    
+    // Filters
+    'filter.all': 'All', 'filter.culture': 'Culture', 'filter.adventure': 'Adventure',
+    'filter.nature': 'Nature', 'filter.luxury': 'Luxury', 'filter.family': 'Family', 'filter.sport': 'Sport',
+    
+    // Section
+    'section.eyebrow': 'Inspirations', 'section.title': 'Inspiring itineraries',
+    
+    // Buttons & Cards
+    'btn.explore': 'Explore cities', 'card.days': 'DAYS', 'card.reviews': 'reviews',
+    'tag.classic': 'Classic',
+    
+    // Stats
+    'stat.distance': 'Total distance', 'stat.traveled': 'traveled', 'stat.level': 'Level',
+    'stat.period': 'Best period', 'stat.type': 'Trip type', 'stat.preview': 'Trip preview',
+    
+    // UI
+    'ui.animations': 'Animations',
+    'tooltip.more': 'See more info about',
+    'toast.city': 'More information about',
+    'toast.city2': 'coming soon',
+    'rating.labels': ['', 'Poor', 'Good', 'Very good', 'Excellent', 'Perfect!'],
+    'level.easy': 'Light adventure', 'level.medium': 'Moderate adventure', 'level.hard': 'Sports adventure',
+    
+    // Circuit titles
+    'c1.title': 'Grand South Tour',
+    'c2.title': 'Imperial Cities Route',
+    'c3.title': 'Desert & Oasis Circuit',
+    'c4.title': 'Atlantic Beaches Tour',
+    'c5.title': 'Blue North Getaway',
+    'c6.title': 'Culture & History Route',
+    'c7.title': 'Atlas Adventure',
+    'c8.title': 'Mediterranean Road Trip',
+    'c9.title': 'Nature & Mountains',
+    'c10.title': 'Morocco Surf Circuit',
+    'c11.title': 'Grand Morocco Tour',
+    
+    // Circuit descriptions
+    'c1.public': 'For: Classic desert and mountains discovery',
+    'c2.public': 'For: Culture, history and royal monuments',
+    'c3.public': 'For: Saharan adventure and desert nights',
+    'c4.public': 'For: Relaxation, surfing and Moroccan beaches',
+    'c5.public': 'For: Nature, calm and northern discovery',
+    'c6.public': 'For: Historical heritage and ancient sites',
+    'c7.public': 'For: Hiking and mountain activities',
+    'c8.public': 'For: Mediterranean beaches discovery',
+    'c9.public': 'For: Forests, lakes and fresh air',
+    'c10.public': 'For: Surf, kitesurf and water sports',
+    'c11.public': 'For: Complete Morocco discovery',
+    
+    // Tags overlay
+    'tag.plages': 'Beaches', 'tag.histoire': 'History', 'tag.nord': 'North',
+    'tag.cote': 'Coast', 'tag.nature2': 'Nature', 'tag.complet': 'Complete',
+    'tag.montagne': 'Mountain', 'tag.sport2': 'Sport',
+    
+    // City tags
+    'tag.medina': 'Imperial Medina', 'tag.toit': 'Roof of Morocco',
+    'tag.sahara': 'Sahara & Dunes', 'tag.cite': 'Millennial City',
+    'tag.capitale': 'Royal Capital', 'tag.villeimp': 'Imperial City',
+    'tag.porte': 'Gateway to Desert', 'tag.villedesert': 'Desert City',
+    'tag.villeblanche': 'White City', 'tag.alizes': 'City of Trade Winds',
+    'tag.soleil': 'Sun City', 'tag.lagune': 'Wild Lagoon',
+    'tag.porteafrique': 'Gateway to Africa', 'tag.villebleue': 'The Blue City',
+    'tag.siteantique': 'Ancient Site', 'tag.berbere': 'Berber Village',
+    'tag.stationski': 'Ski Resort', 'tag.perle': 'Mediterranean Pearl',
+    'tag.lagunemarchica': 'Marchica Lagoon', 'tag.suisse': 'Switzerland of Morocco',
+    'tag.foret': 'Cedar Forest', 'tag.source': 'Ain Asserdoun Spring',
+    'tag.paradis': 'Surfers Paradise',
+    
+    // Activities
+    'act.streetfood': 'Street food & Medina', 'act.randonnee': 'Hiking & Nature',
+    'act.desert': 'Desert & Adventure', 'act.culture': 'Culture & History',
+    'act.tourhassan': 'Hassan Tower & Oudayas', 'act.babmansour': 'Bab Mansour & Medina',
+    'act.tanneries': 'Tanneries & Madrasa', 'act.souks': 'Souks & Gardens',
+    'act.studios': 'Studios & Kasbah', 'act.bivouac': 'Bivouac & Dunes',
+    'act.chameau': 'Camel & Stars', 'act.hassan2': 'Hassan II & Corniche',
+    'act.port': 'Port & Ramparts', 'act.plagesurf': 'Beach & Surf',
+    'act.kitesurf': 'Kitesurf & Lagoon', 'act.portmedina': 'Port & Medina',
+    'act.andalouse': 'Andalusian Medina', 'act.ruelles': 'Blue alleys & Rif',
+    'act.medina': 'Medina & Tanneries', 'act.mausolee': 'Moulay Ismail Mausoleum',
+    'act.ruines': 'Roman Ruins', 'act.kasbah': 'Kasbah Oudayas',
+    'act.djemaa': 'Souks & Djemaa', 'act.toubkal': 'Toubkal & Trekking',
+    'act.ski': 'Ski & Panoramas', 'act.capspartel': 'Cap Spartel & Caves',
+    'act.plagesparc': 'Beaches & National Park', 'act.lagunemarchica': 'Marchica Lagoon',
+    'act.lacs': 'Lakes & National Parks', 'act.cedres': 'Cedars & Monkeys',
+    'act.cascades': 'Waterfalls & Springs', 'act.spots': 'Surf & Famous spots',
+    'act.promenade': 'Beach & Promenade', 'act.kitesurf2': 'Kitesurf & Winds',
+    'act.oudayas': 'Oudayas & Palace', 'act.ruelles2': 'Blue alleys',
+    'act.majorelle': 'Majorelle & Souks', 'act.detente': 'Beach & Relaxation',
+    
+    // Misc
+    'jour': 'DAY', 'jours': 'DAYS', 'nuit': 'night', 'nuits': 'nights',
+    'vers': 'to', 'nuitsLabel': 'nights',
+    
+    // Footer
+    'footer.text': '© 2026 — Developed as part of the Web Development module | Supervised by Mr. Reda Jourani | ENSA Tétouan 2026',
+
+    // Villes
+    'city.marrakech': 'Marrakech', 'city.fes': 'Fès', 'city.rabat': 'Rabat',
+    'city.meknes': 'Meknès', 'city.casablanca': 'Casablanca', 'city.essaouira': 'Essaouira',
+    'city.agadir': 'Agadir', 'city.tanger': 'Tangier', 'city.tetouan': 'Tétouan',
+    'city.chefchaouen': 'Chefchaouen', 'city.merzouga': 'Merzouga', 'city.atlas': 'Atlas',
+    'city.ouarzazate': 'Ouarzazate', 'city.zagora': 'Zagora', 'city.dakhla': 'Dakhla',
+    'city.imlil': 'Imlil', 'city.oukaïmeden': 'Oukaïmeden', 'city.volubilis': 'Volubilis',
+    'city.ifrane': 'Ifrane', 'city.azrou': 'Azrou', 'city.benimellal': 'Beni Mellal',
+    'city.alhoceima': 'Al Hoceïma', 'city.nador': 'Nador', 'city.taghazout': 'Taghazout'
+  },
+  
+  ar: {
+    // Nav
+    'nav.home': 'الرئيسية', 'nav.homepage': 'الصفحة الرئيسية', 'nav.circuits': 'الجولات',
+    'nav.explore': 'استكشف المغرب', 'nav.gastronomy': 'المطبخ',
+    'nav.experiences': 'تجارب', 'nav.cities': 'المدن', 'nav.dishes': 'الأطباق',
+    'nav.activities': 'الأنشطة', 'nav.itineraries': 'البرامج السياحية',
+    'nav.destinations': 'الوجهات', 'nav.guide': 'الدليل',
+    
+    // Hero
+    'hero.badge': 'برامج سياحية', 'hero.title.part1': 'صمّم', 'hero.title.part2': 'رحلتك.',
+    'hero.subtitle': 'برامج جاهزة أو مسار مخصص 100٪ حسب رغبتك.',
+    
+    // Filters
+    'filter.all': 'الكل', 'filter.culture': 'ثقافة', 'filter.adventure': 'مغامرة',
+    'filter.nature': 'طبيعة', 'filter.luxury': 'فخامة', 'filter.family': 'عائلي', 'filter.sport': 'رياضة',
+    
+    // Section
+    'section.eyebrow': 'إلهام', 'section.title': 'برامج سياحية ملهمة',
+    
+    // Buttons & Cards
+    'btn.explore': 'استكشف المدن', 'card.days': 'أيام', 'card.reviews': 'تقييم',
+    'tag.classic': 'كلاسيكي',
+    
+    // Stats
+    'stat.distance': 'المسافة الكلية', 'stat.traveled': 'مقطوعة', 'stat.level': 'المستوى',
+    'stat.period': 'أفضل موسم', 'stat.type': 'نوع الرحلة', 'stat.preview': 'لمحة عن الرحلة',
+    
+    // UI
+    'ui.animations': 'الحركات',
+    'tooltip.more': 'اعرف أكثر عن',
+    'toast.city': 'مزيد من المعلومات عن',
+    'toast.city2': 'قريباً',
+    'rating.labels': ['', 'مقبول', 'جيد', 'جيد جداً', 'ممتاز', 'رائع!'],
+    'level.easy': 'مغامرة خفيفة', 'level.medium': 'مغامرة متوسطة', 'level.hard': 'مغامرة رياضية',
+    
+    // Circuit titles
+    'c1.title': 'جولة الجنوب الكبرى',
+    'c2.title': 'طريق المدن الإمبراطورية',
+    'c3.title': 'رحلة الصحراء والواحات',
+    'c4.title': 'جولة شواطئ الأطلسي',
+    'c5.title': 'رحلة الشمال الأزرق',
+    'c6.title': 'طريق الثقافة والتاريخ',
+    'c7.title': 'مغامرة الأطلس',
+    'c8.title': 'رحلة البحر الأبيض المتوسط',
+    'c9.title': 'الطبيعة والجبال',
+    'c10.title': 'رحلة ركوب الأمواج',
+    'c11.title': 'جولة المغرب الكبرى',
+    
+    // Circuit descriptions
+    'c1.public': 'لـ: اكتشاف كلاسيكي للصحراء والجبال',
+    'c2.public': 'لـ: الثقافة والتاريخ والمعالم الملكية',
+    'c3.public': 'لـ: مغامرة صحراوية وليالي في الصحراء',
+    'c4.public': 'لـ: الاسترخاء وركوب الأمواج وشواطئ المغرب',
+    'c5.public': 'لـ: الطبيعة والهدوء واكتشاف الشمال',
+    'c6.public': 'لـ: التراث التاريخي والمواقع الأثرية',
+    'c7.public': 'لـ: المشي لمسافات طويلة وأنشطة الجبال',
+    'c8.public': 'لـ: اكتشاف شواطئ البحر المتوسط',
+    'c9.public': 'لـ: الغابات والبحيرات والهواء النقي',
+    'c10.public': 'لـ: ركوب الأمواف والكايتسرف ورياضات مائية',
+    'c11.public': 'لـ: اكتشاف كامل للمغرب',
+    
+    // Tags overlay
+    'tag.plages': 'شواطئ', 'tag.histoire': 'تاريخ', 'tag.nord': 'شمال',
+    'tag.cote': 'ساحل', 'tag.nature2': 'طبيعة', 'tag.complet': 'كامل',
+    'tag.montagne': 'جبل', 'tag.sport2': 'رياضة',
+    
+    // City tags
+    'tag.medina': 'المدينة الإمبراطورية', 'tag.toit': 'سقف المغرب',
+    'tag.sahara': 'الصحراء والكثبان', 'tag.cite': 'مدينة الألفية',
+    'tag.capitale': 'العاصمة الملكية', 'tag.villeimp': 'المدينة الإمبراطورية',
+    'tag.porte': 'بوابة الصحراء', 'tag.villedesert': 'مدينة الصحراء',
+    'tag.villeblanche': 'المدينة البيضاء', 'tag.alizes': 'مدينة الرياح',
+    'tag.soleil': 'مدينة الشمس', 'tag.lagune': 'البحيرة البرية',
+    'tag.porteafrique': 'بوابة إفريقيا', 'tag.villebleue': 'المدينة الزرقاء',
+    'tag.siteantique': 'موقع أثري', 'tag.berbere': 'قرية أمازيغية',
+    'tag.stationski': 'منتجع التزلج', 'tag.perle': 'لؤلؤة المتوسط',
+    'tag.lagunemarchica': 'بحيرة مرسيكا', 'tag.suisse': 'سويسرا المغرب',
+    'tag.foret': 'غابة الأرز', 'tag.source': 'عين أسردون',
+    'tag.paradis': 'جنة المحبين',
+    
+    // Activities
+    'act.streetfood': 'أطعمة الشارع والمدينة', 'act.randonnee': 'المشي والطبيعة',
+    'act.desert': 'الصحراء والمغامرة', 'act.culture': 'الثقافة والتاريخ',
+    'act.tourhassan': 'برج حسن وأودايا', 'act.babmansour': 'باب منصور والمدينة',
+    'act.tanneries': 'الدباغة والمدرسة', 'act.souks': 'الأسواق والحدائق',
+    'act.studios': 'الاستوديوهات والقصبة', 'act.bivouac': 'المخيم والكثبان',
+    'act.chameau': 'الجمل والنجوم', 'act.hassan2': 'مسجد الحسن الثاني والكورنيش',
+    'act.port': 'الميناء والأسوار', 'act.plagesurf': 'الشاطئ وركوب الأمواج',
+    'act.kitesurf': 'الكايتسرف والبحيرة', 'act.portmedina': 'الميناء والمدينة',
+    'act.andalouse': 'المدينة الأندلسية', 'act.ruelles': 'الأزقة الزرقاء والريف',
+    'act.medina': 'المدينة والدباغة', 'act.mausolee': 'ضريح مولاي إسماعيل',
+    'act.ruines': 'الآثار الرومانية', 'act.kasbah': 'قصبة أودايا',
+    'act.djemaa': 'الأسواق والجماعة', 'act.toubkal': 'توبقال والمشي',
+    'act.ski': 'التزلج والمناظر', 'act.capspartel': 'رأس سبارتيل والكهوف',
+    'act.plagesparc': 'الشواطئ والحديقة الوطنية', 'act.lagunemarchica': 'بحيرة مرسيكا',
+    'act.lacs': 'البحيرات والحدائق الوطنية', 'act.cedres': 'الأرز والقرود',
+    'act.cascades': 'الشلالات والينابيع', 'act.spots': 'ركوب الأمواج والمواقع الشهيرة',
+    'act.promenade': 'الشاطئ والكورنيش', 'act.kitesurf2': 'الكايتسرف والرياح',
+    'act.oudayas': 'أودايا والقصر', 'act.ruelles2': 'الأزقة الزرقاء',
+    'act.majorelle': 'ماجوريل والأسواق', 'act.detente': 'الشاطئ والاسترخاء',
+    
+    // Misc
+    'jour': 'اليوم', 'jours': 'أيام', 'nuit': 'ليلة', 'nuits': 'ليالي',
+    'vers': 'إلى', 'nuitsLabel': 'ليالي',
+    
+    // Footer
+    'footer.text': '© 2026 — تم إنجازه في إطار وحدة تطوير الويب | تحت إشراف السيد رضا جوراني | المدرسة الوطنية للعلوم التطبيقية طنجة 2026',
+
+    // Villes
+    'city.marrakech': 'مراكش', 'city.fes': 'فاس', 'city.rabat': 'الرباط',
+    'city.meknes': 'مكناس', 'city.casablanca': 'الدار البيضاء', 'city.essaouira': 'الصويرة',
+    'city.agadir': 'أكادير', 'city.tanger': 'طنجة', 'city.tetouan': 'تطوان',
+    'city.chefchaouen': 'شفشاون', 'city.merzouga': 'مرزوكة', 'city.atlas': 'الأطلس',
+    'city.ouarzazate': 'ورزازات', 'city.zagora': 'زاكورة', 'city.dakhla': 'الداخلة',
+    'city.imlil': 'إمليل', 'city.oukaïmeden': 'أوكايمدن', 'city.volubilis': 'وليلي',
+    'city.ifrane': 'إفران', 'city.azrou': 'أزرو', 'city.benimellal': 'بني ملال',
+    'city.alhoceima': 'الحسيمة', 'city.nador': 'الناظور', 'city.taghazout': 'تغازوت'
+  }
+};
+;
+
+let currentLang = 'fr';
+
+function t(key) {
+  return (TRANSLATIONS[currentLang] && TRANSLATIONS[currentLang][key]) || TRANSLATIONS['fr'][key] || key;
+}
+
+function applyTranslations(lang) {
+  currentLang = lang;
+  
+  // 1. Traduction des éléments avec data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.textContent = val;
+  });
+  
+  // 2. Traduction des titres de circuits
+  document.querySelectorAll('.circuit-card').forEach((card, index) => {
+    const titleEl = card.querySelector('.card-title');
+    const publicEl = card.querySelector('.card-public');
+    const tagOverlay = card.querySelector('.card-tag-overlay');
+    
+    if (titleEl) {
+      const titleKey = card.dataset.titleKey || `c${index + 1}.title`;
+      titleEl.textContent = t(titleKey);
+    }
+    if (publicEl) {
+      const publicKey = card.dataset.publicKey || `c${index + 1}.public`;
+      publicEl.textContent = t(publicKey);
+    }
+    if (tagOverlay && !tagOverlay.hasAttribute('data-i18n')) {
+      const tagText = tagOverlay.textContent.trim();
+      const tagMap = {
+        'Plages': 'tag.plages', 'Histoire': 'tag.histoire', 'Nord': 'tag.nord',
+        'Côte': 'tag.cote', 'Nature': 'tag.nature2', 'Complet': 'tag.complet',
+        'Montagne': 'tag.montagne', 'Sport': 'tag.sport2', 'Classique': 'tag.classic'
+      };
+      if (tagMap[tagText]) {
+        tagOverlay.textContent = t(tagMap[tagText]);
+      }
+    }
+  });
+  
+  // 3. Traduction du footer
+  const footer = document.querySelector('.footer-maroc');
+  if (footer) footer.textContent = t('footer.text');
+  
+  // 4. RTL pour Arabe
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  
+  // 5. Font family pour Arabe
+  if (lang === 'ar') {
+    document.body.style.fontFamily = "'Amiri', 'Lato', sans-serif";
+  } else {
+    document.body.style.fontFamily = "";
+  }
+  
+  // 6. Mettre à jour les données JSON des villes dans le modal si ouvert
+  updateModalTranslations();
+
+  // 7. Traduction des routes
+  document.querySelectorAll('.card-route').forEach(routeEl => {
+    const originalRoute = routeEl.dataset.originalRoute || routeEl.innerHTML;
+    if (!routeEl.dataset.originalRoute) routeEl.dataset.originalRoute = originalRoute;
+    
+    // Remplacer chaque nom de ville
+    let translatedRoute = originalRoute;
+    const cityMap = {
+      'Marrakech': 'city.marrakech', 'Fès': 'city.fes', 'Fes': 'city.fes',
+      'Rabat': 'city.rabat', 'Meknès': 'city.meknes', 'Meknes': 'city.meknes',
+      'Casablanca': 'city.casablanca', 'Essaouira': 'city.essaouira',
+      'Agadir': 'city.agadir', 'Tanger': 'city.tanger', 'Tétouan': 'city.tetouan',
+      'Tetouan': 'city.tetouan', 'Chefchaouen': 'city.chefchaouen',
+      'Merzouga': 'city.merzouga', 'Atlas': 'city.atlas', 'Haut Atlas': 'city.atlas',
+      'Ouarzazate': 'city.ouarzazate', 'Zagora': 'city.zagora',
+      'Dakhla': 'city.dakhla', 'Imlil': 'city.imlil', 'Oukaïmeden': 'city.oukaïmeden',
+      'Volubilis': 'city.volubilis', 'Ifrane': 'city.ifrane', 'Azrou': 'city.azrou',
+      'Beni Mellal': 'city.benimellal', 'Al Hoceïma': 'city.alhoceima',
+      'Nador': 'city.nador', 'Taghazout': 'city.taghazout'
+    };
+    
+    Object.keys(cityMap).forEach(city => {
+      const key = cityMap[city];
+      const translated = t(key);
+      if (translated && translated !== city) {
+        translatedRoute = translatedRoute.replace(new RegExp(city, 'g'), translated);
+      }
+    });
+    
+    routeEl.innerHTML = translatedRoute;
+  });
+}
+
+function updateModalTranslations() {
+  const backdrop = document.getElementById('detailModalBackdrop');
+  if (!backdrop || !backdrop.classList.contains('open')) return;
+  
+  // Mettre à jour le titre et sous-titre du modal
+  const dmTitle = document.getElementById('dmTitle');
+  const dmSubtitle = document.getElementById('dmSubtitle');
+  if (dmTitle && dmTitle.dataset.titleKey) {
+    dmTitle.textContent = t(dmTitle.dataset.titleKey);
+  }
+  
+  // Mettre à jour les stats
+  const statLevelSub = document.getElementById('statLevelSub');
+  if (statLevelSub) {
+    const levelMap = {
+      'Facile': t('level.easy'), 'Easy': t('level.easy'),
+      'Moyen': t('level.medium'), 'Medium': t('level.medium'),
+      'Difficile': t('level.hard'), 'Difficult': t('level.hard')
+    };
+    const currentLevel = statLevelSub.dataset.originalLevel || '';
+    statLevelSub.textContent = levelMap[currentLevel] || '';
+  }
+}
+
 
 /* ══ MENU ══ */
 (function(){
@@ -1121,6 +2052,19 @@ gsap.registerPlugin(ScrollTrigger);
   groups.forEach(g=>{g.querySelector('.menu-head').addEventListener('click',()=>{if(isDesktop())activate(g);else{const w=!g.classList.contains('open');w?activate(g):activate(null);}});});
 })();
 
+/* ══ LANG ══ */
+(function(){
+  const btns=document.querySelectorAll('.lang-btn');
+  function setLang(l){
+    btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false'));
+    applyTranslations(l);
+    try{localStorage.setItem('mdLang',l);}catch(e){}
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+  let s='fr';try{s=localStorage.getItem('mdLang')||'fr';}catch(e){}
+  setLang(s);
+})();
+
 /* ══ MOTION ══ */
 (function(){
   const btn=document.getElementById('motionToggle');
@@ -1129,14 +2073,6 @@ gsap.registerPlugin(ScrollTrigger);
   btn.addEventListener('click',()=>setMotion(document.body.classList.contains('reduce-motion')));
   let s=null;try{s=localStorage.getItem('mdMotion');}catch(e){}
   setMotion(s?s==='on':!window.matchMedia('(prefers-reduced-motion:reduce)').matches);
-})();
-
-/* ══ LANG ══ */
-(function(){
-  const btns=document.querySelectorAll('.lang-btn');
-  function setLang(l){btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false'));document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';}
-  btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
-  let s='fr';try{s=localStorage.getItem('mdLang')||'fr';}catch(e){}setLang(s);
 })();
 
 /* ══ SCROLL ══ */
@@ -1189,9 +2125,9 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
 
 /* ══ STAR RATING ══ */
 let toastTimer=null;
-function showToast(msg){
+function showToast(msg,dur=2400){
   const t=document.getElementById('ratingToast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),dur);
 }
 document.querySelectorAll('.star-rating').forEach(w=>{
   const stars=w.querySelectorAll('.star');let saved=0;
@@ -1199,7 +2135,13 @@ document.querySelectorAll('.star-rating').forEach(w=>{
     const v=+s.dataset.v;
     s.addEventListener('mouseenter',()=>stars.forEach(x=>x.classList.toggle('hover',+x.dataset.v<=v)));
     s.addEventListener('mouseleave',()=>stars.forEach(x=>x.classList.remove('hover')));
-    s.addEventListener('click',e=>{e.stopPropagation();saved=v;stars.forEach(x=>x.classList.toggle('filled',+x.dataset.v<=v));gsap.fromTo(s,{scale:.6},{scale:1,duration:.3,ease:'back.out(4)'});showToast(['','Passable','Bien','Très bien','Excellent','Parfait !'][v]+' — '+v+' étoile'+(v>1?'s':''));});
+    s.addEventListener('click',e=>{
+      e.stopPropagation();saved=v;
+      stars.forEach(x=>x.classList.toggle('filled',+x.dataset.v<=v));
+      gsap.fromTo(s,{scale:.6},{scale:1,duration:.3,ease:'back.out(4)'});
+      const labels=t('rating.labels');
+      showToast((Array.isArray(labels)?labels[v]:'')+' — '+v+' étoile'+(v>1?'s':''));
+    });
   });
 });
 
@@ -1208,9 +2150,59 @@ const pc=document.getElementById('particles');
 for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';pc.appendChild(p);gsap.to(p,{opacity:Math.random()*.4+.05,y:-(Math.random()*160+60),x:(Math.random()-.5)*80,duration:Math.random()*7+5,repeat:-1,delay:Math.random()*4,ease:'none'});}
 
 /* ══════════════════════════════════════
-   DETAIL MODAL — city-specific coordinates
+   CITY PAGES MAPPING
 ══════════════════════════════════════ */
-// Approximate SVG coords on a 500×460 viewBox Morocoo map
+const CITY_PAGES = {
+  'Marrakech':   'marrakech.html',
+  'Fès':         'fes.html',
+  'Fes':         'fes.html',
+  'Rabat':       'rabat.html',
+  'Meknès':      'meknes.html',
+  'Meknes':      'meknes.html',
+  'Casablanca':  'casablanca.html',
+  'Essaouira':   'essaouira.html',
+  'Agadir':      'agadir.html',
+  'Tanger':      'tanger.html',
+  'Tétouan':     'tetouan.html',
+  'Tetouan':     'tetouan.html',
+  'Chefchaouen': 'chefchaouen.html',
+  // Pas encore de page:
+  'Haut Atlas':  null, 'Merzouga': null, 'Ouarzazate': null, 'Zagora': null,
+  'Dakhla': null, 'Imlil': null, 'Oukaïmeden': null, 'Taghazout': null,
+  'Volubilis': null, 'Ifrane': null, 'Azrou': null, 'Beni Mellal': null,
+  'Al Hoceïma': null, 'Nador': null,
+};
+
+function normalizeName(n){return n.normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function getCityPage(name){
+  if(CITY_PAGES[name]!==undefined) return CITY_PAGES[name];
+  const nn=normalizeName(name);
+  const k=Object.keys(CITY_PAGES).find(k=>normalizeName(k)===nn);
+  return k?CITY_PAGES[k]:undefined;
+}
+function cityPageExists(name){const p=getCityPage(name);return p!=null && p!==undefined;}
+
+/* ══ TOOLTIP ══ */
+function showCityTooltip(el, cityName){
+  let tip=el.querySelector('.dm-city-tooltip');
+  if(!tip){tip=document.createElement('div');tip.className='dm-city-tooltip';el.appendChild(tip);}
+  tip.textContent=t('tooltip.more')+' '+cityName;
+  requestAnimationFrame(()=>tip.classList.add('visible'));
+}
+function hideCityTooltip(el){
+  const tip=el.querySelector('.dm-city-tooltip');
+  if(tip){tip.classList.remove('visible');setTimeout(()=>{if(tip.parentNode)tip.remove();},250);}
+}
+
+function openCityPage(name){
+  const url=getCityPage(name);
+  if(!url){showToast(t('toast.city')+' '+name+' '+t('toast.city2'));return;}
+  window.open(url,'_blank');
+}
+
+/* ══════════════════════════════════════
+   CITY COORDS on 500×460 viewBox
+══════════════════════════════════════ */
 const CITY_COORDS = {
   'Marrakech':   {x:145, y:210},
   'Haut Atlas':  {x:185, y:195},
@@ -1236,34 +2228,236 @@ const CITY_COORDS = {
   'Beni Mellal': {x:200, y:178},
   'Al Hoceïma':  {x:238, y:60},
   'Nador':       {x:262, y:58},
-  'Al Hoceïma':  {x:238, y:60},
 };
 
 function getCityCoords(name){
-  // Try exact match first
   if(CITY_COORDS[name]) return CITY_COORDS[name];
-  // Fuzzy match
-  const k=Object.keys(CITY_COORDS).find(k=>name.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(name.toLowerCase()));
-  return k ? CITY_COORDS[k] : {x:180+Math.random()*60, y:150+Math.random()*80};
+  const nn=normalizeName(name).toLowerCase();
+  const k=Object.keys(CITY_COORDS).find(k=>normalizeName(k).toLowerCase()===nn||nn.includes(normalizeName(k).toLowerCase())||normalizeName(k).toLowerCase().includes(nn));
+  return k?CITY_COORDS[k]:{x:180+Math.random()*60,y:150+Math.random()*80};
 }
 
+/* ══ MAP ZOOM/PAN ══ */
+let mapZoom=1, mapPanX=0, mapPanY=0;
+let _isPanning=false, _panStartX=0, _panStartY=0;
+let _panInitDone=false;
+
+function zoomMap(factor){
+  mapZoom=Math.max(0.6,Math.min(4,mapZoom*factor));
+  applyMapTransform();
+}
+function resetMapZoom(){
+  mapZoom=1;mapPanX=0;mapPanY=0;
+  applyMapTransform();
+}
+function applyMapTransform(){
+  const svg=document.getElementById('dmMapSvg');
+  if(!svg)return;
+  svg.style.transform=`translate(${mapPanX}px,${mapPanY}px) scale(${mapZoom})`;
+}
+function initMapPanning(){
+  if(_panInitDone)return;
+  _panInitDone=true;
+  const wrapper=document.getElementById('dmMapWrapper');
+  if(!wrapper)return;
+  wrapper.addEventListener('mousedown',e=>{
+    if(e.target.closest('.dm-map-btn'))return;
+    _isPanning=true;_panStartX=e.clientX-mapPanX;_panStartY=e.clientY-mapPanY;
+    wrapper.classList.add('panning');
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!_isPanning)return;
+    mapPanX=e.clientX-_panStartX;mapPanY=e.clientY-_panStartY;
+    applyMapTransform();
+  });
+  document.addEventListener('mouseup',()=>{_isPanning=false;const w=document.getElementById('dmMapWrapper');if(w)w.classList.remove('panning');});
+  wrapper.addEventListener('wheel',e=>{
+    e.preventDefault();
+    zoomMap(e.deltaY>0?0.9:1.1);
+  },{passive:false});
+  // Touch support
+  let lastTouchDist=0;
+  wrapper.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){lastTouchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);}
+    else if(e.touches.length===1){_isPanning=true;_panStartX=e.touches[0].clientX-mapPanX;_panStartY=e.touches[0].clientY-mapPanY;}
+  },{passive:true});
+  wrapper.addEventListener('touchmove',e=>{
+    if(e.touches.length===2){
+      const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+      if(lastTouchDist)zoomMap(d/lastTouchDist);lastTouchDist=d;
+    }else if(e.touches.length===1&&_isPanning){
+      mapPanX=e.touches[0].clientX-_panStartX;mapPanY=e.touches[0].clientY-_panStartY;
+      applyMapTransform();
+    }
+  },{passive:true});
+  wrapper.addEventListener('touchend',()=>{_isPanning=false;lastTouchDist=0;});
+}
+
+/* ══ BUILD MAP — improved paths ══ */
+function buildMap(cities){
+  const linesG=document.getElementById('routeLines');
+  const pinsG=document.getElementById('cityPins');
+  linesG.innerHTML='';pinsG.innerHTML='';
+  if(!cities.length)return;
+
+  const pts=cities.map(c=>getCityCoords(c.name));
+
+  if(pts.length>1){
+    // Background white line for contrast
+    const bgPath=document.createElementNS('http://www.w3.org/2000/svg','path');
+    const d=pts.map((p,i)=>(i===0?'M':'L')+` ${p.x} ${p.y}`).join(' ');
+    bgPath.setAttribute('d',d);
+    bgPath.setAttribute('class','route-line-bg');
+    linesG.appendChild(bgPath);
+
+    // Main dashed route with arrow
+    const mainPath=document.createElementNS('http://www.w3.org/2000/svg','path');
+    mainPath.setAttribute('d',d);
+    mainPath.setAttribute('class','route-line');
+    mainPath.setAttribute('marker-end','url(#arrowEnd)');
+    linesG.appendChild(mainPath);
+
+    // Direction arrows along the route (midpoints)
+    for(let i=0;i<pts.length-1;i++){
+      const a=pts[i],b=pts[i+1];
+      const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      const angle=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
+      const arr=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+      arr.setAttribute('points','0,-4 8,0 0,4');
+      arr.setAttribute('fill','#C0552A');arr.setAttribute('opacity','.7');
+      arr.setAttribute('transform',`translate(${mx},${my}) rotate(${angle})`);
+      linesG.appendChild(arr);
+    }
+  }
+
+  // Start dot (green)
+  if(pts.length>0){
+    const startDot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    startDot.setAttribute('cx',pts[0].x);startDot.setAttribute('cy',pts[0].y);
+    startDot.setAttribute('r','9');startDot.setAttribute('fill','#2D5016');
+    startDot.setAttribute('stroke','#fff');startDot.setAttribute('stroke-width','2.5');
+    linesG.appendChild(startDot);
+    // End dot (gold) if multiple cities
+    if(pts.length>1){
+      const endDot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      endDot.setAttribute('cx',pts[pts.length-1].x);endDot.setAttribute('cy',pts[pts.length-1].y);
+      endDot.setAttribute('r','9');endDot.setAttribute('fill','#D4AF37');
+      endDot.setAttribute('stroke','#fff');endDot.setAttribute('stroke-width','2.5');
+      linesG.appendChild(endDot);
+    }
+  }
+
+  // City pins with callouts and collision detection
+  const usedPositions=[];
+  pts.forEach((pt,i)=>{
+    const c=cities[i];
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','map-pin-group');
+
+    // Outer glow ring
+    const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    ring.setAttribute('cx',pt.x);ring.setAttribute('cy',pt.y);ring.setAttribute('r','12');
+    ring.setAttribute('fill','rgba(192,85,42,.13)');ring.setAttribute('stroke','#C0552A');
+    ring.setAttribute('stroke-width','1.2');ring.setAttribute('class','map-pin-outer');
+    g.appendChild(ring);
+
+    // Main dot
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);dot.setAttribute('r','6');
+    dot.setAttribute('fill','#C0552A');dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','2.2');
+    dot.setAttribute('class','map-pin-inner');
+    g.appendChild(dot);
+
+    // Step number
+    const num=document.createElementNS('http://www.w3.org/2000/svg','text');
+    num.setAttribute('x',pt.x);num.setAttribute('y',pt.y+1);
+    num.setAttribute('text-anchor','middle');num.setAttribute('dominant-baseline','central');
+    num.setAttribute('font-size','8');num.setAttribute('font-weight','900');num.setAttribute('fill','#fff');
+    num.textContent=i+1;
+    g.appendChild(num);
+
+    // Callout with collision detection
+    const boxW=c.name.length>8?115:88;
+    const boxH=38;
+    let boxX=pt.x+18;
+    let goLeft=false;
+    // Near right edge or collision
+    if(pt.x>365 || usedPositions.some(p=>Math.abs(p.x-pt.x)<boxW+5&&Math.abs(p.y-pt.y)<boxH+4)){
+      goLeft=true;boxX=pt.x-18-boxW;
+    }
+    usedPositions.push({x:pt.x,y:pt.y});
+
+    const callout=document.createElementNS('http://www.w3.org/2000/svg','g');
+    callout.setAttribute('class','map-callout');
+
+    // Triangle connector
+    const tri=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    if(goLeft){
+      tri.setAttribute('points',`${boxX+boxW},${pt.y} ${boxX+boxW+6},${pt.y-4} ${boxX+boxW+6},${pt.y+4}`);
+    } else {
+      tri.setAttribute('points',`${boxX-6},${pt.y} ${boxX},${pt.y-4} ${boxX},${pt.y+4}`);
+    }
+    tri.setAttribute('fill','rgba(255,255,255,0.94)');
+    callout.appendChild(tri);
+
+    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    rect.setAttribute('x',boxX);rect.setAttribute('y',pt.y-boxH/2);
+    rect.setAttribute('width',boxW);rect.setAttribute('height',boxH);
+    rect.setAttribute('rx','8');rect.setAttribute('fill','rgba(255,255,255,0.94)');
+    rect.setAttribute('stroke','#EDE5D6');rect.setAttribute('stroke-width','1');
+    callout.appendChild(rect);
+
+    const cityName=document.createElementNS('http://www.w3.org/2000/svg','text');
+    cityName.setAttribute('x',boxX+boxW/2);cityName.setAttribute('y',pt.y-5);
+    cityName.setAttribute('text-anchor','middle');cityName.setAttribute('font-size','10.5');
+    cityName.setAttribute('font-weight','700');cityName.setAttribute('fill','#1A1A1A');
+    cityName.setAttribute('font-family','Playfair Display, serif');
+    cityName.textContent=c.name;
+    callout.appendChild(cityName);
+
+    const nightsT=document.createElementNS('http://www.w3.org/2000/svg','text');
+    nightsT.setAttribute('x',boxX+boxW/2);nightsT.setAttribute('y',pt.y+11);
+    nightsT.setAttribute('text-anchor','middle');nightsT.setAttribute('font-size','9');
+    nightsT.setAttribute('fill','#8B7355');
+    nightsT.textContent=c.nightsLabel||c.nights+' nuit'+(c.nights>1?'s':'');
+    callout.appendChild(nightsT);
+    g.appendChild(callout);
+
+    pinsG.appendChild(g);
+
+    // Animate
+    gsap.fromTo(g,{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,delay:.2+i*.1,ease:'back.out(2)',transformOrigin:`${pt.x}px ${pt.y}px`});
+  });
+}
+
+/* ══ OPEN DETAIL MODAL ══ */
 function openDetailModal(btn){
   const card=btn.closest('.circuit-card');
-  const title=card.dataset.title||card.querySelector('.card-title').textContent;
+  const titleKey=card.dataset.titleKey||'';
+  const publicKey=card.dataset.publicKey||'';
+  const title=t(titleKey)||card.querySelector('.card-title').textContent;
   const duration=card.dataset.duration||'';
   let cities=[];
   try{cities=JSON.parse(card.dataset.cities||'[]');}catch(e){}
 
-  // Header
-  document.getElementById('dmTitle').textContent=title;
-  document.getElementById('dmSubtitle').textContent=duration+(cities.length?' · '+cities.length+' destination'+(cities.length>1?'s':''):'');
-  document.getElementById('btnReserveLabel').textContent='Réserver ce circuit';
+  const dmTitle=document.getElementById('dmTitle');
+  dmTitle.textContent=title;
+  dmTitle.dataset.titleKey=titleKey;
+  
+  document.getElementById('dmSubtitle').textContent=duration+(cities.length?' · '+cities.length+' '+(cities.length>1?t('jours'):t('jour')):'');
 
   // Stats
   document.getElementById('statDistance').textContent=card.dataset.distance||'—';
   document.getElementById('statLevel').textContent=card.dataset.level||'—';
-  const levelMap={'Facile':'Aventure légère','Moyen':'Aventure modérée','Difficile':'Aventure sportive'};
-  document.getElementById('statLevelSub').textContent=levelMap[card.dataset.level]||'';
+  const levelMap={
+    'Facile': t('level.easy'), 'Easy': t('level.easy'),
+    'Moyen': t('level.medium'), 'Medium': t('level.medium'),
+    'Difficile': t('level.hard'), 'Difficult': t('level.hard')
+  };
+  const statLevelSub=document.getElementById('statLevelSub');
+  statLevelSub.textContent=levelMap[card.dataset.level]||'';
+  statLevelSub.dataset.originalLevel=card.dataset.level||'';
+  
   document.getElementById('statPeriod').textContent=card.dataset.period||'—';
   document.getElementById('statType').textContent=card.dataset.type||'—';
 
@@ -1276,135 +2470,135 @@ function openDetailModal(btn){
     strip.appendChild(div);
   });
   if(cities.length>4){
-    const more=document.createElement('div');more.className='dm-photo-more';more.textContent='+'+( cities.length-4);strip.appendChild(more);
+    const more=document.createElement('div');more.className='dm-photo-more';more.textContent='+'+(cities.length-4);strip.appendChild(more);
   }
 
-  // Itinerary list
+  // Itinerary list - traduire les données dynamiques
   const itin=document.getElementById('dmItinerary');
   itin.innerHTML='';
   cities.forEach((c,i)=>{
-    const stop=document.createElement('div');stop.className='dm-stop';
+    const hasPage=cityPageExists(c.name);
+    const stop=document.createElement('div');
+    stop.className='dm-stop';
+
+    // Traduire le tag de la ville
+    const tagMap = {
+      'Médina Impériale': 'tag.medina', 'Toit du Maroc': 'tag.toit',
+      'Sahara & Dunes': 'tag.sahara', 'Cité Millénaire': 'tag.cite',
+      'Capitale Royale': 'tag.capitale', 'Ville Impériale': 'tag.villeimp',
+      'Porte du Désert': 'tag.porte', 'Ville du Désert': 'tag.villedesert',
+      'Ville Blanche': 'tag.villeblanche', 'Cité des Alizés': 'tag.alizes',
+      'Cité du Soleil': 'tag.soleil', 'Lagune Sauvage': 'tag.lagune',
+      "Porte de l'Afrique": 'tag.porteafrique', 'La Ville Bleue': 'tag.villebleue',
+      'Site Antique': 'tag.siteantique', 'Village Berbère': 'tag.berbere',
+      'Station de Ski': 'tag.stationski', 'Perle Méditerranéenne': 'tag.perle',
+      'Lagune Marchica': 'tag.lagunemarchica', 'Suisse du Maroc': 'tag.suisse',
+      'Forêt de Cèdres': 'tag.foret', "Source d'Ain Asserdoun": 'tag.source',
+      'Paradis des Surfeurs': 'tag.paradis'
+    };
+    const translatedTag = tagMap[c.tag] ? t(tagMap[c.tag]) : c.tag;
+
+    // Traduire l'activité
+    const actMap = {
+      'Street food & Médina': 'act.streetfood', 'Randonnée & Nature': 'act.randonnee',
+      'Désert & Aventure': 'act.desert', 'Culture & Histoire': 'act.culture',
+      'Tour Hassan & Oudayas': 'act.tourhassan', 'Bab Mansour & Médina': 'act.babmansour',
+      'Tanneries & Médersa': 'act.tanneries', 'Souks & Jardins': 'act.souks',
+      'Studios & Kasbah': 'act.studios', 'Bivouac & Dunes': 'act.bivouac',
+      'Chameau & Étoiles': 'act.chameau', 'Hassan II & Corniche': 'act.hassan2',
+      'Port & Remparts': 'act.port', 'Plage & Surf': 'act.plagesurf',
+      'Kitesurf & Lagune': 'act.kitesurf', 'Port & Médina': 'act.portmedina',
+      'Médina Andalouse': 'act.andalouse', 'Ruelles bleues & Rif': 'act.ruelles',
+      'Médina & Tanneries': 'act.medina', 'Mausolée Ismaïl': 'act.mausolee',
+      'Ruines Romaines': 'act.ruines', 'Kasbah Oudayas': 'act.kasbah',
+      'Souks & Djemaa': 'act.djemaa', 'Toubkal & Trekking': 'act.toubkal',
+      'Ski & Panoramas': 'act.ski', 'Cap Spartel & Grottes': 'act.capspartel',
+      'Plages & Parc National': 'act.plagesparc', 'Lagune Marchica': 'act.lagunemarchica',
+      'Lacs & Parcs Nationaux': 'act.lacs', 'Cèdres & Singes': 'act.cedres',
+      'Cascades & Sources': 'act.cascades', 'Surf & Spots célèbres': 'act.spots',
+      'Plage & Promenade': 'act.promenade', 'Kitesurf & Vents': 'act.kitesurf2',
+      'Oudayas & Palais': 'act.oudayas', 'Ruelles bleues': 'act.ruelles2',
+      'Majorelle & Souks': 'act.majorelle', 'Plage & Détente': 'act.detente'
+    };
+    const translatedActivity = actMap[c.activity] ? t(actMap[c.activity]) : c.activity;
+
+    // Traduire "vers" dans nextTime
+    let translatedNextTime = c.nextTime;
+    if (c.nextTime && currentLang !== 'fr') {
+      translatedNextTime = c.nextTime.replace('vers', t('vers'));
+    }
+
+    const imgClass='dm-stop-img'+(hasPage?' dm-clickable':'');
+    const imgHover=hasPage
+      ? `onmouseenter="showCityTooltip(this,'${c.name.replace(/'/g,"\\'")}'); " onmouseleave="hideCityTooltip(this)" onclick="openCityPage('${c.name.replace(/'/g,"\\'")}')"`
+      : '';
+    const imgOverlay=hasPage?`<div class="dm-img-overlay"><i class="bi bi-box-arrow-up-right"></i></div>`:'';
+
+    const nameClass='dm-stop-name'+(hasPage?' dm-clickable':'');
+    const nameHover=hasPage
+      ? `onmouseenter="showCityTooltip(this,'${c.name.replace(/'/g,"\\'")}') " onmouseleave="hideCityTooltip(this)" onclick="openCityPage('${c.name.replace(/'/g,"\\'")}')"`
+      : '';
+    const linkIcon=hasPage?`<i class="bi bi-box-arrow-up-right dm-link-icon"></i>`:'';
+
+    // Nuits traduites
+    const nightsText = c.nights > 1 ? t('nuits') : t('nuit');
+    const nightsLabel = c.nightsLabel || `${c.nights} ${nightsText}`;
+
     stop.innerHTML=`
-      <div class="dm-day-badge">JOUR<span>${c.days}</span></div>
-      <div class="dm-stop-img"><img src="${c.img}" alt="${c.name}" loading="lazy"></div>
+      <div class="dm-day-badge">${t('jour')} <span>${c.days}</span></div>
+      <div class="${imgClass}" style="position:relative" ${imgHover}>
+        <img src="${c.img}" alt="${c.name}" loading="lazy">
+        ${imgOverlay}
+      </div>
       <div class="dm-stop-info">
         <div class="dm-stop-head">
-          <div class="dm-stop-name"><i class="bi ${c.icon||'bi-geo-alt'}"></i>${c.name}</div>
-          <div class="dm-nights-badge">${c.nightsLabel||c.nights+' nuit'+(c.nights>1?'s':'')}</div>
+          <div class="${nameClass}" style="position:relative" ${nameHover}>
+            <i class="bi ${c.icon||'bi-geo-alt'}"></i>${c.name}${linkIcon}
+          </div>
+          <div class="dm-nights-badge">${nightsLabel}</div>
         </div>
-        <div class="dm-stop-tag">${c.tag}</div>
+        <div class="dm-stop-tag">${translatedTag}</div>
         <div class="dm-stop-meta">
           <div class="dm-meta-chip"><i class="bi bi-thermometer-sun"></i>${c.temp||'—'}</div>
-          ${c.nextTime?`<div class="dm-meta-chip"><i class="bi bi-clock"></i>${c.nextTime}</div>`:''}
+          ${translatedNextTime?`<div class="dm-meta-chip"><i class="bi bi-clock"></i>${translatedNextTime}</div>`:''}
         </div>
-        ${c.activity?`<div class="dm-stop-activity"><i class="bi bi-knife"></i>${c.activity}</div>`:''}
+        ${translatedActivity?`<div class="dm-stop-activity"><i class="bi bi-knife"></i>${translatedActivity}</div>`:''}
         <div class="dm-stop-chevron"><i class="bi bi-chevron-right"></i></div>
       </div>`;
     itin.appendChild(stop);
   });
 
-  // Map
+  // Build map
   buildMap(cities);
+  resetMapZoom();
+  initMapPanning();
 
-  // Open
-  const backdrop=document.getElementById('detailModalBackdrop');
-  backdrop.classList.add('open');
+  // Open modal
+  document.getElementById('detailModalBackdrop').classList.add('open');
   document.body.style.overflow='hidden';
 
-  // Stagger animate stops
+  // Animate stops
   gsap.fromTo('.dm-stop',{opacity:0,x:-20},{opacity:1,x:0,duration:.35,stagger:.07,delay:.15,ease:'power2.out'});
 }
 
-function buildMap(cities){
-  const linesG=document.getElementById('routeLines');
-  const pinsG=document.getElementById('cityPins');
-  linesG.innerHTML='';pinsG.innerHTML='';
-  if(!cities.length) return;
-
-  const pts=cities.map(c=>getCityCoords(c.name));
-
-  // Draw dashed route
-  for(let i=0;i<pts.length-1;i++){
-    const a=pts[i],b=pts[i+1];
-    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.setAttribute('x1',a.x);line.setAttribute('y1',a.y);
-    line.setAttribute('x2',b.x);line.setAttribute('y2',b.y);
-    line.setAttribute('stroke','#C0552A');line.setAttribute('stroke-width','2');
-    line.setAttribute('stroke-dasharray','6 5');line.setAttribute('stroke-linecap','round');
-    line.setAttribute('opacity','.8');
-    linesG.appendChild(line);
-    // Car icon midpoint (first segment only)
-    if(i===0){
-      const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
-      const car=document.createElementNS('http://www.w3.org/2000/svg','text');
-      car.setAttribute('x',mx);car.setAttribute('y',my-5);
-      car.setAttribute('font-size','13');car.setAttribute('text-anchor','middle');car.textContent='🚗';
-      linesG.appendChild(car);
-    }
-  }
-
-  // Draw pins + callouts
-  pts.forEach((pt,i)=>{
-    const c=cities[i];
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
-    g.setAttribute('class','map-pin-group');
-
-    // Outer ring
-    const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    ring.setAttribute('cx',pt.x);ring.setAttribute('cy',pt.y);ring.setAttribute('r','14');
-    ring.setAttribute('fill','rgba(192,85,42,.15)');ring.setAttribute('stroke','#C0552A');ring.setAttribute('stroke-width','1');
-    g.appendChild(ring);
-    // Inner dot
-    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx',pt.x);dot.setAttribute('cy',pt.y);dot.setAttribute('r','6');
-    dot.setAttribute('fill','#C0552A');dot.setAttribute('class','map-pin-circle');
-    g.appendChild(dot);
-
-    // Callout (right side by default, left if near right edge)
-    const onRight=pt.x<350;
-    const cxOffset=onRight?22:-22;
-    const anchor=onRight?'start':'end';
-    const boxX=onRight?pt.x+18:pt.x-18-(c.name.length>8?108:80);
-    const boxW=c.name.length>8?108:80;
-
-    const callout=document.createElementNS('http://www.w3.org/2000/svg','g');
-    callout.setAttribute('class','map-callout');
-    const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');
-    rect.setAttribute('x',boxX);rect.setAttribute('y',pt.y-22);
-    rect.setAttribute('width',boxW);rect.setAttribute('height',34);
-    rect.setAttribute('rx','7');rect.setAttribute('fill','rgba(255,255,255,0.92)');
-    rect.setAttribute('stroke','#EDE5D6');rect.setAttribute('stroke-width','1');
-    callout.appendChild(rect);
-
-    const cityName=document.createElementNS('http://www.w3.org/2000/svg','text');
-    cityName.setAttribute('x',boxX+boxW/2);cityName.setAttribute('y',pt.y-6);
-    cityName.setAttribute('text-anchor','middle');cityName.setAttribute('font-size','10');
-    cityName.setAttribute('font-weight','700');cityName.setAttribute('fill','#2A2A2A');
-    cityName.setAttribute('font-family','Playfair Display, serif');
-    cityName.textContent=c.name;
-    callout.appendChild(cityName);
-
-    const nightsT=document.createElementNS('http://www.w3.org/2000/svg','text');
-    nightsT.setAttribute('x',boxX+boxW/2);nightsT.setAttribute('y',pt.y+8);
-    nightsT.setAttribute('text-anchor','middle');nightsT.setAttribute('font-size','8.5');
-    nightsT.setAttribute('fill','#8B7355');
-    nightsT.textContent=c.nightsLabel||c.nights+' nuit'+(c.nights>1?'s':'');
-    callout.appendChild(nightsT);
-    g.appendChild(callout);
-
-    pinsG.appendChild(g);
-    // Animate pins
-    gsap.fromTo(g,{opacity:0,scale:.5},{opacity:1,scale:1,duration:.4,delay:.25+i*.1,ease:'back.out(2)',transformOrigin:`${pt.x}px ${pt.y}px`});
-  });
-}
 
 function closeDetailModal(){
   const backdrop=document.getElementById('detailModalBackdrop');
-  gsap.to('#detailModal',{opacity:0,y:20,scale:.97,duration:.2,ease:'power2.in',onComplete:()=>{backdrop.classList.remove('open');document.getElementById('detailModal').style.opacity='';document.getElementById('detailModal').style.transform='';document.body.style.overflow='';}});
+  gsap.to('#detailModal',{opacity:0,y:20,scale:.97,duration:.2,ease:'power2.in',onComplete:()=>{
+    backdrop.classList.remove('open');
+    document.getElementById('detailModal').style.cssText='';
+    document.body.style.overflow='';
+  }});
 }
 
 document.getElementById('detailModalBackdrop').addEventListener('click',function(e){if(e.target===this)closeDetailModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetailModal();});
+// Expose functions globally
+window.openDetailModal = openDetailModal;
+window.closeDetailModal = closeDetailModal;
+window.zoomMap = zoomMap;
+window.resetMapZoom = resetMapZoom;
+window.openCityPage = openCityPage;
 </script>
 </body>
 </html>
