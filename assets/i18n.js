@@ -2059,7 +2059,7 @@
     '.btn-ingredients', '.modal-eyebrow',
     '.act-item h2', '.act-title-line', '.act-cta', '.act-location',
     '.cat-badge', '.city-badge',
-    '.hero-deco-line .label', '.word',
+    '.hero-deco-line .label', '.word', '.hero-badge',
     '.itinerary-tag', '.itinerary-eyebrow', '.itinerary-meta',
     '.itin-card-eyebrow', '.itin-card-title', '.itin-card-for',
     '.itin-card-cities span', '.itin-card-meta', '.itin-card-rating',
